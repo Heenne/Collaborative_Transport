@@ -1,0 +1,43 @@
+# -----------------------------------
+planner: 
+  type: 0        #0->lissajous 1->circle 2->clickedPose 3->spiral 4->StepResponse
+  pause: true
+  iterations: 1
+  reference:  [0 , 1 , 0, 0 ,0 ,0 ]    #X Y Z R P Y
+  
+  growth: 0.33 
+  r0: 4
+
+  omega: 0.03
+  ratio: 2
+  phaseshift: 0.0
+  amplifier_x: 1.0
+  amplifier_y: 1.0
+
+  step_sizes: [1.0, 1.0, 0.5]  # x [m] y[m] phi[times pi] -> [1.0 1.0 0.5] means 1m in x 1m in y and 0.5pi in phi
+  delay: 6.0
+
+
+#Names of formation memebers for parsing the formation parameters
+formation:
+   names: ["master","robot1"] #Names of the robots belonging to one formation
+
+# master:      
+#   controller: 
+#     controller_type: 2
+#     reference: [0 ,0 , 0, 0 ,0 ,0 ]    #X Y Z R P Y given in the world frame
+#     topic_target_odometry:      "/trajectory_odom"  #Topic where the target position/velocities are given at
+
+robot1:  
+  controller:
+    master: "master"
+    master_slave_pose: [-0.0 , -1.0, 0, 0 ,0 ,0 ]  #X Y Z R P Y
+    reference: [0.0 , -0.0, 0, 0 ,0 ,0 ]    #X Y Z R P Y
+    topic_target_odometry:       "/trajectory_odom" 
+    controller_type: 2                        # 1-> pseudo_invers 2->lyapov 3->angl_dist
+    lyapunov: [7.0,12.0,1.0]                   # parameter for lyapunov algorythm: kx,ky,kphi
+    angle_distance: [4.0,1.0,0.3]              # parameter for angle distance algorythm: kl,kpsi,d  
+    topic_current_odometry: "odom_enc"  #Source of state estamination
+    publish_tf: false  #Should be published at tf?
+    world_frame: "experiment" #Name of the map frame
+    thresh: [0.0, 0.0, 0.0] #Thresholds for stopping motion. If velocities are below thresh the robot stops (Prevents oszillation)
