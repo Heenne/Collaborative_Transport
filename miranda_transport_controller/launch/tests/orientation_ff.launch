@@ -1,0 +1,8 @@
+<launch>
+<node pkg="tf2_ros" type="static_transform_publisher" name="mir_panda_transformer" args="0.35 0.15 0.35 0 0 0 1 base_link panda_link0" />
+<!-- <node pkg="tf2_ros" type="static_transform_publisher" name="mir_panda_transformer" args="0 0 0 0 0 0 1 base_link panda_link0" /> -->
+
+<node pkg="miranda_transport_controller" type="dummie_base_move_broadcaster" name="dummie_base"/>
+<node pkg="miranda_transport_controller" type="feed_forward_test" name="test_node" />
+<node pkg="rviz" type="rviz" name="rviz" args="-d $(find miranda_transport_controller)/rviz/feed_forward_test.rviz"/>
+</launch>
