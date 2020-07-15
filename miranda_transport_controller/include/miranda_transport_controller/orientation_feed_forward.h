@@ -69,6 +69,7 @@ class OrientationFeedForward{
        
     private:
         Position transformPosition();
+        Orientation transformOrientation();
         
         Orientation current_ori_;
         
