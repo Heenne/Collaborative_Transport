@@ -138,6 +138,7 @@ add_library(feed_forward
 ## The recommended prefix ensures that target names across packages don't collide
 add_executable(feed_forward_test src/tests/orientation_feed_forward_test.cpp)
 add_executable(feed_forward_publisher_node src/feed_forward_publisher_node.cpp)
+add_executable(dummie_base_move_broadcaster src/tests/dummie_base_move_broadcaster.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -163,6 +164,9 @@ target_link_libraries(feed_forward_publisher_node
   feed_forward
   ${catkin_LIBRARIES}
   ${eigen3_LIBRARIES}
+)
+target_link_libraries(dummie_base_move_broadcaster
+  ${catkin_LIBRARIES}
 )
 #############
 ## Install ##
