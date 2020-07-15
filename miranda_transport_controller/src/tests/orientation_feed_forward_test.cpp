@@ -5,14 +5,15 @@
 int main(int argc, char** argv)
 {
     OrientationFeedForward::Pose pose_desired;
-    pose_desired<<1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0; 
-    OrientationFeedForward feed;
+    pose_desired<<1.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0; 
+    OrientationFeedForward feed(Eigen::Quaterniond(1.0,0.0,0.0,0.0),Eigen::Vector3d(1.0,0.0,0.0));
     double angle=0.0;
     feed.setDesiredPose(pose_desired);
-    for(int i=0;i<4;i++)
+    for(int i=0;i<10;i++)
     {
-        // std::cout<<feed.updateOrientation(angle)<<std::endl<<std::endl;
-        angle+=M_PI/4;        
+        feed.updateOrientation(angle);
+        // std::cout<<feed.getPose()<<std::endl<<std::endl;
+        angle+=M_PI/10;        
     }
 
     ros::init(argc,argv,"ros_orientation_feed_forward_test");
@@ -23,14 +24,11 @@ int main(int argc, char** argv)
     ros_feed_pose.setDesiredPose(pose_desired);
     RosOrientationFeedForward<std_msgs::Float64> ros_feed_float(nh,"test_float");
     ros_feed_float.setDesiredPose(pose_desired);
+    ros_feed_float.setOffset(Eigen::Quaterniond(1.0,0.0,0.0,0.0),Eigen::Vector3d(1.0,0.0,0.0));
     ros::Rate rate(1);
     while(ros::ok())
     {
-        
-        std::cout<<"Trafo: "<<std::endl<<ros_feed_trafo.updateOrientation()<<std::endl;
-        std::cout<<"pose: "<<std::endl<<ros_feed_pose.updateOrientation()<<std::endl;
-        std::cout<<"float: "<<std::endl<<ros_feed_float.updateOrientation()<<std::endl;
-
+        std::cout<<"pose"<<std::endl<<ros_feed_float.getPose()<<std::endl<<std::endl;
         ros::spinOnce();
         rate.sleep();
     }

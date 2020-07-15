@@ -5,11 +5,11 @@ template<class T>
 RosOrientationFeedForward<T>::RosOrientationFeedForward(ros::NodeHandle &nh,std::string topic):OrientationFeedForward()
 {
     this->nh_=nh;
-    this->ori_sub_=this->nh_.subscribe(topic,10,&RosOrientationFeedForward::callbackOrientations,this);
+    this->ori_sub_=this->nh_.subscribe(topic,10,&RosOrientationFeedForward::callbackOrientation,this);
 }
 
 template<class T>
-void RosOrientationFeedForward<T>::callbackOrientations(T msg)
+void RosOrientationFeedForward<T>::callbackOrientation(T msg)
 {
     Eigen::Quaterniond quat;
     convertMsg(quat,msg);

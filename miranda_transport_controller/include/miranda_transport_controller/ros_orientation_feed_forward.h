@@ -15,7 +15,7 @@ class RosOrientationFeedForward:public OrientationFeedForward{
     private:
         ros::Subscriber ori_sub_;
         ros::NodeHandle nh_;
-        void callbackOrientations(T msg);
+        void callbackOrientation(T msg);
      
 };
 #endif

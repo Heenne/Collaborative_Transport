@@ -47,7 +47,6 @@ int main(int argc, char** argv)
     geometry_msgs::PoseStamped current;
     while (ros::ok())
     {
-        pose=feed.updateOrientation();
         ROS_INFO_STREAM("Current pose: "<<pose);
         convertMsg(current,pose);
         pub.publish(current);
