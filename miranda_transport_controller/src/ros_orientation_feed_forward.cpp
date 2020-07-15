@@ -12,7 +12,7 @@ template<class T>
 void RosOrientationFeedForward<T>::callbackOrientations(T msg)
 {
     Eigen::Quaterniond quat;
-    convertMsg(msg,quat);
+    convertMsg(quat,msg);
     this->updateOrientation(quat);
 }
 
