@@ -52,10 +52,14 @@ OrientationFeedForward::Pose OrientationFeedForward::getPose()
 {
     Position pos=transformPosition();
     Pose pose;
-    pose<<pos,this->d_ori_fixed_;
+    pose<<transformPosition(),transformOrientation().coeffs();
     return pose;    
 }
 OrientationFeedForward::Position OrientationFeedForward::transformPosition()
 {
-    return this->current_ori_.inverse()*this->offset_rotation_.inverse()*(d_pos_fixed_-offset_position_);
+    return this->offset_rotation_.inverse()*this->current_ori_.inverse()*(d_pos_fixed_)-offset_position_;
+}
+OrientationFeedForward::Orientation OrientationFeedForward::transformOrientation()
+{
+    return this->current_ori_.inverse()*this->offset_rotation_.inverse()*d_ori_fixed_;
 }

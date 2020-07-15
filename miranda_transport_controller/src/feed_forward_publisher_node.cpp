@@ -35,7 +35,6 @@ int main(int argc, char** argv)
     }
     geometry_msgs::PoseStamped initial;
     convertMsg(initial,transformStamped);
-
     pub.publish(initial);
     OrientationFeedForward::Pose pose;
     convertMsg(pose,initial);
