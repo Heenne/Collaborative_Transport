@@ -28,9 +28,7 @@ void convertMsg(Eigen::Quaterniond &quat,std_msgs::Float64 &msg)
  */
 void convertMsg(Eigen::Quaterniond &quat,geometry_msgs::Transform &msg)
 {
-    Eigen::Vector4d vec;
-    vec<<msg.rotation.w, msg.rotation.x, msg.rotation.y, msg.rotation.z;
-    quat=Eigen::Quaterniond(vec);
+    quat=Eigen::Quaterniond(msg.rotation.w,msg.rotation.x,msg.rotation.y,msg.rotation.z);
 }
 
 /**
@@ -52,9 +50,7 @@ void convertMsg(Eigen::Quaterniond &quat,geometry_msgs::TransformStamped &msg)
  */
 void convertMsg(Eigen::Quaterniond &quat,geometry_msgs::Pose &msg)
 {
-    Eigen::Vector4d vec;
-    vec<<msg.orientation.w, msg.orientation.x, msg.orientation.y, msg.orientation.z;
-    quat=Eigen::Quaterniond(vec);
+    quat=Eigen::Quaterniond(msg.orientation.w, msg.orientation.x, msg.orientation.y, msg.orientation.z);
 }
 /**
  * @brief Convert an stamped pose geometry message to an eigen quaternion
@@ -109,10 +105,10 @@ void convertMsg(geometry_msgs::Pose &msg,Eigen::Matrix<double,7,1> &pose)
     msg.position.x=pose(0);
     msg.position.y=pose(1);
     msg.position.z=pose(2);
-    msg.orientation.w=pose(3);
-    msg.orientation.x=pose(4);
-    msg.orientation.y=pose(5);
-    msg.orientation.z=pose(6);
+    msg.orientation.x=pose(3);
+    msg.orientation.y=pose(4);
+    msg.orientation.z=pose(5);
+    msg.orientation.w=pose(6);
 }
 
 /**
@@ -185,7 +181,7 @@ void convertMsg(geometry_msgs::Transform &transform,geometry_msgs::Pose &pose)
 void convertMsg(geometry_msgs::TransformStamped &transform,geometry_msgs::PoseStamped &pose)
 {
     transform.header=pose.header;
-    convertMsg(transform,pose);
+    convertMsg(transform.transform,pose.pose);
 }
 
 #endif
