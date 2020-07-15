@@ -33,7 +33,7 @@ OrientationFeedForward::Pose OrientationFeedForward::updateOrientation(Orientati
 void OrientationFeedForward::setDesiredPose(Pose pose)
 {
     d_pos_fixed_=pose.block<3,1>(0,0);
-    d_ori_fixed_=pose.block<4,1>(0,0);
+    d_ori_fixed_=pose.block<4,1>(3,0);
     d_pose_fixed_<<d_pos_fixed_,d_ori_fixed_;
-    this->last_pose_=pose;    
+    this->last_pose_=d_pose_fixed_;    
 }

@@ -8,7 +8,8 @@ project(miranda_transport_controller)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED
-            roscpp)
+            roscpp
+            tf2_ros)
 find_package(Eigen3 REQUIRED)
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -122,6 +123,9 @@ ${Eigen_INCLUDE_DIRS}
 add_library(feed_forward
   include/${PROJECT_NAME}/orientation_feed_forward.h
   src/orientation_feed_forward.cpp
+  include/${PROJECT_NAME}/msg_conversion.hpp
+  include/${PROJECT_NAME}/ros_orientation_feed_forward.h
+  src/ros_orientation_feed_forward.cpp
 )
 
 ## Add cmake target dependencies of the library
@@ -132,7 +136,8 @@ add_library(feed_forward
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-# add_executable(${PROJECT_NAME}_node src/miranda_transport_controller_node.cpp)
+add_executable(feed_forward_test src/tests/orientation_feed_forward_test.cpp)
+add_executable(feed_forward_publisher_node src/feed_forward_publisher_node.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -145,11 +150,20 @@ add_library(feed_forward
 # add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
+target_link_libraries(feed_forward_test
+  feed_forward
+  ${catkin_LIBRARIES}
+  ${eigen3_LIBRARIES}
+)
 target_link_libraries(feed_forward
   ${catkin_LIBRARIES}
   ${eigen3_LIBRARIES}
 )
-
+target_link_libraries(feed_forward_publisher_node
+  feed_forward
+  ${catkin_LIBRARIES}
+  ${eigen3_LIBRARIES}
+)
 #############
 ## Install ##
 #############
