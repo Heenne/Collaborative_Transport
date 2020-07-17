@@ -13,17 +13,17 @@
 int main(int argc, char** argv)
 {
     ros::init(argc,argv,"forward_publisher");
-    ros::NodeHandle nh("panda");
+    ros::NodeHandle nh;
     ros::Publisher pub=nh.advertise<geometry_msgs::PoseStamped>("equilibrium_pose",10);
     tf2_ros::Buffer tfBuffer;
     tf2_ros::TransformListener tfListener(tfBuffer);
-    geometry_msgs::TransformStamped transformStamped;
+    RosOrientationFeedForward<std_msgs::Float64> feed(nh,"test_float");   
+    geometry_msgs::TransformStamped transformStamped,offsetStamped;
     bool succeed=false;
     while (!succeed)
     {
-        
         try{
-            transformStamped = tfBuffer.lookupTransform("panda_link0", "panda_K",
+            transformStamped = tfBuffer.lookupTransform("world","panda_K",
                                     ros::Time(0));
                             
             succeed=true;
@@ -33,21 +33,45 @@ int main(int argc, char** argv)
             ros::Duration(1.0).sleep();
         }
     }
+    succeed=false;
+    while (!succeed)
+    {
+        try{
+            offsetStamped = tfBuffer.lookupTransform("base_link","panda_link0",
+                                    ros::Time(0));
+                            
+            succeed=true;
+        }
+        catch (tf2::TransformException &ex) {
+            ROS_WARN("%s",ex.what());
+            ros::Duration(1.0).sleep();
+        }
+    }
+    
     geometry_msgs::PoseStamped initial;
-    convertMsg(initial,transformStamped);
-    pub.publish(initial);
+    convertMsg(initial,transformStamped);    
+
     OrientationFeedForward::Pose pose;
     convertMsg(pose,initial);
-    RosOrientationFeedForward<std_msgs::Float64> feed(nh,"test_float");
     ROS_INFO_STREAM("Initial pose: "<<pose);
-    feed.setDesiredPose(pose);
+     feed.setDesiredPose(pose);
+    
+    
 
-    ros::Rate rate(10);
+    OrientationFeedForward::Pose offset;
+    convertMsg(offset,offsetStamped);
+    ROS_INFO_STREAM("Initial offset: "<<offset);
+    feed.setOffset(offset);
+    
+    ros::Rate rate(1000);
+    OrientationFeedForward::Pose control;
     geometry_msgs::PoseStamped current;
+    current.header.frame_id="panda_link0";
     while (ros::ok())
     {
-        ROS_INFO_STREAM("Current pose: "<<pose);
-        convertMsg(current,pose);
+        control=feed.getPose();
+        // ROS_INFO_STREAM("Current pose: "<<control);
+        convertMsg(current,control);
         pub.publish(current);
         ros::spinOnce();
         rate.sleep();
