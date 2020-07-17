@@ -61,6 +61,14 @@ class OrientationFeedForward{
         void setOffset(Orientation ori_off,Position pos_off);
         
         /**
+         * @brief Set the Offset object
+         * 
+         * @param ori_off Orientation of the Offset (from the mobile base frame and the robot frame)
+         * @param pos_off Position of the Offset (from mobile base frame and the robot frame)
+         */
+        void setOffset(Pose pose);
+
+        /**
          * @brief Set the Desired Pose that has to be hold in mobile base frame
          * 
          * @param pose Desired Pose with in mobile base frame 

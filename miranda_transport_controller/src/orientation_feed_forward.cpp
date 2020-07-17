@@ -16,6 +16,11 @@ OrientationFeedForward::OrientationFeedForward(Orientation ori_off,Position pos_
     setOffset(ori_off,pos_off);
 }
 
+void OrientationFeedForward::setOffset(Pose pose)
+{
+    offset_rotation_=Eigen::Quaterniond(pose.block<4,1>(3,0));
+    offset_position_=pose.block<3,1>(0,0);
+}
 void OrientationFeedForward::setOffset(Orientation ori_off,Position pos_off)
 {
     offset_rotation_=ori_off;
