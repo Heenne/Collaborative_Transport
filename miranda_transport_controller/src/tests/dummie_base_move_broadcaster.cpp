@@ -32,7 +32,7 @@ int main(int argc, char** argv){
   static tf2_ros::TransformBroadcaster br;
   geometry_msgs::TransformStamped transformStamped;
   transformStamped.header.frame_id="world";
-  transformStamped.child_frame_id="base_link";
+  transformStamped.child_frame_id="mir/base_link";
   br.sendTransform(transformStamped);
   ros::NodeHandle nh;
   ros::Subscriber sub = nh.subscribe("/test_float", 10, &poseCallback);

@@ -12,6 +12,7 @@
 
 int main(int argc, char** argv)
 {
+    
     ros::init(argc,argv,"forward_publisher");
     ros::NodeHandle nh;
     ros::Publisher pub=nh.advertise<geometry_msgs::PoseStamped>("equilibrium_pose",10);
@@ -23,7 +24,7 @@ int main(int argc, char** argv)
     while (!succeed)
     {
         try{
-            transformStamped = tfBuffer.lookupTransform("world","panda_K",
+            transformStamped = tfBuffer.lookupTransform("mir/base_link","panda/panda_hand",
                                     ros::Time(0));
                             
             succeed=true;
@@ -37,7 +38,7 @@ int main(int argc, char** argv)
     while (!succeed)
     {
         try{
-            offsetStamped = tfBuffer.lookupTransform("base_link","panda_link0",
+            offsetStamped = tfBuffer.lookupTransform("mir/base_link","panda/panda_link0",
                                     ros::Time(0));
                             
             succeed=true;
@@ -66,7 +67,7 @@ int main(int argc, char** argv)
     ros::Rate rate(1000);
     OrientationFeedForward::Pose control;
     geometry_msgs::PoseStamped current;
-    current.header.frame_id="panda_link0";
+    current.header.frame_id="panda/panda_link0";
     while (ros::ok())
     {
         control=feed.getPose();
