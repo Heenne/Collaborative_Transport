@@ -81,10 +81,10 @@ void convertMsg(Eigen::Matrix<double,7,1> &pose,geometry_msgs::Pose &msg)
     pose<<  msg.position.x,
             msg.position.y,
             msg.position.z,
-            msg.orientation.w,
             msg.orientation.x,
             msg.orientation.y,
-            msg.orientation.z;
+            msg.orientation.z,
+            msg.orientation.w;
    ;
 }
 
@@ -155,6 +155,19 @@ void convertMsg(geometry_msgs::PoseStamped &pose,geometry_msgs::TransformStamped
 {
    pose.header=transformStamped.header;
    convertMsg(pose.pose,transformStamped.transform);
+}
+
+/**
+ * @brief Convert a stamped transform geometry message to a eigen pose vector
+ * 
+ * @param pose Pose Vector the pose is stored in
+ * @param transformStamped The geometry msgs that holds the transform
+ */
+void convertMsg(Eigen::Matrix<double,7,1> &pose,geometry_msgs::TransformStamped &transformStamped)
+{
+    geometry_msgs::PoseStamped pose_msg;
+    convertMsg(pose_msg,transformStamped);
+    convertMsg(pose,pose_msg);
 }
 
 /**
