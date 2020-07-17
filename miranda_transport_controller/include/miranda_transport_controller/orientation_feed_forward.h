@@ -4,11 +4,20 @@
 #include <eigen3/Eigen/Dense>
 #include <eigen3/Eigen/Geometry>
 
+
+/** @addtogroup group_feed_forward
+ * @{
+ */
+/**
+ * @brief A Orientation feed forward class. It uses a given orientation and calculates a robot arm pose
+ * that compansates the motion by the change of orientation (null space motion). 
+ * 
+ */
 class OrientationFeedForward{
     public:
-        typedef Eigen::Matrix<double,3,1> Position; //<Typedef for Position vectors
-        typedef Eigen::Quaterniond Orientation; //<Typedef for Orientation quaternions
-        typedef Eigen::Matrix<double,7,1> Pose; //<Typedef for Pose Vectors (combination of position and quaternion)
+        typedef Eigen::Matrix<double,3,1> Position;     //<Typedef for Position vectors
+        typedef Eigen::Quaterniond Orientation;         //<Typedef for Orientation quaternions
+        typedef Eigen::Matrix<double,7,1> Pose;         //<Typedef for Pose Vectors (combination of position and quaternion)
 
         /**
          * @brief Construct a new Orientation Feed Forward object
@@ -79,4 +88,5 @@ class OrientationFeedForward{
         Orientation offset_rotation_;
         Position offset_position_;       
 };
+//@}
 #endif

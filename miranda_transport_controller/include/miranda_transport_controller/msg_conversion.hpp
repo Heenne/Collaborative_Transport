@@ -7,6 +7,11 @@
 #include<geometry_msgs/Pose.h>
 #include<std_msgs/Float64.h>
 
+/** @file */ 
+/** @addtogroup transport_controller
+ * @{
+ */
+
 /**
  * @brief Convert an float64 z-axis angle to an eigen quaternion
  * 

@@ -1,0 +1,75 @@
+\hypertarget{classRosOrientationFeedForward}{}\section{Ros\+Orientation\+Feed\+Forward$<$ T $>$ Class Template Reference}
+\label{classRosOrientationFeedForward}\index{Ros\+Orientation\+Feed\+Forward$<$ T $>$@{Ros\+Orientation\+Feed\+Forward$<$ T $>$}}
+
+
+A Ros implementation of the Orientation\+Feeed\+Forward class. It contains a ros Subscriber that listens to a specific message and uses the message data as input data for the feed forward control.  
+
+
+
+
+{\ttfamily \#include $<$ros\+\_\+orientation\+\_\+feed\+\_\+forward.\+h$>$}
+
+
+
+Inheritance diagram for Ros\+Orientation\+Feed\+Forward$<$ T $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=243pt]{d6/d61/classRosOrientationFeedForward__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for Ros\+Orientation\+Feed\+Forward$<$ T $>$\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=243pt]{df/d60/classRosOrientationFeedForward__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classRosOrientationFeedForward_acf445e9c7d9be8a85ac899c0d6f7387b}{Ros\+Orientation\+Feed\+Forward} (ros\+::\+Node\+Handle \&nh, std\+::string topic)
+\begin{DoxyCompactList}\small\item\em Construct a new Ros Orientation Feed Forward object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Additional Inherited Members}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$class T$>$\newline
+class Ros\+Orientation\+Feed\+Forward$<$ T $>$}
+
+A Ros implementation of the Orientation\+Feeed\+Forward class. It contains a ros Subscriber that listens to a specific message and uses the message data as input data for the feed forward control. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Message type the subcriber is listeneing to. A convert\+Msg fucntion has to be implemented for it. \\
+\hline
+\end{DoxyTemplParams}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classRosOrientationFeedForward_acf445e9c7d9be8a85ac899c0d6f7387b}\label{classRosOrientationFeedForward_acf445e9c7d9be8a85ac899c0d6f7387b}} 
+\index{Ros\+Orientation\+Feed\+Forward@{Ros\+Orientation\+Feed\+Forward}!Ros\+Orientation\+Feed\+Forward@{Ros\+Orientation\+Feed\+Forward}}
+\index{Ros\+Orientation\+Feed\+Forward@{Ros\+Orientation\+Feed\+Forward}!Ros\+Orientation\+Feed\+Forward@{Ros\+Orientation\+Feed\+Forward}}
+\subsubsection{\texorpdfstring{Ros\+Orientation\+Feed\+Forward()}{RosOrientationFeedForward()}}
+{\footnotesize\ttfamily template$<$class T $>$ \\
+\hyperlink{classRosOrientationFeedForward}{Ros\+Orientation\+Feed\+Forward}$<$ T $>$\+::\hyperlink{classRosOrientationFeedForward}{Ros\+Orientation\+Feed\+Forward} (\begin{DoxyParamCaption}\item[{ros\+::\+Node\+Handle \&}]{nh,  }\item[{std\+::string}]{topic }\end{DoxyParamCaption})}
+
+
+
+Construct a new Ros Orientation Feed Forward object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nh} & Nodehandle for namespace handling \\
+\hline
+{\em topic} & Topic name that should be used as input source \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/miranda\+\_\+transport\+\_\+controller/ros\+\_\+orientation\+\_\+feed\+\_\+forward.\+h\item 
+src/ros\+\_\+orientation\+\_\+feed\+\_\+forward.\+cpp\end{DoxyCompactItemize}
