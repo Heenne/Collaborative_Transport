@@ -12,7 +12,7 @@
 
 int main(int argc, char** argv)
 {
-    
+    //Setup ros objects
     ros::init(argc,argv,"forward_publisher");
     ros::NodeHandle nh;
     ros::Publisher pub=nh.advertise<geometry_msgs::PoseStamped>("equilibrium_pose",10);
@@ -20,7 +20,10 @@ int main(int argc, char** argv)
     tf2_ros::TransformListener tfListener(tfBuffer);
     RosOrientationFeedForward<std_msgs::Float64> feed(nh,"test_float");   
     geometry_msgs::TransformStamped transformStamped,offsetStamped;
-    bool succeed=false;
+
+
+    bool succeed=false; //Flag if a transform had been found
+    //Find the base to hand initial pose
     while (!succeed)
     {
         try{
@@ -34,6 +37,7 @@ int main(int argc, char** argv)
             ros::Duration(1.0).sleep();
         }
     }
+    //Find the offset from base to robot
     succeed=false;
     while (!succeed)
     {
@@ -48,7 +52,8 @@ int main(int argc, char** argv)
             ros::Duration(1.0).sleep();
         }
     }
-    
+
+    //INitialise feedforward initial pose    
     geometry_msgs::PoseStamped initial;
     convertMsg(initial,transformStamped);    
 
@@ -58,21 +63,24 @@ int main(int argc, char** argv)
      feed.setDesiredPose(pose);
     
     
-
+    //Initialise feedforward offset 
     OrientationFeedForward::Pose offset;
     convertMsg(offset,offsetStamped);
     ROS_INFO_STREAM("Initial offset: "<<offset);
     feed.setOffset(offset);
     
-    ros::Rate rate(1000);
+
+    ros::Rate rate(1000);//Publish at 1khz
     OrientationFeedForward::Pose control;
     geometry_msgs::PoseStamped current;
     current.header.frame_id="panda/panda_link0";
     while (ros::ok())
     {
+        //get the current feed foorward
         control=feed.getPose();
-        // ROS_INFO_STREAM("Current pose: "<<control);
         convertMsg(current,control);
+        
+        //publish the current feed forward
         pub.publish(current);
         ros::spinOnce();
         rate.sleep();
