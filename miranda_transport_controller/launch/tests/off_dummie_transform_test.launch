@@ -1,6 +1,6 @@
 <launch>
-<node pkg="tf2_ros" type="static_transform_publisher" name="mir_panda_transformer" args="0.35 0.15 0.35 0 0 0 1 base_link panda_link0" />
-<node pkg="tf2_ros" type="static_transform_publisher" name="panda_ee" args="1 0 1 0 0 0 1 world panda_K" />
+<node pkg="tf2_ros" type="static_transform_publisher" name="mir_panda_transformer" args="0.35 0.15 0.35 0 0 0 1 mir/base_link panda/panda_link0" />
+<node pkg="tf2_ros" type="static_transform_publisher" name="panda_ee" args="1 0 1 0 0 0 1 world panda/panda_hand" />
 
 <node pkg="miranda_transport_controller" type="dummie_base_move_broadcaster" name="dummie_base"/>
 <node pkg="miranda_transport_controller" type="feed_forward_publisher_node" name="test_node" output="screen" />
