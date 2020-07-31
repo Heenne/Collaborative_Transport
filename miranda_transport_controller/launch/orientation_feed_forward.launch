@@ -11,7 +11,7 @@
     <param name="off_source_frame" value="base_link"/>
     
     <param name="lookup_initial_pose" value="true"/>
-    <param name="ee_source_frame" value="odom"/>
+    <param name="ee_source_frame" value="base_link"/>
     <param name="ee_target_frame" value="panda_hand"/> 
 
     <param name="current_target_frame" value="base_link"/>
