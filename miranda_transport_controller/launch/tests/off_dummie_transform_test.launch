@@ -1,8 +1,27 @@
 <launch>
-<node pkg="tf2_ros" type="static_transform_publisher" name="mir_panda_transformer" args="0.35 0.15 0.35 0 0 0 1 mir/base_link panda/panda_link0" />
-<node pkg="tf2_ros" type="static_transform_publisher" name="panda_ee" args="1 0 1 0 0 0 1 world panda/panda_hand" />
+<node pkg="tf2_ros" type="static_transform_publisher" name="mir_panda_transformer" args="0.35 0.15 0.35 0 0 0 1 base_link panda_link0" />
+<node pkg="tf2_ros" type="static_transform_publisher" name="panda_ee" args="1 0 1 0 0 0 1 world panda_hand" />
 
 <node pkg="miranda_transport_controller" type="dummie_base_move_broadcaster" name="dummie_base"/>
-<node pkg="miranda_transport_controller" type="feed_forward_publisher_node" name="test_node" output="screen" />
+
+<!-- <node pkg="miranda_transport_controller" type="feed_forward_publisher_node" name="test_node" output="screen"> -->
+<node pkg="miranda_transport_controller" type="feed_forward_tf_node" name="test_node" output="screen">
+    <param name="update_rate" value="20"/>
+    <param name="pose_topic" value="equilibrium_pose"/>
+
+    <param name="lookup_offset" value="true"/>
+    <param name="off_target_frame" value="panda_link0"/>
+    <param name="off_source_frame" value="base_link"/>
+    
+    <param name="lookup_initial_pose" value="true"/>
+    <param name="ee_source_frame" value="world"/>
+    <param name="ee_target_frame" value="panda_hand"/> 
+
+    <param name="current_target_frame" value="base_link"/>
+    <param name="current_source_frame" value="world" />
+    
+    <param name="ee_pose_frame" value="panda_link0"/>   
+    
+</node>
 <node pkg="rviz" type="rviz" name="rviz" args="-d $(find miranda_transport_controller)/rviz/feed_forward_test.rviz"/>
 </launch>

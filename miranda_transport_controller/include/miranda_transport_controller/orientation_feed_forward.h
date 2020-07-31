@@ -92,7 +92,10 @@ class OrientationFeedForward{
         
         Position d_pos_fixed_;
         Orientation d_ori_fixed_;
-        
+        Eigen::Transform<double,3,Eigen::Affine> offset_;
+        Eigen::Transform<double,3,Eigen::Affine> desired_ee_;
+        Eigen::Transform<double,3,Eigen::Affine> current_;
+
         Orientation offset_rotation_;
         Position offset_position_;       
 };

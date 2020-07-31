@@ -1,8 +1,8 @@
-#ifndef ROS_ORIENTATION_FEED_FORWARD_H
-#define ROS_ORIENTATION_FEED_FORWARD_H
+#ifndef MSG_ORIENTATION_FEED_FORWARD_H
+#define MSG_ORIENTATION_FEED_FORWARD_H
 
 #include <ros/ros.h>
-#include <miranda_transport_controller/orientation_feed_forward.h>
+#include <miranda_transport_controller/ros_orientation_feed_forward_base.h>
 #include <miranda_transport_controller/msg_conversion.hpp>
 
 /** @addtogroup group_feed_forward
@@ -15,7 +15,7 @@
  * @tparam T Message type the subcriber is listeneing to. A convertMsg fucntion has to be implemented for it.
  */
 template<class T>
-class RosOrientationFeedForward:public OrientationFeedForward{
+class MsgOrientationFeedForward:public RosOrientationFeedForwardBase{
     public:
         /**
          * @brief Construct a new Ros Orientation Feed Forward object
@@ -23,12 +23,16 @@ class RosOrientationFeedForward:public OrientationFeedForward{
          * @param nh Nodehandle for namespace handling
          * @param topic Topic name that should be used as input source
          */
-        RosOrientationFeedForward(ros::NodeHandle &nh,std::string topic);
-      
+        MsgOrientationFeedForward(ros::NodeHandle &nh,std::string topic);
+        bool init() override;
     protected:
+        void update(const ros::TimerEvent&)override;
+        
     private:
         ros::Subscriber ori_sub_;
-        ros::NodeHandle nh_;
+        ros::Publisher pose_pub_;
+        T current_orientation_;
+        std::string frame_id_;
         void callbackOrientation(T msg);
      
 };

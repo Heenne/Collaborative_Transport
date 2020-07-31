@@ -121,11 +121,15 @@ ${Eigen_INCLUDE_DIRS}
 
 ## Declare a C++ library
 add_library(feed_forward
-  include/${PROJECT_NAME}/orientation_feed_forward.h
-  src/orientation_feed_forward.cpp
   include/${PROJECT_NAME}/msg_conversion.hpp
-  include/${PROJECT_NAME}/ros_orientation_feed_forward.h
-  src/ros_orientation_feed_forward.cpp
+  include/${PROJECT_NAME}/orientation_feed_forward.h
+  src/orientation_feed_forward.cpp 
+  include/${PROJECT_NAME}/ros_orientation_feed_forward_base.h
+  src/ros_orientation_feed_forward_base.cpp 
+  include/${PROJECT_NAME}/msg_orientation_feed_forward.h
+  src/msg_orientation_feed_forward.cpp
+  include/${PROJECT_NAME}/tf_orientation_feed_forward.h
+  src/tf_orientation_feed_forward.cpp
 )
 
 ## Add cmake target dependencies of the library
@@ -137,7 +141,8 @@ add_library(feed_forward
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
 add_executable(feed_forward_test src/tests/orientation_feed_forward_test.cpp)
-add_executable(feed_forward_publisher_node src/feed_forward_publisher_node.cpp)
+add_executable(feed_forward_msg_node src/feed_forward_msg_node.cpp)
+add_executable(feed_forward_tf_node src/feed_forward_tf_node.cpp)
 add_executable(dummie_base_move_broadcaster src/tests/dummie_base_move_broadcaster.cpp)
 
 ## Rename C++ executable without prefix
@@ -160,7 +165,12 @@ target_link_libraries(feed_forward
   ${catkin_LIBRARIES}
   ${eigen3_LIBRARIES}
 )
-target_link_libraries(feed_forward_publisher_node
+target_link_libraries(feed_forward_msg_node
+  feed_forward
+  ${catkin_LIBRARIES}
+  ${eigen3_LIBRARIES}
+)
+target_link_libraries(feed_forward_tf_node
   feed_forward
   ${catkin_LIBRARIES}
   ${eigen3_LIBRARIES}
@@ -168,6 +178,8 @@ target_link_libraries(feed_forward_publisher_node
 target_link_libraries(dummie_base_move_broadcaster
   ${catkin_LIBRARIES}
 )
+
+
 #############
 ## Install ##
 #############

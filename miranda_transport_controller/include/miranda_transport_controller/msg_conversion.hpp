@@ -1,5 +1,6 @@
 #ifndef MSG_CONVERSION_HPP
 #define MSG_CONVERSION_HPP
+
 #include<eigen3/Eigen/Dense>
 #include<geometry_msgs/TransformStamped.h>
 #include<geometry_msgs/Transform.h>
@@ -18,7 +19,7 @@
  * @param msg Float64 ros message with z-axis angle
  * @param quat Eigen quaterniond the quaternion is stored in
  */
-void convertMsg(Eigen::Quaterniond &quat,std_msgs::Float64 &msg)
+inline void convertMsg(Eigen::Quaterniond &quat,std_msgs::Float64 &msg)
 {
    quat=    Eigen::AngleAxisd(0.0, Eigen::Vector3d::UnitX())
             * Eigen::AngleAxisd(0.0,  Eigen::Vector3d::UnitY())
@@ -31,7 +32,7 @@ void convertMsg(Eigen::Quaterniond &quat,std_msgs::Float64 &msg)
  * @param msg Message that holds the transform
  * @param quat Quaternion the eigen quaternion is stored in
  */
-void convertMsg(Eigen::Quaterniond &quat,geometry_msgs::Transform &msg)
+inline void convertMsg(Eigen::Quaterniond &quat,geometry_msgs::Transform &msg)
 {
     quat=Eigen::Quaterniond(msg.rotation.w,msg.rotation.x,msg.rotation.y,msg.rotation.z);
 }
@@ -42,7 +43,7 @@ void convertMsg(Eigen::Quaterniond &quat,geometry_msgs::Transform &msg)
  * @param msg Message that holds the stamped transform
  * @param quat Quternion the eigen quaternion is stored in
  */
-void convertMsg(Eigen::Quaterniond &quat,geometry_msgs::TransformStamped &msg)
+inline void convertMsg(Eigen::Quaterniond &quat,geometry_msgs::TransformStamped &msg)
 {
     convertMsg(quat,msg.transform);
 }
@@ -53,7 +54,7 @@ void convertMsg(Eigen::Quaterniond &quat,geometry_msgs::TransformStamped &msg)
  * @param msg Message that holds the pose
  * @param quat Quternion the eigen quaternion is stored in
  */
-void convertMsg(Eigen::Quaterniond &quat,geometry_msgs::Pose &msg)
+inline void convertMsg(Eigen::Quaterniond &quat,geometry_msgs::Pose &msg)
 {
     quat=Eigen::Quaterniond(msg.orientation.w, msg.orientation.x, msg.orientation.y, msg.orientation.z);
 }
@@ -63,7 +64,7 @@ void convertMsg(Eigen::Quaterniond &quat,geometry_msgs::Pose &msg)
  * @param msg Message that holds the stamped pose
  * @param quat Quternion the eigen quaternion is stored in
  */
-void convertMsg(Eigen::Quaterniond &quat,geometry_msgs::PoseStamped &msg)
+inline void convertMsg(Eigen::Quaterniond &quat,geometry_msgs::PoseStamped &msg)
 {
    convertMsg(quat,msg.pose);
 }
@@ -76,7 +77,7 @@ void convertMsg(Eigen::Quaterniond &quat,geometry_msgs::PoseStamped &msg)
  * @param msg Message that holds the pose
  * @param pose Matrix (Vector) the eigen pose vector is stored in
  */
-void convertMsg(Eigen::Matrix<double,7,1> &pose,geometry_msgs::Pose &msg)
+inline void convertMsg(Eigen::Matrix<double,7,1> &pose,geometry_msgs::Pose &msg)
 {
     pose<<  msg.position.x,
             msg.position.y,
@@ -94,7 +95,7 @@ void convertMsg(Eigen::Matrix<double,7,1> &pose,geometry_msgs::Pose &msg)
  * @param msg Message that holds the pose
  * @param pose Matrix (Vector) the eigen pose vector is stored in
  */
-void convertMsg(Eigen::Matrix<double,7,1> &pose,geometry_msgs::PoseStamped &msg)
+inline void convertMsg(Eigen::Matrix<double,7,1> &pose,geometry_msgs::PoseStamped &msg)
 {
     convertMsg(pose,msg.pose);
 }
@@ -105,7 +106,7 @@ void convertMsg(Eigen::Matrix<double,7,1> &pose,geometry_msgs::PoseStamped &msg)
  * @param msg Message that the pose is stored in
  * @param pose Matrix (Vector) that holds the pose
  */
-void convertMsg(geometry_msgs::Pose &msg,Eigen::Matrix<double,7,1> &pose)
+inline void convertMsg(geometry_msgs::Pose &msg,Eigen::Matrix<double,7,1> &pose)
 {
     msg.position.x=pose(0);
     msg.position.y=pose(1);
@@ -122,7 +123,7 @@ void convertMsg(geometry_msgs::Pose &msg,Eigen::Matrix<double,7,1> &pose)
  * @param msg Message that the pose is stored in
  * @param pose Matrix (Vector) that holds the pose
  */
-void convertMsg(geometry_msgs::PoseStamped &msg,Eigen::Matrix<double,7,1> &pose)
+inline void convertMsg(geometry_msgs::PoseStamped &msg,Eigen::Matrix<double,7,1> &pose)
 {
     convertMsg(msg.pose,pose);
 }
@@ -133,7 +134,7 @@ void convertMsg(geometry_msgs::PoseStamped &msg,Eigen::Matrix<double,7,1> &pose)
  * @param msg Message that the pose is stored in
  * @param pose Matrix (Vector) that holds the pose
  */
-void convertMsg(geometry_msgs::Pose &pose,geometry_msgs::Transform &transform)
+inline void convertMsg(geometry_msgs::Pose &pose,geometry_msgs::Transform &transform)
 {
     pose.position.x=transform.translation.x;
     pose.position.y=transform.translation.y;
@@ -151,7 +152,7 @@ void convertMsg(geometry_msgs::Pose &pose,geometry_msgs::Transform &transform)
  * @param pose Stamped pose the pose is stored in
  * @param transformStamped The geometry msgs that holds the transform
  */
-void convertMsg(geometry_msgs::PoseStamped &pose,geometry_msgs::TransformStamped &transformStamped)
+inline void convertMsg(geometry_msgs::PoseStamped &pose,geometry_msgs::TransformStamped &transformStamped)
 {
    pose.header=transformStamped.header;
    convertMsg(pose.pose,transformStamped.transform);
@@ -163,7 +164,7 @@ void convertMsg(geometry_msgs::PoseStamped &pose,geometry_msgs::TransformStamped
  * @param pose Pose Vector the pose is stored in
  * @param transformStamped The geometry msgs that holds the transform
  */
-void convertMsg(Eigen::Matrix<double,7,1> &pose,geometry_msgs::TransformStamped &transformStamped)
+inline void convertMsg(Eigen::Matrix<double,7,1> &pose,geometry_msgs::TransformStamped &transformStamped)
 {
     geometry_msgs::PoseStamped pose_msg;
     convertMsg(pose_msg,transformStamped);
@@ -176,7 +177,7 @@ void convertMsg(Eigen::Matrix<double,7,1> &pose,geometry_msgs::TransformStamped 
  * @param transform Message the transform is stored in
  * @param pose Message that holds the pose
  */
-void convertMsg(geometry_msgs::Transform &transform,geometry_msgs::Pose &pose)
+inline void convertMsg(geometry_msgs::Transform &transform,geometry_msgs::Pose &pose)
 {
     transform.translation.x=pose.position.x;
     transform.translation.y=pose.position.y;
@@ -196,7 +197,7 @@ void convertMsg(geometry_msgs::Transform &transform,geometry_msgs::Pose &pose)
  * @param transform Message the stamped transform is stored in
  * @param pose Message that holds the pose
  */
-void convertMsg(geometry_msgs::TransformStamped &transform,geometry_msgs::PoseStamped &pose)
+inline void convertMsg(geometry_msgs::TransformStamped &transform,geometry_msgs::PoseStamped &pose)
 {
     transform.header=pose.header;
     convertMsg(transform.transform,pose.pose);
