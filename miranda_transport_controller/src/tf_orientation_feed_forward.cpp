@@ -6,12 +6,13 @@ TfOrientationFeedForward::TfOrientationFeedForward(ros::NodeHandle &nh):RosOrien
 void TfOrientationFeedForward::update(const ros::TimerEvent&)
 {
     try{
-        geometry_msgs::TransformStamped trafo=tf_buffer_.lookupTransform(this->current_source_frame_,this->current_target_frame_,ros::Time(0));
+        geometry_msgs::TransformStamped trafo=tf_buffer_.lookupTransform(   tf::resolve(this->tf_prefix_,this->current_source_frame_),
+                                                                            tf::resolve(this->tf_prefix_,this->current_target_frame_),ros::Time(0));
         Orientation quat;
         convertMsg(quat,trafo);
         this->updateOrientation(quat);
         geometry_msgs::PoseStamped pose;
-        pose.header.frame_id=this->ee_frame_id_;
+        pose.header.frame_id=tf::resolve(this->tf_prefix_,this->ee_frame_id_);
         Pose forward=this->getPose();
         convertMsg(pose,forward);
         this->pose_pub_.publish(pose);    

@@ -30,9 +30,7 @@ class MsgOrientationFeedForward:public RosOrientationFeedForwardBase{
         
     private:
         ros::Subscriber ori_sub_;
-        ros::Publisher pose_pub_;
         T current_orientation_;
-        std::string frame_id_;
         void callbackOrientation(T msg);
      
 };

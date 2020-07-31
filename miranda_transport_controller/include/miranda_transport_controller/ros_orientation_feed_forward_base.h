@@ -3,6 +3,7 @@
 
 #include <miranda_transport_controller/orientation_feed_forward.h>
 #include <ros/ros.h>
+#include <tf/tf.h>
 #include <tf2_ros/transform_listener.h>
 #include <miranda_transport_controller/msg_conversion.hpp>
 
@@ -25,6 +26,7 @@ class RosOrientationFeedForwardBase:public OrientationFeedForward{
         tf2_ros::Buffer tf_buffer_;
         std::string ee_frame_id_;
         ros::Publisher pose_pub_;
+        std::string tf_prefix_;
     private:
         ros::Timer update_timer_;
         

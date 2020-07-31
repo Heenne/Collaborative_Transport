@@ -9,7 +9,8 @@ project(miranda_transport_controller)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED
             roscpp
-            tf2_ros)
+            tf2_ros
+            tf)
 find_package(Eigen3 REQUIRED)
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)

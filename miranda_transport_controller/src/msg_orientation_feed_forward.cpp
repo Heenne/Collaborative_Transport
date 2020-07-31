@@ -20,7 +20,7 @@ void MsgOrientationFeedForward<T>::update(const ros::TimerEvent&)
     convertMsg(quat,this->current_orientation_);
     this->updateOrientation(quat);
     geometry_msgs::PoseStamped pose;
-    pose.header.frame_id=this->frame_id_;
+    pose.header.frame_id=tf::resolve(this->tf_prefix_,this->ee_frame_id_);
     Pose forward=this->getPose();
     convertMsg(pose,forward);
     this->pose_pub_.publish(pose);

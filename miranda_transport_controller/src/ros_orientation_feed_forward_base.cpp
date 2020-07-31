@@ -14,6 +14,8 @@ bool RosOrientationFeedForwardBase::init()
         ros::Rate ros_rate(rate);
         this->update_timer_=this->nh_.createTimer(ros_rate.cycleTime(),&RosOrientationFeedForwardBase::update,this);
     }
+    nh.getParam("tf_prefix",this->tf_prefix_);
+    
     bool lookup_offset=false;
     if(nh.getParam("lookup_offset",lookup_offset))
     {
@@ -25,7 +27,9 @@ bool RosOrientationFeedForwardBase::init()
         else
         {         
             try{
-                geometry_msgs::TransformStamped trafo=tf_buffer_.lookupTransform(off_source_frame,off_target_frame,ros::Time::now());
+                geometry_msgs::TransformStamped trafo=tf_buffer_.lookupTransform(tf::resolve(this->tf_prefix_,off_source_frame),
+                                                                                    tf::resolve(this->tf_prefix_,off_target_frame),
+                                                                                    ros::Time(0));
                 Pose offset;
                 convertMsg(offset,trafo);
                 this->setOffset(offset);
@@ -53,15 +57,18 @@ bool RosOrientationFeedForwardBase::init()
         else
         {
             try{
-                geometry_msgs::TransformStamped trafo=tf_buffer_.lookupTransform(source_frame,target_frame,ros::Time::now());
+                geometry_msgs::TransformStamped trafo=tf_buffer_.lookupTransform(tf::resolve(this->tf_prefix_,source_frame),
+                                                                                tf::resolve(this->tf_prefix_,target_frame),
+                                                                                ros::Time(0));
                 Pose offset;
                 convertMsg(offset,trafo);
                 this->setDesiredPose(offset);
             }
             catch(tf2::TransformException &ex) {
-                        ROS_WARN("Could NOT find trafo for initial pose lookupfrom %s to %s: %s",
+                        ROS_WARN("Could NOT find trafo for initial pose lookup from %s to %s: %s",
                                                                 source_frame.c_str(),
-                                                                target_frame.c_str(), ex.what());
+                                                                target_frame.c_str(), 
+                                                                ex.what());
             }
         }
     }
