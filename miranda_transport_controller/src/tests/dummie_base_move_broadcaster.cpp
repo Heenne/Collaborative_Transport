@@ -15,7 +15,7 @@ void poseCallback(std_msgs::Float64 msg){
 int main(int argc, char** argv){
   ros::init(argc, argv, "base_movement_dummie");
   ros::NodeHandle nh;
-  ros::Subscriber sub = nh.subscribe("/test_float", 10, &poseCallback);
+  ros::Subscriber sub = nh.subscribe("test_float", 10, &poseCallback);
   static tf2_ros::TransformBroadcaster br;
   ros::Rate rate(500);
 

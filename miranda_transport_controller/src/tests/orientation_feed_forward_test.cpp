@@ -9,7 +9,7 @@ int main(int argc, char** argv)
 {
     OrientationFeedForward::Pose pose_desired;
     pose_desired<<1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 1.0; 
-    OrientationFeedForward feed(Eigen::Quaterniond(1.0,0.0,0.0,0.0),Eigen::Vector3d(1.0,0.0,0.0));
+    OrientationFeedForward feed;
     double angle=0.0;
     feed.setDesiredPose(pose_desired);
     for(int i=0;i<10;i++)
