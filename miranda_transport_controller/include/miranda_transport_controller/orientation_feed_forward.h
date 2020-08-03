@@ -30,7 +30,7 @@ class OrientationFeedForward{
          * @param ori_off The Orientation offset the Robot base has with respect to the mobile base frame
          * @param pos_offf The Position offset the Robot base has with respect to the mobile base frame
          */
-        OrientationFeedForward(Orientation ori_off,Position pos_offf);
+        OrientationFeedForward(Position pos_offf,Orientation ori_off);
        
        /**
         * @brief Updates the current Orientation of the mobile base that has to be feed forwarded
@@ -58,7 +58,7 @@ class OrientationFeedForward{
          * @param ori_off Orientation of the Offset (from the mobile base frame and the robot frame)
          * @param pos_off Position of the Offset (from mobile base frame and the robot frame)
          */
-        void setOffset(Orientation ori_off,Position pos_off);
+        void setOffset(Position pos_off,Orientation ori_off);
         
         /**
          * @brief Set the Offset object
