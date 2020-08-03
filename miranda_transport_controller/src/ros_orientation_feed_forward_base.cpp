@@ -27,12 +27,13 @@ bool RosOrientationFeedForwardBase::init()
         else
         {         
             try{
-                geometry_msgs::TransformStamped trafo=tf_buffer_.lookupTransform(tf::resolve(this->tf_prefix_,off_source_frame),
+                geometry_msgs::TransformStamped offset_trafo=tf_buffer_.lookupTransform(tf::resolve(this->tf_prefix_,off_source_frame),
                                                                                     tf::resolve(this->tf_prefix_,off_target_frame),
                                                                                     ros::Time(0));
                 Pose offset;
-                convertMsg(offset,trafo);
+                convertMsg(offset,offset_trafo);
                 this->setOffset(offset);
+                ROS_INFO_STREAM("Set offset: \n"<<offset);
             }
             catch(tf2::TransformException &ex) {
                         ROS_WARN("Could NOT find trafo for offset lookup from %s to %s: %s",
@@ -46,7 +47,6 @@ bool RosOrientationFeedForwardBase::init()
         ROS_WARN("Did not load offset for feed forward!");
     }
     bool lookup_initial_pose;
-    std::string source_frame,target_frame;
     if(nh.getParam("lookup_initial_pose",lookup_initial_pose))
     {
         std::string target_frame,source_frame;
@@ -60,9 +60,10 @@ bool RosOrientationFeedForwardBase::init()
                 geometry_msgs::TransformStamped trafo=tf_buffer_.lookupTransform(tf::resolve(this->tf_prefix_,source_frame),
                                                                                 tf::resolve(this->tf_prefix_,target_frame),
                                                                                 ros::Time(0));
-                Pose offset;
-                convertMsg(offset,trafo);
-                this->setDesiredPose(offset);
+                Pose initial;
+                convertMsg(initial,trafo);
+                this->setDesiredPose(initial);
+                ROS_INFO_STREAM("Set initial pose: \n"<<initial);
             }
             catch(tf2::TransformException &ex) {
                         ROS_WARN("Could NOT find trafo for initial pose lookup from %s to %s: %s",
