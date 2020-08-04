@@ -11,6 +11,7 @@ find_package(catkin REQUIRED
     roscpp
     tf2_ros
     tf2_geometry_msgs
+    tf
 )
 
 ## System dependencies are found with CMake's conventions
@@ -135,6 +136,7 @@ ${catkin_INCLUDE_DIRS}
 ## The recommended prefix ensures that target names across packages don't collide
 add_executable(clear_odom_enc_node src/clear_odom_enc_node.cpp)
 add_executable(experiment_frame_broadcaster src/experiment_frame_broadcaster.cpp)
+add_executable(odom_map_broadcaster src/odom_map_broadcaster.cpp)
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
 ## target back to the shorter version for ease of user use
@@ -150,6 +152,9 @@ target_link_libraries(clear_odom_enc_node
   ${catkin_LIBRARIES}
 )
 target_link_libraries(experiment_frame_broadcaster
+  ${catkin_LIBRARIES}
+)
+target_link_libraries(odom_map_broadcaster
   ${catkin_LIBRARIES}
 )
 
