@@ -1,0 +1,6 @@
+<launch>
+<include file="$(find miranda_hardware_helper)/launch/miranda.launch" ns="mur" pass_all_args="true">
+    <arg name="spawn_panda" value="false"/>
+    <arg name="tf_prefix"   value="mur"/>
+</include>
+</launch>
