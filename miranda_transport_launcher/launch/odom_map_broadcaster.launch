@@ -1,5 +1,0 @@
-<launch>
-<node name="odom_map_broadcaster" type="odom_map_broadcaster" pkg="miranda_transport_launcher" ns="miranda/mir">
-    <param name="tf_prefix" value="miranda"/>
-</node>
-</launch>
