@@ -139,8 +139,14 @@ add_library(multi_robot_controller
   include/multi_robot_controller/slave.h
   src/slave.cpp
 )
-add_dependencies(multi_robot_controller ${catkin_EXPORTED_TARGETS})
+add_library(input_lib
+  include/${PROJECT_NAME}/input_base.h
+  include/${PROJECT_NAME}/input_odom.h
+  include/${PROJECT_NAME}/input_pose_twist.h
+)
+set_target_properties(input_lib PROPERTIES LINKER_LANGUAGE CXX)
 
+add_dependencies(multi_robot_controller ${catkin_EXPORTED_TARGETS})
 
 
 ## Declare a C++ executable
@@ -148,6 +154,7 @@ add_dependencies(multi_robot_controller ${catkin_EXPORTED_TARGETS})
 ## The recommended prefix ensures that target names across packages don't collide
 add_executable(slave_node src/slave_node.cpp)
 add_executable(master_node src/master_node.cpp)
+add_executable(input_test src/tests/input_test.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -169,6 +176,12 @@ target_link_libraries(slave_node
 )
 target_link_libraries(master_node
   multi_robot_controller
+  ${catkin_LIBRARIES}
+)
+target_link_libraries(input_lib
+  ${catkin_LIBRARIES}
+)
+target_link_libraries(input_test
   ${catkin_LIBRARIES}
 )
 

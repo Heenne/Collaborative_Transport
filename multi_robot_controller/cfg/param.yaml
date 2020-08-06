@@ -1,5 +1,5 @@
 controller:
-    master: "master"                    # name of the master robot
+    master: "mur"                    # name of the master robot
 
     reference: [1.25 , -1.25, 0, 0 ,0 ,0 ]    #X Y Z R P Y
 
@@ -7,7 +7,7 @@ controller:
 
     world_frame: "/map"     #Name of the global coordinate system
 
-    topic_current_odometry:     "base_pose_ground_truth"        #Name of the topic current state estimation is publihsed at
+    topic_current_odometry:     "robot_pose_stamped"        #Name of the topic current state estimation is publihsed at
 
     topic_target_odometry:    "/master/base_pose_ground_truth"  #Name of the topic masters state estimation is published at
     
