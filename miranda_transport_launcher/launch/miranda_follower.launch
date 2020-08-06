@@ -1,16 +1,12 @@
 <launch>
  <!-- Load the formation parameter file-->
   <node pkg="tf2_ros" type="static_transform_publisher" name="experiment_frame" args="11 17 0 0 0 0 1 map experiment" />
-  <node pkg="tf2_ros" type="static_transform_publisher" name="odom_enc_initializer" args="0 0 0 0 0 0 1 odom odom_enc" />
-  <node name="odom_clearer" pkg="miranda_transport_launcher" type="clear_odom_enc_node" ns="robot1" output="screen"/>
-  <node name="experiment_broadcaster" pkg="miranda_transport_launcher" type="experiment_frame_broadcaster" ns="robot1" output="screen"/>
-
-  <include file="$(find mir_driver)/launch/mir.launch" ns="robot1">
-    <arg name="disable_map" value="false"/>
+  <include file="$(find mir_hardware_helper)/launch/mir.launch" ns="mir">
+    <arg name="use_mir_amcl" value="true"/>
+    <arg name="tf_prefix" value="mir"/>
   </include>
-  
   <!-- Setting up the Formation of robots-->
-  <!-- <node name="Controller" pkg="multi_robot_controller" type="slave_node" args="robot1" ns="robot1"/> -->
+  <node name="Controller" pkg="multi_robot_controller" type="slave_node" ns="mir"/>
   
  
 </launch>

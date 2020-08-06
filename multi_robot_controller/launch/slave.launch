@@ -1,0 +1,32 @@
+<?xml version="2.0" ?>
+<!-- 
+  Setup a slave robot specified by:
+    robot_name: name of the robot and ros namespace
+    robot_x: x coordinate of the robot
+    robot_y: y coordinate of the robot
+    robot_yaw: coordinate of the robot angle
+    displ: show ros information at this slave ? screen/log
+-->
+
+<launch>
+<arg name="robot_name"  default="robot"/>
+<arg name="robot_x"     default="0.0" />
+<arg name="robot_y"     default="0.0" />
+<arg name="robot_yaw"   default="0.0" />
+<arg name="displ"       default="log"/> 
+
+
+
+<group ns="$(arg robot_name)" > 
+    <include file="$(find multi_robot_launcher)/launch/robot.launch">
+        <arg name="robot_x"             value="$(arg robot_x)" />
+        <arg name="robot_y"             value="$(arg robot_y)" />
+        <arg name="robot_yaw"           value="$(arg robot_yaw)" />
+        <arg name="robot_name"     value="$(arg robot_name)" />
+    </include>  
+  
+    <node name="Controller" pkg="multi_robot_controller" type="slave_node" args="$(arg robot_name)" output="$(arg displ)"></node>
+</group> 
+</launch>
+
+

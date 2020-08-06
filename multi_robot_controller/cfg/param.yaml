@@ -1,0 +1,18 @@
+controller:
+    master: "master"                    # name of the master robot
+
+    reference: [1.25 , -1.25, 0, 0 ,0 ,0 ]    #X Y Z R P Y
+
+    publish_tf: false           # Should base_link be published by the controller
+
+    world_frame: "/map"     #Name of the global coordinate system
+
+    topic_current_odometry:     "base_pose_ground_truth"        #Name of the topic current state estimation is publihsed at
+
+    topic_target_odometry:    "/master/base_pose_ground_truth"  #Name of the topic masters state estimation is published at
+    
+    controller_type: 2                            # 1-> pseudo_invers 2->lyapov 3->angl_dist
+    
+    lyapunov: [7.0,7.0,11.0]               # parameter for lyapunov algorythm: kx,kphi,vd,omegad
+   
+    angle_distance: [7.0,5.0,0.3]   # parameter for angle distance algorythm: kl,kpsi,d
