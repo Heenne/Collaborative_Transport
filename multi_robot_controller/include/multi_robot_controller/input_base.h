@@ -18,4 +18,5 @@ class InputBase
         tf::Pose pose_;
         tf::Vector3 lin_vel_;
         tf::Vector3 ang_vel_;
+        // virtual void load()=0;
 };

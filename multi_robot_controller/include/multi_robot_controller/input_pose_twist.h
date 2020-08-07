@@ -1,7 +1,7 @@
 
 #include<multi_robot_controller/input_base.h>
-#include<message_filters/subscriber.h>
-#include <nav_msgs/Odometry.h>
+#include <geometry_msgs/PoseStamped.h>
+#include <geometry_msgs/Twist.h>
 
 class InputPoseTwist: public InputBase<geometry_msgs::PoseStamped,geometry_msgs::Twist>
 {   

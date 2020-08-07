@@ -105,7 +105,6 @@ catkin_package(
  INCLUDE_DIRS include
 #  LIBRARIES transport_controller
 #  CATKIN_DEPENDS other_catkin_pkg
- DEPENDS eigen3
 )
 
 ###########

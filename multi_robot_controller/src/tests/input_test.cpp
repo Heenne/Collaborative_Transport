@@ -1,5 +1,5 @@
 #include<ros/ros.h>
-#include<multi_robot_controller/input_pose_twist.h>
+#include<multi_robot_controller/input_pose_odom.h>
 #include<nav_msgs/Odometry.h>
 #include<tf/tf.h>
 int main(int argc, char** argv)
@@ -7,7 +7,7 @@ int main(int argc, char** argv)
     ros::init(argc,argv,"input_test");
     ros::NodeHandle nh;
     // InputOdom base(nh,"/miranda/mir/odom_enc");
-    InputPoseTwist base(nh,"/miranda/mir/robot_pose_stamped","/test_twist");
+    InputPoseOdom base(nh,"/mur/mir/robot_pose_stamped","/mur/mir/odom_enc");
 
     ros::Rate rate(1);
     while (ros::ok())

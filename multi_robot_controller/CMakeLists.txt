@@ -17,7 +17,7 @@ find_package(
   roscpp
   tf  
 )
-find_package(cmake_modules REQUIRED)
+find_package(Eigen3 REQUIRED)
 
 
 
@@ -114,7 +114,6 @@ catkin_package(
   INCLUDE_DIRS include
   LIBRARIES multi_robot_controller
 #  CATKIN_DEPENDS geometry_msgs nav_msgs roscpp multi_robot_msgs
-#  DEPENDS EIGEN
 )
 
 ###########
@@ -124,11 +123,16 @@ catkin_package(
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
 include_directories(
- include
+  include
   ${catkin_INCLUDE_DIRS}
+  ${Eigen_INCLUDE_DIRS}
 )
 ## Declare a C++ library
 add_library(multi_robot_controller
+
+  include/multi_robot_controller/constrained_rigid_motion.h
+  src/constrained_rigid_motion.cpp
+
 
   include/multi_robot_controller/controller.h
   src/controller.cpp
@@ -143,6 +147,7 @@ add_library(input_lib
   include/${PROJECT_NAME}/input_base.h
   include/${PROJECT_NAME}/input_odom.h
   include/${PROJECT_NAME}/input_pose_twist.h
+  include/${PROJECT_NAME}/input_pose_odom.h
 )
 set_target_properties(input_lib PROPERTIES LINKER_LANGUAGE CXX)
 
@@ -155,6 +160,7 @@ add_dependencies(multi_robot_controller ${catkin_EXPORTED_TARGETS})
 add_executable(slave_node src/slave_node.cpp)
 add_executable(master_node src/master_node.cpp)
 add_executable(input_test src/tests/input_test.cpp)
+add_executable(rigid_motion_test src/tests/rigid_motion_test.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -169,6 +175,7 @@ add_executable(input_test src/tests/input_test.cpp)
 ## Specify libraries to link a library or executable target against
 target_link_libraries(multi_robot_controller
   ${catkin_LIBRARIES}
+  ${eigen3_LIBRARIES}
 )
 target_link_libraries(slave_node
   multi_robot_controller
@@ -184,7 +191,10 @@ target_link_libraries(input_lib
 target_link_libraries(input_test
   ${catkin_LIBRARIES}
 )
-
+target_link_libraries(rigid_motion_test
+  ${catkin_LIBRARIES}
+  multi_robot_controller
+)
 
 
 
