@@ -128,20 +128,18 @@ include_directories(
   ${Eigen_INCLUDE_DIRS}
 )
 ## Declare a C++ library
+
 add_library(multi_robot_controller
 
   include/multi_robot_controller/constrained_rigid_motion.h
   src/constrained_rigid_motion.cpp
 
+  include/multi_robot_controller/controllerV2.h
+  src/controllerV2.cpp
 
-  include/multi_robot_controller/controller.h
-  src/controller.cpp
+  include/multi_robot_controller/pass_through_controller.hpp
 
-  include/multi_robot_controller/master.h
-  src/master.cpp
-
-  include/multi_robot_controller/slave.h
-  src/slave.cpp
+  include/multi_robot_controller/lyapunov_controller.hpp
 )
 
 add_library(input_lib
@@ -149,6 +147,7 @@ add_library(input_lib
   include/${PROJECT_NAME}/input_odom.hpp
   include/${PROJECT_NAME}/input_pose_twist.hpp
   include/${PROJECT_NAME}/input_pose_odom.hpp
+  include/${PROJECT_NAME}/input_types.hpp
 )
 add_library(multi_robot_controller_exception
   include/${PROJECT_NAME}/necessary_param_exeption.hpp
@@ -166,6 +165,7 @@ add_executable(slave_node src/slave_node.cpp)
 add_executable(master_node src/master_node.cpp)
 add_executable(input_test src/tests/input_test.cpp)
 add_executable(rigid_motion_test src/tests/rigid_motion_test.cpp)
+add_executable(controller_test src/tests/controller_test.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -182,6 +182,7 @@ target_link_libraries(multi_robot_controller
   ${catkin_LIBRARIES}
   ${eigen3_LIBRARIES}
 )
+
 target_link_libraries(slave_node
   multi_robot_controller
   ${catkin_LIBRARIES}
@@ -197,6 +198,10 @@ target_link_libraries(input_test
   ${catkin_LIBRARIES}
 )
 target_link_libraries(rigid_motion_test
+  ${catkin_LIBRARIES}
+  multi_robot_controller
+)
+target_link_libraries(controller_test
   ${catkin_LIBRARIES}
   multi_robot_controller
 )
