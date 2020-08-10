@@ -24,7 +24,7 @@ class InputOdom: public InputBase
     private:
         ros::Subscriber sub_;
         inline void set(nav_msgs::Odometry msg)
-        {this->setPose(msg);this->setAngVel(msg);this->setLinVel(msg);}
+        {this->setPose(msg);this->setAngVel(msg);this->setLinVel(msg);this->time_=msg.header.stamp;}
         inline void setPose(nav_msgs::Odometry msg) 
         {tf::poseMsgToTF(msg.pose.pose,this->pose_);}
         inline void setLinVel(nav_msgs::Odometry msg) 

@@ -47,7 +47,7 @@ class InputPoseOdom: public InputBase
         // {this->set(*msg_odom);this->setPose(*msg_pose);}
      
         inline void set(nav_msgs::Odometry msg)
-        {this->setAngVel(msg);this->setLinVel(msg);}
+        {this->setAngVel(msg);this->setLinVel(msg);this->time_=msg.header.stamp;}
        
         inline void setPose(geometry_msgs::PoseStamped msg) 
         {tf::poseMsgToTF(msg.pose,this->pose_);}

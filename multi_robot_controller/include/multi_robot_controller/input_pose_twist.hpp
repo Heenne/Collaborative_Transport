@@ -36,7 +36,7 @@ class InputPoseTwist: public InputBase
         {this->setAngVel(msg);this->setLinVel(msg);}
        
         inline void setPose(geometry_msgs::PoseStamped msg) 
-        {tf::poseMsgToTF(msg.pose,this->pose_);}
+        {tf::poseMsgToTF(msg.pose,this->pose_);this->time_=msg.header.stamp;}
         
         inline void setLinVel(geometry_msgs::Twist msg) 
         {tf::vector3MsgToTF(msg.linear,this->lin_vel_);}
