@@ -143,13 +143,18 @@ add_library(multi_robot_controller
   include/multi_robot_controller/slave.h
   src/slave.cpp
 )
+
 add_library(input_lib
-  include/${PROJECT_NAME}/input_base.h
-  include/${PROJECT_NAME}/input_odom.h
-  include/${PROJECT_NAME}/input_pose_twist.h
-  include/${PROJECT_NAME}/input_pose_odom.h
+  include/${PROJECT_NAME}/input_base.hpp
+  include/${PROJECT_NAME}/input_odom.hpp
+  include/${PROJECT_NAME}/input_pose_twist.hpp
+  include/${PROJECT_NAME}/input_pose_odom.hpp
+)
+add_library(multi_robot_controller_exception
+  include/${PROJECT_NAME}/necessary_param_exeption.hpp
 )
 set_target_properties(input_lib PROPERTIES LINKER_LANGUAGE CXX)
+set_target_properties(multi_robot_controller_exception PROPERTIES LINKER_LANGUAGE CXX)
 
 add_dependencies(multi_robot_controller ${catkin_EXPORTED_TARGETS})
 
