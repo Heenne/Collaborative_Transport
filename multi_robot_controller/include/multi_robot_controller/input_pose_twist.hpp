@@ -7,13 +7,14 @@
 class InputPoseTwist: public InputBase
 {   
     public:
-        InputPoseTwist(ros::NodeHandle nh,std::string topic_name_pose,std::string topic_name_twist)
+        InputPoseTwist():InputBase()
+        {;}
+        InputPoseTwist(ros::NodeHandle &nh,std::string topic_name_pose,std::string topic_name_twist):InputBase(nh)
         {
+            this->subscribe(topic_name_pose,topic_name_twist);
            
-            this->sub_pose_=nh.subscribe(topic_name_pose,10,&InputPoseTwist::setPose,this);
-            this->sub_twist_=nh.subscribe(topic_name_twist,10,&InputPoseTwist::set,this);
         }
-        inline InputPoseTwist(ros::NodeHandle nh)
+        inline InputPoseTwist(ros::NodeHandle &nh):InputBase(nh)
         {
             ros::NodeHandle priv("~");
             std::string topic_pose;
@@ -26,11 +27,17 @@ class InputPoseTwist: public InputBase
             {
                 throw NecessaryParamException(priv.resolveName("topic_twist")); 
             }
-            InputPoseTwist(nh,topic_pose,topic_twist);
+            this->subscribe(topic_pose,topic_twist);
         }
     private:
         ros::Subscriber sub_pose_;
         ros::Subscriber sub_twist_;
+
+        inline void subscribe(std::string topic_name_pose,std::string topic_name_twist)
+        {
+            this->sub_pose_=this->nh_.subscribe(topic_name_pose,10,&InputPoseTwist::setPose,this);
+            this->sub_twist_=this->nh_.subscribe(topic_name_twist,10,&InputPoseTwist::set,this);
+        }
 
         inline void set(geometry_msgs::Twist msg)
         {this->setAngVel(msg);this->setLinVel(msg);}
