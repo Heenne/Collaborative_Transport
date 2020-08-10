@@ -9,10 +9,13 @@ class ConstrainedRigidMotion{
         void updateInputState(Eigen::Vector3d state,Eigen::Vector3d d_state,double time);
         Eigen::Vector3d getDiffState();
         Eigen::Vector3d getState();
+
+        static Eigen::Matrix3d createDiffDriveLocking();
     private:
         void calcConstrains(); 
         void calcUnConstrained();     
         void applyConstrains();
+
         Eigen::Quaterniond rotation_;
         Eigen::Matrix3d angular_tensor_;
         Eigen::Vector3d state_out_;
@@ -25,6 +28,7 @@ class ConstrainedRigidMotion{
         Eigen::Vector3d d_constrain_;
         double time_old_;
         double time_new_;
+        bool initial_call_;
       
 
 };
