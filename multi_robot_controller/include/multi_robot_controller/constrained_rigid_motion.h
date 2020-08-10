@@ -5,6 +5,7 @@
 class ConstrainedRigidMotion{
 
     public:
+        ConstrainedRigidMotion();
         ConstrainedRigidMotion(Eigen::Vector3d reference);
         void updateInputState(Eigen::Vector3d state,Eigen::Vector3d d_state,double time);
         Eigen::Vector3d getDiffState();

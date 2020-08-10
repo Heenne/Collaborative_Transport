@@ -1,24 +1,30 @@
 #include<multi_robot_controller/constrained_rigid_motion.h>
 #include<iostream>
+
+ConstrainedRigidMotion::ConstrainedRigidMotion()
+{
+    this->locking_=ConstrainedRigidMotion::createDiffDriveLocking();
+   
+    this->state_in_=Eigen::Vector3d::Zero();
+    this->d_state_in_=Eigen::Vector3d::Zero();
+    
+    this->angular_tensor_=Eigen::Matrix3d::Zero();
+    this->rotation_=Eigen::Quaterniond::Identity();
+    this->constrain_=Eigen::Vector3d::Zero();
+    this->d_constrain_=Eigen::Vector3d::Zero();
+    
+    this->state_out_=this->state_in_;
+    this->d_state_out_=this->d_state_in_;
+    
+    this->time_old_=0.0;
+    this->time_new_=this->time_old_;
+    this->initial_call_=true;  
+}
 ConstrainedRigidMotion::ConstrainedRigidMotion(Eigen::Vector3d reference)
 {
-   this->reference_=reference;
-   this->locking_=ConstrainedRigidMotion::createDiffDriveLocking();
+    ConstrainedRigidMotion();
+    this->reference_=reference;
    
-   this->state_in_=Eigen::Vector3d::Zero();
-   this->d_state_in_=Eigen::Vector3d::Zero();
-   
-   this->angular_tensor_=Eigen::Matrix3d::Zero();
-   this->rotation_=Eigen::Quaterniond::Identity();
-   this->constrain_=Eigen::Vector3d::Zero();
-   this->d_constrain_=Eigen::Vector3d::Zero();
-   
-   this->state_out_=this->state_in_;
-   this->d_state_out_=this->d_state_in_;
-   
-   this->time_old_=0.0;
-   this->time_new_=this->time_old_;
-   this->initial_call_=true;  
 }
 
 void ConstrainedRigidMotion::updateInputState(Eigen::Vector3d state,Eigen::Vector3d d_state,double time)
