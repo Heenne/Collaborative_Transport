@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.0.2)
-project(miranda_transport_launcher)
+project(transport_launcher)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
@@ -105,7 +105,7 @@ find_package(catkin REQUIRED
 ## DEPENDS: system dependencies of this project that dependent projects also need
 catkin_package(
 #  INCLUDE_DIRS include
-#  LIBRARIES miranda_transport_launcher
+#  LIBRARIES transport_launcher
 #  CATKIN_DEPENDS other_catkin_pkg
 #  DEPENDS system_lib
 )
@@ -123,7 +123,7 @@ ${catkin_INCLUDE_DIRS}
 
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
-#   src/${PROJECT_NAME}/miranda_transport_launcher.cpp
+#   src/${PROJECT_NAME}/transport_launcher.cpp
 # )
 
 ## Add cmake target dependencies of the library
@@ -203,7 +203,7 @@ target_link_libraries(experiment_frame_broadcaster
 #############
 
 ## Add gtest based cpp test target and link libraries
-# catkin_add_gtest(${PROJECT_NAME}-test test/test_miranda_transport_launcher.cpp)
+# catkin_add_gtest(${PROJECT_NAME}-test test/test_transport_launcher.cpp)
 # if(TARGET ${PROJECT_NAME}-test)
 #   target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME})
 # endif()

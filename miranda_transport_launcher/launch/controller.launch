@@ -1,4 +1,0 @@
-<launch>
-    <rosparam file="$(find miranda_transport_launcher)/config/formation.yaml" command="load"></rosparam>
-    <node name="Controller" pkg="multi_robot_controller" type="slave_node" args="robot1" ns="robot1" />
-</launch>
