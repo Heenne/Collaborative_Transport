@@ -134,13 +134,21 @@ add_library(multi_robot_controller
   include/multi_robot_controller/constrained_rigid_motion.h
   src/constrained_rigid_motion.cpp
 
-  include/multi_robot_controller/controllerV2.h
-  src/controllerV2.cpp
+  include/multi_robot_controller/constrained_rigid_motion_ros.h
+  src/constrained_rigid_motion_ros.cpp
+
+  include/multi_robot_controller/constrained_rigid_motion_tf.h
+  src/constrained_rigid_motion_tf.cpp
+
+  include/multi_robot_controller/controller.h
+  src/controller.cpp
 
   include/multi_robot_controller/pass_through_controller.hpp
 
-  include/multi_robot_controller/lyapunov_controller.hpp
+  include/multi_robot_controller/lyapunov_controller.h
+  src/lyapunov_controller.cpp
 )
+#set_target_properties(multi_robot_controller PROPERTIES LINKER_LANGUAGE CXX)
 
 add_library(input_lib
   include/${PROJECT_NAME}/input_base.hpp

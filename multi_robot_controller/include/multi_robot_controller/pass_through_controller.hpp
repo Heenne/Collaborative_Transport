@@ -1,7 +1,12 @@
-#include<multi_robot_controller/controllerV2.h>
+#include<multi_robot_controller/controller.h>
 class PassTroughController:public Controller
 {
     public:
+        /**
+         * @brief Construct a new Pass Trough Controller object
+         * 
+         * @param nh The nodehandle for topic resolving in parent class Controller
+         */
         inline PassTroughController(ros::NodeHandle nh):Controller(nh)
         {
         }
