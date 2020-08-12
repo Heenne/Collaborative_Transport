@@ -23,8 +23,12 @@ ConstrainedRigidMotion::ConstrainedRigidMotion()
 ConstrainedRigidMotion::ConstrainedRigidMotion(Eigen::Vector3d reference)
 {
     ConstrainedRigidMotion();
-    this->reference_=reference;
+    this->setReference(reference);
    
+}
+void ConstrainedRigidMotion::setReference(Eigen::Vector3d ref)
+{
+    this->reference_=ref;
 }
 
 void ConstrainedRigidMotion::updateInputState(Eigen::Vector3d state,Eigen::Vector3d d_state,double time)

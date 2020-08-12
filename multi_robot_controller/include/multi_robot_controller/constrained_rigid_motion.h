@@ -10,7 +10,7 @@ class ConstrainedRigidMotion{
         void updateInputState(Eigen::Vector3d state,Eigen::Vector3d d_state,double time);
         Eigen::Vector3d getDiffState();
         Eigen::Vector3d getState();
-
+        void setReference(Eigen::Vector3d ref);
         static Eigen::Matrix3d createDiffDriveLocking();
     private:
         void calcConstrains(); 
