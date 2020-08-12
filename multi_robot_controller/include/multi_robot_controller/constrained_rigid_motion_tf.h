@@ -1,8 +1,8 @@
-#include<multi_robot_controller/constrained_rigid_motion.h>
+#include<multi_robot_controller/constrained_rigid_motion_ros.h>
 #include<ros/ros.h>
 #include<tf/tf.h>
 
-class ConstrainedRigidMotionTf:public ConstrainedRigidMotion{
+class ConstrainedRigidMotionTf:public ConstrainedRigidMotionRos{
     public:
         ConstrainedRigidMotionTf();
         void updateInputState(tf::Pose pose,tf::Vector3 lin_vel, tf::Vector3 ang_vel,double time);

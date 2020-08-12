@@ -1,6 +1,6 @@
 #include<multi_robot_controller/constrained_rigid_motion_tf.h>
 
-ConstrainedRigidMotionTf::ConstrainedRigidMotionTf():ConstrainedRigidMotion()
+ConstrainedRigidMotionTf::ConstrainedRigidMotionTf():ConstrainedRigidMotionRos()
 {
 
 }
