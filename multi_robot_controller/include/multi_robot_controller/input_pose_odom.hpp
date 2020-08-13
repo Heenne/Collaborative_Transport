@@ -42,12 +42,33 @@ class InputPoseOdom: public InputBase
 
             this->subscribe(topic_pose,topic_odom);  
         }
+
+
+        InputPoseOdom(ros::NodeHandle &nh,ros::NodeHandle &nh_param):InputBase(nh)
+        {
+
+            std::string topic_pose;
+            if(!nh_param.getParam("topic_pose",topic_pose))
+            {
+                throw NecessaryParamException(nh_param.resolveName("topic_pose")); 
+            }
+
+
+            std::string topic_odom;
+            if(!nh_param.getParam("topic_odom",topic_odom))
+            {
+                throw NecessaryParamException(nh_param.resolveName("topic_odom")); 
+            }
+
+
+            this->subscribe(topic_pose,topic_odom);  
+        }
+
         ~InputPoseOdom()
         {
             // delete this->sync_;
         }
-        ros::Subscriber sub_pose_;
-        ros::Subscriber sub_odom_;
+        
 
     private:       
     //     message_filters::Subscriber<geometry_msgs::PoseStamped> sub_pose_;
@@ -56,6 +77,10 @@ class InputPoseOdom: public InputBase
        
         // inline void sync(const nav_msgs::OdometryPtr &msg_odom,const geometry_msgs::PoseStampedPtr &msg_pose)
         // {this->set(*msg_odom);this->setPose(*msg_pose);}
+
+        ros::Subscriber sub_pose_;
+        ros::Subscriber sub_odom_;
+
         inline void subscribe(std::string topic_name_pose,std::string topic_name_odom)
         {
             this->sub_pose_=this->nh_.subscribe(topic_name_pose,10,&InputPoseOdom::setPose,this);
