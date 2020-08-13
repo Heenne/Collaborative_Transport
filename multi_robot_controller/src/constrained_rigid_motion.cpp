@@ -37,9 +37,7 @@ void ConstrainedRigidMotion::setReference(Eigen::Vector3d ref)
 
 void ConstrainedRigidMotion::updateInputState(Eigen::Vector3d state,Eigen::Vector3d d_state,double time)
 {
- 
-    
- 
+
     this->time_new_=time;
     this->state_in_=state;
     this->d_state_in_=d_state;
@@ -51,8 +49,8 @@ void ConstrainedRigidMotion::updateInputState(Eigen::Vector3d state,Eigen::Vecto
     this->angular_tensor_(1,0)=this->d_state_in_(2);
     
     calcUnConstrained();
-    // calcConstrains();
-    // applyConstrains();
+    calcConstrains();
+    applyConstrains();
     this->initial_call_=false;
 }
 Eigen::Vector3d ConstrainedRigidMotion::getState()
