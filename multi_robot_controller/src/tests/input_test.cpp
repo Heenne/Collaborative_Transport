@@ -6,7 +6,7 @@
 int main(int argc, char** argv)
 {
     ros::init(argc,argv,"input_test");
-    ros::NodeHandle nh;
+    ros::NodeHandle nh("/mur/mir");
     
     // InputPoseOdom base(nh,"robot_pose_stamped","odom_enc");
     // InputOdom base(nh,"/miranda/mir/odom_enc");
@@ -14,7 +14,6 @@ int main(int argc, char** argv)
     ros::NodeHandle priv("~");
     priv.setParam("topic_pose","robot_pose_stamped");
     priv.setParam("topic_odom","odom_enc");
-    priv.setParam("topic","testtopic");
     try{
             InputPoseOdom base(nh);
             // InputOdom base(nh);

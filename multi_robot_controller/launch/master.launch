@@ -2,8 +2,10 @@
 <launch>
     <node name="master_controller" pkg="multi_robot_controller" type="master_node" output="screen">
         <param name="rate" value="10"/>
-        <param name="topic_pose" value="pose"/>
-        <param name="topic_odom" value="odom"/>
+        <param name="target/topic_pose" value="robot_pose_stamped"/>
+        <param name="target/topic_odom" value="odom_enc"/>
+        <param name="current/topic_pose" value="robot_pose_stamped"/>
+        <param name="current/topic_odom" value="odom_enc"/>
         <param name="topic_output" value="test_cmd_vel"/>   
         <rosparam param="lyapunov">[7.0, 7.0, 11.0]</rosparam>
     </node>   
