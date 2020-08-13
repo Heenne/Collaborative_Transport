@@ -13,6 +13,7 @@ class ConstrainedRigidMotion{
         void setReference(Eigen::Vector3d ref);
         static Eigen::Matrix3d createDiffDriveLocking();
     private:
+        void init();
         void calcConstrains(); 
         void calcUnConstrained();     
         void applyConstrains();

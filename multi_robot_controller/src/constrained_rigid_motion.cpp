@@ -3,6 +3,16 @@
 
 ConstrainedRigidMotion::ConstrainedRigidMotion()
 {
+    this->init();
+}
+ConstrainedRigidMotion::ConstrainedRigidMotion(Eigen::Vector3d reference)
+{    
+    this->init();
+    this->setReference(reference);
+   
+}
+void ConstrainedRigidMotion::init()
+{
     this->locking_=ConstrainedRigidMotion::createDiffDriveLocking();
    
     this->state_in_=Eigen::Vector3d::Zero();
@@ -20,12 +30,6 @@ ConstrainedRigidMotion::ConstrainedRigidMotion()
     this->time_new_=this->time_old_;
     this->initial_call_=true;  
 }
-ConstrainedRigidMotion::ConstrainedRigidMotion(Eigen::Vector3d reference)
-{
-    ConstrainedRigidMotion();
-    this->setReference(reference);
-   
-}
 void ConstrainedRigidMotion::setReference(Eigen::Vector3d ref)
 {
     this->reference_=ref;
@@ -33,6 +37,9 @@ void ConstrainedRigidMotion::setReference(Eigen::Vector3d ref)
 
 void ConstrainedRigidMotion::updateInputState(Eigen::Vector3d state,Eigen::Vector3d d_state,double time)
 {
+ 
+    
+ 
     this->time_new_=time;
     this->state_in_=state;
     this->d_state_in_=d_state;
@@ -44,8 +51,8 @@ void ConstrainedRigidMotion::updateInputState(Eigen::Vector3d state,Eigen::Vecto
     this->angular_tensor_(1,0)=this->d_state_in_(2);
     
     calcUnConstrained();
-    calcConstrains();
-    applyConstrains();
+    // calcConstrains();
+    // applyConstrains();
     this->initial_call_=false;
 }
 Eigen::Vector3d ConstrainedRigidMotion::getState()
@@ -63,7 +70,14 @@ void ConstrainedRigidMotion::calcConstrains()
     double d_time=(this->time_new_-this->time_old_);
     if(!d_time==0.0 &&!this->initial_call_)
     {
-        this->constrain_=Eigen::Vector3d (0.0,0.0,std::atan2(this->d_state_out_(1),this->d_state_out_(3)));
+        if(this->d_state_out_(0)!=0.0)
+        {
+            this->constrain_<<0.0,0.0,std::atan2(this->d_state_out_(1),this->d_state_out_(0));
+        }
+        else
+        {
+            this->constrain_<<0.0,0.0,0.0;
+        }
         this->d_constrain_=(this->constrain_-constrain_old)/d_time;
     }
     this->time_old_=this->time_new_;
@@ -73,6 +87,7 @@ void ConstrainedRigidMotion::calcUnConstrained()
 {
     this->state_out_=(this->state_in_+this->rotation_*this->reference_);
     this->d_state_out_=(this->d_state_in_+this->angular_tensor_*this->rotation_*this->reference_);
+   
 }
 
 void ConstrainedRigidMotion::applyConstrains()
