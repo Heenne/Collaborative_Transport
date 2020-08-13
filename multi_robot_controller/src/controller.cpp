@@ -12,13 +12,6 @@ Controller::State::State()
     this->ang_vel=tf::Vector3(0.0,0.0,0.0);
 }
 
-Controller::State Controller::State::operator=(Controller::State s)
-{
-    return Controller::State(s);
-}
-
-
-
 
 
 
@@ -31,12 +24,16 @@ Controller::Controller()
 Controller::Controller(ros::NodeHandle &nh)
 {
     this->nh_=nh;
-    switch(InputTypes::POSE_ODOM)
+    ros::NodeHandle current_param("~/current");
+    ros::NodeHandle target_param("~/target");
+
+    switch(InputTypes::POSE_ODOM)   //TODO: type sensitivity
     {
         case InputTypes::POSE_ODOM:
         {
-            this->current_state_handler_=new InputPoseOdom(this->nh_);         
-            this->target_state_handler_=new InputPoseOdom(this->nh_);
+            ROS_INFO("Binding input and output to Pose+Odometry topics!");
+            this->current_state_handler_=new InputPoseOdom(this->nh_,current_param);         
+            this->target_state_handler_=new InputPoseOdom(this->nh_,target_param);
             break;
         }
         case InputTypes::POSE_TWIST:
@@ -89,21 +86,21 @@ Controller::~Controller()
 
 void Controller::controlScope(const ros::TimerEvent&)
 {
-    
-    
     //Get the current state from handler
     this->current_state_=State( this->current_state_handler_->getPose(),
                                 this->current_state_handler_->getLinVel(),
                                 this->current_state_handler_->getAngVel());
-    //Get the untransformed target state (ledader state)
-    State untransformed(    this->target_state_handler_->getPose(),
-                            this->target_state_handler_->getLinVel(),
-                            this->target_state_handler_->getAngVel());
-    
+
+    //Get the untransformed target state (leader state)
+    State leader(   this->target_state_handler_->getPose(),
+                    this->target_state_handler_->getLinVel(),
+                    this->target_state_handler_->getAngVel());
+        
+        
     //Update the state of rigid motion
-    this->rigid_motion_.updateInputState(   untransformed.pose,
-                                            untransformed.lin_vel,
-                                            untransformed.ang_vel,
+    this->rigid_motion_.updateInputState(   leader.pose,
+                                            leader.lin_vel,
+                                            leader.ang_vel,
                                             this->target_state_handler_->getTime().toSec());
 
     Eigen::Vector3d state_vector=rigid_motion_.getState();
@@ -118,6 +115,7 @@ void Controller::controlScope(const ros::TimerEvent&)
     this->control_=this->calcControl(this->current_state_,this->target_state_);
 
     this->publish();
+    ros::spinOnce();
 }
 
 void Controller::publish()

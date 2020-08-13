@@ -35,8 +35,7 @@ class Controller
             tf::Vector3 lin_vel;
             tf::Vector3 ang_vel;
             State();
-            State(tf::Pose pose,tf::Vector3 lin_vel,tf::Vector3 ang_vel);        
-            State operator=(State s);   
+            State(tf::Pose pose,tf::Vector3 lin_vel,tf::Vector3 ang_vel);      
         };
     protected:
         virtual ControlVector calcControl(State target_state,State current_state)=0;
