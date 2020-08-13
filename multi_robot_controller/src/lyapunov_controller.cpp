@@ -19,7 +19,7 @@ LyapunovController::LyapunovController(ros::NodeHandle &nh):Controller(nh)
 
 }
 
-Controller::ControlVector LyapunovController::calcControl(State target_state,State current_state)
+Controller::ControlVector LyapunovController::calcControl(State current_state ,State target_state)
 {
     double omega=target_state.ang_vel.z();
     double v=sqrt(pow(target_state.lin_vel.x(),2)+pow(target_state.lin_vel.y(),2)); 
