@@ -4,6 +4,7 @@
 #include<multi_robot_controller/input_pose_twist.hpp>
 #include<multi_robot_controller/constrained_rigid_motion_tf.h>
 #include<multi_robot_controller/necessary_param_exeption.hpp>
+#include<multi_robot_msgs/MetaData.h>
 #include<tf/tf.h>
 class Controller
 {
@@ -39,6 +40,8 @@ class Controller
         };
     protected:
         virtual ControlVector calcControl(State target_state,State current_state)=0;
+        virtual void publishMetaData();
+        ros::Publisher meta_;
     private:
         ros::NodeHandle nh_;
 
@@ -46,6 +49,7 @@ class Controller
         InputBase* target_state_handler_;
         
         ros::Publisher pub_;
+       
 
         State current_state_;
         State target_state_;

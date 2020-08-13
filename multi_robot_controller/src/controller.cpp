@@ -24,6 +24,7 @@ Controller::Controller()
 Controller::Controller(ros::NodeHandle &nh)
 {
     this->nh_=nh;
+
     ros::NodeHandle current_param("~/current");
     ros::NodeHandle target_param("~/target");
 
@@ -75,6 +76,8 @@ Controller::Controller(ros::NodeHandle &nh)
     {
         throw NecessaryParamException(priv.resolveName("topic_output"));
     }
+
+    this->meta_=priv.advertise<multi_robot_msgs::MetaData>("meta_data",10); 
     
 }
 
@@ -115,14 +118,40 @@ void Controller::controlScope(const ros::TimerEvent&)
     this->control_=this->calcControl(this->current_state_,this->target_state_);
 
     this->publish();
-    ros::spinOnce();
 }
 
 void Controller::publish()
 {
+    //Publish control command
     geometry_msgs::Twist twist;
     twist.linear.x=this->control_.v;
     twist.angular.z=this->control_.omega;
     this->pub_.publish(twist);
+
+    //publish Metadata    
+    this->publishMetaData();
+
+}
+
+void Controller::publishMetaData()
+{
+    multi_robot_msgs::State current_state_msg;
+    tf::poseMsgToTF(current_state_msg.pose.pose,this->current_state_.pose);
+    current_state_msg.pose.header.stamp=this->current_state_handler_->getTime();
+    tf::vector3TFToMsg(this->current_state_.lin_vel,current_state_msg.lin_vel);
+    tf::vector3TFToMsg(this->current_state_.ang_vel,current_state_msg.ang_vel);
+
+    multi_robot_msgs::State target_state_msg;
+    tf::poseMsgToTF(target_state_msg.pose.pose,this->target_state_.pose);
+    target_state_msg.pose.header.stamp=this->target_state_handler_->getTime();
+    tf::vector3TFToMsg(this->target_state_.lin_vel,target_state_msg.lin_vel);
+    tf::vector3TFToMsg(this->target_state_.ang_vel,target_state_msg.ang_vel);
+
+    multi_robot_msgs::MetaData msg;
+    msg.current=current_state_msg;
+    msg.target=target_state_msg;
+
+
+    this->meta_.publish(msg);
 }
 

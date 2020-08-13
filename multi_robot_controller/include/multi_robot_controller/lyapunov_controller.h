@@ -59,4 +59,5 @@ class LyapunovController:public Controller
     private:
         LyapunovParameter parameter_;   
         ControlVector calcControl(State target_state,State current_state) override;
+        
 };
