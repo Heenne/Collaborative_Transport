@@ -11,9 +11,6 @@ find_package(
   catkin REQUIRED COMPONENTS
   geometry_msgs
   nav_msgs
-  sensor_msgs
-  multi_robot_msgs
-  laser_geometry
   roscpp
   tf  
 )

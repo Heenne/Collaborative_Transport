@@ -49,22 +49,13 @@
   <!-- Use doc_depend for packages you need only for building documentation: -->
   <!--   <doc_depend>doxygen</doc_depend> -->
   <buildtool_depend>catkin</buildtool_depend>
-  <build_depend>cmake_modules</build_depend>
+  <build_depend>cmake_modules</build_depend>  
   
-  
-  <build_depend>roscpp</build_depend>
+  <depend>roscpp</depend>
   
   
   <build_depend>geometry_msgs</build_depend>
   <build_depend>nav_msgs</build_depend>
-  <build_depend>sensor_msgs</build_depend>
-  <build_depend>multi_robot_msgs</build_depend>
-
-  <exec_depend>roscpp</exec_depend>
-  <build_depend>laser_geometry</build_depend>
-  
-  <exec_depend>message_runtime</exec_depend>
-  <exec_depend>mir_description</exec_depend>
 
   <doc_depend>doxygen</doc_depend>
 
