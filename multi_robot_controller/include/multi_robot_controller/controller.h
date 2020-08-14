@@ -5,6 +5,7 @@
 #include<multi_robot_controller/constrained_rigid_motion_tf.h>
 #include<multi_robot_controller/necessary_param_exeption.hpp>
 #include<multi_robot_msgs/MetaData.h>
+#include<std_srvs/Empty.h>
 #include<tf/tf.h>
 class Controller
 {
@@ -42,13 +43,20 @@ class Controller
         virtual ControlVector calcControl(State target_state,State current_state)=0;
         virtual void publishMetaData();
         ros::Publisher meta_;
+    
     private:
+        bool enableCallback(std_srvs::EmptyRequest &req,std_srvs::EmptyRequest &res);
+        bool disableCallback(std_srvs::EmptyRequest &req,std_srvs::EmptyRequest &res);
+        
+        bool enable_;
         ros::NodeHandle nh_;
 
         InputBase* current_state_handler_;
         InputBase* target_state_handler_;
         
         ros::Publisher pub_;
+        ros::ServiceServer enable_srv_;
+        ros::ServiceServer disable__srv;
        
 
         State current_state_;

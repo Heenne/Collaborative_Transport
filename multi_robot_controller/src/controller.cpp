@@ -24,6 +24,7 @@ Controller::Controller()
 Controller::Controller(ros::NodeHandle &nh)
 {
     this->nh_=nh;
+    this->enable_=false;
 
     ros::NodeHandle current_param("~/current");
     ros::NodeHandle target_param("~/target");
@@ -78,6 +79,8 @@ Controller::Controller(ros::NodeHandle &nh)
     }
 
     this->meta_=priv.advertise<multi_robot_msgs::MetaData>("meta_data",10); 
+    this->enable_srv_=priv.advertiseService("enable_controller",&Controller::enableCallback,this);
+    this->disable__srv=priv.advertiseService("disable_controller",&Controller::disableCallback,this);
     
 }
 
@@ -114,19 +117,21 @@ void Controller::controlScope(const ros::TimerEvent&)
                               tf::Vector3(d_state_vector(0),d_state_vector(1),0.0),
                               tf::Vector3(0.0,0.0,d_state_vector(2)));
 
-    //Execute the calculations from derived classes
-    this->control_=this->calcControl(this->current_state_,this->target_state_);
-
+    //Execute the calculations from derived classes   
     this->publish();
 }
 
 void Controller::publish()
 {
     //Publish control command
-    geometry_msgs::Twist twist;
-    twist.linear.x=this->control_.v;
-    twist.angular.z=this->control_.omega;
-    this->pub_.publish(twist);
+    if(this->enable_)
+    {
+        geometry_msgs::Twist twist;
+        twist.linear.x=this->control_.v;
+        twist.angular.z=this->control_.omega;
+        this->pub_.publish(twist);
+    }
+    
 
     //publish Metadata    
     this->publishMetaData();
@@ -136,22 +141,44 @@ void Controller::publish()
 void Controller::publishMetaData()
 {
     multi_robot_msgs::State current_state_msg;
-    tf::poseMsgToTF(current_state_msg.pose.pose,this->current_state_.pose);
+    tf::poseTFToMsg(this->current_state_.pose,current_state_msg.pose.pose);
     current_state_msg.pose.header.stamp=this->current_state_handler_->getTime();
     tf::vector3TFToMsg(this->current_state_.lin_vel,current_state_msg.lin_vel);
     tf::vector3TFToMsg(this->current_state_.ang_vel,current_state_msg.ang_vel);
 
     multi_robot_msgs::State target_state_msg;
-    tf::poseMsgToTF(target_state_msg.pose.pose,this->target_state_.pose);
+    tf::poseTFToMsg(this->target_state_.pose,target_state_msg.pose.pose);
     target_state_msg.pose.header.stamp=this->target_state_handler_->getTime();
     tf::vector3TFToMsg(this->target_state_.lin_vel,target_state_msg.lin_vel);
     tf::vector3TFToMsg(this->target_state_.ang_vel,target_state_msg.ang_vel);
 
+    multi_robot_msgs::State diff_msg;
+    State diff_state(   this->target_state_.pose.inverseTimes(this->current_state_.pose),
+                        this->target_state_.lin_vel-this->current_state_.lin_vel,
+                        this->target_state_.ang_vel-this->current_state_.ang_vel);
+    
+    tf::poseTFToMsg(diff_state.pose,target_state_msg.pose.pose);
+    // target_state_msg.pose.header.stamp=ros::Time((this->target_state_handler_->getTime()-this->current_state_handler_->getTime()).toSec());
+    tf::vector3TFToMsg(diff_state.lin_vel,diff_msg.lin_vel);
+    tf::vector3TFToMsg(diff_state.ang_vel,diff_msg.ang_vel);
+
+
     multi_robot_msgs::MetaData msg;
     msg.current=current_state_msg;
     msg.target=target_state_msg;
+    msg.diff=diff_msg;
 
 
     this->meta_.publish(msg);
 }
 
+bool Controller::enableCallback(std_srvs::EmptyRequest &req,std_srvs::EmptyRequest &res)
+{
+    this->enable_=true;
+}
+bool Controller::disableCallback(std_srvs::EmptyRequest &req,std_srvs::EmptyRequest &res)
+{
+
+    this->enable_=false;
+}
+        
