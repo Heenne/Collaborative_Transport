@@ -2,6 +2,9 @@
  <!-- Load the formation parameter file-->
   
   <include file="$(find mur_hardware_helper)/launch/mur.launch"/>
-  <include file="$(find multi_robot_controller)/launch/master.launch" ns="mur/mir"/> 
+  <include file="$(find multi_robot_controller)/launch/master.launch" ns="mur/mir">
+    <remap from="cmd_vel" to="cmd_vel_vm"/>
+    <remap from="cmd_vel_integrated" to="cmd_vel_vm_integrated"/>
+  </include> 
  
 </launch>
