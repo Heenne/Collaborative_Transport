@@ -1,4 +1,6 @@
 #include<multi_robot_controller/controller.h>
+#include<multi_robot_controller/LyapunovConfig.h>
+#include<dynamic_reconfigure/server.h>
 class LyapunovController:public Controller
 {
     public:
@@ -57,7 +59,9 @@ class LyapunovController:public Controller
         
 
     private:
-        LyapunovParameter parameter_;   
-        ControlVector calcControl(State target_state,State current_state) override;
+        LyapunovParameter parameter_; 
+        dynamic_reconfigure::Server<multi_robot_controller::LyapunovConfig> server_;  
+        ControlVector calcControl(State current_state ,State target_state) override;
+        void dynConfigcallback(multi_robot_controller::LyapunovConfig &config, uint32_t level);
         
 };
