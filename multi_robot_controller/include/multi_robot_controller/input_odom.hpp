@@ -22,9 +22,18 @@ class InputOdom: public InputBase
             }
             InputOdom(nh,topic);
         }
-        ros::Subscriber sub_;
-    private:
+        InputOdom(ros::NodeHandle &nh,ros::NodeHandle &param_nh)
+        {
+            std::string topic;
+            if(!param_nh.getParam("topic",topic))
+            {
+                throw NecessaryParamException(param_nh.resolveName("topic"));
+            }
+            InputOdom(nh,topic);
+        }
         
+    private:
+        ros::Subscriber sub_;        
         inline void set(nav_msgs::Odometry msg)
         {this->setPose(msg);this->setAngVel(msg);this->setLinVel(msg);this->time_=msg.header.stamp;}
         inline void setPose(nav_msgs::Odometry msg) 

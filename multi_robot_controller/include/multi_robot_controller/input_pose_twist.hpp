@@ -29,6 +29,27 @@ class InputPoseTwist: public InputBase
             }
             this->subscribe(topic_pose,topic_twist);
         }
+
+        inline InputPoseTwist(ros::NodeHandle &nh,ros::NodeHandle &nh_param):InputBase(nh)
+        {
+
+            std::string topic_pose;
+            if(!nh_param.getParam("topic_pose",topic_pose))
+            {
+                throw NecessaryParamException(nh_param.resolveName("topic_pose")); 
+            }
+
+
+            std::string topic_twist;
+            if(!nh_param.getParam("topic_twist",topic_twist))
+            {
+                throw NecessaryParamException(nh_param.resolveName("topic_twist")); 
+            }
+
+            this->subscribe(topic_pose,topic_twist);  
+        };
+
+
     private:
         ros::Subscriber sub_pose_;
         ros::Subscriber sub_twist_;
