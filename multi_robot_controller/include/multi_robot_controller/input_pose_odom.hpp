@@ -10,18 +10,12 @@ class InputPoseOdom: public InputBase
     public:
         InputPoseOdom():InputBase()
         {;}
+
         InputPoseOdom(ros::NodeHandle &nh,std::string topic_name_pose,std::string topic_name_odom):InputBase(nh)
         {
-            // this->sub_pose_.subscribe(nh,topic_name_pose,10);
-            // this->sub_odom_.subscribe(nh,topic_name_odom,10);
-            // this->sync_=new message_filters::TimeSynchronizer<nav_msgs::Odometry,geometry_msgs::PoseStamped>(this->sub_odom_,this->sub_pose_,10);
-            // this->sync_->registerCallback(&InputPoseOdom::sync,this);  
-
-          
             this->subscribe(topic_name_pose,topic_name_odom);
-            ROS_INFO_STREAM("Constructor InputPoseOdom to: "<<this->sub_pose_.getTopic()
-                                                     <<" and "<<this->sub_odom_.getTopic());               
         }
+
         InputPoseOdom(ros::NodeHandle &nh):InputBase(nh)
         {
             ros::NodeHandle priv("~");
@@ -39,7 +33,6 @@ class InputPoseOdom: public InputBase
                 throw NecessaryParamException(priv.resolveName("topic_odom")); 
             }
 
-
             this->subscribe(topic_pose,topic_odom);  
         }
 
@@ -53,31 +46,22 @@ class InputPoseOdom: public InputBase
                 throw NecessaryParamException(nh_param.resolveName("topic_pose")); 
             }
 
-
             std::string topic_odom;
             if(!nh_param.getParam("topic_odom",topic_odom))
             {
                 throw NecessaryParamException(nh_param.resolveName("topic_odom")); 
             }
 
-
             this->subscribe(topic_pose,topic_odom);  
         }
 
         ~InputPoseOdom()
         {
-            // delete this->sync_;
+
         }
         
 
     private:       
-    //     message_filters::Subscriber<geometry_msgs::PoseStamped> sub_pose_;
-    //     message_filters::Subscriber<nav_msgs::Odometry> sub_odom_;
-    //     message_filters::TimeSynchronizer<nav_msgs::Odometry,geometry_msgs::PoseStamped>* sync_;
-       
-        // inline void sync(const nav_msgs::OdometryPtr &msg_odom,const geometry_msgs::PoseStampedPtr &msg_pose)
-        // {this->set(*msg_odom);this->setPose(*msg_pose);}
-
         ros::Subscriber sub_pose_;
         ros::Subscriber sub_odom_;
 
