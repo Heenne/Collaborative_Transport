@@ -29,33 +29,23 @@ Controller::Controller(ros::NodeHandle &nh)
     ros::NodeHandle current_param("~/current");
     ros::NodeHandle target_param("~/target");
 
-    switch(InputTypes::POSE_ODOM)   //TODO: type sensitivity
+    int current_type=InputTypes::NO_TYPE;
+    if(!current_param.getParam("input_type",current_type))
     {
-        case InputTypes::POSE_ODOM:
-        {
-            ROS_INFO("Binding input and output to Pose+Odometry topics!");
-            this->current_state_handler_=new InputPoseOdom(this->nh_,current_param);         
-            this->target_state_handler_=new InputPoseOdom(this->nh_,target_param);
-            break;
-        }
-        case InputTypes::POSE_TWIST:
-        {
-            this->current_state_handler_=new InputPoseTwist(this->nh_);         
-            this->target_state_handler_=new InputPoseTwist(this->nh_);
-            break;
-        }
-        case InputTypes::SINGLE_ODOM:
-        {
-            this->current_state_handler_=new InputOdom(this->nh_);         
-            this->target_state_handler_=new InputOdom(this->nh_);
-            break;
-        }
+        throw NecessaryParamException(current_param.resolveName("input_type"));
     }
-   
+    int target_type=InputTypes::NO_TYPE;
+    if(!target_param.getParam("input_type",target_type))
+    {
+        throw NecessaryParamException(target_param.resolveName("input_type"));
+    }
+    this->current_state_handler_=allocInput(InputTypes(current_type),current_param);
+    this->target_state_handler_=allocInput(InputTypes(target_type),target_param);
+    
+    
 
 
     ros::NodeHandle priv("~");
-
     float rate;
     if(priv.getParam("rate",rate))
     {
@@ -71,6 +61,7 @@ Controller::Controller(ros::NodeHandle &nh)
     std::string output_topic;
     if(priv.getParam("topic_output",output_topic))
     {
+        ROS_INFO("Advertising output at %s",this->nh_.resolveName(output_topic).c_str());
         this->pub_=this->nh_.advertise<geometry_msgs::Twist>(output_topic,10);
     }
     else
@@ -80,16 +71,39 @@ Controller::Controller(ros::NodeHandle &nh)
 
     this->meta_=priv.advertise<multi_robot_msgs::MetaData>("meta_data",10); 
     this->enable_srv_=priv.advertiseService("enable_controller",&Controller::enableCallback,this);
-    this->disable__srv=priv.advertiseService("disable_controller",&Controller::disableCallback,this);
-    
+    this->disable_srv_=priv.advertiseService("disable_controller",&Controller::disableCallback,this);
 }
 
 Controller::~Controller()
 {
-    delete this->current_state_handler_;
-    delete this->target_state_handler_;
 }
 
+std::unique_ptr<InputBase> Controller::allocInput(InputTypes type,ros::NodeHandle parameter)
+{           
+    switch(type)
+    {
+        case InputTypes::POSE_ODOM:
+        {
+            ROS_INFO("Allocing a pose+odom input!");
+            return std::make_unique<InputPoseOdom>(this->nh_,parameter);   
+        }
+        case InputTypes::POSE_TWIST:
+        {
+            ROS_INFO("Allocing a pose+twist input!");
+            return std::make_unique<InputPoseTwist>(this->nh_,parameter);        
+        }
+        case InputTypes::SINGLE_ODOM:
+        {
+            ROS_INFO("Allocing a odom input!");
+            return std::make_unique<InputOdom>(this->nh_,parameter);  
+        }
+        case InputTypes::NO_TYPE:
+        default:
+        {
+            throw InputAllocException();
+        }
+    }
+}
 void Controller::controlScope(const ros::TimerEvent&)
 {
     //Get the current state from handler
@@ -117,6 +131,7 @@ void Controller::controlScope(const ros::TimerEvent&)
                               tf::Vector3(d_state_vector(0),d_state_vector(1),0.0),
                               tf::Vector3(0.0,0.0,d_state_vector(2)));
 
+    this->control_=this->calcControl(this->current_state_,this->target_state_);
     //Execute the calculations from derived classes   
     this->publish();
 }
@@ -131,8 +146,6 @@ void Controller::publish()
         twist.angular.z=this->control_.omega;
         this->pub_.publish(twist);
     }
-    
-
     //publish Metadata    
     this->publishMetaData();
 
@@ -157,7 +170,7 @@ void Controller::publishMetaData()
                         this->target_state_.lin_vel-this->current_state_.lin_vel,
                         this->target_state_.ang_vel-this->current_state_.ang_vel);
     
-    tf::poseTFToMsg(diff_state.pose,target_state_msg.pose.pose);
+    tf::poseTFToMsg(diff_state.pose,diff_msg.pose.pose);
     // target_state_msg.pose.header.stamp=ros::Time((this->target_state_handler_->getTime()-this->current_state_handler_->getTime()).toSec());
     tf::vector3TFToMsg(diff_state.lin_vel,diff_msg.lin_vel);
     tf::vector3TFToMsg(diff_state.ang_vel,diff_msg.ang_vel);
@@ -175,10 +188,11 @@ void Controller::publishMetaData()
 bool Controller::enableCallback(std_srvs::EmptyRequest &req,std_srvs::EmptyRequest &res)
 {
     this->enable_=true;
+    return true;
 }
 bool Controller::disableCallback(std_srvs::EmptyRequest &req,std_srvs::EmptyRequest &res)
 {
-
     this->enable_=false;
+    return true;
 }
         
