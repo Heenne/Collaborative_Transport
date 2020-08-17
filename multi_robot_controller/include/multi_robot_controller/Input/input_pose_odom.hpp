@@ -1,5 +1,5 @@
 
-#include <multi_robot_controller/input_base.hpp>
+#include <multi_robot_controller/Input/input_base.hpp>
 #include <multi_robot_controller/necessary_param_exeption.hpp>
 #include <message_filters/subscriber.h>
 #include <message_filters/time_synchronizer.h>

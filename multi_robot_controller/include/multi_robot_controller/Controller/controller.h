@@ -1,8 +1,8 @@
-#include<multi_robot_controller/input_types.hpp>
-#include<multi_robot_controller/input_pose_odom.hpp>
-#include<multi_robot_controller/input_odom.hpp>
-#include<multi_robot_controller/input_pose_twist.hpp>
-#include<multi_robot_controller/constrained_rigid_motion_tf.h>
+#include<multi_robot_controller/Input/input_types.hpp>
+#include<multi_robot_controller/Input/input_pose_odom.hpp>
+#include<multi_robot_controller/Input/input_odom.hpp>
+#include<multi_robot_controller/Input/input_pose_twist.hpp>
+#include<multi_robot_controller/RigidMotion/constrained_rigid_motion_tf.h>
 #include<multi_robot_controller/necessary_param_exeption.hpp>
 #include<multi_robot_controller/input_alloc_exception.hpp>
 #include<multi_robot_msgs/MetaData.h>

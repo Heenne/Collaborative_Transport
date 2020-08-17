@@ -1,6 +1,6 @@
 #include<ros/ros.h>
-#include<multi_robot_controller/input_pose_odom.hpp>
-#include<multi_robot_controller/input_odom.hpp>
+#include<multi_robot_controller/Input/input_pose_odom.hpp>
+#include<multi_robot_controller/Input/input_odom.hpp>
 #include<nav_msgs/Odometry.h>
 #include<tf/tf.h>
 int main(int argc, char** argv)

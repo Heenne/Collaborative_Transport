@@ -1,4 +1,4 @@
-#include <multi_robot_controller/lyapunov_controller.h>
+#include <multi_robot_controller/Controller/lyapunov_controller.h>
 
 int main(int argc, char **argv)
 {

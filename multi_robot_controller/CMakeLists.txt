@@ -127,53 +127,69 @@ include_directories(
 )
 ## Declare a C++ library
 
-add_library(multi_robot_controller
 
-  include/multi_robot_controller/constrained_rigid_motion.h
-  src/constrained_rigid_motion.cpp
+set(CONTROLLER_SRC_PATH "src/Controller")
+set(CONTROLLER_INCLUDE_PATH "include/multi_robot_controller/Controller")
+add_library(controller
 
-  include/multi_robot_controller/constrained_rigid_motion_ros.h
-  src/constrained_rigid_motion_ros.cpp
+  ${CONTROLLER_INCLUDE_PATH}/controller.h
+  ${CONTROLLER_SRC_PATH}/controller.cpp
 
-  include/multi_robot_controller/constrained_rigid_motion_tf.h
-  src/constrained_rigid_motion_tf.cpp
 
-  include/multi_robot_controller/controller.h
-  src/controller.cpp
+  ${CONTROLLER_INCLUDE_PATH}/pass_through_controller.hpp
 
-  include/multi_robot_controller/pass_through_controller.hpp
-
-  include/multi_robot_controller/lyapunov_controller.h
-  src/lyapunov_controller.cpp
+  ${CONTROLLER_INCLUDE_PATH}/lyapunov_controller.h
+  ${CONTROLLER_SRC_PATH}/lyapunov_controller.cpp
 )
-add_dependencies(multi_robot_controller ${catkin_EXPORTED_TARGETS})
-add_dependencies(multi_robot_controller ${PROJECT_NAME}_gencfg)
+add_dependencies(controller ${catkin_EXPORTED_TARGETS})
+add_dependencies(controller ${PROJECT_NAME}_gencfg)
 
-add_library(input_lib
-  include/${PROJECT_NAME}/input_base.hpp
-  include/${PROJECT_NAME}/input_odom.hpp
-  include/${PROJECT_NAME}/input_pose_twist.hpp
-  include/${PROJECT_NAME}/input_pose_odom.hpp
-  include/${PROJECT_NAME}/input_types.hpp
+
+set(RIGID_MOTION_SRC_PATH "src/RigidMotion")
+set(RIGID_MOTION_INCLUDE_PATH "include/multi_robot_controller/RigidMotion")
+add_library(rigid_motion
+
+    ${RIGID_MOTION_INCLUDE_PATH}/constrained_rigid_motion.h
+    ${RIGID_MOTION_SRC_PATH}/constrained_rigid_motion.cpp
+
+    ${RIGID_MOTION_INCLUDE_PATH}/constrained_rigid_motion_ros.h
+    ${RIGID_MOTION_SRC_PATH}/constrained_rigid_motion_ros.cpp
+
+    ${RIGID_MOTION_INCLUDE_PATH}/constrained_rigid_motion_tf.h
+    ${RIGID_MOTION_SRC_PATH}/constrained_rigid_motion_tf.cpp
+
 )
-add_library(multi_robot_controller_exception
+
+set(RIGID_MOTION_SRC_PATH "src/Input")
+set(RIGID_MOTION_INCLUDE_PATH "include/multi_robot_controller/Input")
+add_library(input
+  ${RIGID_MOTION_INCLUDE_PATH}/input_base.hpp
+  ${RIGID_MOTION_INCLUDE_PATH}/input_odom.hpp
+  ${RIGID_MOTION_INCLUDE_PATH}/input_pose_twist.hpp
+  ${RIGID_MOTION_INCLUDE_PATH}/input_pose_odom.hpp
+  ${RIGID_MOTION_INCLUDE_PATH}/input_types.hpp
+)
+set_target_properties(input PROPERTIES LINKER_LANGUAGE CXX)
+
+add_library(exceptions
   include/${PROJECT_NAME}/necessary_param_exeption.hpp
   include/${PROJECT_NAME}/input_alloc_exception.hpp
 )
-set_target_properties(input_lib PROPERTIES LINKER_LANGUAGE CXX)
-set_target_properties(multi_robot_controller_exception PROPERTIES LINKER_LANGUAGE CXX)
-
-add_dependencies(multi_robot_controller ${catkin_EXPORTED_TARGETS})
+set_target_properties(exceptions PROPERTIES LINKER_LANGUAGE CXX)
 
 
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-add_executable(slave_node src/slave_node.cpp)
-add_executable(master_node src/master_node.cpp)
-add_executable(input_test src/tests/input_test.cpp)
-add_executable(rigid_motion_test src/tests/rigid_motion_test.cpp)
-add_executable(controller_test src/tests/controller_test.cpp)
+set(NODES_PATH "src/Nodes")
+add_executable(slave_node ${NODES_PATH}/slave_node.cpp)
+add_executable(master_node ${NODES_PATH}/master_node.cpp)
+
+
+set(TESTS_PATH "tests")
+add_executable(input_test ${TESTS_PATH}/input_test.cpp)
+add_executable(rigid_motion_test ${TESTS_PATH}/rigid_motion_test.cpp)
+add_executable(controller_test ${TESTS_PATH}/controller_test.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -186,32 +202,35 @@ add_executable(controller_test src/tests/controller_test.cpp)
 # add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
-target_link_libraries(multi_robot_controller
+target_link_libraries(controller
   ${catkin_LIBRARIES}
   ${eigen3_LIBRARIES}
 )
 
 target_link_libraries(slave_node
-  multi_robot_controller
+  controller
   ${catkin_LIBRARIES}
 )
 target_link_libraries(master_node
-  multi_robot_controller
+  controller
   ${catkin_LIBRARIES}
 )
-target_link_libraries(input_lib
+
+target_link_libraries(input
   ${catkin_LIBRARIES}
 )
+
 target_link_libraries(input_test
   ${catkin_LIBRARIES}
 )
+
 target_link_libraries(rigid_motion_test
   ${catkin_LIBRARIES}
-  multi_robot_controller
+  controller
 )
 target_link_libraries(controller_test
   ${catkin_LIBRARIES}
-  multi_robot_controller
+  controller
 )
 
 

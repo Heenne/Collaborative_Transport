@@ -1,4 +1,4 @@
-#include<multi_robot_controller/controller.h>
+#include<multi_robot_controller/Controller/controller.h>
 #include<multi_robot_controller/LyapunovConfig.h>
 #include<dynamic_reconfigure/server.h>
 class LyapunovController:public Controller

@@ -1,4 +1,4 @@
-#include<multi_robot_controller/constrained_rigid_motion_ros.h>
+#include<multi_robot_controller/RigidMotion/constrained_rigid_motion_ros.h>
 
 ConstrainedRigidMotionRos::ConstrainedRigidMotionRos():ConstrainedRigidMotion()
 {

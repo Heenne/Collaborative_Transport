@@ -1,4 +1,4 @@
-#include <multi_robot_controller/constrained_rigid_motion.h>
+#include <multi_robot_controller/RigidMotion/constrained_rigid_motion.h>
 #include <iostream>
 
 int main(int argc,char** argv)
