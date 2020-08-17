@@ -2,13 +2,14 @@ cmake_minimum_required(VERSION 2.8.3)
 project(multi_robot_controller)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
-add_compile_options(-std=c++11)
+add_compile_options(-std=c++14)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(
   catkin REQUIRED COMPONENTS
+  dynamic_reconfigure
   geometry_msgs
   multi_robot_msgs
   nav_msgs
@@ -94,10 +95,9 @@ find_package(Eigen3 REQUIRED)
 ##     and list every .cfg file to be processed
 
 ## Generate dynamic reconfigure parameters in the 'cfg' folder
-# generate_dynamic_reconfigure_options(
-#   cfg/DynReconf1.cfg
-#   cfg/DynReconf2.cfg
-# )
+generate_dynamic_reconfigure_options(
+  cfg/lyapunov.cfg
+)
 
 ###################################
 ## catkin specific configuration ##
@@ -147,6 +147,7 @@ add_library(multi_robot_controller
   src/lyapunov_controller.cpp
 )
 add_dependencies(multi_robot_controller ${catkin_EXPORTED_TARGETS})
+add_dependencies(multi_robot_controller ${PROJECT_NAME}_gencfg)
 
 add_library(input_lib
   include/${PROJECT_NAME}/input_base.hpp
@@ -157,6 +158,7 @@ add_library(input_lib
 )
 add_library(multi_robot_controller_exception
   include/${PROJECT_NAME}/necessary_param_exeption.hpp
+  include/${PROJECT_NAME}/input_alloc_exception.hpp
 )
 set_target_properties(input_lib PROPERTIES LINKER_LANGUAGE CXX)
 set_target_properties(multi_robot_controller_exception PROPERTIES LINKER_LANGUAGE CXX)

@@ -50,6 +50,8 @@
   <!--   <doc_depend>doxygen</doc_depend> -->
   <buildtool_depend>catkin</buildtool_depend>
   <build_depend>cmake_modules</build_depend>  
+  <build_depend>dynamic_reconfigure</build_depend>
+  <exec_depend>dynamic_reconfigure</exec_depend>
   
   <depend>roscpp</depend>
   <build_depend>multi_robot_msgs</build_depend>  
