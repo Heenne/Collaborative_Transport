@@ -1,5 +1,6 @@
 enum InputTypes{
-    POSE_ODOM,
-    SINGLE_ODOM,
-    POSE_TWIST
+    POSE_ODOM=0,
+    SINGLE_ODOM=1,
+    POSE_TWIST=2,
+    NO_TYPE
 };
