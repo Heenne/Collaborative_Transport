@@ -60,15 +60,15 @@ class InputPoseTwist: public InputBase
             this->sub_twist_=this->nh_.subscribe(topic_name_twist,10,&InputPoseTwist::set,this);
         }
 
-        inline void set(geometry_msgs::Twist msg)
+        inline void set(geometry_msgs::TwistStamped msg)
         {this->setAngVel(msg);this->setLinVel(msg);}
        
         inline void setPose(geometry_msgs::PoseStamped msg) 
         {tf::poseMsgToTF(msg.pose,this->pose_);this->time_=msg.header.stamp;}
         
-        inline void setLinVel(geometry_msgs::Twist msg) 
-        {tf::vector3MsgToTF(msg.linear,this->lin_vel_);}
+        inline void setLinVel(geometry_msgs::TwistStamped msg) 
+        {tf::vector3MsgToTF(msg.twist.linear,this->lin_vel_);}
        
-        inline void setAngVel(geometry_msgs::Twist msg) 
-        {tf::vector3MsgToTF(msg.angular,this->ang_vel_);}
+        inline void setAngVel(geometry_msgs::TwistStamped msg) 
+        {tf::vector3MsgToTF(msg.twist.angular,this->ang_vel_);}
 };
