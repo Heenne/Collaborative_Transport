@@ -83,8 +83,13 @@ void ConstrainedRigidMotion::calcConstrains()
 
 void ConstrainedRigidMotion::calcUnConstrained()
 {
-    this->state_out_=(this->state_in_+this->rotation_*this->reference_);
-    this->d_state_out_=(this->d_state_in_+this->angular_tensor_*this->rotation_*this->reference_);
+    //Rotate the reference position
+    Eigen::Vector3d rot_ref=this->rotation_*Eigen::Vector3d(this->reference_(0),this->reference_(1),0.0);
+    this->state_out_=this->state_in_+rot_ref; 
+    //Add the reference angle
+    this->state_out_(2)=this->state_in_(2)+this->reference_(2);
+    //rotate the velocities
+    this->d_state_out_=(this->d_state_in_+this->angular_tensor_*rot_ref);
    
 }
 
