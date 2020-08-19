@@ -1,0 +1,14 @@
+<launch>
+<arg name="namespace" default=""/>
+
+  <node if="$(eval namespace=='')" name="cmd_vel_integrator" pkg="mir_hardware_helper" type="vel_integrator_node">
+    <remap from="cmd_vel" to="cmd_vel_vm"/>
+    <remap from="cmd_vel_integrated" to="cmd_vel_vm_integrated"/>
+    <param name="topic_name" value="robot_pose_stamped"/>
+  </node>
+ <node unless="$(eval namespace=='')" name="cmd_vel_integrator" pkg="mir_hardware_helper" type="vel_integrator_node" ns="$(arg namespace)">
+    <remap from="cmd_vel" to="cmd_vel_vm"/>
+    <remap from="cmd_vel_integrated" to="cmd_vel_vm_integrated"/>
+    <param name="topic_name" value="robot_pose_stamped"/>
+  </node>
+</launch>

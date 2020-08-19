@@ -1,12 +1,18 @@
 <?xml version="2.0" ?>
 <launch>
+<arg name="reference" default="[0.0, 0.0, 0.0]"/>
 
 <node name="slave_controller" pkg="multi_robot_controller" type="slave_node" output="screen">
     <param name="rate" value="10"/>
-    <param name="topic_pose" value="pose"/>
-    <param name="topic_odom" value="odom"/>
-    <param name="topic_output" value="test_cmd_vel"/>   
-    <rosparam param="lyapunov">[7.0, 7.0, 11.0]</rosparam>
+    <param name="target/input_type" value="2"/>
+    <param name="target/topic_pose" value="cmd_vel_vm_integrated"/>
+    <param name="target/topic_twist" value="cmd_vel_vm"/>
+    <param name="current/input_type" value="0"/>
+    <param name="current/topic_pose" value="robot_pose_stamped"/>
+    <param name="current/topic_odom" value="odom_enc"/>
+    <param name="topic_output" value="test_cmd_vel"/>
+    <rosparam param="lyapunov">[3.0,4.0,1.0] </rosparam>
+    <rosparam param="reference" subst_value="True">$(arg reference)</rosparam>
 </node>
 
 </launch>
