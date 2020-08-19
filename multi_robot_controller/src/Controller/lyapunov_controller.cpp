@@ -25,7 +25,7 @@ Controller::ControlVector LyapunovController::calcControl(State current_state ,S
 {
     double omega=target_state.ang_vel.z();
     // double v=sqrt(pow(target_state.lin_vel.x(),2)+pow(target_state.lin_vel.y(),2)); 
-    double v=(target_state.pose.inverse()*target_state.lin_vel).x();
+    double v=(target_state.pose.getRotation().inverse()*target_state.lin_vel).x();
     
     tf::Transform control_dif=current_state.pose.inverseTimes(target_state.pose);
     

@@ -59,9 +59,9 @@ class LyapunovController:public Controller
         
 
     private:
-        LyapunovParameter parameter_; 
-        dynamic_reconfigure::Server<multi_robot_controller::LyapunovConfig> server_;  
-        ControlVector calcControl(State current_state ,State target_state) override;
-        void dynConfigcallback(multi_robot_controller::LyapunovConfig &config, uint32_t level);
+        LyapunovParameter parameter_; ///< Prarameter set of the controller (LyapunovParameter)
+        dynamic_reconfigure::Server<multi_robot_controller::LyapunovConfig> server_;  ///<Server for the dynamic reconfiguration of the parameters
+        ControlVector calcControl(State current_state ,State target_state) override;  ///<Ovverrides the ControlLaw from base class with the lyapunov based control law
+        void dynConfigcallback(multi_robot_controller::LyapunovConfig &config, uint32_t level); ///<Callback for the dynamic reconfigure server
         
 };
