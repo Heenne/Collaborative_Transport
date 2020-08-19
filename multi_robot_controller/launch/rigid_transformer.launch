@@ -1,0 +1,21 @@
+<launch>
+<arg name="namespace" default=""/>
+<arg name="reference" default="[0.0, 1.0, 0.0]"/>
+
+<node if="$(eval namespace=='')" name="rigid_transformer" pkg="multi_robot_controller" type="rigid_transformer" >
+    <param name="input_type" value="0"/>
+    <rosparam param="reference" subst_value="True">$(arg reference)</rosparam>
+    <param name="topic_pose" value="robot_pose_stamped"/>
+    <param name="topic_odom" value="odom_enc"/>      
+</node>
+
+<node unless="$(eval namespace=='')" name="rigid_transformer" pkg="multi_robot_controller" type="rigid_transformer" ns="$(arg namespace)">
+    <param name="input_type" value="0"/>
+    <rosparam param="reference" subst_value="True">$(arg reference)</rosparam>
+    <param name="topic_pose" value="robot_pose_stamped"/>
+    <param name="topic_odom" value="odom_enc"/>      
+</node>
+
+
+
+</launch>

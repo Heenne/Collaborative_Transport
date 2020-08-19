@@ -184,6 +184,7 @@ set_target_properties(exceptions PROPERTIES LINKER_LANGUAGE CXX)
 set(NODES_PATH "src/Nodes")
 add_executable(slave_node ${NODES_PATH}/slave_node.cpp)
 add_executable(master_node ${NODES_PATH}/master_node.cpp)
+add_executable(rigid_transformer ${NODES_PATH}/rigid_transformer.cpp)
 
 
 set(TESTS_PATH "tests")
@@ -203,8 +204,24 @@ add_executable(controller_test ${TESTS_PATH}/controller_test.cpp)
 
 ## Specify libraries to link a library or executable target against
 target_link_libraries(controller
+  rigid_motion
+  input
   ${catkin_LIBRARIES}
   ${eigen3_LIBRARIES}
+)
+target_link_libraries(rigid_transformer
+  rigid_motion
+  input
+  ${catkin_LIBRARIES}
+  ${eigen3_LIBRARIES}
+)
+
+
+target_link_libraries(rigid_motion  
+  ${catkin_LIBRARIES}
+)
+target_link_libraries(input
+  ${catkin_LIBRARIES}
 )
 
 target_link_libraries(slave_node
@@ -216,17 +233,17 @@ target_link_libraries(master_node
   ${catkin_LIBRARIES}
 )
 
-target_link_libraries(input
-  ${catkin_LIBRARIES}
-)
 
 target_link_libraries(input_test
   ${catkin_LIBRARIES}
 )
 
 target_link_libraries(rigid_motion_test
-  ${catkin_LIBRARIES}
   controller
+  input
+  rigid_motion
+  ${catkin_LIBRARIES}
+  
 )
 target_link_libraries(controller_test
   ${catkin_LIBRARIES}
