@@ -1,8 +1,10 @@
 <?xml version="2.0" ?>
 <launch>
+
+<arg name="config_file" value="" doc="Path of the parameter configuration file"/>
 <arg name="reference" default="[0.0, 0.0, 0.0]"/>
 
-<node name="slave_controller" pkg="multi_robot_controller" type="slave_node" output="screen">
+<node if="$(eval config_file=='')" name="slave_controller" pkg="multi_robot_controller" type="slave_node" output="screen">
     <param name="rate" value="10"/>
     <param name="target/input_type" value="2"/>
     <param name="target/topic_pose" value="cmd_vel_vm_integrated"/>
@@ -14,7 +16,9 @@
     <rosparam param="lyapunov">[3.0,4.0,1.0] </rosparam>
     <rosparam param="reference" subst_value="True">$(arg reference)</rosparam>
 </node>
-
+<node unless="$(eval config_file=='')" name="slave_controller" pkg="multi_robot_controller" type="slave_node" output="screen">
+    <roparam command="load" file="$(arg config_file)"/>
+</node>
 </launch>
 
 
