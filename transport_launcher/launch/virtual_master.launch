@@ -1,14 +1,41 @@
 <launch>
-<arg name="namespace" default=""/>
 
-  <node if="$(eval namespace=='')" name="cmd_vel_integrator" pkg="mir_hardware_helper" type="vel_integrator_node">
-    <remap from="cmd_vel" to="cmd_vel_vm"/>
-    <remap from="cmd_vel_integrated" to="cmd_vel_vm_integrated"/>
-    <param name="topic_name" value="robot_pose_stamped"/>
-  </node>
- <node unless="$(eval namespace=='')" name="cmd_vel_integrator" pkg="mir_hardware_helper" type="vel_integrator_node" ns="$(arg namespace)">
-    <remap from="cmd_vel" to="cmd_vel_vm"/>
-    <remap from="cmd_vel_integrated" to="cmd_vel_vm_integrated"/>
-    <param name="topic_name" value="robot_pose_stamped"/>
-  </node>
+ <group ns="virtual_master">
+
+
+  <include file="$(find mir_description)/launch/upload_mir_urdf.launch"/>
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
+        <param name="tf_prefix" value="master"/>
+    </node>
+
+    <node respawn="true" pkg="joy" type="joy_node"  name="ps4_joy">
+        <param name="dev" value="/dev/input/js0"/>
+        <param name="deadzone" value="0.12"/>
+        <param name="coalesce_interval" value="0.001"/>
+    </node>
+
+    <node name="ps4_driver" pkg="mir_hardware_helper" type="ps4_ros.py">
+            <remap from="/mur/mir/cmd_vel" to="master_velocity"/>
+            <remap from="/miranda/mir/cmd_vel" to="master_velocity"/>
+    </node>
+    
+      <node name="base_link_broadcaster" pkg="transport_launcher" type="base_broadcaster.py">
+      <remap from="robot_pose" to="master_pose"/>
+      <param name="tf_prefix" value="master"/>
+      </node>
+
+    <node name="cmd_vel_integrator" pkg="mir_hardware_helper" type="vel_integrator_node">
+      <param name="topic_name" value="reset_pose"/>
+      <param name="frame_id" value="/map"/>
+      <remap from="cmd_vel" to="master_velocity"/>
+      <remap from="cmd_vel_integrated" to="master_pose"/>
+    </node>
+
+    <node name="fake_mir_joint_publisher" pkg="mir_driver" type="fake_mir_joint_publisher.py" output="screen" />
+    
+    <node name="referencing_handler" pkg="transport_launcher" type="drive_slave_to_reference.py"  output="screen">
+      <remap from="/master_pose_stamped" to="master_pose"/>
+    </node>
+  </group>
+  
 </launch>
