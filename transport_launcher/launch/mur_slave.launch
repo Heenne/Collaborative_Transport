@@ -1,15 +1,9 @@
 <launch>
  <!-- Load the formation parameter file-->
   
-  <include file="$(find mur_hardware_helper)/launch/mur.launch">
-  </include>
-
-  <include file="$(find multi_robot_controller)/launch/master.launch" ns="mur/mir">
-  </include>
-  
-
- <include file="$(find multi_robot_controller)/launch/slave.launch" ns="mur/mir">
-    <arg name="reference" value="[0.0, 0.3, 0.0]"/>
+  <include file="$(find mur_hardware_helper)/launch/mur.launch"/>
+  <include file="$(find multi_robot_controller)/launch/slave.launch" ns="mur/mir">
+      <arg name="config_file" value="$(find transport_launcher)/config/mur_slave.yaml"/>
   </include>
  
 </launch>

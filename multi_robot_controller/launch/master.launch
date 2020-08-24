@@ -1,24 +1,10 @@
 <?xml version="2.0" ?>
 <launch>
 
-    <arg name="config_file" value="" doc="Path of the parameter configuration file">
-
-
-    <node if="$(eval config_file=='')" name="master_controller" pkg="multi_robot_controller" type="master_node" output="screen">
-        <param name="rate" value="10"/>
-        <param name="target/input_type" value="2"/>
-        <param name="target/topic_pose" value="cmd_vel_vm_integrated"/>
-        <param name="target/topic_twist" value="cmd_vel_vm"/>
-        <param name="current/input_type" value="0"/>
-        <param name="current/topic_pose" value="robot_pose_stamped"/>
-        <param name="current/topic_odom" value="odom_enc"/>
-        <param name="topic_output" value="test_cmd_vel"/>
-        <param name="current/input_type" value="0"/>   
-        <rosparam param="lyapunov">[3.0,4.0,1.0] </rosparam>
-    </node>  
+    <arg name="config_file" default="$(find multi_robot_controller)/config/master.yaml" doc="Path of the parameter configuration file"/>
 
     <node unless="$(eval config_file=='')" name="master_controller" pkg="multi_robot_controller" type="master_node" output="screen">
-        <roparam command="load" file="$(arg config_file)">
+        <rosparam command="load" file="$(arg config_file)"/>
     </node> 
 
 </launch>

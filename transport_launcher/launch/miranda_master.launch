@@ -1,10 +1,7 @@
 <launch>
  <!-- Load the formation parameter file-->
   
-  <include file="$(find miranda_hardware_helper)/launch/miranda.launch">
-  </include>
-
-  <include file="$(find multi_robot_controller)/launch/master.launch" ns="miranda/mir">
-  </include>
+  <include file="$(find mur_hardware_helper)/launch/miranda.launch"/>
+  <include file="$(find multi_robot_controller)/launch/master.launch" ns="miranda/mir"/>
  
 </launch>

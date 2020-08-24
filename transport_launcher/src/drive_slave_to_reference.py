@@ -29,7 +29,7 @@ class SlaveReferencer:
         self.slaves=dict()
         self.slave_poses=dict()
         for slave in slaves_ns:
-            ref=rospy.get_param("/"+slave.strip("/")+"/reference")
+            ref=rospy.get_param("/"+slave.strip("/")+"/slave_controller/reference")
             ref_pose=PoseStamped()
             ref_pose.pose.position.x=ref[0]
             ref_pose.pose.position.y=ref[1]
@@ -55,8 +55,8 @@ class SlaveReferencer:
         for slave in self.slaves:                
                self.move_base_dict[slave]=actionlib.SimpleActionClient(slave+'/move_base',MoveBaseAction)
 
-    def __calcSlaves__(self):        
-        master_pose=rospy.wait_for_message("/master_pose_stamped",PoseStamped)
+    def __calcSlaves__(self):
+        master_pose=rospy.wait_for_message("/master_pose",PoseStamped)
         for slave in self.slaves:
             print(self.slaves[slave])
             trafo=TransformStamped()

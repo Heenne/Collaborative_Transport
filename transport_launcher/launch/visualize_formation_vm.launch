@@ -1,0 +1,5 @@
+<launch>
+    <node type="rviz" name="rviz" pkg="rviz" args="-d $(find transport_launcher)/rviz/multimirvirtual.rviz"/>
+    <node name="rqt_tf_tree" pkg="rqt_tf_tree" type="rqt_tf_tree"/>
+    <node name="rqt_node_graph" pkg="rqt_graph" type="rqt_graph"/>
+</launch>
