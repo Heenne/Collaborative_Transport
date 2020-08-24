@@ -1,6 +1,8 @@
 #pragma once
 #include<exception>
-
+/** \addtogroup MultiRobotController 
+ *  @{
+ */
 class InputAllocException:public std::exception
 {
     public:

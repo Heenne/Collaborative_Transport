@@ -1,0 +1,195 @@
+\hypertarget{classOrientationFeedForward}{}\section{Orientation\+Feed\+Forward Class Reference}
+\label{classOrientationFeedForward}\index{Orientation\+Feed\+Forward@{Orientation\+Feed\+Forward}}
+
+
+A Orientation feed forward class. It uses a given orientation and calculates a robot arm pose that compansates the motion by the change of orientation (null space motion).  
+
+
+
+
+{\ttfamily \#include $<$orientation\+\_\+feed\+\_\+forward.\+h$>$}
+
+
+
+Inheritance diagram for Orientation\+Feed\+Forward\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{dd/d46/classOrientationFeedForward__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classOrientationFeedForward_a45f6220dd29a9df06f62eeed86189101}\label{classOrientationFeedForward_a45f6220dd29a9df06f62eeed86189101}} 
+typedef Eigen\+::\+Matrix$<$ double, 3, 1 $>$ {\bfseries Position}
+\item 
+\mbox{\Hypertarget{classOrientationFeedForward_a329654d4c6d79679903a76c624330f99}\label{classOrientationFeedForward_a329654d4c6d79679903a76c624330f99}} 
+typedef Eigen\+::\+Quaterniond {\bfseries Orientation}
+\item 
+\mbox{\Hypertarget{classOrientationFeedForward_a68247ebc7099747e21cbd56d4dbc405a}\label{classOrientationFeedForward_a68247ebc7099747e21cbd56d4dbc405a}} 
+typedef Eigen\+::\+Matrix$<$ double, 7, 1 $>$ {\bfseries Pose}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classOrientationFeedForward_aad82bda1b9fa824e321a6c8afad84973}\label{classOrientationFeedForward_aad82bda1b9fa824e321a6c8afad84973}} 
+\hyperlink{classOrientationFeedForward_aad82bda1b9fa824e321a6c8afad84973}{Orientation\+Feed\+Forward} ()
+\begin{DoxyCompactList}\small\item\em Construct a new Orientation Feed Forward object. \end{DoxyCompactList}\item 
+\hyperlink{classOrientationFeedForward_a0ae1aba3b3e0abf84828a9db008b6f69}{Orientation\+Feed\+Forward} (Position pos\+\_\+offf, Orientation ori\+\_\+off)
+\begin{DoxyCompactList}\small\item\em Construct a new Orientation Feed Forward object. \end{DoxyCompactList}\item 
+void \hyperlink{classOrientationFeedForward_aa7d8913f8f9d90e913b478d9adc5ff20}{update\+Orientation} (double angle)
+\begin{DoxyCompactList}\small\item\em Updates the current Orientation of the mobile base that has to be feed forwarded. \end{DoxyCompactList}\item 
+void \hyperlink{classOrientationFeedForward_aed8f826976135c0cd55408a652993828}{update\+Orientation} (Orientation ori)
+\begin{DoxyCompactList}\small\item\em Updates the current Orientation of the mobile base that has to be feed forwarded. \end{DoxyCompactList}\item 
+Pose \hyperlink{classOrientationFeedForward_ad31fce2cdf39cbf375457b9aa7ca2219}{get\+Pose} ()
+\begin{DoxyCompactList}\small\item\em Get the Pose object for motion control. \end{DoxyCompactList}\item 
+void \hyperlink{classOrientationFeedForward_adc105d9a1fe00d6a79fcf38447202709}{set\+Offset} (Position pos\+\_\+off, Orientation ori\+\_\+off)
+\begin{DoxyCompactList}\small\item\em Set the Offset object. \end{DoxyCompactList}\item 
+void \hyperlink{classOrientationFeedForward_adbd1691b1e930752818624d065acbf1c}{set\+Offset} (Pose pose)
+\begin{DoxyCompactList}\small\item\em Set the Offset object. \end{DoxyCompactList}\item 
+void \hyperlink{classOrientationFeedForward_a5f69dfd449972707d2ccd07e20fd2c5b}{set\+Desired\+Pose} (Pose pose)
+\begin{DoxyCompactList}\small\item\em Set the Desired Pose that has to be hold in mobile base frame. \end{DoxyCompactList}\item 
+void \hyperlink{classOrientationFeedForward_ad419aebf0df88282ca6c1dc24adbadb2}{set\+Desired\+Pose} (Position position, Orientation orientation)
+\begin{DoxyCompactList}\small\item\em Set the Desired Pose object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+A Orientation feed forward class. It uses a given orientation and calculates a robot arm pose that compansates the motion by the change of orientation (null space motion). 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classOrientationFeedForward_a0ae1aba3b3e0abf84828a9db008b6f69}\label{classOrientationFeedForward_a0ae1aba3b3e0abf84828a9db008b6f69}} 
+\index{Orientation\+Feed\+Forward@{Orientation\+Feed\+Forward}!Orientation\+Feed\+Forward@{Orientation\+Feed\+Forward}}
+\index{Orientation\+Feed\+Forward@{Orientation\+Feed\+Forward}!Orientation\+Feed\+Forward@{Orientation\+Feed\+Forward}}
+\subsubsection{\texorpdfstring{Orientation\+Feed\+Forward()}{OrientationFeedForward()}}
+{\footnotesize\ttfamily Orientation\+Feed\+Forward\+::\+Orientation\+Feed\+Forward (\begin{DoxyParamCaption}\item[{Position}]{pos\+\_\+offf,  }\item[{Orientation}]{ori\+\_\+off }\end{DoxyParamCaption})}
+
+
+
+Construct a new Orientation Feed Forward object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ori\+\_\+off} & The Orientation offset the Robot base has with respect to the mobile base frame \\
+\hline
+{\em pos\+\_\+offf} & The Position offset the Robot base has with respect to the mobile base frame \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classOrientationFeedForward_ad31fce2cdf39cbf375457b9aa7ca2219}\label{classOrientationFeedForward_ad31fce2cdf39cbf375457b9aa7ca2219}} 
+\index{Orientation\+Feed\+Forward@{Orientation\+Feed\+Forward}!get\+Pose@{get\+Pose}}
+\index{get\+Pose@{get\+Pose}!Orientation\+Feed\+Forward@{Orientation\+Feed\+Forward}}
+\subsubsection{\texorpdfstring{get\+Pose()}{getPose()}}
+{\footnotesize\ttfamily Orientation\+Feed\+Forward\+::\+Pose Orientation\+Feed\+Forward\+::get\+Pose (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Get the Pose object for motion control. 
+
+\begin{DoxyReturn}{Returns}
+Pose in robot base frame wich can be forwarded to the robot motion control 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classOrientationFeedForward_a5f69dfd449972707d2ccd07e20fd2c5b}\label{classOrientationFeedForward_a5f69dfd449972707d2ccd07e20fd2c5b}} 
+\index{Orientation\+Feed\+Forward@{Orientation\+Feed\+Forward}!set\+Desired\+Pose@{set\+Desired\+Pose}}
+\index{set\+Desired\+Pose@{set\+Desired\+Pose}!Orientation\+Feed\+Forward@{Orientation\+Feed\+Forward}}
+\subsubsection{\texorpdfstring{set\+Desired\+Pose()}{setDesiredPose()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Orientation\+Feed\+Forward\+::set\+Desired\+Pose (\begin{DoxyParamCaption}\item[{Pose}]{pose }\end{DoxyParamCaption})}
+
+
+
+Set the Desired Pose that has to be hold in mobile base frame. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pose} & Desired Pose with in mobile base frame \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classOrientationFeedForward_ad419aebf0df88282ca6c1dc24adbadb2}\label{classOrientationFeedForward_ad419aebf0df88282ca6c1dc24adbadb2}} 
+\index{Orientation\+Feed\+Forward@{Orientation\+Feed\+Forward}!set\+Desired\+Pose@{set\+Desired\+Pose}}
+\index{set\+Desired\+Pose@{set\+Desired\+Pose}!Orientation\+Feed\+Forward@{Orientation\+Feed\+Forward}}
+\subsubsection{\texorpdfstring{set\+Desired\+Pose()}{setDesiredPose()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Orientation\+Feed\+Forward\+::set\+Desired\+Pose (\begin{DoxyParamCaption}\item[{Position}]{position,  }\item[{Orientation}]{orientation }\end{DoxyParamCaption})}
+
+
+
+Set the Desired Pose object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & Position that has to be hold by the endeffektor defined in mobile base frame \\
+\hline
+{\em orientation} & Orientation that has to be hold by the endeffektor defined in robot base frame \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classOrientationFeedForward_adc105d9a1fe00d6a79fcf38447202709}\label{classOrientationFeedForward_adc105d9a1fe00d6a79fcf38447202709}} 
+\index{Orientation\+Feed\+Forward@{Orientation\+Feed\+Forward}!set\+Offset@{set\+Offset}}
+\index{set\+Offset@{set\+Offset}!Orientation\+Feed\+Forward@{Orientation\+Feed\+Forward}}
+\subsubsection{\texorpdfstring{set\+Offset()}{setOffset()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Orientation\+Feed\+Forward\+::set\+Offset (\begin{DoxyParamCaption}\item[{Position}]{pos\+\_\+off,  }\item[{Orientation}]{ori\+\_\+off }\end{DoxyParamCaption})}
+
+
+
+Set the Offset object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ori\+\_\+off} & Orientation of the Offset (from the mobile base frame and the robot frame) \\
+\hline
+{\em pos\+\_\+off} & Position of the Offset (from mobile base frame and the robot frame) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classOrientationFeedForward_adbd1691b1e930752818624d065acbf1c}\label{classOrientationFeedForward_adbd1691b1e930752818624d065acbf1c}} 
+\index{Orientation\+Feed\+Forward@{Orientation\+Feed\+Forward}!set\+Offset@{set\+Offset}}
+\index{set\+Offset@{set\+Offset}!Orientation\+Feed\+Forward@{Orientation\+Feed\+Forward}}
+\subsubsection{\texorpdfstring{set\+Offset()}{setOffset()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Orientation\+Feed\+Forward\+::set\+Offset (\begin{DoxyParamCaption}\item[{Pose}]{pose }\end{DoxyParamCaption})}
+
+
+
+Set the Offset object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ori\+\_\+off} & Orientation of the Offset (from the mobile base frame and the robot frame) \\
+\hline
+{\em pos\+\_\+off} & Position of the Offset (from mobile base frame and the robot frame) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classOrientationFeedForward_aa7d8913f8f9d90e913b478d9adc5ff20}\label{classOrientationFeedForward_aa7d8913f8f9d90e913b478d9adc5ff20}} 
+\index{Orientation\+Feed\+Forward@{Orientation\+Feed\+Forward}!update\+Orientation@{update\+Orientation}}
+\index{update\+Orientation@{update\+Orientation}!Orientation\+Feed\+Forward@{Orientation\+Feed\+Forward}}
+\subsubsection{\texorpdfstring{update\+Orientation()}{updateOrientation()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Orientation\+Feed\+Forward\+::update\+Orientation (\begin{DoxyParamCaption}\item[{double}]{angle }\end{DoxyParamCaption})}
+
+
+
+Updates the current Orientation of the mobile base that has to be feed forwarded. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em angle} & Angle of the Rotation around z-\/axis \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classOrientationFeedForward_aed8f826976135c0cd55408a652993828}\label{classOrientationFeedForward_aed8f826976135c0cd55408a652993828}} 
+\index{Orientation\+Feed\+Forward@{Orientation\+Feed\+Forward}!update\+Orientation@{update\+Orientation}}
+\index{update\+Orientation@{update\+Orientation}!Orientation\+Feed\+Forward@{Orientation\+Feed\+Forward}}
+\subsubsection{\texorpdfstring{update\+Orientation()}{updateOrientation()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Orientation\+Feed\+Forward\+::update\+Orientation (\begin{DoxyParamCaption}\item[{Orientation}]{ori }\end{DoxyParamCaption})}
+
+
+
+Updates the current Orientation of the mobile base that has to be feed forwarded. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ori} & Quaternion of the current Orientation \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/multi\+\_\+robot\+\_\+controller/feed\+\_\+forward/orientation\+\_\+feed\+\_\+forward.\+h\item 
+src/feed\+\_\+forward/orientation\+\_\+feed\+\_\+forward.\+cpp\end{DoxyCompactItemize}

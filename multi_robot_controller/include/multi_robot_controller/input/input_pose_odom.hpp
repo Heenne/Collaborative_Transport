@@ -5,6 +5,11 @@
 #include <message_filters/time_synchronizer.h>
 #include <nav_msgs/Odometry.h>
 
+/** \addtogroup Input 
+ *  @{
+ */
+
+
 class InputPoseOdom: public InputBase
 {   
     public:

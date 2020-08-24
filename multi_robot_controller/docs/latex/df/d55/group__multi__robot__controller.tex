@@ -1,0 +1,290 @@
+\hypertarget{group__multi__robot__controller}{}\section{Multi\+\_\+robot\+\_\+controller}
+\label{group__multi__robot__controller}\index{Multi\+\_\+robot\+\_\+controller@{Multi\+\_\+robot\+\_\+controller}}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classInputAllocException}{Input\+Alloc\+Exception}
+\item 
+class \hyperlink{classNecessaryParamException}{Necessary\+Param\+Exception}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{group__multi__robot__controller_ga465b07e16106af072ed5315010fa876c}{convert\+Msg} (Eigen\+::\+Quaterniond \&quat, std\+\_\+msgs\+::\+Float64 \&msg)
+\begin{DoxyCompactList}\small\item\em Convert an float64 z-\/axis angle to an eigen quaternion. \end{DoxyCompactList}\item 
+void \hyperlink{group__multi__robot__controller_gad42169e0be94216cd31a8a360a848155}{convert\+Msg} (Eigen\+::\+Quaterniond \&quat, geometry\+\_\+msgs\+::\+Transform \&msg)
+\begin{DoxyCompactList}\small\item\em Convert Orientation of a Transform geometry message to an eigen quaternion. \end{DoxyCompactList}\item 
+void \hyperlink{group__multi__robot__controller_ga34987bf2293cc8aa5fac7ac60e6510ef}{convert\+Msg} (Eigen\+::\+Quaterniond \&quat, geometry\+\_\+msgs\+::\+Transform\+Stamped \&msg)
+\begin{DoxyCompactList}\small\item\em Convert an Stamped\+Transform geometry message to an eigen quaternion. \end{DoxyCompactList}\item 
+void \hyperlink{group__multi__robot__controller_gadc07db93efb76fd809b67b74dd13b939}{convert\+Msg} (Eigen\+::\+Quaterniond \&quat, geometry\+\_\+msgs\+::\+Pose \&msg)
+\begin{DoxyCompactList}\small\item\em Convert an Pose geometry message to an eigen quaternion. \end{DoxyCompactList}\item 
+void \hyperlink{group__multi__robot__controller_ga8257db2bb94ec53eadfe87d04b38cc0b}{convert\+Msg} (Eigen\+::\+Quaterniond \&quat, geometry\+\_\+msgs\+::\+Pose\+Stamped \&msg)
+\begin{DoxyCompactList}\small\item\em Convert an stamped pose geometry message to an eigen quaternion. \end{DoxyCompactList}\item 
+void \hyperlink{group__multi__robot__controller_gafde5764b46f0189c2aea14ed57434708}{convert\+Msg} (Eigen\+::\+Matrix$<$ double, 7, 1 $>$ \&pose, geometry\+\_\+msgs\+::\+Pose \&msg)
+\begin{DoxyCompactList}\small\item\em Convert an pose geometry message to an Eigen pose vector (x, y, z, w, x, y, z) \end{DoxyCompactList}\item 
+void \hyperlink{group__multi__robot__controller_ga9e842115a5f448ab0e3ba9fea93d5179}{convert\+Msg} (Eigen\+::\+Matrix$<$ double, 7, 1 $>$ \&pose, geometry\+\_\+msgs\+::\+Pose\+Stamped \&msg)
+\begin{DoxyCompactList}\small\item\em Convert an stamepd pose geometry message to an Eigen pose vector (x, y, z, w, x, y, z) \end{DoxyCompactList}\item 
+void \hyperlink{group__multi__robot__controller_ga7beb50c98e49263d05b3b819be58d76c}{convert\+Msg} (geometry\+\_\+msgs\+::\+Pose \&msg, Eigen\+::\+Matrix$<$ double, 7, 1 $>$ \&pose)
+\begin{DoxyCompactList}\small\item\em Convert an Eigen pose vector (x, y, z, w, x, y, z) to a pose geometry message. \end{DoxyCompactList}\item 
+void \hyperlink{group__multi__robot__controller_gaf1628de186f2d90b064f8c8b36beef53}{convert\+Msg} (geometry\+\_\+msgs\+::\+Pose\+Stamped \&msg, Eigen\+::\+Matrix$<$ double, 7, 1 $>$ \&pose)
+\begin{DoxyCompactList}\small\item\em Convert an Eigen pose vector (x, y, z, w, x, y, z) to a stamepd pose geometry message. \end{DoxyCompactList}\item 
+void \hyperlink{group__multi__robot__controller_ga45b2bbef58d2c60ff8eeb77d221f2ab7}{convert\+Msg} (geometry\+\_\+msgs\+::\+Pose \&pose, geometry\+\_\+msgs\+::\+Transform \&transform)
+\begin{DoxyCompactList}\small\item\em Convert an Eigen pose vector (x, y, z, w, x, y, z) to a transform geometry message. \end{DoxyCompactList}\item 
+void \hyperlink{group__multi__robot__controller_gaf99f4d3d714176ee5a3d235ffabb7d3f}{convert\+Msg} (geometry\+\_\+msgs\+::\+Pose\+Stamped \&pose, geometry\+\_\+msgs\+::\+Transform\+Stamped \&transform\+Stamped)
+\begin{DoxyCompactList}\small\item\em Convert a stamped transform geometry message to a stamped pose geometry message. \end{DoxyCompactList}\item 
+void \hyperlink{group__multi__robot__controller_ga21e894dfe1e1216355db06776a630b09}{convert\+Msg} (Eigen\+::\+Matrix$<$ double, 7, 1 $>$ \&pose, geometry\+\_\+msgs\+::\+Transform\+Stamped \&transform\+Stamped)
+\begin{DoxyCompactList}\small\item\em Convert a stamped transform geometry message to a eigen pose vector. \end{DoxyCompactList}\item 
+void \hyperlink{group__multi__robot__controller_ga27bedbf17c4aa6e228239ef1f1009e2b}{convert\+Msg} (geometry\+\_\+msgs\+::\+Transform \&transform, geometry\+\_\+msgs\+::\+Pose \&pose)
+\begin{DoxyCompactList}\small\item\em Convert a geometry pos messag to a geometry transfomr message. \end{DoxyCompactList}\item 
+void \hyperlink{group__multi__robot__controller_ga83f417b8e164774e4926508549543498}{convert\+Msg} (geometry\+\_\+msgs\+::\+Transform\+Stamped \&transform, geometry\+\_\+msgs\+::\+Pose\+Stamped \&pose)
+\begin{DoxyCompactList}\small\item\em Convert a geometry stamped pose message to a stamped transform geometry message. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{group__multi__robot__controller_gaa948b5d25acee95c1d39f1e1276304b8}\label{group__multi__robot__controller_gaa948b5d25acee95c1d39f1e1276304b8}} 
+const char $\ast$ {\bfseries Input\+Alloc\+Exception\+::what} () const  throw ()
+\item 
+\mbox{\Hypertarget{group__multi__robot__controller_ga7c6066c92d689e7946e49425c2efef62}\label{group__multi__robot__controller_ga7c6066c92d689e7946e49425c2efef62}} 
+{\bfseries Necessary\+Param\+Exception\+::\+Necessary\+Param\+Exception} (std\+::string param\+\_\+name\+\_\+resolved)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{group__multi__robot__controller_ga465b07e16106af072ed5315010fa876c}\label{group__multi__robot__controller_ga465b07e16106af072ed5315010fa876c}} 
+\index{Multi\+\_\+robot\+\_\+controller@{Multi\+\_\+robot\+\_\+controller}!convert\+Msg@{convert\+Msg}}
+\index{convert\+Msg@{convert\+Msg}!Multi\+\_\+robot\+\_\+controller@{Multi\+\_\+robot\+\_\+controller}}
+\subsubsection{\texorpdfstring{convert\+Msg()}{convertMsg()}\hspace{0.1cm}{\footnotesize\ttfamily [1/14]}}
+{\footnotesize\ttfamily void convert\+Msg (\begin{DoxyParamCaption}\item[{Eigen\+::\+Quaterniond \&}]{quat,  }\item[{std\+\_\+msgs\+::\+Float64 \&}]{msg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Convert an float64 z-\/axis angle to an eigen quaternion. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & Float64 ros message with z-\/axis angle \\
+\hline
+{\em quat} & Eigen quaterniond the quaternion is stored in \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group__multi__robot__controller_gad42169e0be94216cd31a8a360a848155}\label{group__multi__robot__controller_gad42169e0be94216cd31a8a360a848155}} 
+\index{Multi\+\_\+robot\+\_\+controller@{Multi\+\_\+robot\+\_\+controller}!convert\+Msg@{convert\+Msg}}
+\index{convert\+Msg@{convert\+Msg}!Multi\+\_\+robot\+\_\+controller@{Multi\+\_\+robot\+\_\+controller}}
+\subsubsection{\texorpdfstring{convert\+Msg()}{convertMsg()}\hspace{0.1cm}{\footnotesize\ttfamily [2/14]}}
+{\footnotesize\ttfamily void convert\+Msg (\begin{DoxyParamCaption}\item[{Eigen\+::\+Quaterniond \&}]{quat,  }\item[{geometry\+\_\+msgs\+::\+Transform \&}]{msg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Convert Orientation of a Transform geometry message to an eigen quaternion. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & Message that holds the transform \\
+\hline
+{\em quat} & Quaternion the eigen quaternion is stored in \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group__multi__robot__controller_ga34987bf2293cc8aa5fac7ac60e6510ef}\label{group__multi__robot__controller_ga34987bf2293cc8aa5fac7ac60e6510ef}} 
+\index{Multi\+\_\+robot\+\_\+controller@{Multi\+\_\+robot\+\_\+controller}!convert\+Msg@{convert\+Msg}}
+\index{convert\+Msg@{convert\+Msg}!Multi\+\_\+robot\+\_\+controller@{Multi\+\_\+robot\+\_\+controller}}
+\subsubsection{\texorpdfstring{convert\+Msg()}{convertMsg()}\hspace{0.1cm}{\footnotesize\ttfamily [3/14]}}
+{\footnotesize\ttfamily void convert\+Msg (\begin{DoxyParamCaption}\item[{Eigen\+::\+Quaterniond \&}]{quat,  }\item[{geometry\+\_\+msgs\+::\+Transform\+Stamped \&}]{msg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Convert an Stamped\+Transform geometry message to an eigen quaternion. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & Message that holds the stamped transform \\
+\hline
+{\em quat} & Quternion the eigen quaternion is stored in \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group__multi__robot__controller_gadc07db93efb76fd809b67b74dd13b939}\label{group__multi__robot__controller_gadc07db93efb76fd809b67b74dd13b939}} 
+\index{Multi\+\_\+robot\+\_\+controller@{Multi\+\_\+robot\+\_\+controller}!convert\+Msg@{convert\+Msg}}
+\index{convert\+Msg@{convert\+Msg}!Multi\+\_\+robot\+\_\+controller@{Multi\+\_\+robot\+\_\+controller}}
+\subsubsection{\texorpdfstring{convert\+Msg()}{convertMsg()}\hspace{0.1cm}{\footnotesize\ttfamily [4/14]}}
+{\footnotesize\ttfamily void convert\+Msg (\begin{DoxyParamCaption}\item[{Eigen\+::\+Quaterniond \&}]{quat,  }\item[{geometry\+\_\+msgs\+::\+Pose \&}]{msg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Convert an Pose geometry message to an eigen quaternion. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & Message that holds the pose \\
+\hline
+{\em quat} & Quternion the eigen quaternion is stored in \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group__multi__robot__controller_ga8257db2bb94ec53eadfe87d04b38cc0b}\label{group__multi__robot__controller_ga8257db2bb94ec53eadfe87d04b38cc0b}} 
+\index{Multi\+\_\+robot\+\_\+controller@{Multi\+\_\+robot\+\_\+controller}!convert\+Msg@{convert\+Msg}}
+\index{convert\+Msg@{convert\+Msg}!Multi\+\_\+robot\+\_\+controller@{Multi\+\_\+robot\+\_\+controller}}
+\subsubsection{\texorpdfstring{convert\+Msg()}{convertMsg()}\hspace{0.1cm}{\footnotesize\ttfamily [5/14]}}
+{\footnotesize\ttfamily void convert\+Msg (\begin{DoxyParamCaption}\item[{Eigen\+::\+Quaterniond \&}]{quat,  }\item[{geometry\+\_\+msgs\+::\+Pose\+Stamped \&}]{msg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Convert an stamped pose geometry message to an eigen quaternion. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & Message that holds the stamped pose \\
+\hline
+{\em quat} & Quternion the eigen quaternion is stored in \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group__multi__robot__controller_gafde5764b46f0189c2aea14ed57434708}\label{group__multi__robot__controller_gafde5764b46f0189c2aea14ed57434708}} 
+\index{Multi\+\_\+robot\+\_\+controller@{Multi\+\_\+robot\+\_\+controller}!convert\+Msg@{convert\+Msg}}
+\index{convert\+Msg@{convert\+Msg}!Multi\+\_\+robot\+\_\+controller@{Multi\+\_\+robot\+\_\+controller}}
+\subsubsection{\texorpdfstring{convert\+Msg()}{convertMsg()}\hspace{0.1cm}{\footnotesize\ttfamily [6/14]}}
+{\footnotesize\ttfamily void convert\+Msg (\begin{DoxyParamCaption}\item[{Eigen\+::\+Matrix$<$ double, 7, 1 $>$ \&}]{pose,  }\item[{geometry\+\_\+msgs\+::\+Pose \&}]{msg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Convert an pose geometry message to an Eigen pose vector (x, y, z, w, x, y, z) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & Message that holds the pose \\
+\hline
+{\em pose} & Matrix (Vector) the eigen pose vector is stored in \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group__multi__robot__controller_ga9e842115a5f448ab0e3ba9fea93d5179}\label{group__multi__robot__controller_ga9e842115a5f448ab0e3ba9fea93d5179}} 
+\index{Multi\+\_\+robot\+\_\+controller@{Multi\+\_\+robot\+\_\+controller}!convert\+Msg@{convert\+Msg}}
+\index{convert\+Msg@{convert\+Msg}!Multi\+\_\+robot\+\_\+controller@{Multi\+\_\+robot\+\_\+controller}}
+\subsubsection{\texorpdfstring{convert\+Msg()}{convertMsg()}\hspace{0.1cm}{\footnotesize\ttfamily [7/14]}}
+{\footnotesize\ttfamily void convert\+Msg (\begin{DoxyParamCaption}\item[{Eigen\+::\+Matrix$<$ double, 7, 1 $>$ \&}]{pose,  }\item[{geometry\+\_\+msgs\+::\+Pose\+Stamped \&}]{msg }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Convert an stamepd pose geometry message to an Eigen pose vector (x, y, z, w, x, y, z) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & Message that holds the pose \\
+\hline
+{\em pose} & Matrix (Vector) the eigen pose vector is stored in \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group__multi__robot__controller_ga7beb50c98e49263d05b3b819be58d76c}\label{group__multi__robot__controller_ga7beb50c98e49263d05b3b819be58d76c}} 
+\index{Multi\+\_\+robot\+\_\+controller@{Multi\+\_\+robot\+\_\+controller}!convert\+Msg@{convert\+Msg}}
+\index{convert\+Msg@{convert\+Msg}!Multi\+\_\+robot\+\_\+controller@{Multi\+\_\+robot\+\_\+controller}}
+\subsubsection{\texorpdfstring{convert\+Msg()}{convertMsg()}\hspace{0.1cm}{\footnotesize\ttfamily [8/14]}}
+{\footnotesize\ttfamily void convert\+Msg (\begin{DoxyParamCaption}\item[{geometry\+\_\+msgs\+::\+Pose \&}]{msg,  }\item[{Eigen\+::\+Matrix$<$ double, 7, 1 $>$ \&}]{pose }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Convert an Eigen pose vector (x, y, z, w, x, y, z) to a pose geometry message. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & Message that the pose is stored in \\
+\hline
+{\em pose} & Matrix (Vector) that holds the pose \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group__multi__robot__controller_gaf1628de186f2d90b064f8c8b36beef53}\label{group__multi__robot__controller_gaf1628de186f2d90b064f8c8b36beef53}} 
+\index{Multi\+\_\+robot\+\_\+controller@{Multi\+\_\+robot\+\_\+controller}!convert\+Msg@{convert\+Msg}}
+\index{convert\+Msg@{convert\+Msg}!Multi\+\_\+robot\+\_\+controller@{Multi\+\_\+robot\+\_\+controller}}
+\subsubsection{\texorpdfstring{convert\+Msg()}{convertMsg()}\hspace{0.1cm}{\footnotesize\ttfamily [9/14]}}
+{\footnotesize\ttfamily void convert\+Msg (\begin{DoxyParamCaption}\item[{geometry\+\_\+msgs\+::\+Pose\+Stamped \&}]{msg,  }\item[{Eigen\+::\+Matrix$<$ double, 7, 1 $>$ \&}]{pose }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Convert an Eigen pose vector (x, y, z, w, x, y, z) to a stamepd pose geometry message. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & Message that the pose is stored in \\
+\hline
+{\em pose} & Matrix (Vector) that holds the pose \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group__multi__robot__controller_ga45b2bbef58d2c60ff8eeb77d221f2ab7}\label{group__multi__robot__controller_ga45b2bbef58d2c60ff8eeb77d221f2ab7}} 
+\index{Multi\+\_\+robot\+\_\+controller@{Multi\+\_\+robot\+\_\+controller}!convert\+Msg@{convert\+Msg}}
+\index{convert\+Msg@{convert\+Msg}!Multi\+\_\+robot\+\_\+controller@{Multi\+\_\+robot\+\_\+controller}}
+\subsubsection{\texorpdfstring{convert\+Msg()}{convertMsg()}\hspace{0.1cm}{\footnotesize\ttfamily [10/14]}}
+{\footnotesize\ttfamily void convert\+Msg (\begin{DoxyParamCaption}\item[{geometry\+\_\+msgs\+::\+Pose \&}]{pose,  }\item[{geometry\+\_\+msgs\+::\+Transform \&}]{transform }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Convert an Eigen pose vector (x, y, z, w, x, y, z) to a transform geometry message. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & Message that the pose is stored in \\
+\hline
+{\em pose} & Matrix (Vector) that holds the pose \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group__multi__robot__controller_gaf99f4d3d714176ee5a3d235ffabb7d3f}\label{group__multi__robot__controller_gaf99f4d3d714176ee5a3d235ffabb7d3f}} 
+\index{Multi\+\_\+robot\+\_\+controller@{Multi\+\_\+robot\+\_\+controller}!convert\+Msg@{convert\+Msg}}
+\index{convert\+Msg@{convert\+Msg}!Multi\+\_\+robot\+\_\+controller@{Multi\+\_\+robot\+\_\+controller}}
+\subsubsection{\texorpdfstring{convert\+Msg()}{convertMsg()}\hspace{0.1cm}{\footnotesize\ttfamily [11/14]}}
+{\footnotesize\ttfamily void convert\+Msg (\begin{DoxyParamCaption}\item[{geometry\+\_\+msgs\+::\+Pose\+Stamped \&}]{pose,  }\item[{geometry\+\_\+msgs\+::\+Transform\+Stamped \&}]{transform\+Stamped }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Convert a stamped transform geometry message to a stamped pose geometry message. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pose} & Stamped pose the pose is stored in \\
+\hline
+{\em transform\+Stamped} & The geometry msgs that holds the transform \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group__multi__robot__controller_ga21e894dfe1e1216355db06776a630b09}\label{group__multi__robot__controller_ga21e894dfe1e1216355db06776a630b09}} 
+\index{Multi\+\_\+robot\+\_\+controller@{Multi\+\_\+robot\+\_\+controller}!convert\+Msg@{convert\+Msg}}
+\index{convert\+Msg@{convert\+Msg}!Multi\+\_\+robot\+\_\+controller@{Multi\+\_\+robot\+\_\+controller}}
+\subsubsection{\texorpdfstring{convert\+Msg()}{convertMsg()}\hspace{0.1cm}{\footnotesize\ttfamily [12/14]}}
+{\footnotesize\ttfamily void convert\+Msg (\begin{DoxyParamCaption}\item[{Eigen\+::\+Matrix$<$ double, 7, 1 $>$ \&}]{pose,  }\item[{geometry\+\_\+msgs\+::\+Transform\+Stamped \&}]{transform\+Stamped }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Convert a stamped transform geometry message to a eigen pose vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pose} & Pose Vector the pose is stored in \\
+\hline
+{\em transform\+Stamped} & The geometry msgs that holds the transform \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group__multi__robot__controller_ga27bedbf17c4aa6e228239ef1f1009e2b}\label{group__multi__robot__controller_ga27bedbf17c4aa6e228239ef1f1009e2b}} 
+\index{Multi\+\_\+robot\+\_\+controller@{Multi\+\_\+robot\+\_\+controller}!convert\+Msg@{convert\+Msg}}
+\index{convert\+Msg@{convert\+Msg}!Multi\+\_\+robot\+\_\+controller@{Multi\+\_\+robot\+\_\+controller}}
+\subsubsection{\texorpdfstring{convert\+Msg()}{convertMsg()}\hspace{0.1cm}{\footnotesize\ttfamily [13/14]}}
+{\footnotesize\ttfamily void convert\+Msg (\begin{DoxyParamCaption}\item[{geometry\+\_\+msgs\+::\+Transform \&}]{transform,  }\item[{geometry\+\_\+msgs\+::\+Pose \&}]{pose }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Convert a geometry pos messag to a geometry transfomr message. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em transform} & Message the transform is stored in \\
+\hline
+{\em pose} & Message that holds the pose \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group__multi__robot__controller_ga83f417b8e164774e4926508549543498}\label{group__multi__robot__controller_ga83f417b8e164774e4926508549543498}} 
+\index{Multi\+\_\+robot\+\_\+controller@{Multi\+\_\+robot\+\_\+controller}!convert\+Msg@{convert\+Msg}}
+\index{convert\+Msg@{convert\+Msg}!Multi\+\_\+robot\+\_\+controller@{Multi\+\_\+robot\+\_\+controller}}
+\subsubsection{\texorpdfstring{convert\+Msg()}{convertMsg()}\hspace{0.1cm}{\footnotesize\ttfamily [14/14]}}
+{\footnotesize\ttfamily void convert\+Msg (\begin{DoxyParamCaption}\item[{geometry\+\_\+msgs\+::\+Transform\+Stamped \&}]{transform,  }\item[{geometry\+\_\+msgs\+::\+Pose\+Stamped \&}]{pose }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Convert a geometry stamped pose message to a stamped transform geometry message. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em transform} & Message the stamped transform is stored in \\
+\hline
+{\em pose} & Message that holds the pose \\
+\hline
+\end{DoxyParams}

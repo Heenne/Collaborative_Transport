@@ -4,6 +4,11 @@
 #include <geometry_msgs/PoseStamped.h>
 #include <geometry_msgs/Twist.h>
 
+/** \addtogroup Input 
+ *  @{
+ */
+
+
 class InputPoseTwist: public InputBase
 {   
     public:

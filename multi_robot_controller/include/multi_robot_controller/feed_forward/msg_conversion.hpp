@@ -9,7 +9,7 @@
 #include<std_msgs/Float64.h>
 
 /** @file */ 
-/** @addtogroup multi_robot_controller
+/** @addtogroup MultiRobotController
  * @{
  */
 

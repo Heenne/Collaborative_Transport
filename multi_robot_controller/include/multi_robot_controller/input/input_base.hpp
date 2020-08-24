@@ -3,6 +3,9 @@
 #include<ros/ros.h>
 #include <tf/tf.h>
 
+/** \addtogroup Input 
+ *  @{
+ */
 
 
 class InputBase

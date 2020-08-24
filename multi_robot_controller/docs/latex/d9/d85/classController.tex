@@ -1,0 +1,45 @@
+\hypertarget{classController}{}\section{Controller Class Reference}
+\label{classController}\index{Controller@{Controller}}
+
+
+Inheritance diagram for Controller\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=310pt]{dc/d30/classController__inherit__graph}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{structController_1_1ControlVector}{Control\+Vector}
+\item 
+struct \hyperlink{structController_1_1State}{State}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classController_a7341f9092e1977cdd2a1492c4422c019}\label{classController_a7341f9092e1977cdd2a1492c4422c019}} 
+{\bfseries Controller} (ros\+::\+Node\+Handle \&nh)
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classController_a190a3955517e39310a4b715a883cbe02}\label{classController_a190a3955517e39310a4b715a883cbe02}} 
+virtual \hyperlink{structController_1_1ControlVector}{Control\+Vector} {\bfseries calc\+Control} (\hyperlink{structController_1_1State}{State} current\+\_\+state, \hyperlink{structController_1_1State}{State} target\+\_\+state)=0
+\item 
+\mbox{\Hypertarget{classController_a95ac558f7a8d570ba4f0ba12182de8c5}\label{classController_a95ac558f7a8d570ba4f0ba12182de8c5}} 
+virtual void {\bfseries publish\+Meta\+Data} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classController_aeb648bc7d97b36f1dcba956fa5aaeec6}\label{classController_aeb648bc7d97b36f1dcba956fa5aaeec6}} 
+ros\+::\+Publisher {\bfseries meta\+\_\+}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/multi\+\_\+robot\+\_\+controller/controller/controller.\+h\item 
+src/controller/controller.\+cpp\end{DoxyCompactItemize}

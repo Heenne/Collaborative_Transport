@@ -2,6 +2,11 @@
 #include<ros/ros.h>
 #include<tf/tf.h>
 
+/** \addtogroup RigidMotion 
+ *  @{
+ */
+
+
 class Constrainedrigid_motionTf:public Constrainedrigid_motionRos{
     public:
         Constrainedrigid_motionTf();

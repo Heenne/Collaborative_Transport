@@ -2,6 +2,9 @@
 #include<exception>
 #include<string>
 
+/** \addtogroup MultiRobotController 
+ *  @{
+ */
 class NecessaryParamException:public std::runtime_error
 {
     public:

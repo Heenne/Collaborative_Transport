@@ -5,7 +5,7 @@
 #include <multi_robot_controller/feed_forward/ros_orientation_feed_forward_base.h>
 #include <multi_robot_controller/feed_forward/msg_conversion.hpp>
 
-/** @addtogroup group_feed_forward
+/** @addtogroup FeedForward
  * @{
  */
 /**

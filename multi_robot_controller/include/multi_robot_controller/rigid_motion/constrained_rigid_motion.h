@@ -2,6 +2,10 @@
 #include<eigen3/Eigen/Geometry>
 #include<vector>
 
+/** \addtogroup RigidMotion 
+ *  @{
+ */
+
 class Constrainedrigid_motion{
 
     public:

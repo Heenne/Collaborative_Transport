@@ -5,7 +5,7 @@
 #include <eigen3/Eigen/Geometry>
 
 
-/** @addtogroup group_feed_forward
+/** @addtogroup FeedForward
  * @{
  */
 /**

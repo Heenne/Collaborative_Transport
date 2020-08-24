@@ -3,6 +3,11 @@
 #include<multi_robot_controller/necessary_param_exeption.hpp>
 #include <nav_msgs/Odometry.h>
 
+/** \addtogroup Input 
+ *  @{
+ */
+
+
 class InputOdom: public InputBase
 {   
     public:

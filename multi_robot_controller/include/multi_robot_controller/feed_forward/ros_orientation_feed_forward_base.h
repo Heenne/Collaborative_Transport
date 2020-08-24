@@ -7,7 +7,7 @@
 #include <tf2_ros/transform_listener.h>
 #include <multi_robot_controller/feed_forward/msg_conversion.hpp>
 
-/** @addtogroup group_feed_forward
+/** @addtogroup FeedForward
  * @{
  */
 /**
