@@ -14,7 +14,9 @@ find_package(
   multi_robot_msgs
   nav_msgs
   roscpp
-  tf  
+  tf       
+  tf2_ros
+  
 )
 find_package(Eigen3 REQUIRED)
 
@@ -127,9 +129,17 @@ include_directories(
 )
 ## Declare a C++ library
 
+macro(generate_dirs dir_name)
+  string(TOUPPER ${dir_name} string_upper)
+  set(${string_upper}_SRC_PATH "src/${dir_name}")
+  set(${string_upper}_INCLUDE_PATH "include/multi_robot_controller/${dir_name}")
+endmacro(generate_dirs)
 
-set(CONTROLLER_SRC_PATH "src/Controller")
-set(CONTROLLER_INCLUDE_PATH "include/multi_robot_controller/Controller")
+
+
+
+
+generate_dirs(controller)
 add_library(controller
 
   ${CONTROLLER_INCLUDE_PATH}/controller.h
@@ -145,8 +155,8 @@ add_dependencies(controller ${catkin_EXPORTED_TARGETS})
 add_dependencies(controller ${PROJECT_NAME}_gencfg)
 
 
-set(RIGID_MOTION_SRC_PATH "src/RigidMotion")
-set(RIGID_MOTION_INCLUDE_PATH "include/multi_robot_controller/RigidMotion")
+
+generate_dirs(rigid_motion)
 add_library(rigid_motion
 
     ${RIGID_MOTION_INCLUDE_PATH}/constrained_rigid_motion.h
@@ -160,16 +170,34 @@ add_library(rigid_motion
 
 )
 
-set(RIGID_MOTION_SRC_PATH "src/Input")
-set(RIGID_MOTION_INCLUDE_PATH "include/multi_robot_controller/Input")
+generate_dirs(input)
 add_library(input
-  ${RIGID_MOTION_INCLUDE_PATH}/input_base.hpp
-  ${RIGID_MOTION_INCLUDE_PATH}/input_odom.hpp
-  ${RIGID_MOTION_INCLUDE_PATH}/input_pose_twist.hpp
-  ${RIGID_MOTION_INCLUDE_PATH}/input_pose_odom.hpp
-  ${RIGID_MOTION_INCLUDE_PATH}/input_types.hpp
+  ${INPUT_INCLUDE_PATH}/input_base.hpp
+  ${INPUT_INCLUDE_PATH}/input_odom.hpp
+  ${INPUT_INCLUDE_PATH}/input_pose_twist.hpp
+  ${INPUT_INCLUDE_PATH}/input_pose_odom.hpp
+  ${INPUT_INCLUDE_PATH}/input_types.hpp
 )
 set_target_properties(input PROPERTIES LINKER_LANGUAGE CXX)
+
+
+generate_dirs(feed_forward)
+add_library(feed_forward
+  ${FEED_FORWARD_INCLUDE_PATH}/msg_conversion.hpp
+
+  ${FEED_FORWARD_INCLUDE_PATH}/orientation_feed_forward.h
+  ${FEED_FORWARD_SRC_PATH}/orientation_feed_forward.cpp 
+
+  ${FEED_FORWARD_INCLUDE_PATH}/ros_orientation_feed_forward_base.h
+  ${FEED_FORWARD_SRC_PATH}/ros_orientation_feed_forward_base.cpp 
+
+  ${FEED_FORWARD_INCLUDE_PATH}/msg_orientation_feed_forward.h
+  ${FEED_FORWARD_SRC_PATH}/msg_orientation_feed_forward.cpp
+
+  ${FEED_FORWARD_INCLUDE_PATH}/tf_orientation_feed_forward.h
+  ${FEED_FORWARD_SRC_PATH}/tf_orientation_feed_forward.cpp
+
+)
 
 add_library(exceptions
   include/${PROJECT_NAME}/necessary_param_exeption.hpp
@@ -181,16 +209,20 @@ set_target_properties(exceptions PROPERTIES LINKER_LANGUAGE CXX)
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
-set(NODES_PATH "src/Nodes")
+set(NODES_PATH "src/nodes")
 add_executable(slave_node ${NODES_PATH}/slave_node.cpp)
 add_executable(master_node ${NODES_PATH}/master_node.cpp)
 add_executable(rigid_transformer ${NODES_PATH}/rigid_transformer.cpp)
+add_executable(feed_forward_msg_node ${NODES_PATH}/feed_forward_msg_node.cpp)
+add_executable(feed_forward_tf_node ${NODES_PATH}/feed_forward_tf_node.cpp)
 
 
 set(TESTS_PATH "tests")
 add_executable(input_test ${TESTS_PATH}/input_test.cpp)
 add_executable(rigid_motion_test ${TESTS_PATH}/rigid_motion_test.cpp)
 add_executable(controller_test ${TESTS_PATH}/controller_test.cpp)
+add_executable(feed_forward_test ${TESTS_PATH}/orientation_feed_forward_test.cpp)
+add_executable(dummie_base_move_broadcaster ${TESTS_PATH}/dummie_base_move_broadcaster.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -209,9 +241,15 @@ target_link_libraries(controller
   ${catkin_LIBRARIES}
   ${eigen3_LIBRARIES}
 )
+
 target_link_libraries(rigid_transformer
   rigid_motion
   input
+  ${catkin_LIBRARIES}
+  ${eigen3_LIBRARIES}
+)
+
+target_link_libraries(feed_forward
   ${catkin_LIBRARIES}
   ${eigen3_LIBRARIES}
 )
@@ -223,14 +261,9 @@ target_link_libraries(rigid_motion
 target_link_libraries(input
   ${catkin_LIBRARIES}
 )
-
-target_link_libraries(slave_node
-  controller
+target_link_libraries(feed_forward
   ${catkin_LIBRARIES}
-)
-target_link_libraries(master_node
-  controller
-  ${catkin_LIBRARIES}
+  ${eigen3_LIBRARIES}
 )
 
 
@@ -249,6 +282,37 @@ target_link_libraries(controller_test
   ${catkin_LIBRARIES}
   controller
 )
+
+target_link_libraries(feed_forward_test
+  feed_forward
+  ${catkin_LIBRARIES}
+  ${eigen3_LIBRARIES}
+)
+target_link_libraries(dummie_base_move_broadcaster
+  ${catkin_LIBRARIES}
+)
+
+target_link_libraries(slave_node
+  controller
+  ${catkin_LIBRARIES}
+)
+target_link_libraries(master_node
+  controller
+  ${catkin_LIBRARIES}
+)
+
+
+target_link_libraries(feed_forward_msg_node
+  feed_forward
+  ${catkin_LIBRARIES}
+  ${eigen3_LIBRARIES}
+)
+target_link_libraries(feed_forward_tf_node
+  feed_forward
+  ${catkin_LIBRARIES}
+  ${eigen3_LIBRARIES}
+)
+
 
 
 

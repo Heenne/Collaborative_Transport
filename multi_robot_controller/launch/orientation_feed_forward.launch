@@ -1,0 +1,26 @@
+<launch>
+<arg name="tf_prefix" default=""/>
+<arg name="type" default="msg"/>
+
+<node pkg="multi_robot_controller" type="feed_forward_$(arg type)_node" name="test_node" output="screen" ns="panda">
+    <param name="update_rate" value="20"/>
+    <param name="pose_topic" value="equilibrium_pose"/>
+
+    <param name="lookup_offset" value="true"/>   
+    <param name="off_source_frame" value="base_link"/>
+    <param name="off_target_frame" value="panda_link0"/>
+    
+    <param name="lookup_initial_pose" value="true"/>
+    <param name="ee_source_frame" value="base_link"/>
+    <param name="ee_target_frame" value="panda_hand"/> 
+
+    <param name="has_initial_orientation" value="true"/>
+    <param name="current_source_frame" value="odom" />
+    <param name="current_target_frame" value="base_link"/>
+   
+    
+    <param name="ee_pose_frame" value="panda_link0"/>
+
+    <param name="tf_prefix" value="$(arg tf_prefix)"/>
+</node>
+</launch>

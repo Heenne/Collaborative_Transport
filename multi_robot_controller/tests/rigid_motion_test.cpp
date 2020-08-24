@@ -1,9 +1,9 @@
-#include <multi_robot_controller/RigidMotion/constrained_rigid_motion.h>
+#include <multi_robot_controller/rigid_motion/constrained_rigid_motion.h>
 #include <iostream>
 
 int main(int argc,char** argv)
 {
-    ConstrainedRigidMotion motion(Eigen::Vector3d(0.0,1.0,0.0));
+    Constrainedrigid_motion motion(Eigen::Vector3d(0.0,1.0,0.0));
     double time=0.0;
     double omega=0.1;
     while(time<10.0)
