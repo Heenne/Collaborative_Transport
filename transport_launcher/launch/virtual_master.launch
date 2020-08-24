@@ -35,6 +35,10 @@
     
     <node name="referencing_handler" pkg="transport_launcher" type="drive_slave_to_reference.py"  output="screen">
       <remap from="/master_pose_stamped" to="master_pose"/>
+      <param name="master_namespace" value="/virtual_master"/>
+      <rosparam param="slave_namespaces">["/mur/mir","/miranda/mir"]</rosparam> 
+      <rosparam param="/mur/mir/reference">[0.0,0.7,0.0]</rosparam>   
+      <rosparam param="/miranda/mir/reference">[0.0,-0.7,0.0]</rosparam>      
     </node>
   </group>
   
