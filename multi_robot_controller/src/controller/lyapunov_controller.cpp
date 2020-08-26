@@ -24,15 +24,34 @@ LyapunovController::LyapunovController(ros::NodeHandle &nh):Controller(nh)
 Controller::ControlVector LyapunovController::calcControl(State current_state ,State target_state)
 {
     double omega=target_state.ang_vel.z();
-    // double v=sqrt(pow(target_state.lin_vel.x(),2)+pow(target_state.lin_vel.y(),2)); 
-    double v=(target_state.pose.getRotation().inverse()*target_state.lin_vel).x();
+    double v=sqrt(pow(target_state.lin_vel.x(),2)+pow(target_state.lin_vel.y(),2)); 
     
     tf::Transform control_dif=current_state.pose.inverseTimes(target_state.pose);
     
     double x=control_dif.getOrigin().getX();
-    double y=control_dif.getOrigin().getY();
+    double y=control_dif.getOrigin().getY();    
+  
     double phi=tf::getYaw(control_dif.getRotation());
-
+    ROS_INFO_STREAM("Raw: "<<phi);
+    if(phi>=M_PI_2)
+    {
+        phi-=M_PI;
+        v=-v;
+        ROS_INFO_STREAM("Quadrant 2: "<<phi);       
+    }
+    else if( phi<=-M_PI_2)
+    {
+        
+        phi=phi+M_PI;
+        v=-v;
+        ROS_INFO_STREAM("Quadrant 3: "<<phi);
+        
+    }    
+   
+    control_dif.setRotation(tf::createQuaternionFromYaw(phi));
+    this->control_diff_.pose=control_dif;
+    this->control_diff_.lin_vel=target_state.lin_vel-current_state.lin_vel;
+    this->control_diff_.ang_vel=target_state.lin_vel-current_state.lin_vel;
 
     ControlVector output;
     output.v=this->parameter_.kx*x+v*cos(phi);
