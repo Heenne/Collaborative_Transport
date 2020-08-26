@@ -1,8 +1,10 @@
 from functools import partial 
 import rospy
+
 import smach
 import smach_ros
-import States as st
+
+import MoveStates as st
 import actionlib
 from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
 
