@@ -77,13 +77,19 @@ class InputPoseOdom: public InputBase
         }
 
         inline void set(nav_msgs::Odometry msg)
-        {this->setAngVel(msg);this->setLinVel(msg);this->time_=msg.header.stamp;}
+        {
+            this->setAngVel(msg);this->setLinVel(msg);
+            this->time_=msg.header.stamp;
+        }
        
         inline void setPose(geometry_msgs::PoseStamped msg) 
         {tf::poseMsgToTF(msg.pose,this->pose_);}
         
         inline void setLinVel(nav_msgs::Odometry msg) 
-        {tf::vector3MsgToTF(msg.twist.twist.linear,this->lin_vel_);}
+        {
+            tf::vector3MsgToTF(msg.twist.twist.linear,this->lin_vel_);
+            this->lin_vel_=tf::Transform(this->pose_.getRotation(),tf::Vector3(0.0,0.0,0.0))*this->lin_vel_;
+        }
        
         inline void setAngVel(nav_msgs::Odometry msg) 
         {tf::vector3MsgToTF(msg.twist.twist.angular,this->ang_vel_);}
