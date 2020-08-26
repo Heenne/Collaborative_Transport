@@ -1,7 +1,7 @@
 <launch>
  <!-- Load the formation parameter file-->
   
-  <include file="$(find miranda_hardware_helper)/launch/miranda.launch"/>
+  <include file="$(find miranda_hardware_helper)/launch/miranda_move_base.launch"/>
   <include file="$(find multi_robot_controller)/launch/slave.launch" ns="miranda/mir">
     <arg name="config_file" value="$(find transport_launcher)/config/miranda_slave.yaml"/>
   </include>

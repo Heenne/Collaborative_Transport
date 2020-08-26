@@ -33,11 +33,11 @@
 
     <node name="fake_mir_joint_publisher" pkg="mir_driver" type="fake_mir_joint_publisher.py" output="screen" />
     
-    <node name="referencing_handler" pkg="transport_launcher" type="drive_slave_to_reference.py"  output="screen">
+    <!-- <node name="referencing_handler" pkg="transport_launcher" type="drive_slave_to_reference.py"  output="screen">
       <remap from="/master_pose" to="/mur/mir/robot_pose_stamped"/>
       <param name="master_namespace" value="/virtual_master"/>
       <rosparam param="slave_namespaces">["/mur/mir","/miranda/mir"]</rosparam> 
-    </node>
+    </node> -->
   </group>
   
 </launch>
