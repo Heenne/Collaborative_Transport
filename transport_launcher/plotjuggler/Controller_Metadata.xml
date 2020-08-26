@@ -1,0 +1,191 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<root version="2.3.8">
+ <tabbed_widget parent="main_window" name="Main Window">
+  <plotmatrix columns="1" tab_name="Poses" rows="2">
+   <plot style="Lines" col="0" row="0">
+    <range left="-3.883516" right="9.757863" top="6.904088" bottom="1.761905"/>
+    <limitY/>
+    <curve curve_x="/miranda/mir/slave_controller/meta_data/current/pose/pose/position/x" R="148" curve_y="/miranda/mir/slave_controller/meta_data/current/pose/pose/position/y" B="189" name="/miranda/mir/slave_controller/meta_data/current/pose/pose/position/[x;y]" G="103" custom_transform="XYPlot"/>
+    <curve curve_x="/miranda/mir/slave_controller/meta_data/target/pose/pose/position/x" R="241" curve_y="/miranda/mir/slave_controller/meta_data/target/pose/pose/position/y" B="193" name="/miranda/mir/slave_controller/meta_data/target/pose/pose/position/[x;y]" G="76" custom_transform="XYPlot"/>
+    <curve curve_x="/virtual_master/master_pose/position/x" R="23" curve_y="/virtual_master/master_pose/position/y" B="207" name="/virtual_master/master_pose/position/[x;y]" G="190" custom_transform="XYPlot"/>
+    <transform value="XYPlot"/>
+   </plot>
+   <plot style="Lines" col="0" row="1">
+    <range left="-28.122428" right="-18.154684" top="1.632260" bottom="-1.628729"/>
+    <limitY/>
+    <curve R="31" B="180" name="/miranda/mir/slave_controller/meta_data/current/angle" G="119" custom_transform="noTransform"/>
+    <curve R="214" B="40" name="/miranda/mir/slave_controller/meta_data/target/angle" G="39" custom_transform="noTransform"/>
+    <transform value="noTransform"/>
+   </plot>
+  </plotmatrix>
+  <plotmatrix columns="1" tab_name="Velocities" rows="3">
+   <plot style="Lines" col="0" row="0">
+    <range left="-28.122428" right="-18.154684" top="0.100000" bottom="-0.100000"/>
+    <limitY/>
+    <curve R="148" B="189" name="/miranda/mir/slave_controller/meta_data/current/lin_vel/x" G="103" custom_transform="noTransform"/>
+    <curve R="26" B="56" name="/miranda/mir/slave_controller/meta_data/target/lin_vel/x" G="201" custom_transform="noTransform"/>
+    <transform value="noTransform"/>
+   </plot>
+   <plot style="Lines" col="0" row="1">
+    <range left="-28.122428" right="-18.154684" top="0.100000" bottom="-0.100000"/>
+    <limitY/>
+    <curve R="23" B="207" name="/miranda/mir/slave_controller/meta_data/current/lin_vel/y" G="190" custom_transform="noTransform"/>
+    <curve R="255" B="14" name="/miranda/mir/slave_controller/meta_data/target/lin_vel/y" G="127" custom_transform="noTransform"/>
+    <transform value="noTransform"/>
+   </plot>
+   <plot style="Lines" col="0" row="2">
+    <range left="-28.122428" right="-18.154684" top="0.100000" bottom="-0.100000"/>
+    <limitY/>
+    <curve R="188" B="34" name="/miranda/mir/slave_controller/meta_data/current/ang_vel/z" G="189" custom_transform="noTransform"/>
+    <curve R="241" B="193" name="/miranda/mir/slave_controller/meta_data/target/ang_vel/z" G="76" custom_transform="noTransform"/>
+    <transform value="noTransform"/>
+   </plot>
+  </plotmatrix>
+  <plotmatrix columns="1" tab_name="Differences" rows="3">
+   <plot style="Lines" col="0" row="0">
+    <range left="-28.122428" right="-18.154684" top="4.893827" bottom="4.693827"/>
+    <limitY/>
+    <curve R="255" B="14" name="/miranda/mir/slave_controller/meta_data/diff/pose/pose/position/x" G="127" custom_transform="noTransform"/>
+    <transform value="noTransform"/>
+   </plot>
+   <plot style="Lines" col="0" row="1">
+    <range left="-28.122428" right="-18.154684" top="-5.198369" bottom="-5.398369"/>
+    <limitY/>
+    <curve R="241" B="193" name="/miranda/mir/slave_controller/meta_data/diff/pose/pose/position/y" G="76" custom_transform="noTransform"/>
+    <transform value="noTransform"/>
+   </plot>
+   <plot style="Lines" col="0" row="2">
+    <range left="-28.122428" right="-18.154684" top="3.205704" bottom="3.005704"/>
+    <limitY/>
+    <curve R="26" B="56" name="/miranda/mir/slave_controller/meta_data/diff/angle" G="201" custom_transform="noTransform"/>
+    <transform value="noTransform"/>
+   </plot>
+  </plotmatrix>
+  <plotmatrix columns="2" tab_name="Master" rows="3">
+   <plot style="Lines" col="0" row="0">
+    <range left="0.032642" right="5.626079" top="0.135781" bottom="-0.064219"/>
+    <limitY/>
+    <curve R="188" B="34" name="/virtual_master/master_pose/position/x" G="189" custom_transform="noTransform"/>
+    <transform value="noTransform"/>
+   </plot>
+   <plot style="Lines" col="0" row="1">
+    <range left="0.032642" right="5.626079" top="1.994045" bottom="1.794045"/>
+    <limitY/>
+    <curve R="31" B="180" name="/virtual_master/master_pose/position/y" G="119" custom_transform="noTransform"/>
+    <transform value="noTransform"/>
+   </plot>
+   <plot style="Lines" col="0" row="2">
+    <range left="0.032642" right="5.626079" top="89.172989" bottom="88.972989"/>
+    <limitY/>
+    <curve R="214" B="40" name="/virtual_master/master_pose/orientation/yaw_deg" G="39" custom_transform="noTransform"/>
+    <transform value="noTransform"/>
+   </plot>
+   <plot style="Lines" col="1" row="0">
+    <range left="0.025432" right="5.625349" top="0.100000" bottom="-0.100000"/>
+    <limitY/>
+    <curve R="26" B="56" name="/virtual_master/master_velocity/linear/x" G="201" custom_transform="noTransform"/>
+    <transform value="noTransform"/>
+   </plot>
+   <plot style="Lines" col="1" row="1">
+    <range left="0.025432" right="5.625349" top="0.100000" bottom="-0.100000"/>
+    <limitY/>
+    <curve R="255" B="14" name="/virtual_master/master_velocity/linear/y" G="127" custom_transform="noTransform"/>
+    <transform value="noTransform"/>
+   </plot>
+   <plot style="Lines" col="1" row="2">
+    <range left="0.025432" right="5.625349" top="0.100000" bottom="-0.100000"/>
+    <limitY/>
+    <curve R="148" B="189" name="/virtual_master/master_velocity/angular/z" G="103" custom_transform="noTransform"/>
+    <transform value="noTransform"/>
+   </plot>
+  </plotmatrix>
+  <plotmatrix columns="1" tab_name="plot" rows="3">
+   <plot style="Lines" col="0" row="0">
+    <range left="-12.174532" right="-2.274115" top="0.100000" bottom="-0.100000"/>
+    <limitY/>
+    <curve R="26" B="56" name="/virtual_master/master_velocity/linear/x" G="201" custom_transform="noTransform"/>
+    <transform value="noTransform"/>
+   </plot>
+   <plot style="Lines" col="0" row="1">
+    <range left="-12.174532" right="-2.274115" top="0.100000" bottom="-0.100000"/>
+    <limitY/>
+    <curve R="255" B="14" name="/virtual_master/master_velocity/linear/y" G="127" custom_transform="noTransform"/>
+    <transform value="noTransform"/>
+   </plot>
+   <plot style="Lines" col="0" row="2">
+    <range left="-12.174532" right="-2.274115" top="0.100000" bottom="-0.100000"/>
+    <limitY/>
+    <curve R="148" B="189" name="/virtual_master/master_velocity/angular/z" G="103" custom_transform="noTransform"/>
+    <transform value="noTransform"/>
+   </plot>
+  </plotmatrix>
+  <currentPlotMatrix index="3"/>
+ </tabbed_widget>
+ <use_relative_time_offset enabled="1"/>
+ <!-- - - - - - - - - - - - - - - -->
+ <!-- - - - - - - - - - - - - - - -->
+ <Plugins>
+  <plugin ID="DataLoad CSV">
+   <default time_axis=""/>
+  </plugin>
+  <plugin ID="DataLoad ROS bags">
+   <use_header_stamp value="false"/>
+   <use_renaming_rules value="true"/>
+   <discard_large_arrays value="true"/>
+   <max_array_size value="100"/>
+  </plugin>
+  <plugin ID="DataLoad ULog"/>
+  <plugin ID="ROS Topic Subscriber">
+   <use_header_stamp value="false"/>
+   <use_renaming_rules value="true"/>
+   <discard_large_arrays value="true"/>
+   <max_array_size value="100"/>
+  </plugin>
+  <plugin status="idle" ID="ROS /rosout Visualization"/>
+  <plugin status="idle" ID="ROS Topic Re-Publisher"/>
+ </Plugins>
+ <!-- - - - - - - - - - - - - - - -->
+ <previouslyLoaded_Datafiles/>
+ <previouslyLoaded_Streamer name="ROS Topic Subscriber"/>
+ <!-- - - - - - - - - - - - - - - -->
+ <customMathEquations/>
+ <snippets>
+  <snippet language="JS" name="1st_derivative">
+   <global>var prevX = 0
+var prevY = 0</global>
+   <equation>dx = time - prevX
+dy = value - prevY
+prevX = time
+prevY = value
+
+return dy/dx</equation>
+  </snippet>
+  <snippet language="JS" name="1st_order_lowpass">
+   <global>var prevY = 0
+var alpha = 0.1</global>
+   <equation>prevY = alpha * value + (1.-alpha) * prevY
+
+return prevY</equation>
+  </snippet>
+  <snippet language="JS" name="sum_A_B">
+   <global></global>
+   <equation>return $$PLOT_A$$ + $$PLOT_B$$</equation>
+  </snippet>
+  <snippet language="JS" name="yaw_from_quaternion">
+   <global>// source: https://en.wikipedia.org/wiki/Conversion_between_quaternions_and_Euler_angles
+
+function quaternionToYaw(x, y, z, w)
+{
+  // yaw (z-axis rotation)
+  t1 = 2.0 * (w * z + x * y);
+  t2 = 1.0 - 2.0 * (y * y + z * z);
+  yaw = Math.atan2(t1, t2);
+
+  return yaw
+}</global>
+   <equation>return quaternionToYaw(x, y, z, w);</equation>
+  </snippet>
+ </snippets>
+ <!-- - - - - - - - - - - - - - - -->
+</root>
+
