@@ -9,12 +9,48 @@
 class Constrainedrigid_motion{
 
     public:
+        /**
+         * @brief Construct a new Constrainedrigid_motion object
+         * 
+         */
         Constrainedrigid_motion();
+        /**
+         * @brief Construct a new Constrainedrigid_motion object with given refrence vector
+         * 
+         * @param reference 3D Vector that describes the x,y,phi offset from point to transformed point
+         */
         Constrainedrigid_motion(Eigen::Vector3d reference);
+        /**
+         * @brief Update procedure for the motion states
+         * 
+         * @param state State representation of the source
+         * @param d_state Velocities (state derivatives) of the  source
+         * @param time Timestamp, the update was procceded at (important for numerical derivatives)
+         */
         void updateInputState(Eigen::Vector3d state,Eigen::Vector3d d_state,double time);
+        /**
+         * @brief Get the Velocities of the destination
+         * 
+         * @return Eigen::Vector3d Velocities (state derivatives) of the destination
+         */
         Eigen::Vector3d getDiffState();
+        /**
+         * @brief Get the State of destination
+         * 
+         * @return Eigen::Vector3d State vector of the destination
+         */
         Eigen::Vector3d getState();
+        /**
+         * @brief Set the reference from source to destination
+         * 
+         * @param ref x,y,phi representation of the reference
+         */
         void setReference(Eigen::Vector3d ref);
+        /**
+         * @brief Create a differential drive locking matrix
+         * 
+         * @return Eigen::Matrix3d differential drive locking matrix
+         */
         static Eigen::Matrix3d createDiffDriveLocking();
     private:
         void init();
