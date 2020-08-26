@@ -101,6 +101,7 @@ class Controller
          */
         virtual void publishMetaData();
         ros::Publisher meta_;
+        State control_diff_;
     
     private:
         bool enableCallback(std_srvs::EmptyRequest &req,std_srvs::EmptyRequest &res);

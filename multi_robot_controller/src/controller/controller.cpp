@@ -155,25 +155,27 @@ void Controller::publishMetaData()
 {
     multi_robot_msgs::State current_state_msg;
     tf::poseTFToMsg(this->current_state_.pose,current_state_msg.pose.pose);
-    current_state_msg.pose.header.stamp=this->current_state_handler_->getTime();
+    // current_state_msg.pose.header.stamp=this->current_state_handler_->getTime();
+    current_state_msg.pose.header.stamp=ros::Time::now();
     tf::vector3TFToMsg(this->current_state_.lin_vel,current_state_msg.lin_vel);
     tf::vector3TFToMsg(this->current_state_.ang_vel,current_state_msg.ang_vel);
+    current_state_msg.angle=tf::getYaw(this->current_state_.pose.getRotation());
 
     multi_robot_msgs::State target_state_msg;
     tf::poseTFToMsg(this->target_state_.pose,target_state_msg.pose.pose);
-    target_state_msg.pose.header.stamp=this->target_state_handler_->getTime();
+    // target_state_msg.pose.header.stamp=this->target_state_handler_->getTime();
+    target_state_msg.pose.header.stamp=ros::Time::now();
     tf::vector3TFToMsg(this->target_state_.lin_vel,target_state_msg.lin_vel);
     tf::vector3TFToMsg(this->target_state_.ang_vel,target_state_msg.ang_vel);
+    target_state_msg.angle=tf::getYaw(this->target_state_.pose.getRotation());
+
 
     multi_robot_msgs::State diff_msg;
-    State diff_state(   this->target_state_.pose.inverseTimes(this->current_state_.pose),
-                        this->target_state_.lin_vel-this->current_state_.lin_vel,
-                        this->target_state_.ang_vel-this->current_state_.ang_vel);
-    
-    tf::poseTFToMsg(diff_state.pose,diff_msg.pose.pose);
+    tf::poseTFToMsg(this->control_diff_.pose,diff_msg.pose.pose);
     // target_state_msg.pose.header.stamp=ros::Time((this->target_state_handler_->getTime()-this->current_state_handler_->getTime()).toSec());
-    tf::vector3TFToMsg(diff_state.lin_vel,diff_msg.lin_vel);
-    tf::vector3TFToMsg(diff_state.ang_vel,diff_msg.ang_vel);
+    tf::vector3TFToMsg(this->control_diff_.lin_vel,diff_msg.lin_vel);
+    tf::vector3TFToMsg(this->control_diff_.ang_vel,diff_msg.ang_vel);
+    diff_msg.angle=tf::getYaw(this->control_diff_.pose.getRotation());
 
 
     multi_robot_msgs::MetaData msg;
