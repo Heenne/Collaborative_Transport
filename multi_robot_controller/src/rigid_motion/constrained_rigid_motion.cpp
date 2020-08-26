@@ -49,8 +49,8 @@ void Constrainedrigid_motion::updateInputState(Eigen::Vector3d state,Eigen::Vect
     this->angular_tensor_(1,0)=this->d_state_in_(2);
     
     calcUnConstrained();
-    // calcConstrains();
-    // applyConstrains();
+    calcConstrains();
+    applyConstrains();
     this->initial_call_=false;
 }
 Eigen::Vector3d Constrainedrigid_motion::getState()
@@ -66,17 +66,21 @@ void Constrainedrigid_motion::calcConstrains()
 {
     Eigen::Vector3d constrain_old=this->constrain_;
     double d_time=(this->time_new_-this->time_old_);
+
     if(!d_time==0.0 &&!this->initial_call_)
     {
-        if(this->d_state_out_(0)!=0.0)
+        if(std::sqrt(std::pow(this->d_state_out_(0),2)+std::pow(this->d_state_out_(1),2))<0.05 )
         {
-            this->constrain_<<0.0,0.0,std::atan2(this->d_state_out_(1),this->d_state_out_(0));
+            
+            this->constrain_<<0.0,0.0,this->state_in_(2)+this->reference_(2);
         }
         else
         {
-            this->constrain_<<0.0,0.0,0.0;
-        }
-        this->d_constrain_=(this->constrain_-constrain_old)/d_time;
+            double angle_calc=std::atan2(this->d_state_out_(1),this->d_state_out_(0));
+            this->constrain_<<0.0,0.0,angle_calc;            
+        };
+        // this->d_constrain_=(this->constrain_-constrain_old)/d_time;
+        this->d_constrain_<<0.0,0.0,this->d_state_in_(2);
     }
     this->time_old_=this->time_new_;
 }
@@ -89,14 +93,15 @@ void Constrainedrigid_motion::calcUnConstrained()
     //Add the reference angle
     this->state_out_(2)=this->state_in_(2)+this->reference_(2);
     //rotate the velocities
-    this->d_state_out_=(this->d_state_in_+this->angular_tensor_*rot_ref);
+    this->d_state_out_=(this->d_state_in_+this->rotation_*this->angular_tensor_*this->reference_);
    
 }
 
 void Constrainedrigid_motion::applyConstrains()
 {
-    this->d_state_out_=this->locking_*this->d_state_out_+this->d_constrain_;
     this->state_out_=this->locking_*this->state_out_+this->constrain_;
+    this->d_state_out_=this->locking_*this->d_state_out_+this->d_constrain_;
+    
 }
 
 Eigen::Matrix3d Constrainedrigid_motion::createDiffDriveLocking()
