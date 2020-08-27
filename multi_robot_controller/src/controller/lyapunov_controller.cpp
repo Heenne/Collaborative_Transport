@@ -32,19 +32,16 @@ Controller::ControlVector LyapunovController::calcControl(State current_state ,S
     double y=control_dif.getOrigin().getY();    
   
     double phi=tf::getYaw(control_dif.getRotation());
-    ROS_INFO_STREAM("Raw: "<<phi);
     if(phi>=M_PI_2)
     {
         phi-=M_PI;
-        v=-v;
-        ROS_INFO_STREAM("Quadrant 2: "<<phi);       
+        v=-v;    
     }
     else if( phi<=-M_PI_2)
     {
         
         phi=phi+M_PI;
         v=-v;
-        ROS_INFO_STREAM("Quadrant 3: "<<phi);
         
     }    
    
