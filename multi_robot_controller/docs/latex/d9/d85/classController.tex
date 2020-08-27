@@ -9,34 +9,92 @@ Inheritance diagram for Controller\+:\nopagebreak
 \includegraphics[width=310pt]{dc/d30/classController__inherit__graph}
 \end{center}
 \end{figure}
+
+
+Collaboration diagram for Controller\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=181pt]{dd/d93/classController__coll__graph}
+\end{center}
+\end{figure}
 \subsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
 struct \hyperlink{structController_1_1ControlVector}{Control\+Vector}
-\item 
+\begin{DoxyCompactList}\small\item\em Defines the controllers output. \end{DoxyCompactList}\item 
 struct \hyperlink{structController_1_1State}{State}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Defines the state representations within the \hyperlink{classController}{Controller}. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classController_a7341f9092e1977cdd2a1492c4422c019}\label{classController_a7341f9092e1977cdd2a1492c4422c019}} 
-{\bfseries Controller} (ros\+::\+Node\+Handle \&nh)
-\end{DoxyCompactItemize}
+\mbox{\Hypertarget{classController_a95c56822d667e94b031451729ce069a9}\label{classController_a95c56822d667e94b031451729ce069a9}} 
+\hyperlink{classController_a95c56822d667e94b031451729ce069a9}{Controller} ()
+\begin{DoxyCompactList}\small\item\em Construct a new \hyperlink{classController}{Controller} object. \end{DoxyCompactList}\item 
+\hyperlink{classController_a7341f9092e1977cdd2a1492c4422c019}{Controller} (ros\+::\+Node\+Handle \&nh)
+\begin{DoxyCompactList}\small\item\em Construct a new \hyperlink{classController}{Controller} object with given Nodehandle. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classController_a0ab87934c4f7a266cfdb86e0f36bc1b5}\label{classController_a0ab87934c4f7a266cfdb86e0f36bc1b5}} 
+\hyperlink{classController_a0ab87934c4f7a266cfdb86e0f36bc1b5}{$\sim$\+Controller} ()
+\begin{DoxyCompactList}\small\item\em Destroy the \hyperlink{classController}{Controller} object. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-\mbox{\Hypertarget{classController_a190a3955517e39310a4b715a883cbe02}\label{classController_a190a3955517e39310a4b715a883cbe02}} 
-virtual \hyperlink{structController_1_1ControlVector}{Control\+Vector} {\bfseries calc\+Control} (\hyperlink{structController_1_1State}{State} current\+\_\+state, \hyperlink{structController_1_1State}{State} target\+\_\+state)=0
-\item 
+virtual \hyperlink{structController_1_1ControlVector}{Control\+Vector} \hyperlink{classController_a190a3955517e39310a4b715a883cbe02}{calc\+Control} (\hyperlink{structController_1_1State}{State} current\+\_\+state, \hyperlink{structController_1_1State}{State} target\+\_\+state)=0
+\begin{DoxyCompactList}\small\item\em Control law fucntion. Determines the control vector by a given current and target state. Is implemented in derived Classes. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{classController_a95ac558f7a8d570ba4f0ba12182de8c5}\label{classController_a95ac558f7a8d570ba4f0ba12182de8c5}} 
-virtual void {\bfseries publish\+Meta\+Data} ()
-\end{DoxyCompactItemize}
+virtual void \hyperlink{classController_a95ac558f7a8d570ba4f0ba12182de8c5}{publish\+Meta\+Data} ()
+\begin{DoxyCompactList}\small\item\em Publishes the meta data of the controller. Thes are e.\+g. the current and target states and the control differences. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Protected Attributes}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{classController_aeb648bc7d97b36f1dcba956fa5aaeec6}\label{classController_aeb648bc7d97b36f1dcba956fa5aaeec6}} 
 ros\+::\+Publisher {\bfseries meta\+\_\+}
+\item 
+\mbox{\Hypertarget{classController_a454701a403066ee2b8c24bd61268655e}\label{classController_a454701a403066ee2b8c24bd61268655e}} 
+\hyperlink{structController_1_1State}{State} {\bfseries control\+\_\+diff\+\_\+}
 \end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classController_a7341f9092e1977cdd2a1492c4422c019}\label{classController_a7341f9092e1977cdd2a1492c4422c019}} 
+\index{Controller@{Controller}!Controller@{Controller}}
+\index{Controller@{Controller}!Controller@{Controller}}
+\subsubsection{\texorpdfstring{Controller()}{Controller()}}
+{\footnotesize\ttfamily Controller\+::\+Controller (\begin{DoxyParamCaption}\item[{ros\+::\+Node\+Handle \&}]{nh }\end{DoxyParamCaption})}
+
+
+
+Construct a new \hyperlink{classController}{Controller} object with given Nodehandle. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nh} & Nodehandle for resolving topics \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classController_a190a3955517e39310a4b715a883cbe02}\label{classController_a190a3955517e39310a4b715a883cbe02}} 
+\index{Controller@{Controller}!calc\+Control@{calc\+Control}}
+\index{calc\+Control@{calc\+Control}!Controller@{Controller}}
+\subsubsection{\texorpdfstring{calc\+Control()}{calcControl()}}
+{\footnotesize\ttfamily virtual \hyperlink{structController_1_1ControlVector}{Control\+Vector} Controller\+::calc\+Control (\begin{DoxyParamCaption}\item[{\hyperlink{structController_1_1State}{State}}]{current\+\_\+state,  }\item[{\hyperlink{structController_1_1State}{State}}]{target\+\_\+state }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+
+
+
+Control law fucntion. Determines the control vector by a given current and target state. Is implemented in derived Classes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em current\+\_\+state} & Current state of the controlled robot. \\
+\hline
+{\em target\+\_\+state} & \hyperlink{structController_1_1State}{State} of the mobile robot to be reached. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{structController_1_1ControlVector}{Control\+Vector} Commands to gain the target state from current state 
+\end{DoxyReturn}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
