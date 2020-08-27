@@ -1,11 +1,11 @@
 #include<multi_robot_controller/rigid_motion/constrained_rigid_motion_tf.h>
 
-Constrainedrigid_motionTf::Constrainedrigid_motionTf():Constrainedrigid_motionRos()
+ConstrainedRigidMotionTf::ConstrainedRigidMotionTf():ConstrainedRigidMotionRos()
 {
 
 }
 
-void Constrainedrigid_motionTf::updateInputState(tf::Pose pose,tf::Vector3 lin_vel, tf::Vector3 ang_vel,double time)
+void ConstrainedRigidMotionTf::updateInputState(tf::Pose pose,tf::Vector3 lin_vel, tf::Vector3 ang_vel,double time)
 {
     //convert input states to eigen state vectors for the rigid motion
     //For state  

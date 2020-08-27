@@ -1,19 +1,19 @@
 #include<multi_robot_controller/rigid_motion/constrained_rigid_motion.h>
 #include<iostream>
 
-Constrainedrigid_motion::Constrainedrigid_motion()
+ConstrainedRigidMotion::ConstrainedRigidMotion()
 {
     this->init();
 }
-Constrainedrigid_motion::Constrainedrigid_motion(Eigen::Vector3d reference)
+ConstrainedRigidMotion::ConstrainedRigidMotion(Eigen::Vector3d reference)
 {    
     this->init();
     this->setReference(reference);
    
 }
-void Constrainedrigid_motion::init()
+void ConstrainedRigidMotion::init()
 {
-    this->locking_=Constrainedrigid_motion::createDiffDriveLocking();
+    this->locking_=ConstrainedRigidMotion::createDiffDriveLocking();
    
     this->state_in_=Eigen::Vector3d::Zero();
     this->d_state_in_=Eigen::Vector3d::Zero();
@@ -30,12 +30,12 @@ void Constrainedrigid_motion::init()
     this->time_new_=this->time_old_;
     this->initial_call_=true;  
 }
-void Constrainedrigid_motion::setReference(Eigen::Vector3d ref)
+void ConstrainedRigidMotion::setReference(Eigen::Vector3d ref)
 {
     this->reference_=ref;
 }
 
-void Constrainedrigid_motion::updateInputState(Eigen::Vector3d state,Eigen::Vector3d d_state,double time)
+void ConstrainedRigidMotion::updateInputState(Eigen::Vector3d state,Eigen::Vector3d d_state,double time)
 {
 
     this->time_new_=time;
@@ -53,16 +53,16 @@ void Constrainedrigid_motion::updateInputState(Eigen::Vector3d state,Eigen::Vect
     applyConstrains();
     this->initial_call_=false;
 }
-Eigen::Vector3d Constrainedrigid_motion::getState()
+Eigen::Vector3d ConstrainedRigidMotion::getState()
 {
     return this->state_out_;
 }
-Eigen::Vector3d Constrainedrigid_motion::getDiffState()
+Eigen::Vector3d ConstrainedRigidMotion::getDiffState()
 {
     return this->d_state_out_;
 }
 
-void Constrainedrigid_motion::calcConstrains()
+void ConstrainedRigidMotion::calcConstrains()
 {
     Eigen::Vector3d constrain_old=this->constrain_;
     double d_time=(this->time_new_-this->time_old_);
@@ -85,7 +85,7 @@ void Constrainedrigid_motion::calcConstrains()
     this->time_old_=this->time_new_;
 }
 
-void Constrainedrigid_motion::calcUnConstrained()
+void ConstrainedRigidMotion::calcUnConstrained()
 {
     //Rotate the reference position
     Eigen::Vector3d rot_ref=this->rotation_*Eigen::Vector3d(this->reference_(0),this->reference_(1),0.0);
@@ -97,14 +97,14 @@ void Constrainedrigid_motion::calcUnConstrained()
    
 }
 
-void Constrainedrigid_motion::applyConstrains()
+void ConstrainedRigidMotion::applyConstrains()
 {
     this->state_out_=this->locking_*this->state_out_+this->constrain_;
     this->d_state_out_=this->locking_*this->d_state_out_+this->d_constrain_;
     
 }
 
-Eigen::Matrix3d Constrainedrigid_motion::createDiffDriveLocking()
+Eigen::Matrix3d ConstrainedRigidMotion::createDiffDriveLocking()
 {
     Eigen::Matrix3d locking;
     locking=Eigen::Matrix3d::Identity();

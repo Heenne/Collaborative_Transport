@@ -7,10 +7,10 @@
  */
 
 
-class Constrainedrigid_motionTf:public Constrainedrigid_motionRos{
+class ConstrainedRigidMotionTf:public ConstrainedRigidMotionRos{
     public:
-        Constrainedrigid_motionTf();
+        ConstrainedRigidMotionTf();
         void updateInputState(tf::Pose pose,tf::Vector3 lin_vel, tf::Vector3 ang_vel,double time);
-        using Constrainedrigid_motion::updateInputState;
+        using ConstrainedRigidMotion::updateInputState;
     private:
 };

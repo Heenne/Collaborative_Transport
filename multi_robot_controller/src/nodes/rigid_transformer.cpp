@@ -24,7 +24,7 @@ int main(int argc, char** argv)
     ros::Rate rate(10);
     while (ros::ok())
     {
-        Constrainedrigid_motionTf rigid;
+        ConstrainedRigidMotionTf rigid;
         rigid.updateInputState(input->getPose(),input->getLinVel(),input->getAngVel(),input->getTime().toSec());
          
         geometry_msgs::PoseStamped pose_transformed;

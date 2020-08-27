@@ -6,20 +6,20 @@
  *  @{
  */
 
-class Constrainedrigid_motion{
+class ConstrainedRigidMotion{
 
     public:
         /**
-         * @brief Construct a new Constrainedrigid_motion object
+         * @brief Construct a new ConstrainedRigidMotion object
          * 
          */
-        Constrainedrigid_motion();
+        ConstrainedRigidMotion();
         /**
-         * @brief Construct a new Constrainedrigid_motion object with given refrence vector
+         * @brief Construct a new ConstrainedRigidMotion object with given refrence vector
          * 
          * @param reference 3D Vector that describes the x,y,phi offset from point to transformed point
          */
-        Constrainedrigid_motion(Eigen::Vector3d reference);
+        ConstrainedRigidMotion(Eigen::Vector3d reference);
         /**
          * @brief Update procedure for the motion states
          * 

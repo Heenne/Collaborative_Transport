@@ -1,6 +1,6 @@
 #include<multi_robot_controller/rigid_motion/constrained_rigid_motion_ros.h>
 
-Constrainedrigid_motionRos::Constrainedrigid_motionRos():Constrainedrigid_motion()
+ConstrainedRigidMotionRos::ConstrainedRigidMotionRos():ConstrainedRigidMotion()
 {
     ros::NodeHandle priv("~");
     std::vector<double> reference;

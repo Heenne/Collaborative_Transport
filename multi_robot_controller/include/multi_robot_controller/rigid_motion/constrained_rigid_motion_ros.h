@@ -7,7 +7,7 @@
  */
 
 
-class Constrainedrigid_motionRos:public Constrainedrigid_motion{
+class ConstrainedRigidMotionRos:public ConstrainedRigidMotion{
     public:
-        Constrainedrigid_motionRos();   
+        ConstrainedRigidMotionRos();   
 };

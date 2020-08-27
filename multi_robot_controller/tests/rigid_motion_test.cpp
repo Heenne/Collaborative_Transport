@@ -3,7 +3,7 @@
 
 int main(int argc,char** argv)
 {
-    Constrainedrigid_motion motion(Eigen::Vector3d(0.0,1.0,0.0));
+    ConstrainedRigidMotion motion(Eigen::Vector3d(0.0,1.0,0.0));
     double time=0.0;
     double omega=0.1;
     while(time<10.0)

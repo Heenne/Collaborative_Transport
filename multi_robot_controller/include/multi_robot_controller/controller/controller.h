@@ -124,7 +124,7 @@ class Controller
 
         ControlVector control_;
 
-        Constrainedrigid_motionTf rigid_motion_;
+        ConstrainedRigidMotionTf rigid_motion_;
         ros::Timer control_scope_timer_;
         void controlScope(const ros::TimerEvent&);
         void publish();
