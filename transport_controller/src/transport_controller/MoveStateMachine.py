@@ -10,7 +10,7 @@ from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
 
 class MoveStateMachine(smach.StateMachine):
     def __init__(self,slave_namespaces):               
-        smach.StateMachine.__init__(self,outcomes=['movement_done'],input_keys=['slaves'])        
+        smach.StateMachine.__init__(self,outcomes=['movement_done',"movement_error"],input_keys=['slaves'])        
         with self: 
             map_abort=dict()
             for name in slave_namespaces:
@@ -40,7 +40,7 @@ class MoveStateMachine(smach.StateMachine):
             smach.StateMachine.add('Movement',sm_con,transitions={'success':'movement_done',
                                                                   'error_occured':'ErrorHandlingState'})
             smach.StateMachine.add("ErrorHandlingState",st.ErrorHandlingState(),                                
-                                    transitions={   'error_handling_aborted':'movement_done',
+                                    transitions={   'error_handling_aborted':'movement_error',
                                                     'try_again':'Movement'})
 
 

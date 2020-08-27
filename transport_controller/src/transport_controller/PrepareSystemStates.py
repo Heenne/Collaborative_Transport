@@ -18,7 +18,7 @@ class StartState(smach.State):
             userdata.slaves[slave]=dict()
             #Load reference vectors as poses
             try:
-                ref=rospy.get_param(slave.strip("/")+"/slave_controller/reference")
+                ref=rospy.get_param(slave+"/slave_controller/reference")
                 ref_pose=PoseStamped()
                 ref_pose.pose.position.x=ref[0]
                 ref_pose.pose.position.y=ref[1]

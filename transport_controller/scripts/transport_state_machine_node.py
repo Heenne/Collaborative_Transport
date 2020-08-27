@@ -5,20 +5,29 @@ import rospy
 
 from transport_controller.PrepareSystemStateMachine import PrepareSystemStateMachine
 from transport_controller.MoveStateMachine  import MoveStateMachine
-
+from transport_controller.FormationControlStateMachine import FormationControlStateMachine
 
 if __name__=="__main__":
     rospy.init_node('transport_state_machine')
  
     sm=smach.StateMachine(outcomes=["out"])
-    
-    prepare=PrepareSystemStateMachine(["/mur/mir","/miranda/mir"])
-    movement=MoveStateMachine(["/mur/mir","/miranda/mir"])
+    namespaces=["/mur/mir","/miranda/mir"]
     with sm:
-        smach.StateMachine.add("Prepare_Movement",prepare,   transitions={"preparation_done":"Move_Slave","preparation_error":'out'})
-        smach.StateMachine.add("Move_Slave",movement,   transitions={"movement_done":"Prepare_Movement"})
-          
+        smach.StateMachine.add( "PrepareMovement",
+                                PrepareSystemStateMachine(namespaces),
+                                transitions={   "preparation_done":"MoveToFormation",
+                                                "preparation_error":'out'})
 
+        smach.StateMachine.add( "MoveToFormation",
+                                MoveStateMachine(namespaces), 
+                                transitions={   "movement_done":"FormationControl",
+                                                "movement_error":'out'})
+
+
+        smach.StateMachine.add( "FormationControl",
+                                FormationControlStateMachine(namespaces),
+                                transitions={   'formation_control_done':'PrepareMovement',
+                                                "formation_control_error":'out'})
 
     sis = smach_ros.IntrospectionServer('server_name', sm, '/SM_ROOT')
     sis.start()
