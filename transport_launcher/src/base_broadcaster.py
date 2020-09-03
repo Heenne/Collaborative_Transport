@@ -15,7 +15,7 @@ def callbackPose(msg):
     t = TransformStamped()
     t.header.stamp = rospy.Time.now()
     t.header.frame_id = "/map"
-    t.child_frame_id = tf_prefix+"/base_link"
+    t.child_frame_id = tf_prefix+"/base_footprint"
     t.transform.translation=msg.pose.position
     t.transform.rotation=msg.pose.orientation   
     br.sendTransform(t)
