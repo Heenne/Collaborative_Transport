@@ -3,6 +3,7 @@ import FormationControlStates as st
 import rospy
 from std_srvs.srv   import Empty,EmptyRequest
 
+
 class FormationControlServiceState(smach.State):
     def __init__(self,namespaces,service_name):
         smach.State.__init__(self,outcomes=["called"])
@@ -43,6 +44,7 @@ class FormationControlIdleState(smach.State):
     def execute(self,userdata):
         while not self.called:
             rospy.Rate(10).sleep
+        self.called=False
         if self.enable:
             self.enable=False
             return "enable"
@@ -54,3 +56,6 @@ class FormationControlIdleState(smach.State):
             return "stop"
         else:
             return "error"
+
+
+    
