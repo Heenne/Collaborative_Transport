@@ -7,7 +7,6 @@ Panels:
         - /Global Options1
         - /Status1
         - /Ur1/Status1
-        - /MirandaCostmap1
       Splitter Ratio: 0.5
     Tree Height: 1587
   - Class: rviz/Selection
@@ -542,6 +541,13 @@ Visualization Manager:
       Unreliable: false
       Use Timestamp: false
       Value: true
+    - Class: rviz/Axes
+      Enabled: true
+      Length: 1
+      Name: Axes
+      Radius: 0.10000000149011612
+      Reference Frame: <Fixed Frame>
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -570,7 +576,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/XYOrbit
-      Distance: 10.118528366088867
+      Distance: 15.921700477600098
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
