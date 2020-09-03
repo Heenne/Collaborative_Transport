@@ -3,7 +3,8 @@ import rospy
 from tf import transformations
 
 from geometry_msgs.msg import PoseStamped
-from std_srvs.srv import Empty
+from std_srvs.srv import Empty,SetBool,SetBoolRequest
+from transport_controller.ServiceDistributor import ClientDistributor,ServiceConfig
 
 
 class StartState(smach.State):
@@ -12,6 +13,7 @@ class StartState(smach.State):
                                     io_keys=['slaves']
                                     )
         self.slave_namespaces=slave_namespaces
+        self.gripper_clients=ClientDistributor(["mur/ur","miranda/panda"],ServiceConfig("grip",SetBool))
 
     def execute(self,userdata):  
         rospy.loginfo("Initializing system!")                           
@@ -33,6 +35,9 @@ class StartState(smach.State):
                 userdata.slaves[slave]["reference"]=ref_pose
             except:
                 return "references_error"
+            req=SetBoolRequest()
+            req.data=False
+            self.gripper_clients.call(req)
         return "startup_done"
 
 
