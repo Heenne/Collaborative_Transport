@@ -1,5 +1,6 @@
 import smach
 import PrepareSystemStates as st
+import States
 
 class PrepareSystemStateMachine(smach.StateMachine):
     def __init__(self,slave_namespaces):
@@ -11,7 +12,7 @@ class PrepareSystemStateMachine(smach.StateMachine):
                                     transitions={   'startup_done':'Idle',
                                                     "references_error":"preparation_error"})
 
-            smach.StateMachine.add('Idle',st.IdleState(),
-                                    transitions={   'start':'preparation_done'})
+            smach.StateMachine.add("Idle",    States.WaitTriggerState(0.1,"start"),
+                                    transitions={"start":"preparation_done"})
 
            

@@ -15,7 +15,7 @@ class ClientDistributor():
     
     def call(self,req):
         for client in self.clients:
-            client.call(req)       
+            client.call(req)      
 
 class ServiceDistributor():
     def __init__(self,namespaces,service):

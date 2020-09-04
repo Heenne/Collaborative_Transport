@@ -7,7 +7,7 @@ import smach_ros
 import MoveStates as st
 import actionlib
 from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
-
+import States
 
 class MoveStateMachine(smach.StateMachine):
     def __init__(self,slave_namespaces):               
@@ -22,8 +22,8 @@ class MoveStateMachine(smach.StateMachine):
             smach.StateMachine.add("DrivePose",st.DrivePoseState(["mur/ur","miranda/panda"],"drive"),
                                                 transitions={  'done':'Idle'})
 
-            smach.StateMachine.add("Idle",st.IdleState(),
-                                    transitions={   'start':'Movement'}   )
+            smach.StateMachine.add("Idle",States.WaitTriggerState(0.1,"start_moving"),
+                                    transitions={   'start_moving':'Movement'}   )
             
             
         

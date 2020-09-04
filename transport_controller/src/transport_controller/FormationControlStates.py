@@ -1,61 +1,80 @@
 import smach
 import FormationControlStates as st
+from ServiceDistributor import ClientDistributor,ServiceConfig
 import rospy
 from std_srvs.srv   import Empty,EmptyRequest
 
 
 class FormationControlServiceState(smach.State):
-    def __init__(self,namespaces,service_name):
+    def __init__(self,namespaces,name):
         smach.State.__init__(self,outcomes=["called"])
-        self.clients=list()
-        for name in namespaces:
-            self.clients.append(rospy.ServiceProxy(name+'/'+service_name, Empty))
-
+        self.clients=ClientDistributor(namespaces,ServiceConfig(name,Empty))
 
     def execute(self,userdata):
-        for client in self.clients:
-            client.call(EmptyRequest())
+        self.clients.call(EmptyRequest())
         return "called"
 
 
 class FormationControlIdleState(smach.State):
     def __init__(self):
-        smach.State.__init__(self,outcomes=["enable",'disable','stop',"error"])
-        self.enable_srv=rospy.Service("~enable",Empty,self.__enableCallback__)
-        self.disable_srv=rospy.Service("~disable",Empty,self.__disableCallback__)
-        self.stop_srv=rospy.Service("~stop_control",Empty,self.__stopCallback__)
-        self.enable=False
-        self.disable=False
-        self.stop=False
-        self.called=False
-    
-    def __enableCallback__(self,req):
-        self.enable=True
-        self.called=True
-    
-    def __disableCallback__(self,req):
-        self.disable=True
-        self.called=True
-
-    def __stopCallback__(self,req):
-        self.stop=True
-        self.called=True
+        smach.State.__init__(self,outcomes=["enable",'disable','stop',"error","move"])
+       
+        self.__enable=False
+        self.__disable=False
+        self.__stop=False
+        self.__called=False  
+        self.__move=False
     
     def execute(self,userdata):
-        while not self.called:
+        enable_srv=rospy.Service("~enable",Empty,self.__enableCallback__)
+        disable_srv=rospy.Service("~disable",Empty,self.__disableCallback__)
+        stop_srv=rospy.Service("~stop",Empty,self.__stopCallback__)
+        move_srv=rospy.Service("~move",Empty,self.__moveCallback__)
+
+        while not self.__called:
             rospy.Rate(10).sleep
-        self.called=False
-        if self.enable:
-            self.enable=False
+
+        self.__called=False
+        
+        enable_srv.shutdown()
+        disable_srv.shutdown()
+        stop_srv.shutdown()
+        move_srv.shutdown()
+        
+        if self.__enable:
+            self.__enable=False
             return "enable"
-        elif self.disable:
-            self.disable=False
+        elif self.__move:
+            self.__move=False
+            return "move"
+
+        elif self.__disable:
+            self.__disable=False
             return "disable"
-        elif self.stop:
-            self.stop=False
+
+        elif self.__stop:
+            self.__stop=False
             return "stop"
+
         else:
             return "error"
+
+
+    def __enableCallback__(self,req):
+        self.__enable=True
+        self.__called=True
+    
+    def __disableCallback__(self,req):
+        self.__disable=True
+        self.__called=True
+
+    def __stopCallback__(self,req):
+        self.__stop=True
+        self.__called=True
+    
+    def __moveCallback__(self,req):
+        self.__move=True
+        self.__called=True
 
 
     
