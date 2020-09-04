@@ -5,7 +5,6 @@ from catkin_pkg.python_setup import generate_distutils_setup
 setup_args = generate_distutils_setup(
     packages=['transport_controller'],
     package_dir={'': 'src'},
-    skripts=["scripts/transport_state_machine_node"]
 )
 
 setup(**setup_args)
