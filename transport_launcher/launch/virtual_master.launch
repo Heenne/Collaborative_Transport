@@ -1,4 +1,9 @@
 <launch>
+  <node respawn="true" pkg="joy" type="joy_node"  name="ps4_joy">
+    <param name="dev" value="/dev/input/js0"/>
+    <param name="deadzone" value="0.12"/>
+    <param name="coalesce_interval" value="0.001"/>
+  </node>
 
  <group ns="virtual_master">
 
@@ -8,14 +13,10 @@
         <param name="tf_prefix" value="master"/>
     </node>
 
-    <node respawn="true" pkg="joy" type="joy_node"  name="ps4_joy">
-        <param name="dev" value="/dev/input/js0"/>
-        <param name="deadzone" value="0.12"/>
-        <param name="coalesce_interval" value="0.001"/>
-    </node>
+    
 
     <node name="state_machine_controller" pkg="transport_controller" type="ps4_statemachine_controller.py" output="screen">
-            <remap from="cmd_vel" to="master_velocity"/>
+            <remap from="joy" to="/joy" />
             <remap from="cmd_vel" to="master_velocity"/>
             <remap from="enable" to="/transport_state_machine/enable"/>
             <remap from="disable" to="/transport_state_machine/disable"/>
@@ -23,10 +24,10 @@
             <remap from="stop" to="/transport_state_machine/stop"/>
     </node>
     
-      <node name="base_link_broadcaster" pkg="transport_launcher" type="base_broadcaster.py">
+    <node name="base_link_broadcaster" pkg="transport_launcher" type="base_broadcaster.py">
       <remap from="robot_pose" to="master_pose"/>
       <param name="tf_prefix" value="master"/>
-      </node>
+    </node>
 
     <node name="cmd_vel_integrator" pkg="mir_helper" type="vel_integrator_node">
       <param name="topic_name" value="reset_pose"/>

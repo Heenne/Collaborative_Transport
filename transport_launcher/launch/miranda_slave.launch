@@ -1,4 +1,5 @@
 <launch>
+    <arg name="orientation_ff" value="true"/>
 
     <!--    Laucnh the robot hardware
             Access move base server
@@ -20,7 +21,12 @@
 
     <!-- Launch the formation slave controller -->
     <include file="$(find multi_robot_controller)/launch/slave.launch" ns="miranda/mir">
-        <arg name="config_file" value="$(find transport_launcher)/config/miranda_slave_behind.yaml"/>
+        <arg name="config_file" value="$(find transport_launcher)/config/miranda_slave_parallel.yaml"/>
     </include>
+
+    <node if="$(eval orientation_ff)" name="orientation_ff" type="feed_forward_tf_node" pkg="multi_robot_controller" ns="miranda/panda">
+        <rosparam command="load" file="$(find transport_launcher)/config/miranda_orientation_ff.yaml"/>
+        <param name="tf_prefix" value="miranda"/>
+    </node>
 
 </launch>
