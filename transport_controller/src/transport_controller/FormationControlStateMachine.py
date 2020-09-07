@@ -10,7 +10,7 @@ class FormationControlStateMachine(smach.StateMachine):
         with self:         
             smach.StateMachine.add("Idle",st.FormationControlIdleState(),
                                     transitions={   'enable':'EnableControl',
-                                                    'disable':'DisableControl',
+                                                    'disable':'ReleaseObject',
                                                     'stop':'formation_control_stop',
                                                     "error":"formation_control_error",
                                                     "move":"formation_control_move"})
@@ -25,9 +25,19 @@ class FormationControlStateMachine(smach.StateMachine):
                                     transitions={"done":"Adjust"})
             
             smach.StateMachine.add("Adjust",    States.WaitTriggerState(0.1,"adjusted"),
-                                                                    transitions={"adjusted":"Idle"})
+                                                                    transitions={"adjusted":"LinkObject"})
 
-            
+
+            smach.StateMachine.add("LinkObject", st.LinkObjectState(arm_ns),transitions={"linked":"Idle"})
+
+
+            smach.StateMachine.add("ReleaseObject", st.ReleaseObjectState(arm_ns),transitions={"released":"DriveToMove"})
+
+            smach.StateMachine.add("DriveToMove",
+                                    mv.DrivePoseState(arm_ns,"drive"),
+                                    transitions={"done":"DisableControl"})
+
+
             smach.StateMachine.add('DisableControl',
                                     st.FormationControlServiceState(base_ns,"slave_controller/disable_controller"),
                                     transitions={'called':'Idle'})            

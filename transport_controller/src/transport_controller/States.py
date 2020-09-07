@@ -15,7 +15,7 @@ class WaitTriggerState(smach.State):
         while not self.__enable:
             rospy.sleep(self.__timeout)
 
-        self.enable=False
+        self.__enable=False
         srv.shutdown()
         return self.__outcome
     

@@ -28,9 +28,9 @@ class CalcPosesState(smach.State):
         smach.State.__init__(self,  outcomes=["calculation_done","calculation_error",'master_pose_error'],
                                     io_keys=['slaves'])
   
-    def execute(self,userdata):       
-        try: 
-            master_pose=PoseStamped()
+    def execute(self,userdata):  
+        master_pose=PoseStamped()     
+        try:             
             master_pose=rospy.wait_for_message("/virtual_master/master_pose",PoseStamped)
         except:
             return 'master_pose_error'

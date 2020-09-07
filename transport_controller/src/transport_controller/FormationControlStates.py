@@ -2,7 +2,8 @@ import smach
 import FormationControlStates as st
 from ServiceDistributor import ClientDistributor,ServiceConfig
 import rospy
-from std_srvs.srv   import Empty,EmptyRequest
+from std_srvs.srv   import Empty,EmptyRequest ,SetBool,SetBoolRequest
+from controller_manager_msgs.srv import SwitchController,SwitchControllerRequest
 
 
 class FormationControlServiceState(smach.State):
@@ -77,4 +78,40 @@ class FormationControlIdleState(smach.State):
         self.__called=True
 
 
-    
+class LinkObjectState(smach.State):
+    def __init__(self,namespaces):
+        smach.State.__init__(self,outcomes=["linked"])
+        self.__clients=ClientDistributor(namespaces,ServiceConfig("grip",SetBool))
+
+    def execute(self,userdata):
+        switcher=rospy.ServiceProxy("/miranda/panda/controller_manager/switch_controller",SwitchController)
+        req=SwitchControllerRequest()
+        req.start_controllers=["position_joint_controller"]
+        req.start_controllers=["cartesian_impedance_controller"]
+        req.strictness=2
+        switcher.call(req)
+
+        grip_req=SetBoolRequest()
+        grip_req.data=True
+        self.__clients.call(grip_req)
+
+        return "linked"
+
+class ReleaseObjectState(smach.State):
+    def __init__(self,namespaces):
+        smach.State.__init__(self,outcomes=["released"])
+        self.__clients=ClientDistributor(namespaces,ServiceConfig("grip",SetBool))
+
+    def execute(self,userdata):
+        grip_req=SetBoolRequest()
+        grip_req.data=False
+        self.__clients.call(grip_req)
+
+        switcher=rospy.ServiceProxy("/miranda/panda/controller_manager/switch_controller",SwitchController)
+        req=SwitchControllerRequest()
+        req.start_controllers=["cartesian_impedance_controller"]
+        req.start_controllers=["position_joint_controller"]
+        req.strictness=1
+        switcher.call(req)
+     
+        return "released"
