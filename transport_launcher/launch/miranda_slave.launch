@@ -1,19 +1,26 @@
 <launch>
 
-    <arg name="poses_file_name" default="transport_poses.yaml"/>
-
+    <!--    Laucnh the robot hardware
+            Access move base server
+            Sate controlle for the knowledge of current manipulator state
+            Joint controller for teached movemet
+            impedance controller for transport movement
+    -->
     <include file="$(find miranda_hardware_helper)/launch/miranda.launch">
         <arg name="move_base" value="true"/>
         <arg name="controllers_started" value="franka_state_controller position_joint_controller"/>
         <arg name="controllers_stopped" value="cartesian_impedance_controller"/>
     </include>
 
+    <!-- Access teached movement for the manipulator -->
+    <arg name="poses_file_name" default="transport_poses.yaml"/>
     <node name="move_teached" type="pose_teacher_node.py" pkg="robot_teacher"  output="screen" ns="miranda/panda">
         <rosparam command="load" file="$(find miranda_hardware_helper)/config/move_teached.yaml" subst_value="true"/>
     </node>
 
+    <!-- Launch the formation slave controller -->
     <include file="$(find multi_robot_controller)/launch/slave.launch" ns="miranda/mir">
-        <arg name="config_file" value="$(find transport_launcher)/config/miranda_slave.yaml"/>
+        <arg name="config_file" value="$(find transport_launcher)/config/miranda_slave_behind.yaml"/>
     </include>
 
 </launch>

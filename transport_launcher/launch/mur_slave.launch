@@ -1,9 +1,19 @@
 <launch>
 
+
+   <!--    Launch the robot hardware
+           Access teached movement and move base server           
+    -->
   <include file="$(find mur_hardware_helper)/launch/mur_move_base_teached.launch"/>
   
-  <include file="$(find multi_robot_controller)/launch/slave.launch" ns="mur/mir">
-      <arg name="config_file" value="$(find transport_launcher)/config/mur_slave.yaml"/>
-  </include>
+  <!-- Launch the formation slave controller -->
+  <node name="move_teached" type="pose_teacher_node.py" pkg="robot_teacher"  output="screen" ns="mur/ur">
+      <rosparam command="load" file="$(find mur_hardware_helper)/config/move_teached.yaml" subst_value="true"/>
+  </node>
  
+   <!-- Access teached movement for the manipulator -->
+  <include file="$(find multi_robot_controller)/launch/slave.launch" ns="mur/mir">
+      <arg name="config_file" value="$(find transport_launcher)/config/mur_slave_behind.yaml"/>
+  </include>
+   
 </launch>
