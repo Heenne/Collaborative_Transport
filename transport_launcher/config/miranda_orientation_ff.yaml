@@ -1,0 +1,12 @@
+update_rate: 20
+pose_topic: test_pose
+lookup_offset: true 
+off_source_frame: mir/base_link
+off_target_frame: panda/panda_link0
+lookup_initial_pose: true
+ee_source_frame: mir/base_link
+ee_target_frame: panda/panda_hand
+has_initial_orientation: true
+current_source_frame: mir/odom
+current_target_frame: mir/base_link
+ee_pose_frame: panda/panda_link0
