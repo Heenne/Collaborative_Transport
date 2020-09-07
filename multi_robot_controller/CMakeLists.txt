@@ -114,7 +114,7 @@ catkin_package(
   INCLUDE_DIRS include
   LIBRARIES multi_robot_controller
   CATKIN_DEPENDS roscpp
-  DEPENDS Eigen3 tf 
+  DEPENDS tf 
 )
 
 ###########

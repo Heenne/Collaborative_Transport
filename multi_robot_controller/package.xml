@@ -52,7 +52,8 @@
   <build_depend>cmake_modules</build_depend>  
   <build_depend>dynamic_reconfigure</build_depend>
   <exec_depend>dynamic_reconfigure</exec_depend>
-  
+
+  <depend>tf</depend>  
   <depend>roscpp</depend>
   <build_depend>multi_robot_msgs</build_depend>  
   <build_depend>geometry_msgs</build_depend>
