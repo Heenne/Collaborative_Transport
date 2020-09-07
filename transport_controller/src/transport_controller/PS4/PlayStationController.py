@@ -6,6 +6,7 @@ from sensor_msgs.msg import Joy
 from geometry_msgs.msg import TwistStamped
 from geometry_msgs.msg import Twist
 from std_srvs.srv import Empty,EmptyRequest
+from ps4_controller import PlayStationHandler
 
 class PlayStationMultiplexer():
 
@@ -88,26 +89,11 @@ class PlayStationMultiplexer():
         self.__buttons_old = data.buttons
 
 
-class PlayStationHandler():
-    def __init__(self,message_type):
-        self.__sub_joy = rospy.Subscriber('joy', Joy, self.__joy_callback__)
-        self._buttons=[0]*11
-        self._edges=[0]*11
-        self._axes=[0]*8
-        
-    
-    def __joy_callback__(self,msg):
-        self._edges=[a and not b for a,b in zip(msg.buttons ,self._buttons)]        
-        self._buttons=msg.buttons
-        self._axes=msg.axes
 
-
-    def run(self):
-        pass
 
 class PlayStationStateMachineHandler(PlayStationHandler):
     def __init__(self,message_type,button_clients):
-        PlayStationHandler.__init__(self,message_type)
+        PlayStationHandler.__init__(self)
         self.__rate=rospy.Rate(10)
 
         self.__clientlist=[rospy.ServiceProxy(client,Empty) for client in button_clients]

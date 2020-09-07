@@ -50,6 +50,7 @@
   <!--   <doc_depend>doxygen</doc_depend> -->
   <buildtool_depend>catkin</buildtool_depend>
   <build_depend>rospy</build_depend>
+  <build_depend>ps4_controller</build_depend>
   <exec_depend>smach_ros</exec_depend>
   <exec_depend>std_srvs</exec_depend>
   <exec_depend>actionlib</exec_depend>
