@@ -3,6 +3,8 @@
 RosOrientationFeedForwardBase::RosOrientationFeedForwardBase(ros::NodeHandle &nh):  nh_(nh),
                                                                                     tf_listener_(tf_buffer_)
 {
+    ros::NodeHandle priv("~");
+    this->init_service_=priv.advertiseService("init",&RosOrientationFeedForwardBase::initServiceCallback,this);
 }
 
 bool RosOrientationFeedForwardBase::init()
@@ -89,4 +91,9 @@ bool RosOrientationFeedForwardBase::init()
     }
     return true;
     
+}
+bool RosOrientationFeedForwardBase::initServiceCallback(std_srvs::EmptyRequest &req,std_srvs::EmptyResponse &res)
+{
+    this->init();
+    return true;
 }
