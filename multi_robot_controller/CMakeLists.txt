@@ -128,8 +128,9 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
   ${Eigen_INCLUDE_DIRS}
 )
-## Declare a C++ library
 
+
+##Macro fro generating dir names
 macro(generate_dirs dir_name)
   string(TOUPPER ${dir_name} string_upper)
   set(${string_upper}_SRC_PATH "src/${dir_name}")
@@ -138,52 +139,9 @@ endmacro(generate_dirs)
 
 
 
-
-
-generate_dirs(controller)
-add_library(controller
-
-  ${CONTROLLER_INCLUDE_PATH}/controller.h
-  ${CONTROLLER_SRC_PATH}/controller.cpp
-
-
-  ${CONTROLLER_INCLUDE_PATH}/pass_through_controller.hpp
-
-  ${CONTROLLER_INCLUDE_PATH}/lyapunov_controller.h
-  ${CONTROLLER_SRC_PATH}/lyapunov_controller.cpp
-)
-add_dependencies(controller ${catkin_EXPORTED_TARGETS})
-add_dependencies(controller ${PROJECT_NAME}_gencfg)
-
-
-
-generate_dirs(rigid_motion)
-add_library(rigid_motion
-
-    ${RIGID_MOTION_INCLUDE_PATH}/constrained_rigid_motion.h
-    ${RIGID_MOTION_SRC_PATH}/constrained_rigid_motion.cpp
-
-    ${RIGID_MOTION_INCLUDE_PATH}/constrained_rigid_motion_ros.h
-    ${RIGID_MOTION_SRC_PATH}/constrained_rigid_motion_ros.cpp
-
-    ${RIGID_MOTION_INCLUDE_PATH}/constrained_rigid_motion_tf.h
-    ${RIGID_MOTION_SRC_PATH}/constrained_rigid_motion_tf.cpp
-
-)
-
-generate_dirs(input)
-add_library(input
-  ${INPUT_INCLUDE_PATH}/input_base.hpp
-  ${INPUT_INCLUDE_PATH}/input_odom.hpp
-  ${INPUT_INCLUDE_PATH}/input_pose_twist.hpp
-  ${INPUT_INCLUDE_PATH}/input_pose_odom.hpp
-  ${INPUT_INCLUDE_PATH}/input_types.hpp
-)
-set_target_properties(input PROPERTIES LINKER_LANGUAGE CXX)
-
-
+##Feed forward
 generate_dirs(feed_forward)
-add_library(feed_forward
+add_library(orientation_feed_forward
   ${FEED_FORWARD_INCLUDE_PATH}/msg_conversion.hpp
 
   ${FEED_FORWARD_INCLUDE_PATH}/orientation_feed_forward.h
@@ -199,7 +157,66 @@ add_library(feed_forward
   ${FEED_FORWARD_SRC_PATH}/tf_orientation_feed_forward.cpp
 
 )
+target_link_libraries(orientation_feed_forward
+  ${catkin_LIBRARIES}
+  ${eigen3_LIBRARIES}
+)
 
+#Controller
+generate_dirs(controller)
+add_library(controller
+
+  ${CONTROLLER_INCLUDE_PATH}/controller.h
+  ${CONTROLLER_SRC_PATH}/controller.cpp
+
+
+  ${CONTROLLER_INCLUDE_PATH}/pass_through_controller.hpp
+
+  ${CONTROLLER_INCLUDE_PATH}/lyapunov_controller.h
+  ${CONTROLLER_SRC_PATH}/lyapunov_controller.cpp
+)
+target_link_libraries(controller
+  rigid_motion
+  input
+  ${catkin_LIBRARIES}
+  ${eigen3_LIBRARIES}
+)
+add_dependencies(controller ${catkin_EXPORTED_TARGETS})
+add_dependencies(controller ${PROJECT_NAME}_gencfg)
+
+#Rigid motion
+generate_dirs(rigid_motion)
+add_library(rigid_motion
+
+    ${RIGID_MOTION_INCLUDE_PATH}/constrained_rigid_motion.h
+    ${RIGID_MOTION_SRC_PATH}/constrained_rigid_motion.cpp
+
+    ${RIGID_MOTION_INCLUDE_PATH}/constrained_rigid_motion_ros.h
+    ${RIGID_MOTION_SRC_PATH}/constrained_rigid_motion_ros.cpp
+
+    ${RIGID_MOTION_INCLUDE_PATH}/constrained_rigid_motion_tf.h
+    ${RIGID_MOTION_SRC_PATH}/constrained_rigid_motion_tf.cpp
+)
+target_link_libraries(rigid_motion  
+  ${catkin_LIBRARIES}
+)
+
+#Input
+generate_dirs(input)
+add_library(input
+  ${INPUT_INCLUDE_PATH}/input_base.hpp
+  ${INPUT_INCLUDE_PATH}/input_odom.hpp
+  ${INPUT_INCLUDE_PATH}/input_pose_twist.hpp
+  ${INPUT_INCLUDE_PATH}/input_pose_odom.hpp
+  ${INPUT_INCLUDE_PATH}/input_types.hpp
+)
+target_link_libraries(input
+  ${catkin_LIBRARIES}
+)
+set_target_properties(input PROPERTIES LINKER_LANGUAGE CXX)
+
+
+#Exceptions
 add_library(exceptions
   include/${PROJECT_NAME}/necessary_param_exeption.hpp
   include/${PROJECT_NAME}/input_alloc_exception.hpp
@@ -207,41 +224,13 @@ add_library(exceptions
 set_target_properties(exceptions PROPERTIES LINKER_LANGUAGE CXX)
 
 
-## Declare a C++ executable
-## With catkin_make all packages are built within a single CMake context
-## The recommended prefix ensures that target names across packages don't collide
+##NODES
 set(NODES_PATH "src/nodes")
 add_executable(slave_node ${NODES_PATH}/slave_node.cpp)
 add_executable(master_node ${NODES_PATH}/master_node.cpp)
 add_executable(rigid_transformer ${NODES_PATH}/rigid_transformer.cpp)
 add_executable(feed_forward_msg_node ${NODES_PATH}/feed_forward_msg_node.cpp)
 add_executable(feed_forward_tf_node ${NODES_PATH}/feed_forward_tf_node.cpp)
-
-
-set(TESTS_PATH "tests")
-add_executable(input_test ${TESTS_PATH}/input_test.cpp)
-add_executable(rigid_motion_test ${TESTS_PATH}/rigid_motion_test.cpp)
-add_executable(controller_test ${TESTS_PATH}/controller_test.cpp)
-add_executable(feed_forward_test ${TESTS_PATH}/orientation_feed_forward_test.cpp)
-add_executable(dummie_base_move_broadcaster ${TESTS_PATH}/dummie_base_move_broadcaster.cpp)
-
-## Rename C++ executable without prefix
-## The above recommended prefix causes long target names, the following renames the
-## target back to the shorter version for ease of user use
-## e.g. "rosrun someones_pkg node" instead of "rosrun someones_pkg someones_pkg_node"
-# set_target_properties(${PROJECT_NAME}_node PROPERTIES OUTPUT_NAME node PREFIX "")
-
-## Add cmake target dependencies of the executable
-## same as for the library above
-# add_dependencies(${PROJECT_NAME}_node ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-
-## Specify libraries to link a library or executable target against
-target_link_libraries(controller
-  rigid_motion
-  input
-  ${catkin_LIBRARIES}
-  ${eigen3_LIBRARIES}
-)
 
 target_link_libraries(rigid_transformer
   rigid_motion
@@ -250,23 +239,35 @@ target_link_libraries(rigid_transformer
   ${eigen3_LIBRARIES}
 )
 
-target_link_libraries(feed_forward
+target_link_libraries(slave_node
+  controller
+  ${catkin_LIBRARIES}
+)
+
+target_link_libraries(master_node
+  controller
+  ${catkin_LIBRARIES}
+)
+
+target_link_libraries(feed_forward_msg_node
+orientation_feed_forward
+  ${catkin_LIBRARIES}
+  ${eigen3_LIBRARIES}
+)
+target_link_libraries(feed_forward_tf_node
+orientation_feed_forward
   ${catkin_LIBRARIES}
   ${eigen3_LIBRARIES}
 )
 
 
-target_link_libraries(rigid_motion  
-  ${catkin_LIBRARIES}
-)
-target_link_libraries(input
-  ${catkin_LIBRARIES}
-)
-target_link_libraries(feed_forward
-  ${catkin_LIBRARIES}
-  ${eigen3_LIBRARIES}
-)
-
+##Testfile ("No proper unittest")
+set(TESTS_PATH "tests")
+add_executable(input_test ${TESTS_PATH}/input_test.cpp)
+add_executable(rigid_motion_test ${TESTS_PATH}/rigid_motion_test.cpp)
+add_executable(controller_test ${TESTS_PATH}/controller_test.cpp)
+add_executable(feed_forward_test ${TESTS_PATH}/orientation_feed_forward_test.cpp)
+add_executable(dummie_base_move_broadcaster ${TESTS_PATH}/dummie_base_move_broadcaster.cpp)
 
 target_link_libraries(input_test
   ${catkin_LIBRARIES}
@@ -279,40 +280,24 @@ target_link_libraries(rigid_motion_test
   ${catkin_LIBRARIES}
   
 )
+
 target_link_libraries(controller_test
   ${catkin_LIBRARIES}
   controller
 )
 
 target_link_libraries(feed_forward_test
-  feed_forward
+orientation_feed_forward
   ${catkin_LIBRARIES}
   ${eigen3_LIBRARIES}
 )
+
 target_link_libraries(dummie_base_move_broadcaster
   ${catkin_LIBRARIES}
 )
 
-target_link_libraries(slave_node
-  controller
-  ${catkin_LIBRARIES}
-)
-target_link_libraries(master_node
-  controller
-  ${catkin_LIBRARIES}
-)
 
 
-target_link_libraries(feed_forward_msg_node
-  feed_forward
-  ${catkin_LIBRARIES}
-  ${eigen3_LIBRARIES}
-)
-target_link_libraries(feed_forward_tf_node
-  feed_forward
-  ${catkin_LIBRARIES}
-  ${eigen3_LIBRARIES}
-)
 
 
 
