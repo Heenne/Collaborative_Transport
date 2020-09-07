@@ -113,7 +113,8 @@ generate_dynamic_reconfigure_options(
 catkin_package(
   INCLUDE_DIRS include
   LIBRARIES multi_robot_controller
-#  CATKIN_DEPENDS geometry_msgs nav_msgs roscpp multi_robot_msgs
+  CATKIN_DEPENDS roscpp
+  DEPENDS Eigen3 tf 
 )
 
 ###########
