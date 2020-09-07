@@ -2,7 +2,7 @@ import smach
 import rospy
 import smach_ros
 
-from transport_controller.ServiceDistributor import ClientDistributor ,ServiceConfig
+from ServiceDistributor import ClientDistributor ,ServiceConfig
 from robot_teacher.srv import SetName,SetNameRequest
 from geometry_msgs.msg import PoseStamped,TransformStamped
 from tf2_geometry_msgs import do_transform_pose

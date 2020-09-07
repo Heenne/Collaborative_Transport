@@ -4,9 +4,9 @@ import smach_ros
 import rospy
 
 
-from transport_controller    import PrepareSystemStateMachine
-from transport_controller    import MoveStateMachine
-from transport_controller    import FormationControlStateMachine
+from transport_controller.StateMachine    import PrepareSystemStateMachine
+from transport_controller.StateMachine    import MoveStateMachine
+from transport_controller.StateMachine    import FormationControlStateMachine
 
 if __name__=="__main__":
     rospy.init_node('transport_state_machine')

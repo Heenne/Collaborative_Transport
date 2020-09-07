@@ -4,7 +4,7 @@ from tf import transformations
 
 from geometry_msgs.msg import PoseStamped
 from std_srvs.srv import Empty,SetBool,SetBoolRequest
-from transport_controller.ServiceDistributor import ClientDistributor,ServiceConfig
+from ServiceDistributor import ClientDistributor,ServiceConfig
 
 
 class StartState(smach.State):
