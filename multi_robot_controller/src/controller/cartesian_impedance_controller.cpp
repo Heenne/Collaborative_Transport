@@ -88,7 +88,7 @@ bool CartesianImpedanceExampleController::init(hardware_interface::RobotHW* robo
       ros::NodeHandle("dynamic_reconfigure_compliance_param_node");
 
   dynamic_server_compliance_param_ = std::make_unique<
-      dynamic_reconfigure::Server<franka_example_controllers::compliance_paramConfig>>(
+      dynamic_reconfigure::Server<multi_robot_controller::StiffnessConfig>>(
 
       dynamic_reconfigure_compliance_param_node_);
   dynamic_server_compliance_param_->setCallback(
@@ -210,17 +210,18 @@ Eigen::Matrix<double, 7, 1> CartesianImpedanceExampleController::saturateTorqueR
 }
 
 void CartesianImpedanceExampleController::complianceParamCallback(
-    franka_example_controllers::compliance_paramConfig& config,
+    multi_robot_controller::StiffnessConfig& config,
     uint32_t /*level*/) {
+        
   cartesian_stiffness_target_.setIdentity();
   cartesian_stiffness_target_.topLeftCorner(3, 3)
-      << config.translational_stiffness * Eigen::Matrix3d::Identity();
+      << config.Kx,0.0,0.0,0.0,config.Ky,0.0,0.0,0.0,config.Kz;
   cartesian_stiffness_target_.bottomRightCorner(3, 3)
       << config.rotational_stiffness * Eigen::Matrix3d::Identity();
+  
   cartesian_damping_target_.setIdentity();
-  // Damping ratio = 1
   cartesian_damping_target_.topLeftCorner(3, 3)
-      << 2.0 * sqrt(config.translational_stiffness) * Eigen::Matrix3d::Identity();
+       << config.Dx,0.0,0.0,0.0,config.Dy,0.0,0.0,0.0,config.Dz;
   cartesian_damping_target_.bottomRightCorner(3, 3)
       << 2.0 * sqrt(config.rotational_stiffness) * Eigen::Matrix3d::Identity();
   nullspace_stiffness_target_ = config.nullspace_stiffness;

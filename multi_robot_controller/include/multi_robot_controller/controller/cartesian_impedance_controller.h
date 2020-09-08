@@ -16,19 +16,42 @@
 
 #include <eigen3/Eigen/Dense>
 
-#include <franka_example_controllers/compliance_paramConfig.h>
+#include <multi_robot_controller/StiffnessConfig.h>
 #include <franka_hw/franka_model_interface.h>
 #include <franka_hw/franka_state_interface.h>
 
 namespace cartesian_impedance_controller {
 
+/**
+ * @brief A class that provides cartesian impedance control based on the 
+ * [franka_example_controllers](https://github.com/frankaemika/franka_ros/tree/kinetic-devel/franka_example_controllers)
+ * 
+ */
 class CartesianImpedanceExampleController : public controller_interface::MultiInterfaceController<
                                                 franka_hw::FrankaModelInterface,
                                                 hardware_interface::EffortJointInterface,
                                                 franka_hw::FrankaStateInterface> {
  public:
+    /**
+     * @brief Initializes the controller
+     * 
+     * @param robot_hw The Hardware Interface the controller is working with
+     * @param node_handle The Nodehandle for handling ros ressources
+     * @return true Initialisation done
+     * @return false Initialisation error
+     */
   bool init(hardware_interface::RobotHW* robot_hw, ros::NodeHandle& node_handle) override;
+  
+  /**
+   * @brief  Starting the controller. E.g setting the target pose to the current one
+   * 
+   */
   void starting(const ros::Time&) override;
+  /**
+   * @brief Updates the control scope. Determines the desired torques by cartesian impedance control
+   * 
+   * @param period Control period
+   */
   void update(const ros::Time&, const ros::Duration& period) override;
 
  private:
@@ -56,10 +79,10 @@ class CartesianImpedanceExampleController : public controller_interface::MultiIn
   Eigen::Quaterniond orientation_d_target_;
 
   // Dynamic reconfigure
-  std::unique_ptr<dynamic_reconfigure::Server<franka_example_controllers::compliance_paramConfig>>
+  std::unique_ptr<dynamic_reconfigure::Server<multi_robot_controller::StiffnessConfig>>
       dynamic_server_compliance_param_;
   ros::NodeHandle dynamic_reconfigure_compliance_param_node_;
-  void complianceParamCallback(franka_example_controllers::compliance_paramConfig& config,
+  void complianceParamCallback(multi_robot_controller::StiffnessConfig& config,
                                uint32_t level);
 
   // Equilibrium pose subscriber

@@ -112,6 +112,7 @@ find_package(Franka 0.7.0 REQUIRED)
 ## Generate dynamic reconfigure parameters in the 'cfg' folder
 generate_dynamic_reconfigure_options(
   cfg/lyapunov.cfg
+  cfg/stiffness.cfg
 )
 
 ###################################
