@@ -26,7 +26,6 @@
 
     <node if="$(eval orientation_ff)" name="orientation_ff" type="feed_forward_tf_node" pkg="multi_robot_controller" ns="miranda/panda">
         <rosparam command="load" file="$(find transport_launcher)/config/miranda_orientation_ff.yaml"/>
-        <param name="tf_prefix" value="miranda"/>
     </node>
 
 </launch>
