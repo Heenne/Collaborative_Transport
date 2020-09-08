@@ -10,7 +10,7 @@ from move_base_msgs.msg import MoveBaseAction, MoveBaseGoal
 import States
 
 class MoveStateMachine(smach.StateMachine):
-    def __init__(self,slave_namespaces):               
+    def __init__(self,base_namespaces,arm_namespaces):               
         smach.StateMachine.__init__(self,outcomes=['movement_done',"movement_error"],input_keys=['slaves'])        
          
         with self: 
@@ -19,7 +19,7 @@ class MoveStateMachine(smach.StateMachine):
                                                     'calculation_error':'movement_error',
                                                     'master_pose_error':'movement_error'})
             
-            smach.StateMachine.add("DrivePose",st.DrivePoseState(["mur/ur","miranda/panda"],"drive"),
+            smach.StateMachine.add("DrivePose",st.DrivePoseState(arm_namespaces,"drive"),
                                                 transitions={  'done':'Idle'})
 
             smach.StateMachine.add("Idle",States.WaitTriggerState(0.1,"start_moving"),
@@ -27,7 +27,7 @@ class MoveStateMachine(smach.StateMachine):
             
             
         
-            sm_con=self.__allocMoveConcurrency__(slave_namespaces)          
+            sm_con=self.__allocMoveConcurrency__(base_namespaces)          
 
             smach.StateMachine.add('Movement',sm_con,transitions={'success':'movement_done',
                                                                   'error_occured':'ErrorHandlingState'})

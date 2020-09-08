@@ -10,10 +10,9 @@ from transport_controller.StateMachine    import FormationControlStateMachine
 
 if __name__=="__main__":
     rospy.init_node('transport_state_machine')
- 
+    base_namespaces=rospy.get_param("~base_namespaces",["/mur/mir","/miranda/mir"])
+    arm_namespaces=rospy.get_param("~arm_namespaces",["/mur/ur","/miranda/panda"])
     sm=smach.StateMachine(outcomes=["out"])
-    base_namespaces=["/mur/mir","/miranda/mir"]
-    arm_namespaces=["/mur/ur","/miranda/panda"]
     try:
         with sm:
             smach.StateMachine.add( "PrepareMovement",
