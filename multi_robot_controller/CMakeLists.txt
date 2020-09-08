@@ -8,17 +8,30 @@ add_compile_options(-std=c++14)
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(
-  catkin REQUIRED COMPONENTS
+  catkin REQUIRED COMPONENTS 
+  roscpp
+  rospy 
+         
+  tf2_ros 
+  tf
+  tf_conversions
+ 
+  controller_interface
   dynamic_reconfigure
+  eigen_conversions
+  franka_hw    
+  hardware_interface
+  
   geometry_msgs
   multi_robot_msgs
   nav_msgs
-  roscpp
-  tf       
-  tf2_ros
+  pluginlib
+  realtime_tools
+ 
   
 )
 find_package(Eigen3 REQUIRED)
+find_package(Franka 0.7.0 REQUIRED)
 
 
 
@@ -127,6 +140,7 @@ include_directories(
   include
   ${catkin_INCLUDE_DIRS}
   ${Eigen_INCLUDE_DIRS}
+  ${Franka_INCLUDE_DIRS}
 )
 
 
@@ -160,6 +174,7 @@ add_library(orientation_feed_forward
 target_link_libraries(orientation_feed_forward
   ${catkin_LIBRARIES}
   ${eigen3_LIBRARIES}
+  ${Franka_LIBRARIES}
 )
 
 #Controller
@@ -174,6 +189,11 @@ add_library(controller
 
   ${CONTROLLER_INCLUDE_PATH}/lyapunov_controller.h
   ${CONTROLLER_SRC_PATH}/lyapunov_controller.cpp
+
+  ${CONTROLLER_INCLUDE_PATH}/cartesian_impedance_controller.h
+  ${CONTROLLER_SRC_PATH}/cartesian_impedance_controller.cpp
+
+  ${CONTROLLER_INCLUDE_PATH}/pseudo_inversion.h
 )
 target_link_libraries(controller
   rigid_motion
