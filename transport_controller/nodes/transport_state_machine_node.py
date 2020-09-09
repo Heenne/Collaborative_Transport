@@ -21,7 +21,7 @@ if __name__=="__main__":
                                                     "preparation_error":'out'})
 
             smach.StateMachine.add( "MoveToFormation",
-                                    MoveStateMachine(base_namespaces), 
+                                    MoveStateMachine(base_namespaces,arm_namespaces), 
                                     transitions={   "movement_done":"FormationControl",
                                                     "movement_error":'out'})
 
