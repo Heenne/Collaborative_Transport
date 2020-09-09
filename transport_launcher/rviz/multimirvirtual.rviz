@@ -548,6 +548,21 @@ Visualization Manager:
       Radius: 0.10000000149011612
       Reference Frame: <Fixed Frame>
       Value: true
+    - Alpha: 1
+      Axes Length: 1
+      Axes Radius: 0.10000000149011612
+      Class: rviz/Pose
+      Color: 255; 25; 0
+      Enabled: true
+      Head Length: 0.30000001192092896
+      Head Radius: 0.10000000149011612
+      Name: Pose
+      Shaft Length: 1
+      Shaft Radius: 0.05000000074505806
+      Shape: Axes
+      Topic: /miranda/panda/test_pose
+      Unreliable: false
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -576,25 +591,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/XYOrbit
-      Distance: 15.921700477600098
+      Distance: 4.824314594268799
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 9.35919189453125
-        Y: 8.68447494506836
-        Z: 7.625201760674827e-6
+        X: 7.285910129547119
+        Y: 6.244406700134277
+        Z: 3.810504495049827e-6
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.954796314239502
+      Pitch: 1.159795880317688
       Target Frame: <Fixed Frame>
       Value: XYOrbit (rviz)
-      Yaw: 6.228571891784668
+      Yaw: 5.813575744628906
     Saved: ~
 Window Geometry:
   Displays:

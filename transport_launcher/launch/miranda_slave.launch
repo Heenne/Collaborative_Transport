@@ -1,6 +1,13 @@
 <launch>
     <arg name="orientation_ff" value="true"/>
 
+    
+    <!-- <node   name="dynamic_reconfigure_load_lyapunov" pkg="dynamic_reconfigure" type="dynparam" 
+            args="load /miranda/mir/slave_controller $(find transport_launcher)/launch/config/lyapunov_dyn.yaml" />
+    
+    <node   name="dynamic_reconfigure_load_cartesian" pkg="dynamic_reconfigure" type="dynparam" 
+            args="load /miranda/mir/slave_controller $(find transport_launcher)/launch/config/impedance_dyn.yaml" /> -->
+
     <!--    Laucnh the robot hardware
             Access move base server
             Sate controlle for the knowledge of current manipulator state
@@ -21,7 +28,7 @@
 
     <!-- Launch the formation slave controller -->
     <include file="$(find multi_robot_controller)/launch/slave.launch" ns="miranda/mir">
-        <arg name="config_file" value="$(find transport_launcher)/config/miranda_slave_parallel.yaml"/>
+        <arg name="config_file" value="$(find transport_launcher)/config/miranda_slave_behind.yaml"/>
     </include>
 
     <node if="$(eval orientation_ff)" name="orientation_ff" type="feed_forward_tf_node" pkg="multi_robot_controller" ns="miranda/panda">
