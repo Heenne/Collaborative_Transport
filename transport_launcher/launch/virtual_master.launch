@@ -22,6 +22,7 @@
             <remap from="disable" to="/transport_state_machine/disable"/>
             <remap from="trigger" to="/transport_state_machine/trigger"/>
             <remap from="stop" to="/transport_state_machine/stop"/>
+            <remap from="move" to="/transport_state_machine/move"/>
     </node>
     
     <node name="base_link_broadcaster" pkg="transport_launcher" type="base_broadcaster.py">
