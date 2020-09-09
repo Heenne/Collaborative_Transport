@@ -4,6 +4,7 @@
 #include <multi_robot_controller/feed_forward/orientation_feed_forward.h>
 #include <ros/ros.h>
 #include <tf/tf.h>
+#include<multi_robot_controller/necessary_param_exeption.hpp>
 #include <tf2_ros/transform_listener.h>
 #include <multi_robot_controller/feed_forward/msg_conversion.hpp>
 #include <std_srvs/Empty.h>

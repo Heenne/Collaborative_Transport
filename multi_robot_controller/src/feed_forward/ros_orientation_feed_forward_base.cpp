@@ -13,9 +13,13 @@ bool RosOrientationFeedForwardBase::init()
     ros::NodeHandle nh("~");
     if(nh.getParam("update_rate",rate))
     {
-        ros::Rate ros_rate(rate);
-        this->update_timer_=this->nh_.createTimer(ros_rate.cycleTime(),&RosOrientationFeedForwardBase::update,this);
+        this->update_timer_=this->nh_.createTimer(ros::Rate(rate),&RosOrientationFeedForwardBase::update,this);
     }
+    else
+    {
+       throw NecessaryParamException("update_rate");
+    }
+    
     nh.getParam("tf_prefix",this->tf_prefix_);
     
     bool lookup_offset=false;
@@ -68,10 +72,7 @@ bool RosOrientationFeedForwardBase::init()
                 ROS_INFO_STREAM("Set initial pose: \n"<<initial);
             }
             catch(tf2::TransformException &ex) {
-                        ROS_WARN("Could NOT find trafo for initial pose lookup from %s to %s: %s",
-                                                                source_frame.c_str(),
-                                                                target_frame.c_str(), 
-                                                                ex.what());
+                throw ex;
             }
         }
     }
