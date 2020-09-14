@@ -1,4 +1,0 @@
-<launch>
-<include file="$(find transport_launcher)/launch/virtual_master.launch"/>
-<node name="transport_state_machine" type="transport_state_machine_node.py" pkg="transport_controller" output="screen"/>
-</launch>
