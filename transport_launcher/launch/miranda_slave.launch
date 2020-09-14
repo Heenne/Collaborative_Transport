@@ -1,5 +1,5 @@
 <launch>
-    <arg name="orientation_ff" value="true"/>
+    <arg name="orientation_ff" default="true"/>
 
     
     <!-- <node   name="dynamic_reconfigure_load_lyapunov" pkg="dynamic_reconfigure" type="dynparam" 
