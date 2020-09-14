@@ -27,7 +27,7 @@ namespace cartesian_impedance_controller {
  * [franka_example_controllers](https://github.com/frankaemika/franka_ros/tree/kinetic-devel/franka_example_controllers)
  * 
  */
-class CartesianImpedanceExampleController : public controller_interface::MultiInterfaceController<
+class CartesianImpedanceController : public controller_interface::MultiInterfaceController<
                                                 franka_hw::FrankaModelInterface,
                                                 hardware_interface::EffortJointInterface,
                                                 franka_hw::FrankaStateInterface> {

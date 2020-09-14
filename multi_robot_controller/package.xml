@@ -65,7 +65,7 @@
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>
-    <controller_interface plugin="${prefix}/plugins.xml"/>
+    <controller_interface plugin="${prefix}/multi_robot_plugins.xml"/>
   </export>
 
 </package>
