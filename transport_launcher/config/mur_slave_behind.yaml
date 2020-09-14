@@ -12,4 +12,4 @@ current:
 
 lyapunov: [3.0,4.0,1.0]
 topic_output: "cmd_vel"
-reference: [-0.3 ,0.8, 0.0]
+reference: [-0.3 ,0.7, 0.0]

@@ -1,0 +1,12 @@
+type: 0        
+pause: true
+iterations: 3
+
+
+
+omega: 0.05
+ratio: 1
+phaseshift: 1.57075
+amplifier_x: 0.3
+amplifier_y: 0.3
+
