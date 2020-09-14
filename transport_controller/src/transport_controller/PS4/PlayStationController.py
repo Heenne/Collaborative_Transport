@@ -102,6 +102,7 @@ class PlayStationStateMachineHandler(PlayStationHandler):
         self.__speed_rotation =  rospy.get_param("~rotation",0.2)
         self.__trans_incr=rospy.get_param("~trans_incr",0.1)
         self.__rot_incr=rospy.get_param("~rot_incr",0.1)
+        self.__enable_cmd_vel=rospy.get_param("~allow_cmd_vel",True)
 
         self._private_services={"change_rot","change_trans","switch_incr_decr"}
         self.__increase=False
@@ -120,21 +121,6 @@ class PlayStationStateMachineHandler(PlayStationHandler):
             self.__publisher=rospy.Publisher("cmd_vel",message_type,queue_size=10)
             self.__publishFunction=self.__publishTwistStamped__
 
-   
-    def __switchIncrDecr__(self):
-        self.__increase=not self.__increase
-
-    def __changeRot__(self):
-        if self.__increase:
-            self.__speed_rotation=(1+self.__rot_incr)*self.__speed_rotation
-        else:
-            self.__speed_rotation=(1-self.__rot_incr)*self.__speed_rotation
-
-    def __changeTrans__(self):
-        if self.__increase:
-            self.__speed_translation=(1+self.__rot_incr)*self.__speed_translation
-        else:
-            self.__speed_translation=(1-self.__rot_incr)*self.__speed_translation
 
     def __publishTwist__(self):
         msg=Twist()
@@ -163,7 +149,8 @@ class PlayStationStateMachineHandler(PlayStationHandler):
             self.__translation = (abs(self._axes[5] - 1) - abs(self._axes[2] - 1)) *self.__speed_translation #data.axes[1] + data.axes[4]
             self.__rotation = (self._axes[0] + self._axes[3])*self.__speed_translation
 
-            self.__publishFunction()
+            if self.__enable_cmd_vel:
+                self.__publishFunction()
             self.__rate.sleep()            
             
         
