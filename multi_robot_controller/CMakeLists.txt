@@ -16,6 +16,7 @@ find_package(
   tf
   tf_conversions
  
+  pluginlib
   controller_interface
   dynamic_reconfigure
   eigen_conversions
@@ -24,8 +25,7 @@ find_package(
   
   geometry_msgs
   multi_robot_msgs
-  nav_msgs
-  pluginlib
+  nav_msgs  
   realtime_tools
  
   
