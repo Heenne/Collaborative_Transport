@@ -1,4 +1,8 @@
 <launch>
+  <arg name="use_ps4_cmd_vel"  default="false"/>
+  <arg name="use_planner_cmd_vel"  default="false"/>
+
+
   <node respawn="true" pkg="joy" type="joy_node"  name="ps4_joy">
     <param name="dev" value="/dev/input/js0"/>
     <param name="deadzone" value="0.12"/>
@@ -12,10 +16,12 @@
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
         <param name="tf_prefix" value="master"/>
     </node>
-
     
 
     <node name="state_machine_controller" pkg="transport_controller" type="ps4_statemachine_controller.py" output="screen">
+            <param name="allow_cmd_vel" value="$(arg use_ps4_cmd_vel)"/>
+            <param name="translation" value="0.1"/>
+            <param name="rotation" value="0.3"/>
             <remap from="joy" to="/joy" />
             <remap from="cmd_vel" to="master_velocity"/>
             <remap from="enable" to="/transport_state_machine/enable"/>
@@ -23,6 +29,7 @@
             <remap from="trigger" to="/transport_state_machine/trigger"/>
             <remap from="stop" to="/transport_state_machine/stop"/>
             <remap from="move" to="/transport_state_machine/move"/>
+            <remap from="plan" to="planner/start_planner"/>
     </node>
     
     <node name="base_link_broadcaster" pkg="transport_launcher" type="base_broadcaster.py">
@@ -30,12 +37,27 @@
       <param name="tf_prefix" value="master"/>
     </node>
 
-    <node name="cmd_vel_integrator" pkg="mir_helper" type="vel_integrator_node">
+    <node if="$(arg use_ps4_cmd_vel)" name="cmd_vel_integrator" pkg="mir_helper" type="vel_integrator_node">
       <param name="topic_name" value="reset_pose"/>
       <param name="frame_id" value="/map"/>
       <remap from="cmd_vel" to="master_velocity"/>
       <remap from="cmd_vel_integrated" to="master_pose"/>
     </node>
+
+    <node if="$(arg use_planner_cmd_vel)" name="planner" type="planner_node" pkg="mir_helper" output="screen">
+        <rosparam command="load" file="$(find transport_launcher)/config/planner.yaml"/>
+        <remap from="trajectory_odom" to="master_odom"/>
+        <remap from="trajectory_vel" to="master_velocity_unstamped"/>
+        <remap from="trajectory_pose" to="master_pose"/>
+        <remap from="start_pose" to="initialpose"/>        
+        <remap from="reset_pose" to="initialpose"/>  
+    </node>
+
+      
+  <node if="$(arg use_planner_cmd_vel)" name="twist_stamper" pkg="mir_helper" type="twist_stamper">
+    <remap from="twist_in" to="master_velocity_unstamped"/>
+    <remap from="twist_out" to="master_velocity"/>
+  </node>
 
     <node name="fake_mir_joint_publisher" pkg="mir_driver" type="fake_mir_joint_publisher.py" output="screen" />
     
