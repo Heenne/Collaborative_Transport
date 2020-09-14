@@ -19,7 +19,7 @@
 
     <!-- Launch the formation slave controller -->
     <include file="$(find multi_robot_controller)/launch/slave.launch" ns="mur/mir">
-        <arg name="config_file" value="$(find transport_launcher)/config/mur_slave_parallel.yaml"/>
+        <arg name="config_file" value="$(find transport_launcher)/config/mur_slave_behind.yaml"/>
     </include>
 
 </launch>
