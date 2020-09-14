@@ -1,0 +1,13 @@
+<launch>
+    <node pkg="rosbag" type="record" name="record_formation"
+       args="record -e  (.*)/slave_controller/meta_data 
+                        (.*)/robot_pose_stamped
+                        (.*)/odom_enc
+                        (.*)/mir/cmd_vel
+                        (.*)/master_pose 
+                        (.*)/master_velocity  
+                        /tf
+                        
+                    -o formation.bag"
+    />
+</launch>
