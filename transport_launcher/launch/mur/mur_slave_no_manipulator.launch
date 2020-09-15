@@ -1,0 +1,15 @@
+<launch>
+    
+    <include file="$(find mir_launcher)/launch/mir.launch" ns="mur/mir">
+        <arg name="tf_prefix" value="mur/mir"/>
+        <arg name="move_base" value="true"/>
+    </include>
+
+    <!-- Launch the formation slave controller -->
+    <include file="$(find multi_robot_controller)/launch/slave.launch" ns="mur/mir">
+        <arg unless="$(arg twist_local)" name="config_file" value="$(find transport_launcher)/config/global_twist_slave_controller.yaml"/>
+        <arg if="$(arg twist_local)" name="config_file" value="$(find transport_launcher)/config/local_twist_slave_controller.yaml"/>
+        <rosparam command="load" file="$(find transport_launcher)/config/reference_miranda.yaml" ns="/mur/mir/slave_controller"/>
+    </include>
+
+</launch>
