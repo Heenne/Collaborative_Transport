@@ -74,7 +74,6 @@ class InputPoseTwist: public InputBase
         inline void setLinVel(geometry_msgs::TwistStamped msg) 
         {
             tf::vector3MsgToTF(msg.twist.linear,this->lin_vel_);
-            this->lin_vel_=tf::Transform(this->pose_.getRotation(),tf::Vector3(0.0,0.0,0.0))*this->lin_vel_;
         }
        
         inline void setAngVel(geometry_msgs::TwistStamped msg) 
