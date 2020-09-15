@@ -1,4 +1,7 @@
 <launch>
+    <arg name="filename" default="formation"/>
+    <arg name="path" default="."/>
+
     <node pkg="rosbag" type="record" name="record_formation"
        args="record -e  (.*)/slave_controller/meta_data 
                         (.*)/robot_pose_stamped
@@ -8,6 +11,6 @@
                         (.*)/master_velocity  
                         /tf
                         
-                    -o formation.bag"
+                    -o $(arg path)/formation.bag"
     />
 </launch>
