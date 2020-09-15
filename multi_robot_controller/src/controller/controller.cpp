@@ -92,11 +92,16 @@ std::unique_ptr<InputBase> Controller::allocInput(InputTypes type,ros::NodeHandl
             ROS_INFO("Allocing a pose+twist input!");
             return std::make_unique<InputPoseTwist>(this->nh_,parameter);        
         }
+        case InputTypes::POSE_TWIST_LOCAL:
+        {
+            return std::make_unique<InputPoseTwistLocal>(this->nh_,parameter);
+        }
         case InputTypes::SINGLE_ODOM:
         {
             ROS_INFO("Allocing a odom input!");
             return std::make_unique<InputOdom>(this->nh_,parameter);  
         }
+        
         case InputTypes::NO_TYPE:
         default:
         {

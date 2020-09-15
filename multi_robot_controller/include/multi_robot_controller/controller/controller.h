@@ -2,6 +2,7 @@
 #include<multi_robot_controller/input/input_pose_odom.hpp>
 #include<multi_robot_controller/input/input_odom.hpp>
 #include<multi_robot_controller/input/input_pose_twist.hpp>
+#include<multi_robot_controller/input/input_pose_twist_local.hpp>
 #include<multi_robot_controller/rigid_motion/constrained_rigid_motion_tf.h>
 #include<multi_robot_controller/necessary_param_exeption.hpp>
 #include<multi_robot_controller/input_alloc_exception.hpp>

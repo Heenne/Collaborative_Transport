@@ -228,6 +228,7 @@ add_library(input
   ${INPUT_INCLUDE_PATH}/input_base.hpp
   ${INPUT_INCLUDE_PATH}/input_odom.hpp
   ${INPUT_INCLUDE_PATH}/input_pose_twist.hpp
+  ${INPUT_INCLUDE_PATH}/input_pose_twist_local.hpp
   ${INPUT_INCLUDE_PATH}/input_pose_odom.hpp
   ${INPUT_INCLUDE_PATH}/input_types.hpp
 )
