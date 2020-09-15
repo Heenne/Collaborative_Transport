@@ -14,6 +14,7 @@ class ErrorHandlingState(smach.State):
         smach.State.__init__(self,outcomes=['error_handling_aborted','try_again'])
         self.retry_counter=0
     def execute(self,userdata):
+        rospy.sleep(3.0)
         if self.retry_counter<2:
             self.retry_counter=self.retry_counter+1
             return 'try_again'
