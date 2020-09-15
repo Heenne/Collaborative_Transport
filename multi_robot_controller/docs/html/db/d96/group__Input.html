@@ -109,13 +109,19 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d5/d86/classInputPoseTwist.html">InputPoseTwist</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d8d/classInputPoseTwistLocal.html">InputPoseTwistLocal</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
 Enumerations</h2></td></tr>
-<tr class="memitem:gaf4789bd72e7b14daae9ed61dbc059261"><td class="memItemLeft" align="right" valign="top"><a id="gaf4789bd72e7b14daae9ed61dbc059261"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>InputTypes</b> { <b>POSE_ODOM</b> =0, 
+<tr class="memitem:gaf4789bd72e7b14daae9ed61dbc059261"><td class="memItemLeft" align="right" valign="top"><a id="gaf4789bd72e7b14daae9ed61dbc059261"></a>enum &#160;</td><td class="memItemRight" valign="bottom"><b>InputTypes</b> { <br />
+&#160;&#160;<b>POSE_ODOM</b> =0, 
 <b>SINGLE_ODOM</b> =1, 
 <b>POSE_TWIST</b> =2, 
-<b>NO_TYPE</b>
+<b>POSE_TWIST_LOCAL</b> =3, 
+<br />
+&#160;&#160;<b>NO_TYPE</b>
+<br />
  }</td></tr>
 <tr class="separator:gaf4789bd72e7b14daae9ed61dbc059261"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -166,6 +172,15 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>InputBase::checkValue
 <tr class="memitem:ga0e8c731f5d891db652aabe3d0b6bd92a"><td class="memItemLeft" align="right" valign="top"><a id="ga0e8c731f5d891db652aabe3d0b6bd92a"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>InputPoseTwist::InputPoseTwist</b> (ros::NodeHandle &amp;nh, ros::NodeHandle &amp;nh_param)</td></tr>
 <tr class="separator:ga0e8c731f5d891db652aabe3d0b6bd92a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga613203eb75ab62bb69d211bb41ff09ce"><td class="memItemLeft" align="right" valign="top"><a id="ga613203eb75ab62bb69d211bb41ff09ce"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>InputPoseTwistLocal::InputPoseTwistLocal</b> (ros::NodeHandle &amp;nh, std::string topic_name_pose, std::string topic_name_twist)</td></tr>
+<tr class="separator:ga613203eb75ab62bb69d211bb41ff09ce"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga62a12e3ef3c56dfa955224d66cd21c17"><td class="memItemLeft" align="right" valign="top"><a id="ga62a12e3ef3c56dfa955224d66cd21c17"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>InputPoseTwistLocal::InputPoseTwistLocal</b> (ros::NodeHandle &amp;nh)</td></tr>
+<tr class="separator:ga62a12e3ef3c56dfa955224d66cd21c17"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac6c272dad9e420c67549b152d4c2581c"><td class="memItemLeft" align="right" valign="top"><a id="gac6c272dad9e420c67549b152d4c2581c"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>InputPoseTwistLocal::InputPoseTwistLocal</b> (ros::NodeHandle &amp;nh, ros::NodeHandle &amp;nh_param)</td></tr>
+<tr class="separator:gac6c272dad9e420c67549b152d4c2581c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>

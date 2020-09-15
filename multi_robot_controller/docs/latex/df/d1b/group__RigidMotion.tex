@@ -43,10 +43,6 @@ void {\bfseries Constrained\+Rigid\+Motion\+Tf\+::update\+Input\+State} (tf\+::\
 {\footnotesize\ttfamily Constrained\+Rigid\+Motion\+::\+Constrained\+Rigid\+Motion (\begin{DoxyParamCaption}\item[{Eigen\+::\+Vector3d}]{reference }\end{DoxyParamCaption})}
 
 
-
-Construct a new \hyperlink{classConstrainedRigidMotion}{Constrained\+Rigid\+Motion} object with given refrence vector. 
-
-
 \begin{DoxyParams}{Parameters}
 {\em reference} & 3D Vector that describes the x,y,phi offset from point to transformed point \\
 \hline
@@ -57,10 +53,6 @@ Construct a new \hyperlink{classConstrainedRigidMotion}{Constrained\+Rigid\+Moti
 \subsubsection{\texorpdfstring{create\+Diff\+Drive\+Locking()}{createDiffDriveLocking()}}
 {\footnotesize\ttfamily Eigen\+::\+Matrix3d Constrained\+Rigid\+Motion\+::create\+Diff\+Drive\+Locking (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
 
-
-
-Create a differential drive locking matrix. 
-
 \begin{DoxyReturn}{Returns}
 Eigen\+::\+Matrix3d differential drive locking matrix 
 \end{DoxyReturn}
@@ -70,10 +62,6 @@ Eigen\+::\+Matrix3d differential drive locking matrix
 \subsubsection{\texorpdfstring{get\+Diff\+State()}{getDiffState()}}
 {\footnotesize\ttfamily Eigen\+::\+Vector3d Constrained\+Rigid\+Motion\+::get\+Diff\+State (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-
-
-Get the Velocities of the destination. 
-
 \begin{DoxyReturn}{Returns}
 Eigen\+::\+Vector3d Velocities (state derivatives) of the destination 
 \end{DoxyReturn}
@@ -82,10 +70,6 @@ Eigen\+::\+Vector3d Velocities (state derivatives) of the destination
 \index{get\+State@{get\+State}!Rigid\+Motion@{Rigid\+Motion}}
 \subsubsection{\texorpdfstring{get\+State()}{getState()}}
 {\footnotesize\ttfamily Eigen\+::\+Vector3d Constrained\+Rigid\+Motion\+::get\+State (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
-
-
-
-Get the State of destination. 
 
 \begin{DoxyReturn}{Returns}
 Eigen\+::\+Vector3d State vector of the destination 
@@ -97,10 +81,6 @@ Eigen\+::\+Vector3d State vector of the destination
 {\footnotesize\ttfamily void Constrained\+Rigid\+Motion\+::set\+Reference (\begin{DoxyParamCaption}\item[{Eigen\+::\+Vector3d}]{ref }\end{DoxyParamCaption})}
 
 
-
-Set the reference from source to destination. 
-
-
 \begin{DoxyParams}{Parameters}
 {\em ref} & x,y,phi representation of the reference \\
 \hline
@@ -110,10 +90,6 @@ Set the reference from source to destination.
 \index{update\+Input\+State@{update\+Input\+State}!Rigid\+Motion@{Rigid\+Motion}}
 \subsubsection{\texorpdfstring{update\+Input\+State()}{updateInputState()}}
 {\footnotesize\ttfamily void Constrained\+Rigid\+Motion\+::update\+Input\+State (\begin{DoxyParamCaption}\item[{Eigen\+::\+Vector3d}]{state,  }\item[{Eigen\+::\+Vector3d}]{d\+\_\+state,  }\item[{double}]{time }\end{DoxyParamCaption})}
-
-
-
-Update procedure for the motion states. 
 
 
 \begin{DoxyParams}{Parameters}

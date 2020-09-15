@@ -32,5 +32,11 @@ var group__Input =
       [ "InputPoseTwist", "db/d96/group__Input.html#ga81300e68b133bd3df8fabf4d2ea7e4b2", null ],
       [ "InputPoseTwist", "db/d96/group__Input.html#ga118fe4becb20679b5c950827b3b4b449", null ],
       [ "InputPoseTwist", "db/d96/group__Input.html#ga0e8c731f5d891db652aabe3d0b6bd92a", null ]
+    ] ],
+    [ "InputPoseTwistLocal", "d2/d8d/classInputPoseTwistLocal.html", [
+      [ "InputPoseTwistLocal", "db/d96/group__Input.html#ga0efa41dce1eb31d448e51c018c67901d", null ],
+      [ "InputPoseTwistLocal", "db/d96/group__Input.html#ga613203eb75ab62bb69d211bb41ff09ce", null ],
+      [ "InputPoseTwistLocal", "db/d96/group__Input.html#ga62a12e3ef3c56dfa955224d66cd21c17", null ],
+      [ "InputPoseTwistLocal", "db/d96/group__Input.html#gac6c272dad9e420c67549b152d4c2581c", null ]
     ] ]
 ];

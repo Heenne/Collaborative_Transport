@@ -54,19 +54,12 @@ void \hyperlink{classOrientationFeedForward_ad419aebf0df88282ca6c1dc24adbadb2}{s
 \begin{DoxyCompactList}\small\item\em Set the Desired Pose object. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
-\subsection{Detailed Description}
-A Orientation feed forward class. It uses a given orientation and calculates a robot arm pose that compansates the motion by the change of orientation (null space motion). 
-
 \subsection{Constructor \& Destructor Documentation}
 \mbox{\Hypertarget{classOrientationFeedForward_a0ae1aba3b3e0abf84828a9db008b6f69}\label{classOrientationFeedForward_a0ae1aba3b3e0abf84828a9db008b6f69}} 
 \index{Orientation\+Feed\+Forward@{Orientation\+Feed\+Forward}!Orientation\+Feed\+Forward@{Orientation\+Feed\+Forward}}
 \index{Orientation\+Feed\+Forward@{Orientation\+Feed\+Forward}!Orientation\+Feed\+Forward@{Orientation\+Feed\+Forward}}
 \subsubsection{\texorpdfstring{Orientation\+Feed\+Forward()}{OrientationFeedForward()}}
 {\footnotesize\ttfamily Orientation\+Feed\+Forward\+::\+Orientation\+Feed\+Forward (\begin{DoxyParamCaption}\item[{Position}]{pos\+\_\+offf,  }\item[{Orientation}]{ori\+\_\+off }\end{DoxyParamCaption})}
-
-
-
-Construct a new Orientation Feed Forward object. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -84,10 +77,6 @@ Construct a new Orientation Feed Forward object.
 \subsubsection{\texorpdfstring{get\+Pose()}{getPose()}}
 {\footnotesize\ttfamily Orientation\+Feed\+Forward\+::\+Pose Orientation\+Feed\+Forward\+::get\+Pose (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
-
-
-Get the Pose object for motion control. 
-
 \begin{DoxyReturn}{Returns}
 Pose in robot base frame wich can be forwarded to the robot motion control 
 \end{DoxyReturn}
@@ -96,10 +85,6 @@ Pose in robot base frame wich can be forwarded to the robot motion control
 \index{set\+Desired\+Pose@{set\+Desired\+Pose}!Orientation\+Feed\+Forward@{Orientation\+Feed\+Forward}}
 \subsubsection{\texorpdfstring{set\+Desired\+Pose()}{setDesiredPose()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
 {\footnotesize\ttfamily void Orientation\+Feed\+Forward\+::set\+Desired\+Pose (\begin{DoxyParamCaption}\item[{Pose}]{pose }\end{DoxyParamCaption})}
-
-
-
-Set the Desired Pose that has to be hold in mobile base frame. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -111,10 +96,6 @@ Set the Desired Pose that has to be hold in mobile base frame.
 \index{set\+Desired\+Pose@{set\+Desired\+Pose}!Orientation\+Feed\+Forward@{Orientation\+Feed\+Forward}}
 \subsubsection{\texorpdfstring{set\+Desired\+Pose()}{setDesiredPose()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily void Orientation\+Feed\+Forward\+::set\+Desired\+Pose (\begin{DoxyParamCaption}\item[{Position}]{position,  }\item[{Orientation}]{orientation }\end{DoxyParamCaption})}
-
-
-
-Set the Desired Pose object. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -130,10 +111,6 @@ Set the Desired Pose object.
 {\footnotesize\ttfamily void Orientation\+Feed\+Forward\+::set\+Offset (\begin{DoxyParamCaption}\item[{Position}]{pos\+\_\+off,  }\item[{Orientation}]{ori\+\_\+off }\end{DoxyParamCaption})}
 
 
-
-Set the Offset object. 
-
-
 \begin{DoxyParams}{Parameters}
 {\em ori\+\_\+off} & Orientation of the Offset (from the mobile base frame and the robot frame) \\
 \hline
@@ -145,10 +122,6 @@ Set the Offset object.
 \index{set\+Offset@{set\+Offset}!Orientation\+Feed\+Forward@{Orientation\+Feed\+Forward}}
 \subsubsection{\texorpdfstring{set\+Offset()}{setOffset()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily void Orientation\+Feed\+Forward\+::set\+Offset (\begin{DoxyParamCaption}\item[{Pose}]{pose }\end{DoxyParamCaption})}
-
-
-
-Set the Offset object. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -164,10 +137,6 @@ Set the Offset object.
 {\footnotesize\ttfamily void Orientation\+Feed\+Forward\+::update\+Orientation (\begin{DoxyParamCaption}\item[{double}]{angle }\end{DoxyParamCaption})}
 
 
-
-Updates the current Orientation of the mobile base that has to be feed forwarded. 
-
-
 \begin{DoxyParams}{Parameters}
 {\em angle} & Angle of the Rotation around z-\/axis \\
 \hline
@@ -177,10 +146,6 @@ Updates the current Orientation of the mobile base that has to be feed forwarded
 \index{update\+Orientation@{update\+Orientation}!Orientation\+Feed\+Forward@{Orientation\+Feed\+Forward}}
 \subsubsection{\texorpdfstring{update\+Orientation()}{updateOrientation()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily void Orientation\+Feed\+Forward\+::update\+Orientation (\begin{DoxyParamCaption}\item[{Orientation}]{ori }\end{DoxyParamCaption})}
-
-
-
-Updates the current Orientation of the mobile base that has to be feed forwarded. 
 
 
 \begin{DoxyParams}{Parameters}

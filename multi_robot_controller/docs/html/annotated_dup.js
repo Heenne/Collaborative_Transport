@@ -1,5 +1,8 @@
 var annotated_dup =
 [
+    [ "cartesian_impedance_controller", null, [
+      [ "CartesianImpedanceController", "d1/d6d/classcartesian__impedance__controller_1_1CartesianImpedanceController.html", "d1/d6d/classcartesian__impedance__controller_1_1CartesianImpedanceController" ]
+    ] ],
     [ "ConstrainedRigidMotion", "d3/dfb/classConstrainedRigidMotion.html", "d3/dfb/classConstrainedRigidMotion" ],
     [ "ConstrainedRigidMotionRos", "da/d00/classConstrainedRigidMotionRos.html", "da/d00/classConstrainedRigidMotionRos" ],
     [ "ConstrainedRigidMotionTf", "d5/d1e/classConstrainedRigidMotionTf.html", "d5/d1e/classConstrainedRigidMotionTf" ],
@@ -9,6 +12,7 @@ var annotated_dup =
     [ "InputOdom", "d6/d79/classInputOdom.html", "d6/d79/classInputOdom" ],
     [ "InputPoseOdom", "d4/d18/classInputPoseOdom.html", "d4/d18/classInputPoseOdom" ],
     [ "InputPoseTwist", "d5/d86/classInputPoseTwist.html", "d5/d86/classInputPoseTwist" ],
+    [ "InputPoseTwistLocal", "d2/d8d/classInputPoseTwistLocal.html", "d2/d8d/classInputPoseTwistLocal" ],
     [ "LyapunovController", "d2/d09/classLyapunovController.html", "d2/d09/classLyapunovController" ],
     [ "MsgOrientationFeedForward", "dc/d54/classMsgOrientationFeedForward.html", "dc/d54/classMsgOrientationFeedForward" ],
     [ "NecessaryParamException", "d7/d29/classNecessaryParamException.html", "d7/d29/classNecessaryParamException" ],

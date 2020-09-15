@@ -199,12 +199,14 @@ ros::Publisher&#160;</td><td class="memItemRight" valign="bottom"><b>pose_pub_</
 <tr class="memitem:a0ac4ea0415e293dbe56fa214c1acb3fc inherit pro_attribs_classRosOrientationFeedForwardBase"><td class="memItemLeft" align="right" valign="top"><a id="a0ac4ea0415e293dbe56fa214c1acb3fc"></a>
 std::string&#160;</td><td class="memItemRight" valign="bottom"><b>tf_prefix_</b></td></tr>
 <tr class="separator:a0ac4ea0415e293dbe56fa214c1acb3fc inherit pro_attribs_classRosOrientationFeedForwardBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae3a57b29bd7a416e5dd8833d45e16754 inherit pro_attribs_classRosOrientationFeedForwardBase"><td class="memItemLeft" align="right" valign="top"><a id="ae3a57b29bd7a416e5dd8833d45e16754"></a>
+ros::ServiceServer&#160;</td><td class="memItemRight" valign="bottom"><b>init_service_</b></td></tr>
+<tr class="separator:ae3a57b29bd7a416e5dd8833d45e16754 inherit pro_attribs_classRosOrientationFeedForwardBase"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><h3>template&lt;class T&gt;<br />
 class MsgOrientationFeedForward&lt; T &gt;</h3>
 
-<p>A Ros implementation of the OrientationFeeedForward class. It contains a ros Subscriber that listens to a specific message and uses the message data as input data for the feed forward control. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">T</td><td>Message type the subcriber is listeneing to. A convertMsg fucntion has to be implemented for it. </td></tr>
@@ -239,8 +241,6 @@ template&lt;class T &gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p>Construct a new Ros Orientation Feed Forward object. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">nh</td><td>Nodehandle for namespace handling </td></tr>

@@ -10,14 +10,19 @@ class \hyperlink{classInputOdom}{Input\+Odom}
 class \hyperlink{classInputPoseOdom}{Input\+Pose\+Odom}
 \item 
 class \hyperlink{classInputPoseTwist}{Input\+Pose\+Twist}
+\item 
+class \hyperlink{classInputPoseTwistLocal}{Input\+Pose\+Twist\+Local}
 \end{DoxyCompactItemize}
 \subsection*{Enumerations}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\Hypertarget{group__Input_gaf4789bd72e7b14daae9ed61dbc059261}\label{group__Input_gaf4789bd72e7b14daae9ed61dbc059261}} 
-enum {\bfseries Input\+Types} \{ {\bfseries P\+O\+S\+E\+\_\+\+O\+D\+OM} =0, 
+enum {\bfseries Input\+Types} \{ \newline
+{\bfseries P\+O\+S\+E\+\_\+\+O\+D\+OM} =0, 
 {\bfseries S\+I\+N\+G\+L\+E\+\_\+\+O\+D\+OM} =1, 
 {\bfseries P\+O\+S\+E\+\_\+\+T\+W\+I\+ST} =2, 
+{\bfseries P\+O\+S\+E\+\_\+\+T\+W\+I\+S\+T\+\_\+\+L\+O\+C\+AL} =3, 
+\newline
 {\bfseries N\+O\+\_\+\+T\+Y\+PE}
  \}
 \end{DoxyCompactItemize}
@@ -68,6 +73,15 @@ void {\bfseries Input\+Base\+::check\+Values} ()
 \item 
 \mbox{\Hypertarget{group__Input_ga0e8c731f5d891db652aabe3d0b6bd92a}\label{group__Input_ga0e8c731f5d891db652aabe3d0b6bd92a}} 
 {\bfseries Input\+Pose\+Twist\+::\+Input\+Pose\+Twist} (ros\+::\+Node\+Handle \&nh, ros\+::\+Node\+Handle \&nh\+\_\+param)
+\item 
+\mbox{\Hypertarget{group__Input_ga613203eb75ab62bb69d211bb41ff09ce}\label{group__Input_ga613203eb75ab62bb69d211bb41ff09ce}} 
+{\bfseries Input\+Pose\+Twist\+Local\+::\+Input\+Pose\+Twist\+Local} (ros\+::\+Node\+Handle \&nh, std\+::string topic\+\_\+name\+\_\+pose, std\+::string topic\+\_\+name\+\_\+twist)
+\item 
+\mbox{\Hypertarget{group__Input_ga62a12e3ef3c56dfa955224d66cd21c17}\label{group__Input_ga62a12e3ef3c56dfa955224d66cd21c17}} 
+{\bfseries Input\+Pose\+Twist\+Local\+::\+Input\+Pose\+Twist\+Local} (ros\+::\+Node\+Handle \&nh)
+\item 
+\mbox{\Hypertarget{group__Input_gac6c272dad9e420c67549b152d4c2581c}\label{group__Input_gac6c272dad9e420c67549b152d4c2581c}} 
+{\bfseries Input\+Pose\+Twist\+Local\+::\+Input\+Pose\+Twist\+Local} (ros\+::\+Node\+Handle \&nh, ros\+::\+Node\+Handle \&nh\+\_\+param)
 \end{DoxyCompactItemize}
 \subsection*{Variables}
 \begin{DoxyCompactItemize}

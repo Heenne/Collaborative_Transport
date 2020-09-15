@@ -16,9 +16,13 @@ var hierarchy =
     [ "InputBase", "d9/df8/classInputBase.html", [
       [ "InputOdom", "d6/d79/classInputOdom.html", null ],
       [ "InputPoseOdom", "d4/d18/classInputPoseOdom.html", null ],
-      [ "InputPoseTwist", "d5/d86/classInputPoseTwist.html", null ]
+      [ "InputPoseTwist", "d5/d86/classInputPoseTwist.html", null ],
+      [ "InputPoseTwistLocal", "d2/d8d/classInputPoseTwistLocal.html", null ]
     ] ],
     [ "LyapunovController::LyapunovParameter", "de/d26/structLyapunovController_1_1LyapunovParameter.html", null ],
+    [ "MultiInterfaceController", null, [
+      [ "cartesian_impedance_controller::CartesianImpedanceController", "d1/d6d/classcartesian__impedance__controller_1_1CartesianImpedanceController.html", null ]
+    ] ],
     [ "OrientationFeedForward", "d6/d0a/classOrientationFeedForward.html", [
       [ "RosOrientationFeedForwardBase", "df/df6/classRosOrientationFeedForwardBase.html", [
         [ "MsgOrientationFeedForward< T >", "dc/d54/classMsgOrientationFeedForward.html", null ],
