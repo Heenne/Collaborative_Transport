@@ -11,6 +11,6 @@
                         (.*)/master_velocity  
                         /tf
                         
-                    -o $(arg path)/formation.bag"
+                    -o $(arg path)/$(arg filename).bag"
     />
 </launch>
