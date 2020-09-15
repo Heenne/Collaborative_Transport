@@ -13,11 +13,13 @@ class StartState(smach.State):
                                     io_keys=['slaves']
                                     )
         self.slave_namespaces=slave_namespaces
+        self.__enable_manipulator=rospy.get_param("~enable_manipulator",False)
         
 
     def execute(self,userdata):  
         rospy.loginfo("Initializing system!")  
-        gripper_clients=ClientDistributor(["mur/ur","miranda/panda"],ServiceConfig("grip",SetBool))                         
+        if self.__enable_manipulator:
+            gripper_clients=ClientDistributor(["mur/ur","miranda/panda"],ServiceConfig("grip",SetBool))                         
         userdata.slaves=dict()       
         for slave in self.slave_namespaces:            
             userdata.slaves[slave]=dict()
@@ -38,7 +40,8 @@ class StartState(smach.State):
                 return "references_error"
             req=SetBoolRequest()
             req.data=False
-            gripper_clients.call(req)
+            if self.__enable_manipulator:
+                gripper_clients.call(req)
         return "startup_done"
 
 

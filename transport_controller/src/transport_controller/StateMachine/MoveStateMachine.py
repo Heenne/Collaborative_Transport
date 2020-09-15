@@ -12,15 +12,23 @@ import States
 class MoveStateMachine(smach.StateMachine):
     def __init__(self,base_namespaces,arm_namespaces):               
         smach.StateMachine.__init__(self,outcomes=['movement_done',"movement_error"],input_keys=['slaves'])        
-         
-        with self: 
-            smach.StateMachine.add('CalcPoses', st.CalcPosesState(),
-                                    transitions={   'calculation_done':'DrivePose',
-                                                    'calculation_error':'movement_error',
-                                                    'master_pose_error':'movement_error'})
+        self.__enable_manipulator=rospy.get_param("~enable_manipulator",False)
+        with self:            
+            if self.__enable_manipulator:
+                smach.StateMachine.add('CalcPoses', st.CalcPosesState(),
+                                        transitions={   'calculation_done':'DrivePose',
+                                                        'calculation_error':'movement_error',
+                                                        'master_pose_error':'movement_error'})
+                smach.StateMachine.add("DrivePose",st.DrivePoseState(arm_namespaces,"drive"),
+                                                    transitions={  'done':'Idle'})
+            else:
+                smach.StateMachine.add('CalcPoses', st.CalcPosesState(),
+                                        transitions={   'calculation_done':'Idle',
+                                                        'calculation_error':'movement_error',
+                                                        'master_pose_error':'movement_error'})
             
-            smach.StateMachine.add("DrivePose",st.DrivePoseState(arm_namespaces,"drive"),
-                                                transitions={  'done':'Idle'})
+       
+                
 
             smach.StateMachine.add("Idle",States.WaitTriggerState(0.1,"start_moving"),
                                     transitions={   'start_moving':'Movement'}   )
