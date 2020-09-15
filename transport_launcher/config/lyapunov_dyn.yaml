@@ -5,9 +5,9 @@ dictitems:
       groups: !!python/object/new:dynamic_reconfigure.encoding.Config
         state: []
       id: 0
-      kphi: 0.2
-      kx: 0.7
-      ky: 3.1
+      kphi: 2.4
+      kx: 2.0
+      ky: 10.0
       name: Default
       parameters: !!python/object/new:dynamic_reconfigure.encoding.Config
         state: []
@@ -15,7 +15,7 @@ dictitems:
       state: true
       type: ''
     state: []
-  kphi: 0.2
-  kx: 0.7
-  ky: 3.1
+  kphi: 2.4
+  kx: 2.0
+  ky: 10.0
 state: []

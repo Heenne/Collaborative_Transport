@@ -1,12 +1,18 @@
 type: 0        
 pause: true
-iterations: 3
+iterations: 1
 
 
+#Kreis
+# omega: 0.05
+# ratio: 1
+# phaseshift: 4.71238898
+# amplifier_x: 0.5
+# amplifier_y: 0.5
 
+# Stundenglas
 omega: 0.05
-ratio: 1
-phaseshift: 1.57075
-amplifier_x: 0.3
-amplifier_y: 0.3
-
+ratio: 2
+phaseshift: 0
+amplifier_x: 2.0
+amplifier_y: 0.5
