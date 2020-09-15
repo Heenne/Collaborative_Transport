@@ -21,7 +21,7 @@
     <node name="state_machine_controller" pkg="transport_controller" type="ps4_statemachine_controller.py" output="screen">
             <param name="allow_cmd_vel" value="$(arg use_ps4_cmd_vel)"/>
             <param name="translation" value="0.1"/>
-            <param name="rotation" value="0.3"/>
+            <param name="rotation" value="0.2"/>
             <remap from="joy" to="/joy" />
             <remap from="cmd_vel" to="master_velocity"/>
             <remap from="enable" to="/transport_state_machine/enable"/>
@@ -44,7 +44,7 @@
       <remap from="cmd_vel_integrated" to="master_pose"/>
     </node>
 
-    <node if="$(arg use_planner_cmd_vel)" name="planner" type="planner_node" pkg="mir_helper" output="screen">
+    <node if="$(arg use_planner_cmd_vel)" name="planner" type="planner_node" pkg="base_trajectory_analytical" output="screen">
         <rosparam command="load" file="$(find transport_launcher)/config/planner.yaml"/>
         <remap from="trajectory_odom" to="master_odom"/>
         <remap from="trajectory_vel" to="master_velocity_unstamped"/>
