@@ -1,6 +1,9 @@
 <launch>
 
+    <arg name="orientation_ff" default="false"/>
     <arg name="twist_local" default="false"/>
+
+
     <node   name="dynamic_reconfigure_load_lyapunov" pkg="dynamic_reconfigure" type="dynparam" 
             args="load /mur/mir/slave_controller $(find transport_launcher)/config/lyapunov_dyn.yaml" />
     
@@ -13,6 +16,7 @@
     <include file="$(find mur_hardware_helper)/launch/mur.launch">
         <arg name="move_base" value="true"/>
         <arg name="controllers_started" value="joint_state_controller robot_status_controller position_joint_controller"/>
+        <arg name="controllers_stopped" value="cartesian_controller"/>
     </include>
 
     <!-- Access teached movement for the manipulator -->
@@ -22,10 +26,14 @@
     </node>
 
     <!-- Launch the formation slave controller -->
+    <rosparam command="load" file="$(find transport_launcher)/config/reference_mur.yaml" ns="/mur/mir/slave_controller"/>
     <include file="$(find multi_robot_controller)/launch/slave.launch" ns="mur/mir">
         <arg unless="$(arg twist_local)" name="config_file" value="$(find transport_launcher)/config/global_twist_slave_controller.yaml"/>
-        <arg if="$(arg twist_local)" name="config_file" value="$(find transport_launcher)/config/local_twist_slave_controller.yaml"/>
-        <rosparam command="load" file="$(find transport_launcher)/config/reference_mur.yaml" ns="/mur/mir/slave_controller"/>
+        <arg if="$(arg twist_local)" name="config_file" value="$(find transport_launcher)/config/local_twist_slave_controller.yaml"/>       
     </include>
+
+    <node if="$(eval orientation_ff)" name="orientation_ff" type="feed_forward_tf_node" pkg="multi_robot_controller" ns="mur/ur">
+        <rosparam command="load" file="$(find transport_launcher)/config/mur_orientation_ff.yaml"/>
+    </node>
 
 </launch>

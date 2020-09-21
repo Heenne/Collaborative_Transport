@@ -1,0 +1,13 @@
+update_rate: 100
+pose_topic: cartesian_controller/target_pose_prefixed
+lookup_offset: true 
+off_source_frame: mur/mir/base_link
+off_target_frame: mur/ur/base_link
+lookup_initial_pose: true
+ee_source_frame: mur/mir/base_link
+ee_target_frame: mur/ur/tool0
+has_initial_orientation: true
+current_source_frame: master/base_link
+current_target_frame: mur/mir/base_link
+ee_pose_frame: mur/ur/base_link
+tf_prefix: ""

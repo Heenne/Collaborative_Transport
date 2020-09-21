@@ -30,10 +30,10 @@
     </node>
 
     <!-- Launch the formation slave controller -->
+    <rosparam command="load" file="$(find transport_launcher)/config/reference_miranda.yaml" ns="/miranda/mir/slave_controller"/>
     <include file="$(find multi_robot_controller)/launch/slave.launch" ns="miranda/mir">
         <arg unless="$(arg twist_local)" name="config_file" value="$(find transport_launcher)/config/global_twist_slave_controller.yaml"/>
         <arg if="$(arg twist_local)" name="config_file" value="$(find transport_launcher)/config/local_twist_slave_controller.yaml"/>
-        <rosparam command="load" file="$(find transport_launcher)/config/reference_miranda.yaml" ns="/miranda/mir/slave_controller"/>
     </include>
 
     <node if="$(eval orientation_ff)" name="orientation_ff" type="feed_forward_tf_node" pkg="multi_robot_controller" ns="miranda/panda">
