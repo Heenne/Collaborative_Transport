@@ -7,7 +7,9 @@ void TfOrientationFeedForward::update(const ros::TimerEvent&)
 {
     try{
         geometry_msgs::TransformStamped trafo=tf_buffer_.lookupTransform(   tf::resolve(this->tf_prefix_,this->current_source_frame_),
-                                                                            tf::resolve(this->tf_prefix_,this->current_target_frame_),ros::Time(0));
+                                                                            tf::resolve(this->tf_prefix_,this->current_target_frame_),
+                                                                            ros::Time(0),
+                                                                            ros::Duration(10.0));
         Orientation quat;
         convertMsg(quat,trafo);
         this->updateOrientation(quat);
@@ -18,7 +20,7 @@ void TfOrientationFeedForward::update(const ros::TimerEvent&)
         this->pose_pub_.publish(pose);    
     }
     catch(tf2::TransformException &ex) {
-                ROS_WARN("Could NOT find trafo for initial pose lookupfrom %s to %s: %s",
+                ROS_WARN_ONCE("Could NOT find trafo for initial pose lookupfrom %s to %s: %s",
                                                         this->current_source_frame_.c_str(),
                                                         this->current_target_frame_.c_str(), ex.what());
     }

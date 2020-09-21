@@ -1,9 +1,10 @@
 #include <multi_robot_controller/feed_forward/ros_orientation_feed_forward_base.h>
 
-RosOrientationFeedForwardBase::RosOrientationFeedForwardBase(ros::NodeHandle &nh):  nh_(nh),
+RosOrientationFeedForwardBase::RosOrientationFeedForwardBase(ros::NodeHandle &nh):  nh_(nh),                                                                        
                                                                                     tf_listener_(tf_buffer_)
 {
     ros::NodeHandle priv("~");
+    this->tf_buffer_.setUsingDedicatedThread(true);
     this->init_service_=priv.advertiseService("init",&RosOrientationFeedForwardBase::initServiceCallback,this);
 }
 
@@ -35,7 +36,8 @@ bool RosOrientationFeedForwardBase::init()
             try{
                 geometry_msgs::TransformStamped offset_trafo=tf_buffer_.lookupTransform(tf::resolve(this->tf_prefix_,off_source_frame),
                                                                                     tf::resolve(this->tf_prefix_,off_target_frame),
-                                                                                    ros::Time(0));
+                                                                                    ros::Time(0),
+                                                                                    ros::Duration(10.0));
                 Pose offset;
                 convertMsg(offset,offset_trafo);
                 this->setOffset(offset);
@@ -65,14 +67,17 @@ bool RosOrientationFeedForwardBase::init()
             try{
                 geometry_msgs::TransformStamped trafo=tf_buffer_.lookupTransform(tf::resolve(this->tf_prefix_,source_frame),
                                                                                 tf::resolve(this->tf_prefix_,target_frame),
-                                                                                ros::Time(0));
+                                                                                ros::Time(0),
+                                                                                ros::Duration(10.0));
                 Pose initial;
                 convertMsg(initial,trafo);
                 this->setDesiredPose(initial);
                 ROS_INFO_STREAM("Set initial pose: \n"<<initial);
             }
             catch(tf2::TransformException &ex) {
-                throw ex;
+                  ROS_WARN("Could NOT find trafo for initial lookup from %s to %s: %s",
+                                                                source_frame.c_str(),
+                                                                target_frame.c_str(), ex.what());
             }
         }
     }
