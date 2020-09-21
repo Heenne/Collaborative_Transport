@@ -15,8 +15,8 @@
     -->
     <include file="$(find mur_hardware_helper)/launch/mur.launch">
         <arg name="move_base" value="true"/>
-        <arg name="controllers_started" value="joint_state_controller robot_status_controller position_joint_controller"/>
-        <arg name="controllers_stopped" value="cartesian_controller"/>
+        <arg name="controllers_started" value="joint_state_controller robot_status_controller"/>
+        <arg name="controllers_stopped" value="position_joint_controller cartesian_controller"/>
     </include>
 
     <!-- Access teached movement for the manipulator -->

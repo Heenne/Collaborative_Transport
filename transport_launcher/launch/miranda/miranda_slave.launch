@@ -19,8 +19,8 @@
     -->
     <include file="$(find miranda_hardware_helper)/launch/miranda.launch">
         <arg name="move_base" value="true"/>
-        <arg name="controllers_started" value="franka_state_controller position_joint_controller"/>
-        <arg name="controllers_stopped" value="cartesian_impedance_controller"/>
+        <arg name="controllers_started" value="franka_state_controller"/>
+        <arg name="controllers_stopped" value="cartesian_impedance_controller position_joint_controller"/>
     </include>
 
     <!-- Access teached movement for the manipulator -->
