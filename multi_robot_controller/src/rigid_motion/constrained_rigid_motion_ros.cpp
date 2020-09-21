@@ -21,5 +21,10 @@ ConstrainedRigidMotionRos::ConstrainedRigidMotionRos():ConstrainedRigidMotion()
     {
         throw NecessaryParamException(priv.resolveName("reference"));
     }
+    double thresh;
+    if(priv.getParam("velocity_constrain_thresh",thresh))
+    {
+        this->setVelocityThresh(thresh);
+    }
     
 }

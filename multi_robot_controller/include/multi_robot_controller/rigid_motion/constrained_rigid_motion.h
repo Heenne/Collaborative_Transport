@@ -52,11 +52,18 @@ class ConstrainedRigidMotion{
          * @return Eigen::Matrix3d differential drive locking matrix
          */
         static Eigen::Matrix3d createDiffDriveLocking();
+        /**
+         * @brief Set the Velocity Threshold that specifies when to calc atan2 to given value
+         * 
+         * @param thresh Minimum velocity the atan2 is calculate from
+         */
+        void setVelocityThresh(double thresh);
     private:
         void init();
         void calcConstrains(); 
         void calcUnConstrained();     
         void applyConstrains();
+        
 
         Eigen::Quaterniond rotation_;
         Eigen::Matrix3d angular_tensor_;
@@ -68,6 +75,7 @@ class ConstrainedRigidMotion{
         Eigen::Matrix3d locking_;
         Eigen::Vector3d constrain_;
         Eigen::Vector3d d_constrain_;
+        double velocity_constrain_thresh_;
         double time_old_;
         double time_new_;
         bool initial_call_;

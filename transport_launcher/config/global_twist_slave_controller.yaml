@@ -1,5 +1,7 @@
 rate: 30 
 
+velocity_constrain_thresh: 0.01
+
 target:
   input_type: 2
   topic_pose: "/virtual_master/master_pose"

@@ -34,7 +34,10 @@ void ConstrainedRigidMotion::setReference(Eigen::Vector3d ref)
 {
     this->reference_=ref;
 }
-
+void ConstrainedRigidMotion::setVelocityThresh(double thresh)
+{
+    this->velocity_constrain_thresh_=thresh;
+}
 void ConstrainedRigidMotion::updateInputState(Eigen::Vector3d state,Eigen::Vector3d d_state,double time)
 {
 
@@ -68,9 +71,8 @@ void ConstrainedRigidMotion::calcConstrains()
     double d_time=(this->time_new_-this->time_old_);
     if(d_time>0.0 &&!this->initial_call_)
     {
-        if(std::sqrt(std::pow(this->d_state_out_(0),2)+std::pow(this->d_state_out_(1),2))<0.05 )
-        {
-            
+        if(std::sqrt(std::pow(this->d_state_out_(0),2)+std::pow(this->d_state_out_(1),2))<velocity_constrain_thresh_)
+        {            
             this->constrain_<<0.0,0.0,this->state_in_(2)+this->reference_(2);
         }
         else
