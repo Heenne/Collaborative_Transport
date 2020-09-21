@@ -66,8 +66,7 @@ void ConstrainedRigidMotion::calcConstrains()
 {
     Eigen::Vector3d constrain_old=this->constrain_;
     double d_time=(this->time_new_-this->time_old_);
-
-    if(!d_time==0.0 &&!this->initial_call_)
+    if(d_time>0.0 &&!this->initial_call_)
     {
         if(std::sqrt(std::pow(this->d_state_out_(0),2)+std::pow(this->d_state_out_(1),2))<0.05 )
         {
@@ -79,9 +78,10 @@ void ConstrainedRigidMotion::calcConstrains()
             double angle_calc=std::atan2(this->d_state_out_(1),this->d_state_out_(0));
             this->constrain_<<0.0,0.0,angle_calc;            
         };
-        // this->d_constrain_=(this->constrain_-constrain_old)/d_time;
-        this->d_constrain_<<0.0,0.0,this->d_state_in_(2);
+        this->d_constrain_=(this->constrain_-constrain_old)/d_time;
+        // this->d_constrain_<<0.0,0.0,this->d_state_in_(2);
     }
+    
     this->time_old_=this->time_new_;
 }
 
