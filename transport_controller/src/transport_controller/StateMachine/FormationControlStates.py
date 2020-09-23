@@ -5,7 +5,6 @@ import rospy
 from std_srvs.srv   import Empty,EmptyRequest ,SetBool,SetBoolRequest
 from controller_manager_msgs.srv import SwitchController,SwitchControllerRequest
 
-
 class FormationControlServiceState(smach.State):
     def __init__(self,namespaces,name):
         smach.State.__init__(self,outcomes=["called"])
@@ -78,26 +77,54 @@ class FormationControlIdleState(smach.State):
         self.__called=True
 
 
+class AdjutsState(smach.State):
+    def __init__(self,namespaces):
+        smach.State.__init__(self,outcomes=["adjusted"])
+        self.__switcher=ClientDistributor(namespaces,ServiceConfig("controller_manager/switch_controller",SwitchController))         
+        self.__enable=False
+        self.__timeout=0.1
+
+    def execute(self,userdata):
+        req=SwitchControllerRequest()
+        req.stop_controllers=["position_joint_controller"]
+        req.start_controllers=["cartesian_controller"]
+        req.strictness=2
+        self.__switcher.call(req)
+        srv=rospy.Service("~trigger",Empty,self.__callback__)
+        while not self.__enable:
+            rospy.sleep(self.__timeout)             
+        srv.shutdown()
+        return "adjusted"
+
+    def __callback__(self,req):
+        self.__enable=True
+        return
+    
+
 class LinkObjectState(smach.State):
     def __init__(self,namespaces):
         smach.State.__init__(self,outcomes=["linked"])
-        self.__clients=ClientDistributor(namespaces,ServiceConfig("grip",SetBool))
+        self.__enable_orientation_ff=rospy.get_param("~enable_orientation_ff",False)
+        if self.__enable_orientation_ff:
+            self.__orientation_init=ClientDistributor(namespaces,ServiceConfig("orientation_ff/init",Empty))
+        self.__clients=ClientDistributor(namespaces,ServiceConfig("grip",SetBool))       
+        self.__switcher=ClientDistributor(namespaces,ServiceConfig("controller_manager/switch_controller",SwitchController))
 
     def execute(self,userdata):
-        init_ff=rospy.ServiceProxy("/miranda/panda/orientation_ff/init",Empty)
-        init_ff.call(EmptyRequest())
-        switcher=rospy.ServiceProxy("/miranda/panda/controller_manager/switch_controller",SwitchController)
+        if self.__enable_orientation_ff:       
+            self.__orientation_init.call(EmptyRequest())        
+        
         req=SwitchControllerRequest()
-        req.stop_controllers=["position_joint_controller"]
+        req.stop_controllers=["cartesian_controller"]
         req.start_controllers=["cartesian_impedance_controller"]
         req.strictness=2
-        switcher.call(req)
+        self.__switcher.call(req)
 
         grip_req=SetBoolRequest()
         grip_req.data=True
-        #self.__clients.call(grip_req)
-
+        self.__clients.call(grip_req)
         return "linked"
+
 
 class ReleaseObjectState(smach.State):
     def __init__(self,namespaces):

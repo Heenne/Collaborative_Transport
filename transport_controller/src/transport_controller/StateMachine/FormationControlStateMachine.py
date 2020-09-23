@@ -27,29 +27,39 @@ class FormationControlStateMachine(smach.StateMachine):
            
             
             if self.__enable_manipulator:
+                #Enable the formation base controller
                 smach.StateMachine.add('EnableControl',
                                     st.FormationControlServiceState(base_ns,"slave_controller/enable_controller"),
                                     transitions={'called':'DriveToGrip'})
+                
+                #Drive to the grip position (PTP)
                 smach.StateMachine.add("DriveToGrip",
                                         mv.DrivePoseState(arm_ns,"grip"),
                                         transitions={"done":"Adjust"})
-                smach.StateMachine.add("Adjust",    States.WaitTriggerState(0.1,"adjusted"),
+                
+                #Adjust the EE position
+                smach.StateMachine.add("Adjust",    st.AdjutsState(arm_ns),
                                                                 transitions={"adjusted":"LinkObject"})
+                
+                #Link to the object (enable compliance and grip)
                 smach.StateMachine.add("LinkObject", st.LinkObjectState(arm_ns),transitions={"linked":"Idle"})
 
             else:
+                #Enable the formation base controller
                 smach.StateMachine.add('EnableControl',
                                     st.FormationControlServiceState(base_ns,"slave_controller/enable_controller"),
                                     transitions={'called':'Idle'})                
             
             if self.__enable_manipulator:
+                #Release gripper and disable compliance
                 smach.StateMachine.add("ReleaseObject", st.ReleaseObjectState(arm_ns),transitions={"released":"DriveToMove"})
                 
+                #Drive to move position (PTP)
                 smach.StateMachine.add("DriveToMove",
                                     mv.DrivePoseState(arm_ns,"drive"),
                                     transitions={"done":"DisableControl"})          
 
-
+            #Disable the formation control
             smach.StateMachine.add('DisableControl',
                                     st.FormationControlServiceState(base_ns,"slave_controller/disable_controller"),
                                     transitions={'called':'Idle'})            

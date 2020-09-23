@@ -16,7 +16,7 @@ if __name__=="__main__":
     try:
         with sm:
             smach.StateMachine.add( "PrepareMovement",
-                                    PrepareSystemStateMachine(base_namespaces),
+                                    PrepareSystemStateMachine(base_namespaces,arm_namespaces),
                                     transitions={   "preparation_done":"MoveToFormation",
                                                     "preparation_error":'out'})
 

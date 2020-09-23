@@ -5,6 +5,7 @@ import smach_ros
 from ServiceDistributor import ClientDistributor ,ServiceConfig
 from robot_teacher.srv import SetName,SetNameRequest
 from geometry_msgs.msg import PoseStamped,TransformStamped
+from controller_manager_msgs.srv import SwitchController,SwitchControllerRequest
 from tf2_geometry_msgs import do_transform_pose
 from std_srvs.srv import Empty
 
@@ -67,9 +68,9 @@ class IdleState(smach.State):
         return "start"
     
 class DrivePoseState(smach.State):
-    def __init__(self,namespaces,pose_name):
-        self.__pose_name=pose_name
-        smach.State.__init__(self,  outcomes=["done"])       
+    def __init__(self,namespaces,pose_name):       
+        smach.State.__init__(self,  outcomes=["done"]) 
+        self.__pose_name=pose_name  
         self.__client=ClientDistributor( namespaces,
                                         ServiceConfig("move_teached/drive_to",SetName))
     def execute(self,userdata):
