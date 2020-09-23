@@ -6,5 +6,7 @@
     <node name="transport_state_machine" type="transport_state_machine_node.py" pkg="transport_controller" output="screen">
         <rosparam param="base_namespaces">["/mur/mir","/miranda/mir"]</rosparam>
         <rosparam param="arm_namespaces">["/mur/ur","/miranda/panda"]</rosparam>
+        <param name="enable_manipulator" value="true"/>
+        <param name="enable_orientation_ff" value="false"/>
     </node>
 </launch>
