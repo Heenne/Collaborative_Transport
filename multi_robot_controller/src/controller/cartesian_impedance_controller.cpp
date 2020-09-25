@@ -20,7 +20,7 @@ bool CartesianImpedanceController::init(hardware_interface::RobotHW* robot_hw,
   std::vector<double> cartesian_damping_vector;
 
   sub_equilibrium_pose_ = node_handle.subscribe(
-      "/equilibrium_pose", 20, &CartesianImpedanceController::equilibriumPoseCallback, this,
+      "equilibrium_pose", 20, &CartesianImpedanceController::equilibriumPoseCallback, this,
       ros::TransportHints().reliable().tcpNoDelay());
 
   std::string arm_id;
@@ -89,8 +89,7 @@ bool CartesianImpedanceController::init(hardware_interface::RobotHW* robot_hw,
 
   dynamic_server_compliance_param_ = std::make_unique<
       dynamic_reconfigure::Server<multi_robot_controller::StiffnessConfig>>(
-
-      dynamic_reconfigure_compliance_param_node_);
+      node_handle);
   dynamic_server_compliance_param_->setCallback(
       boost::bind(&CartesianImpedanceController::complianceParamCallback, this, _1, _2));
 
