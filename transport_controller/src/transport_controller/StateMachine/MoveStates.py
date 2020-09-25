@@ -77,5 +77,5 @@ class DrivePoseState(smach.State):
         req=SetNameRequest()
         req.name=self.__pose_name
         self.__client.call(req)
-        rospy.sleep(4)
+        rospy.sleep(10)
         return "done"

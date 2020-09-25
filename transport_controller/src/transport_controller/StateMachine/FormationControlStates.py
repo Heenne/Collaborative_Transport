@@ -93,7 +93,12 @@ class AdjutsState(smach.State):
         srv=rospy.Service("~trigger",Empty,self.__callback__)
         while not self.__enable:
             rospy.sleep(self.__timeout)             
-        srv.shutdown()
+        srv.shutdown()    
+        req=SwitchControllerRequest()
+        req.stop_controllers=["cartesian_controller"]
+        req.start_controllers=[]
+        req.strictness=2 
+        self.__switcher.call(req)  
         return "adjusted"
 
     def __callback__(self,req):
@@ -107,6 +112,7 @@ class LinkObjectState(smach.State):
         self.__enable_orientation_ff=rospy.get_param("~enable_orientation_ff",False)
         if self.__enable_orientation_ff:
             self.__orientation_init=ClientDistributor(namespaces,ServiceConfig("orientation_ff/init",Empty))
+        
         self.__clients=ClientDistributor(namespaces,ServiceConfig("grip",SetBool))       
         self.__switcher=ClientDistributor(namespaces,ServiceConfig("controller_manager/switch_controller",SwitchController))
 
@@ -115,7 +121,7 @@ class LinkObjectState(smach.State):
             self.__orientation_init.call(EmptyRequest())        
         
         req=SwitchControllerRequest()
-        req.stop_controllers=["cartesian_controller"]
+        req.stop_controllers=[]
         req.start_controllers=["cartesian_impedance_controller"]
         req.strictness=2
         self.__switcher.call(req)
@@ -130,17 +136,17 @@ class ReleaseObjectState(smach.State):
     def __init__(self,namespaces):
         smach.State.__init__(self,outcomes=["released"])
         self.__clients=ClientDistributor(namespaces,ServiceConfig("grip",SetBool))
+        self.__switcher=ClientDistributor(namespaces,ServiceConfig("controller_manager/switch_controller",SwitchController))
 
     def execute(self,userdata):
         grip_req=SetBoolRequest()
         grip_req.data=False
-        #self.__clients.call(grip_req)
+        self.__clients.call(grip_req)
 
-        switcher=rospy.ServiceProxy("/miranda/panda/controller_manager/switch_controller",SwitchController)
         req=SwitchControllerRequest()
         req.stop_controllers=["cartesian_impedance_controller"]
         req.start_controllers=["position_joint_controller"]
         req.strictness=2
-        switcher.call(req)
+        self.__switcher.call(req)
      
         return "released"
