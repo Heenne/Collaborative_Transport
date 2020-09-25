@@ -1,5 +1,5 @@
 update_rate: 100
-pose_topic: cartesian_controller/target_pose_prefixed
+pose_topic: cartesian_impedance_controller/target_pose_prefixed
 lookup_offset: true 
 off_source_frame: mur/mir/base_link
 off_target_frame: mur/ur/base_link

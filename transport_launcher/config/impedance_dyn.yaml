@@ -1,35 +1,35 @@
 !!python/object/new:dynamic_reconfigure.encoding.Config
 dictitems:
-  Dx: 0.3
-  Dy: 0.3
-  Dz: 0.3
-  Kx: 0.0
-  Ky: 0.0
-  Kz: 400.0
+  Dx: 2.0
+  Dy: 2.0
+  Dz: 2.0
+  Kx: 76.0
+  Ky: 76.0
+  Kz: 76.0
   groups: !!python/object/new:dynamic_reconfigure.encoding.Config
     dictitems:
-      Dx: 0.3
-      Dy: 0.3
-      Dz: 0.3
-      Kx: 0.0
-      Ky: 0.0
-      Kz: 400.0
+      Dx: 2.0
+      Dy: 2.0
+      Dz: 2.0
+      Kx: 76.0
+      Ky: 76.0
+      Kz: 76.0
       groups: !!python/object/new:dynamic_reconfigure.encoding.Config
         state: []
       id: 0
       name: Default
-      nullspace_damping: 32.0
-      nullspace_stiffness: 27.0
+      nullspace_damping: 13.0
+      nullspace_stiffness: 21.0
       parameters: !!python/object/new:dynamic_reconfigure.encoding.Config
         state: []
       parent: 0
-      rotational_damping: 10.0
-      rotational_stiffness: 10.0
+      rotational_damping: 0.3
+      rotational_stiffness: 0.3
       state: true
       type: ''
     state: []
-  nullspace_damping: 32.0
-  nullspace_stiffness: 27.0
-  rotational_damping: 10.0
-  rotational_stiffness: 10.0
+  nullspace_damping: 13.0
+  nullspace_stiffness: 21.0
+  rotational_damping: 0.3
+  rotational_stiffness: 0.3
 state: []

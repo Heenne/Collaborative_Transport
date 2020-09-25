@@ -1,5 +1,5 @@
 update_rate: 100
-pose_topic: equilibrium_pose
+pose_topic: cartesian_impedance_controller/equilibrium_pose
 lookup_offset: true 
 off_source_frame: miranda/mir/base_link
 off_target_frame: miranda/panda/panda_link0
