@@ -1,6 +1,5 @@
 <launch>
-
-    <include file="$(find transport_launcher)/launch/miranda_slave.launch">
+    <include file="$(find transport_launcher)/launch/miranda/miranda_slave.launch">
         <arg name="orientation_ff" value="true"/>
     </include>
 </launch>
