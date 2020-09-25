@@ -58,14 +58,13 @@
   <build_depend>multi_robot_msgs</build_depend>  
   <build_depend>geometry_msgs</build_depend>
   <build_depend>nav_msgs</build_depend>
-  <depend>controller_interface</depend>
-  <depend>pluginlib</depend>
+
   <doc_depend>doxygen</doc_depend>
 
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>
-    <controller_interface plugin="${prefix}/multi_robot_plugins.xml"/>
+   
   </export>
 
 </package>

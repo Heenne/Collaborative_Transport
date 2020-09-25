@@ -112,7 +112,6 @@ find_package(Franka 0.7.0 REQUIRED)
 ## Generate dynamic reconfigure parameters in the 'cfg' folder
 generate_dynamic_reconfigure_options(
   cfg/lyapunov.cfg
-  cfg/stiffness.cfg
 )
 
 ###################################
@@ -191,10 +190,6 @@ add_library(controller
   ${CONTROLLER_INCLUDE_PATH}/lyapunov_controller.h
   ${CONTROLLER_SRC_PATH}/lyapunov_controller.cpp
 
-  ${CONTROLLER_INCLUDE_PATH}/cartesian_impedance_controller.h
-  ${CONTROLLER_SRC_PATH}/cartesian_impedance_controller.cpp
-
-  ${CONTROLLER_INCLUDE_PATH}/pseudo_inversion.h
 )
 target_link_libraries(controller
   rigid_motion
