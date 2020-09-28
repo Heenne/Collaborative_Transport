@@ -1,0 +1,22 @@
+<launch>
+    <arg name="mur_root_package" default="mur_hardware_helper"/>
+
+       
+    <!--    Launch the robot hardware
+            Access move base server
+            Sate controlle for the knowledge of current manipulator state
+            Cartesian controller for motion command
+    -->
+    <include file="$(eval find( arg('mur_root_package'))+'/launch/mur.launch')">
+        <arg name="move_base" value="true"/>
+        <arg name="controllers_started" value="joint_state_controller robot_status_controller cartesian_impedance_controller"/>
+    </include>
+
+    <!-- 
+        Start the orientation feed forward with given config file
+     -->
+    <node name="orientation_ff" type="feed_forward_tf_node" pkg="multi_robot_controller" ns="mur/ur" output="screen">
+        <rosparam command="load" file="$(find transport_launcher)/config/mur_orientation_ff.yaml"/>
+    </node>
+
+</launch>

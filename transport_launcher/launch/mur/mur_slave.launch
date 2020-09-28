@@ -1,19 +1,20 @@
 <launch>
-
-    <arg name="orientation_ff" default="false"/>
     <arg name="twist_local" default="false"/>
+    <arg name="mur_root_package" default="mur_hardware_helper"/>
 
-
+    <!-- 
+        Load parameter for dynamic reconfiguring the slave controller
+     -->
     <node   name="dynamic_reconfigure_load_lyapunov" pkg="dynamic_reconfigure" type="dynparam" 
             args="load /mur/mir/slave_controller $(find transport_launcher)/config/lyapunov_dyn.yaml" />
     
-    <!--    Laucnh the robot hardware
+    <!--    Launch the robot hardware
             Access move base server
             Sate controlle for the knowledge of current manipulator state
             Joint controller for teached movemet
             impedance controller for transport movement
     -->
-    <include file="$(find mur_hardware_helper)/launch/mur.launch">
+    <include file="$(eval find( arg('mur_root_package'))+'/launch/mur.launch')">
         <arg name="move_base" value="true"/>
         <arg name="controllers_started" value="joint_state_controller robot_status_controller position_joint_controller"/>
         <arg name="controllers_stopped" value="cartesian_controller cartesian_impedance_controller"/>
@@ -22,7 +23,7 @@
     <!-- Access teached movement for the manipulator -->
     <arg name="poses_file_name" default="transport_poses.yaml"/>
     <node name="move_teached" type="pose_teacher_node.py" pkg="robot_teacher"  output="screen" ns="mur/ur">
-        <rosparam command="load" file="$(find mur_hardware_helper)/config/move_teached.yaml" subst_value="true"/>
+        <rosparam command="load" file="$(find $(arg mur_root_package))/config/move_teached.yaml" subst_value="true"/>
     </node>
 
     <!-- Launch the formation slave controller -->
@@ -31,9 +32,5 @@
         <arg unless="$(arg twist_local)" name="config_file" value="$(find transport_launcher)/config/global_twist_slave_controller.yaml"/>
         <arg if="$(arg twist_local)" name="config_file" value="$(find transport_launcher)/config/local_twist_slave_controller.yaml"/>       
     </include>
-
-    <node if="$(eval orientation_ff)" name="orientation_ff" type="feed_forward_tf_node" pkg="multi_robot_controller" ns="mur/ur">
-        <rosparam command="load" file="$(find transport_launcher)/config/mur_orientation_ff.yaml"/>
-    </node>
 
 </launch>

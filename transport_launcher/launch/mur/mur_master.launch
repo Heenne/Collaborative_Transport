@@ -1,6 +1,6 @@
 <launch>
-
-  <include file="$(find mur_hardware_helper)/launch/mur.launch"/>
+  <arg name="mur_root_package" default="mur_hardware_helper"/>
+  <include file="$(eval find( arg('mur_root_package'))+'/launch/mur.launch')">
   <include file="$(find multi_robot_controller)/launch/master.launch" ns="mur/mir"/>
  
 </launch>
