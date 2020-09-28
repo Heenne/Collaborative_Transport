@@ -5,9 +5,9 @@ off_source_frame: miranda/mir/base_link
 off_target_frame: miranda/panda/panda_link0
 lookup_initial_pose: true
 ee_source_frame: miranda/mir/base_link
-ee_target_frame: miranda/panda/panda_hand
+ee_target_frame: miranda/panda/panda_EE
 has_initial_orientation: true
-current_source_frame: master/base_link
+current_source_frame: miranda/mir/odom
 current_target_frame: miranda/mir/base_link
 ee_pose_frame: miranda/panda/panda_link0
 tf_prefix: ""

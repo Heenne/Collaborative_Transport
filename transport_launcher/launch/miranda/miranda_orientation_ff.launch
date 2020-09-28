@@ -1,6 +1,8 @@
 <launch>
     <arg name="miranda_root_package" default="miranda_hardware_helper"/>
 
+    <node   name="dynamic_reconfigure_load_stiffness" pkg="dynamic_reconfigure" type="dynparam" 
+            args="load /miranda/mir/slave_controller $(find transport_launcher)/config/impedance_dyn.yaml" />
        
     <!--    Launch the robot hardware
             Access move base server

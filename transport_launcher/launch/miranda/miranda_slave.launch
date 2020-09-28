@@ -6,9 +6,9 @@
     
     <node   name="dynamic_reconfigure_load_lyapunov" pkg="dynamic_reconfigure" type="dynparam" 
             args="load /miranda/mir/slave_controller $(find transport_launcher)/config/lyapunov_dyn.yaml" />
-    
-    <!-- <node   name="dynamic_reconfigure_load_cartesian" pkg="dynamic_reconfigure" type="dynparam" 
-            args="load /miranda/mir/slave_controller $(find transport_launcher)/config/impedance_dyn.yaml" /> -->
+    <node   name="dynamic_reconfigure_load_stiffness" pkg="dynamic_reconfigure" type="dynparam" 
+            args="load /miranda/mir/slave_controller $(find transport_launcher)/config/impedance_dyn.yaml" />
+
 
   
     <!--    Laucnh the robot hardware
