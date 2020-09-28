@@ -12,14 +12,6 @@ bool RosOrientationFeedForwardBase::init()
 {
     double rate;
     ros::NodeHandle nh("~");
-    if(nh.getParam("update_rate",rate))
-    {
-        this->update_timer_=this->nh_.createTimer(ros::Rate(rate),&RosOrientationFeedForwardBase::update,this);
-    }
-    else
-    {
-       throw NecessaryParamException("update_rate");
-    }
     
     nh.getParam("tf_prefix",this->tf_prefix_);
     
@@ -94,6 +86,15 @@ bool RosOrientationFeedForwardBase::init()
     if(nh.getParam("pose_topic",pose_topic))
     {
         this->pose_pub_=this->nh_.advertise<geometry_msgs::PoseStamped>(pose_topic,10);
+    }
+
+    if(nh.getParam("update_rate",rate))
+    {
+        this->update_timer_=this->nh_.createTimer(ros::Rate(rate),&RosOrientationFeedForwardBase::update,this);
+    }
+    else
+    {
+       throw NecessaryParamException("update_rate");
     }
     return true;
     
