@@ -1,7 +1,6 @@
 <launch>
     <arg name="twist_local" default="false"/>
-    <arg name="mur_root_package" default="mur_hardware_helper"/>
-
+   
     <!-- 
         Load parameter for dynamic reconfiguring the slave controller
      -->
@@ -14,17 +13,12 @@
             Joint controller for teached movemet
             impedance controller for transport movement
     -->
-    <include file="$(eval find( arg('mur_root_package'))+'/launch/mur.launch')">
-        <arg name="move_base" value="true"/>
+    <include file="$(find mur_hardware_helper)/launch/mur.launch">
+        <arg name="pose_filename" value="$(find transport_launcher)/poses/mur_transport_poses.yaml"/>
         <arg name="controllers_started" value="joint_state_controller robot_status_controller position_joint_controller"/>
         <arg name="controllers_stopped" value="cartesian_controller cartesian_impedance_controller"/>
     </include>
 
-    <!-- Access teached movement for the manipulator -->
-    <arg name="poses_file_name" default="transport_poses.yaml"/>
-    <node name="move_teached" type="pose_teacher_node.py" pkg="robot_teacher"  output="screen" ns="mur/ur">
-        <rosparam command="load" file="$(find $(arg mur_root_package))/config/move_teached.yaml" subst_value="true"/>
-    </node>
 
     <!-- Launch the formation slave controller -->
     <rosparam command="load" file="$(find transport_launcher)/config/reference_mur.yaml" ns="/mur/mir/slave_controller"/>

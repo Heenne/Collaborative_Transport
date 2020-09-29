@@ -1,7 +1,5 @@
 <launch>
 
-
-    <arg name="orientation_ff" default="false"/>
     <arg name="twist_local" default="false"/>
     
     <node   name="dynamic_reconfigure_load_lyapunov" pkg="dynamic_reconfigure" type="dynparam" 
@@ -18,16 +16,10 @@
             impedance controller for transport movement
     -->
     <include file="$(find miranda_hardware_helper)/launch/miranda.launch">
-        <arg name="move_base" value="true"/>
         <arg name="controllers_started" value="franka_state_controller position_joint_controller"/>
         <arg name="controllers_stopped" value="cartesian_impedance_controller cartesian_controller"/>
+        <arg name="pose_filename" value="$(find transport_launcher)/poses/miranda_transport_poses.yaml"/>
     </include>
-
-    <!-- Access teached movement for the manipulator -->
-    <arg name="poses_file_name" default="transport_poses.yaml"/>
-    <node name="move_teached" type="pose_teacher_node.py" pkg="robot_teacher"  output="screen" ns="miranda/panda">
-        <rosparam command="load" file="$(find miranda_hardware_helper)/config/move_teached.yaml" subst_value="true"/>
-    </node>
 
     <!-- Launch the formation slave controller -->
     <rosparam command="load" file="$(find transport_launcher)/config/reference_miranda.yaml" ns="/miranda/mir/slave_controller"/>
@@ -35,9 +27,5 @@
         <arg unless="$(arg twist_local)" name="config_file" value="$(find transport_launcher)/config/global_twist_slave_controller.yaml"/>
         <arg if="$(arg twist_local)" name="config_file" value="$(find transport_launcher)/config/local_twist_slave_controller.yaml"/>
     </include>
-
-    <node if="$(eval orientation_ff)" name="orientation_ff" type="feed_forward_tf_node" pkg="multi_robot_controller" ns="miranda/panda">
-        <rosparam command="load" file="$(find transport_launcher)/config/miranda_orientation_ff.yaml"/>
-    </node>
 
 </launch>
