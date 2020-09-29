@@ -4,9 +4,6 @@
         <arg name="use_planner_cmd_vel"  value="true"/>
     </include>
     <node name="transport_state_machine" type="transport_state_machine_node.py" pkg="transport_controller" output="screen">
-        <rosparam param="base_namespaces">["/mur/mir","/miranda/mir"]</rosparam>
-        <rosparam param="arm_namespaces">["/mur/ur","/miranda/panda"]</rosparam>
-        <param name="enable_manipulator" value="true"/>
-        <param name="enable_orientation_ff" value="true"/>
+        <rosparam command="load" file="$(find transport_launcher)/config/system_settings.yaml"/>
     </node>
 </launch>
