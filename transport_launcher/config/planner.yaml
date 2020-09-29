@@ -14,5 +14,5 @@ iterations: 10
 omega: 0.05
 ratio: 2
 phaseshift: 0
-amplifier_x: 2.0
+amplifier_x: 1.0
 amplifier_y: 0.25
