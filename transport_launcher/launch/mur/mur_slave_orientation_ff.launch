@@ -5,7 +5,7 @@
     <!--    
         Laucnh the robot hardware          
     -->
-    <include file="$(find transport_launcher)/launch/mur/mur_slave.launch" pass_all_args="true">       
+    <include file="$(find transport_launcher)/launch/mur/mur_slave.launch" pass_all_args="true"/>       
 
     <!-- 
         Start the orientation feed forward with given config file
