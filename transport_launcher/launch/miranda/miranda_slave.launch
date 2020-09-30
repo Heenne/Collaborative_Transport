@@ -2,10 +2,14 @@
 
     <arg name="twist_local" default="false"/>
     
-    <node   name="dynamic_reconfigure_load_lyapunov" pkg="dynamic_reconfigure" type="dynparam" 
+    <node   name="reconfigure_load_lyapunov" pkg="dynamic_reconfigure" type="dynparam" 
             args="load /miranda/mir/slave_controller $(find transport_launcher)/config/lyapunov_dyn.yaml" />
-    <node   name="dynamic_reconfigure_load_stiffness" pkg="dynamic_reconfigure" type="dynparam" 
-            args="load /miranda/mir/slave_controller $(find transport_launcher)/config/impedance_dyn.yaml" />
+    
+    <node   name="reconfigure_load_stiffness_ic" pkg="dynamic_reconfigure" type="dynparam" 
+            args="load /miranda/panda/cartesian_impedance_controller $(find transport_launcher)/config/impedance_dyn.yaml" />
+    
+    <node   name="reconfigure_load_stiffness_cc" pkg="dynamic_reconfigure" type="dynparam" 
+            args="load /miranda/panda/cartesian_controller $(find transport_launcher)/config/impedance_dyn.yaml" />
 
 
   
