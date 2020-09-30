@@ -71,14 +71,12 @@ void ConstrainedRigidMotion::calcConstrains()
     double d_time=(this->time_new_-this->time_old_);
     if(d_time>0.0 &&!this->initial_call_)
     {
-       
-        double angle_calc=std::atan2(this->d_state_out_(1),this->d_state_out_(0));
-        this->constrain_<<0.0,0.0,angle_calc;            
-       
+        if(std::sqrt(std::pow(this->d_state_out_(0),2)+std::pow(this->d_state_out_(1),2))>this->velocity_constrain_thresh_)
+        {
+            this->constrain_<<0.0,0.0,std::atan2(this->d_state_out_(1),this->d_state_out_(0));       
+        }     
         this->d_constrain_=(this->constrain_-constrain_old)/d_time;
-        // this->d_constrain_<<0.0,0.0,this->d_state_in_(2);
-    }
-    
+    }    
     this->time_old_=this->time_new_;
 }
 
