@@ -1,6 +1,6 @@
 rate: 30 
 
-velocity_constrain_thresh: 0.001
+velocity_constrain_thresh: 0.0005
 
 target:
   input_type: 2
