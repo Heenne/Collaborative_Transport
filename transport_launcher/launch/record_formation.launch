@@ -1,6 +1,5 @@
 <launch>
     <arg name="filename" default="formation"/>
-    <arg name="path" default="."/>
 
     <node pkg="rosbag" type="record" name="record_formation"
        args="record -e  (.*)/slave_controller/meta_data 
@@ -8,9 +7,15 @@
                         (.*)/odom_enc
                         (.*)/mir/cmd_vel
                         (.*)/master_pose 
-                        (.*)/master_velocity  
+                        (.*)/master_velocity 
+                        (.*)/joint_states 
+                        (.*)/joint_states_desired
+                        (.*)/F_ext
+                        (.*)/target_pose 
+                        (.*)/wrench
+                        (.*)/franka_states 
                         /tf
                         
-                    -o $(arg path)/$(arg filename).bag"
+                    -o $(arg filename).bag"
     />
 </launch>
