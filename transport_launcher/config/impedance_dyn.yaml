@@ -8,8 +8,8 @@ dictitems:
   Dz: 0.3
   Kpitch: 100.0
   Kroll: 100.0
-  Kx: 0.0
-  Ky: 0.0
+  Kx: 200.0
+  Ky: 200.0
   Kyaw: 100.0
   Kz: 1200.0
   groups: !!python/object/new:dynamic_reconfigure.encoding.Config
@@ -22,8 +22,8 @@ dictitems:
       Dz: 0.3
       Kpitch: 100.0
       Kroll: 100.0
-      Kx: 0.0
-      Ky: 0.0
+      Kx: 200.0
+      Ky: 200.0
       Kyaw: 100.0
       Kz: 1200.0
       groups: !!python/object/new:dynamic_reconfigure.encoding.Config
