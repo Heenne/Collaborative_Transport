@@ -12,4 +12,4 @@ grip:
   shoulder_pan_joint: 0
   wrist_1_joint: -1.570796326
   wrist_2_joint: 1.570796326
-  wrist_3_joint: 1.57
+  wrist_3_joint: 0.0

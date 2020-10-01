@@ -1,20 +1,17 @@
 drive:
-  panda_joint1:  0.0
+  panda_joint1: 0.0
   panda_joint2: -1.57
   panda_joint3: 0.0
   panda_joint4: -2.35619
   panda_joint5: 0
   panda_joint6: 0.78
   panda_joint7: 0.78
-
+  
 grip:
-  panda_joint1: 0.0
-  panda_joint2: 0.29
-  panda_joint3: 0.0
-  panda_joint4: -1.83
-  panda_joint5: 0.0
-  panda_joint6: 2.08
-  panda_joint7: -0.78
-
-
- 
+  panda_joint1: -0.09113657420141716
+  panda_joint2: -0.03510454696067002
+  panda_joint3: 0.09825577748553814
+  panda_joint4: -2.4972289084932333
+  panda_joint5: -0.005589439156218956
+  panda_joint6: 2.4461820579104954
+  panda_joint7: -0.7824933414546152
