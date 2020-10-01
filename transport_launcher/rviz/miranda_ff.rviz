@@ -255,7 +255,7 @@ Visualization Manager:
       Shaft Length: 1
       Shaft Radius: 0.05000000074505806
       Shape: Axes
-      Topic: /miranda/panda/equilibrium_pose
+      Topic: /miranda/panda/target_pose
       Unreliable: false
       Value: true
   Enabled: true
