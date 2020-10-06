@@ -1,30 +1,30 @@
 !!python/object/new:dynamic_reconfigure.encoding.Config
 dictitems:
-  Dpitch: 0.2
-  Droll: 0.2
-  Dx: 0.3
-  Dy: 0.3
-  Dyaw: 0.2
-  Dz: 0.3
-  Kpitch: 100.0
-  Kroll: 100.0
+  Dpitch: 0.0
+  Droll: 0.0
+  Dx: 0.1
+  Dy: 0.1
+  Dyaw: 0.0
+  Dz: 30.0
+  Kpitch: 10.0
+  Kroll: 10.0
   Kx: 200.0
   Ky: 200.0
-  Kyaw: 100.0
+  Kyaw: 10.0
   Kz: 1200.0
   groups: !!python/object/new:dynamic_reconfigure.encoding.Config
     dictitems:
-      Dpitch: 0.2
-      Droll: 0.2
-      Dx: 0.3
-      Dy: 0.3
-      Dyaw: 0.2
-      Dz: 0.3
-      Kpitch: 100.0
-      Kroll: 100.0
+      Dpitch: 0.0
+      Droll: 0.0
+      Dx: 0.1
+      Dy: 0.1
+      Dyaw: 0.0
+      Dz: 30.0
+      Kpitch: 10.0
+      Kroll: 10.0
       Kx: 200.0
       Ky: 200.0
-      Kyaw: 100.0
+      Kyaw: 10.0
       Kz: 1200.0
       groups: !!python/object/new:dynamic_reconfigure.encoding.Config
         state: []

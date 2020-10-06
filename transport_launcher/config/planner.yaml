@@ -11,15 +11,15 @@ iterations: 10
 # amplifier_y: 0.5
 
 # Stundenglas
-omega: 0.07
-ratio: 2
-phaseshift: 0
-amplifier_x: 2.0
-amplifier_y: 0.25
+# omega: 0.07
+# ratio: 2
+# phaseshift: 0
+# amplifier_x: 2.0
+# amplifier_y: 0.25
 
 #Ellipse
-# omega: 0.05
-# ratio: 1
-# phaseshift: 1.4
-# amplifier_x: 0.9
-# amplifier_y: 0.5
+omega: 0.05
+ratio: 1
+phaseshift: 1.4
+amplifier_x: 0.9
+amplifier_y: 0.5
