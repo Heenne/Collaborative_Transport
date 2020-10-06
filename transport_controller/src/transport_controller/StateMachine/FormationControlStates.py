@@ -137,6 +137,9 @@ class ReleaseObjectState(smach.State):
         smach.State.__init__(self,outcomes=["released"])
         self.__clients=ClientDistributor(namespaces,ServiceConfig("grip",SetBool))
         self.__switcher=ClientDistributor(namespaces,ServiceConfig("controller_manager/switch_controller",SwitchController))
+        self.__enable_orientation_ff=rospy.get_param("~enable_orientation_ff",False)
+        if self.__enable_orientation_ff:
+            self.__orientation_init=ClientDistributor(namespaces,ServiceConfig("orientation_ff/disable",Empty))
 
     def execute(self,userdata):
         grip_req=SetBoolRequest()
@@ -148,5 +151,8 @@ class ReleaseObjectState(smach.State):
         req.start_controllers=["position_joint_controller"]
         req.strictness=2
         self.__switcher.call(req)
+        if self.__enable_orientation_ff:       
+            self.__orientation_init.call(EmptyRequest())        
+       
      
         return "released"
