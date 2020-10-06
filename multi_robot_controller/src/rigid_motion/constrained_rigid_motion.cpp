@@ -75,6 +75,11 @@ void ConstrainedRigidMotion::calcConstrains()
         {
             this->constrain_<<0.0,0.0,std::atan2(this->d_state_out_(1),this->d_state_out_(0));       
         }     
+        else
+        {
+            this->constrain_<<0.0,0.0,this->state_in_(2)+this->reference_(2);
+        }
+        
         this->d_constrain_=(this->constrain_-constrain_old)/d_time;
     }    
     this->time_old_=this->time_new_;
