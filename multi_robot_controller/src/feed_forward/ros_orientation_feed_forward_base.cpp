@@ -1,11 +1,13 @@
 #include <multi_robot_controller/feed_forward/ros_orientation_feed_forward_base.h>
 
 RosOrientationFeedForwardBase::RosOrientationFeedForwardBase(ros::NodeHandle &nh):  nh_(nh),                                                                        
-                                                                                    tf_listener_(tf_buffer_)
+                                                                                    tf_listener_(tf_buffer_),
+                                                                                    enable_(false)             
 {
     ros::NodeHandle priv("~");
     this->tf_buffer_.setUsingDedicatedThread(true);
-    this->init_service_=priv.advertiseService("init",&RosOrientationFeedForwardBase::initServiceCallback,this);
+    this->init_service_=priv.advertiseService("enable",&RosOrientationFeedForwardBase::initServiceCallback,this);
+    this->enable_service_=priv.advertiseService("disable",&RosOrientationFeedForwardBase::disableServiceCallback,this);
 }
 
 bool RosOrientationFeedForwardBase::init()
@@ -56,7 +58,8 @@ bool RosOrientationFeedForwardBase::init()
         }
         else
         {
-            try{
+            try
+            {
                 geometry_msgs::TransformStamped trafo=tf_buffer_.lookupTransform(tf::resolve(this->tf_prefix_,source_frame),
                                                                                 tf::resolve(this->tf_prefix_,target_frame),
                                                                                 ros::Time(0),
@@ -102,5 +105,12 @@ bool RosOrientationFeedForwardBase::init()
 bool RosOrientationFeedForwardBase::initServiceCallback(std_srvs::EmptyRequest &req,std_srvs::EmptyResponse &res)
 {
     this->init();
+    this->enable_=true;
     return true;
 }
+bool RosOrientationFeedForwardBase::disableServiceCallback(std_srvs::EmptyRequest &req,std_srvs::EmptyResponse &res)
+{
+    this->enable_=false;
+    return true;
+}
+

@@ -81,7 +81,12 @@ class OrientationFeedForward{
          * @param orientation Orientation that has to be hold by the endeffektor defined in robot base frame
          */
         void setDesiredPose(Position position,Orientation orientation) ; 
-        
+        /**
+         * @brief Set the Initial orientation to be respected
+         * 
+         * @param initial_ori orientation given at initialisation time
+         */
+        void setInitial(Orientation initial_ori);
     protected:
        
     private:
@@ -89,6 +94,7 @@ class OrientationFeedForward{
         Orientation transformOrientation();
         
         Orientation current_ori_;
+        Orientation initial_ori_;
         
         Position d_pos_fixed_;
         Orientation d_ori_fixed_;

@@ -6,6 +6,7 @@ OrientationFeedForward::OrientationFeedForward()
 
     d_ori_fixed_.setIdentity();
     this->current_ori_.setIdentity();
+    this->initial_ori_.setIdentity();
     this->offset_rotation_.setIdentity();
     this->offset_.setIdentity();
     this->desired_ee_.setIdentity();
@@ -23,7 +24,10 @@ void OrientationFeedForward::setOffset(Position pos_off, Orientation ori_off)
     this->offset_.translate(pos_off);
     this->offset_.rotate(ori_off);
 }
-
+void OrientationFeedForward::setInitial(Orientation initial_ori)
+{
+    this->initial_ori_=initial_ori_;
+}
 void OrientationFeedForward::setOffset(Pose pose)
 {
     this->setOffset(Position(pose.block<3,1>(0,0)),Orientation(pose.block<4,1>(3,0)));
@@ -53,6 +57,7 @@ void OrientationFeedForward::updateOrientation(Orientation ori)
 {
     this->current_.setIdentity();
     this->current_.rotate(ori);
+    this->initial_ori_.inverse()*this->current_;
 }
 
 OrientationFeedForward::Pose OrientationFeedForward::getPose()
@@ -63,7 +68,6 @@ OrientationFeedForward::Pose OrientationFeedForward::getPose()
 }
 OrientationFeedForward::Position OrientationFeedForward::transformPosition()
 {
-//    std::cout<<"Offset:\n"<<offset_.matrix()<<std::endl<<"Current:\n"<<current_.matrix()<<std::endl<<"Desired:\n"<<desired_ee_.matrix();
    return (this->offset_.inverse()*this->current_.inverse()*this->desired_ee_).translation();
 }
 OrientationFeedForward::Orientation OrientationFeedForward::transformOrientation()

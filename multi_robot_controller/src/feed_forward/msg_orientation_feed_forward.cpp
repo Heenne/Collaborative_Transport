@@ -16,21 +16,29 @@ void MsgOrientationFeedForward<T>::callbackOrientation(T msg)
 template<class T>
 void MsgOrientationFeedForward<T>::update(const ros::TimerEvent&)
 {
-    Eigen::Quaterniond quat;
-    convertMsg(quat,this->current_orientation_);
-    this->updateOrientation(quat);
-    geometry_msgs::PoseStamped pose;
-    pose.header.frame_id=tf::resolve(this->tf_prefix_,this->ee_frame_id_);
-    Pose forward=this->getPose();
-    convertMsg(pose,forward);
-    this->pose_pub_.publish(pose);
+    if(this->enable_)
+    {
+        Eigen::Quaterniond quat;
+        convertMsg(quat,this->current_orientation_);
+        this->updateOrientation(quat);
+        geometry_msgs::PoseStamped pose;
+        pose.header.frame_id=tf::resolve(this->tf_prefix_,this->ee_frame_id_);
+        Pose forward=this->getPose();
+        convertMsg(pose,forward);
+        this->pose_pub_.publish(pose);
+
+    }
+   
 }
 template<class T>
 bool MsgOrientationFeedForward<T>::init()
 {
     ros::NodeHandle nh("~");
     RosOrientationFeedForwardBase::init();
-   
+    T init=*ros::topic::waitForMessage<T>(this->topic_,this->nh_);
+    Orientation ori;
+    convertMsg(ori,init);
+    this->setInitial(ori);
    
 }
 

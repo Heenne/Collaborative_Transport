@@ -30,6 +30,7 @@ class MsgOrientationFeedForward:public RosOrientationFeedForwardBase{
         
     private:
         ros::Subscriber ori_sub_;
+        std::string topic_;
         T current_orientation_;
         void callbackOrientation(T msg);
      

@@ -29,9 +29,12 @@ class RosOrientationFeedForwardBase:public OrientationFeedForward{
         ros::Publisher pose_pub_;
         std::string tf_prefix_;
         ros::ServiceServer init_service_;
-    private:       
+        ros::ServiceServer enable_service_;
+        bool enable_;      
+    private:         
         ros::Timer update_timer_;
         bool initServiceCallback(std_srvs::EmptyRequest &req,std_srvs::EmptyResponse &res);
+        bool disableServiceCallback(std_srvs::EmptyRequest &req,std_srvs::EmptyResponse &res);
         
 
 };
