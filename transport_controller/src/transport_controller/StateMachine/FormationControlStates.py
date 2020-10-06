@@ -111,7 +111,7 @@ class LinkObjectState(smach.State):
         smach.State.__init__(self,outcomes=["linked"])
         self.__enable_orientation_ff=rospy.get_param("~enable_orientation_ff",False)
         if self.__enable_orientation_ff:
-            self.__orientation_init=ClientDistributor(namespaces,ServiceConfig("orientation_ff/init",Empty))
+            self.__orientation_init=ClientDistributor(namespaces,ServiceConfig("orientation_ff/enable",Empty))
         
         self.__clients=ClientDistributor(namespaces,ServiceConfig("grip",SetBool))       
         self.__switcher=ClientDistributor(namespaces,ServiceConfig("controller_manager/switch_controller",SwitchController))
