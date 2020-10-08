@@ -20,6 +20,6 @@ iterations: 10
 #Ellipse
 omega: 0.05
 ratio: 1
-phaseshift: 1.4
+phaseshift: 5.497787144
 amplifier_x: 0.9
 amplifier_y: 0.5
