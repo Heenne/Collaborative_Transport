@@ -1,7 +1,7 @@
 base_namespaces: ["/mur/mir","/miranda/mir"]
 arm_namespaces: ["/mur/ur","/miranda/panda"]
 enable_manipulator: true
-enable_orientation_ff: true
+enable_orientation_ff: false
 
 # base_namespaces: ["/mur/mir"]
 # arm_namespaces: ["/mur/ur"]
