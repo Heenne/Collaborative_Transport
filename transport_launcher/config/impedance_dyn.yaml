@@ -2,8 +2,8 @@
 dictitems:
   Dpitch: 0.0
   Droll: 0.0
-  Dx: 0.1
-  Dy: 0.1
+  Dx: 8.0
+  Dy: 8.0
   Dyaw: 0.0
   Dz: 30.0
   Kpitch: 10.0
@@ -16,8 +16,8 @@ dictitems:
     dictitems:
       Dpitch: 0.0
       Droll: 0.0
-      Dx: 0.1
-      Dy: 0.1
+      Dx: 8.0
+      Dy: 8.0
       Dyaw: 0.0
       Dz: 30.0
       Kpitch: 10.0
@@ -30,14 +30,14 @@ dictitems:
         state: []
       id: 0
       name: Default
-      nullspace_damping: 0.0
-      nullspace_stiffness: 0.0
+      nullspace_damping: 2.0
+      nullspace_stiffness: 6.0
       parameters: !!python/object/new:dynamic_reconfigure.encoding.Config
         state: []
       parent: 0
       state: true
       type: ''
     state: []
-  nullspace_damping: 0.0
-  nullspace_stiffness: 0.0
+  nullspace_damping: 2.0
+  nullspace_stiffness: 6.0
 state: []
