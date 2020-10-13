@@ -91,14 +91,17 @@ class AdjutsState(smach.State):
         req.strictness=2
         self.__switcher.call(req)
         srv=rospy.Service("~trigger",Empty,self.__callback__)
-        while not self.__enable:
-            rospy.sleep(self.__timeout)             
+        while not self.__enable:           
+            rospy.sleep(self.__timeout)      
+        self.__enable=False       
+        
         srv.shutdown()    
         req=SwitchControllerRequest()
         req.stop_controllers=["cartesian_controller"]
         req.start_controllers=[]
         req.strictness=2 
         self.__switcher.call(req)  
+        
         return "adjusted"
 
     def __callback__(self,req):
