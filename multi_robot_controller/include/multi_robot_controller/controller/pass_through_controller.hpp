@@ -1,4 +1,8 @@
 #include<multi_robot_controller/controller.h>
+/**
+ * @brief Controller that forwards the given velocity
+ * 
+ */
 class PassTroughController:public Controller
 {
     public:

@@ -1,6 +1,16 @@
 #include<multi_robot_controller/controller/controller.h>
 #include<multi_robot_controller/LyapunovConfig.h>
 #include<dynamic_reconfigure/server.h>
+
+/**
+ * @brief Class that implements a lyapunov approach based controller
+ * 
+ * |Ros-Parameter   |Description        |
+ * |----------------|-------------------|
+ * |~lyapunov | Array of parameters it the order of LyapunovParameter (kx,ky,kphi)|
+ * 
+ */
+
 class LyapunovController:public Controller
 {
     public:
