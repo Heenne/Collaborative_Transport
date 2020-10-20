@@ -1,0 +1,5 @@
+lower_abs_force: -1
+upper_abs_force: 30
+lower_abs_torque: -1
+upper_abs_torque: 2
+services: ["mur/mir/slave_controller/disable_controller","miranda/mir/slave_controller/disable_controller"]

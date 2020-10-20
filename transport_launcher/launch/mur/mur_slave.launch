@@ -1,6 +1,7 @@
 <launch>
     <arg name="twist_local" default="false"/>
-   
+    <arg name="has_ft_sensor" value="true"/>
+
     <!-- 
         Load parameter for dynamic reconfiguring the slave controller
      -->
@@ -27,4 +28,13 @@
         <arg if="$(arg twist_local)" name="config_file" value="$(find transport_launcher)/config/local_twist_slave_controller.yaml"/>       
     </include>
 
+     <node if="$(arg has_ft_sensor)" name="force_watchdog" type="force_watchdog.py" pkg="watchdogs" output="screen">
+        <remap from="watch_topic" to="/mur/ur/wrench"/>
+        <rosparam command="load" file="$(find transport_launcher)/config/watchdog.yaml"/>
+        <param name="lower_abs_force" value="-1"/>
+        <param name="upper_abs_force" value="40"/>
+        <param name="lower_abs_torque" value="-1"/>
+        <param name="upper_abs_torque" value="1"/>
+        <rosparam param="services">["mur/mir/slave_controller/disable_controller","miranda/mir/slave_controller/disable_controller"]</rosparam>
+    </node>
 </launch>
