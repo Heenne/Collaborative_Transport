@@ -14,12 +14,25 @@
 
 
 
-
+/**
+ * @brief Class for controlling a formation of multiple mobile robots.
+ * 
+ *  Objects of this class contain the following ros parameter:
+ * 
+ * |Ros-Parameter   |Description        |
+ * |----------------|-------------------|
+ * |~target/input_type| Type of the target state topic.|
+ * |~current/input_type| Type of the current state topic.|
+ * |~rate            | Rate the controller is spinning with.|
+ * |~topic_output     | Name of the output topic.|
+ * 
+ */
 class Controller
 {
     public:
         /**
          * @brief Construct a new Controller object
+         * 
          * 
          */
         Controller();
@@ -101,8 +114,10 @@ class Controller
          * 
          */
         virtual void publishMetaData();
-        ros::Publisher meta_;
-        State control_diff_;
+
+
+        ros::Publisher meta_;       //<Publisher for controllers meta data
+        State control_diff_;        //<Difference between current and target state
     
     private:
         bool enableCallback(std_srvs::EmptyRequest &req,std_srvs::EmptyRequest &res);

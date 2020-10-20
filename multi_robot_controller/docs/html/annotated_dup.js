@@ -1,8 +1,5 @@
 var annotated_dup =
 [
-    [ "cartesian_impedance_controller", null, [
-      [ "CartesianImpedanceController", "d1/d6d/classcartesian__impedance__controller_1_1CartesianImpedanceController.html", "d1/d6d/classcartesian__impedance__controller_1_1CartesianImpedanceController" ]
-    ] ],
     [ "ConstrainedRigidMotion", "d3/dfb/classConstrainedRigidMotion.html", "d3/dfb/classConstrainedRigidMotion" ],
     [ "ConstrainedRigidMotionRos", "da/d00/classConstrainedRigidMotionRos.html", "da/d00/classConstrainedRigidMotionRos" ],
     [ "ConstrainedRigidMotionTf", "d5/d1e/classConstrainedRigidMotionTf.html", "d5/d1e/classConstrainedRigidMotionTf" ],

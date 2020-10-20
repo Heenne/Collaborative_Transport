@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['orientationfeedforward',['OrientationFeedForward',['../d6/d0a/classOrientationFeedForward.html#aad82bda1b9fa824e321a6c8afad84973',1,'OrientationFeedForward::OrientationFeedForward()'],['../d6/d0a/classOrientationFeedForward.html#a0ae1aba3b3e0abf84828a9db008b6f69',1,'OrientationFeedForward::OrientationFeedForward(Position pos_offf, Orientation ori_off)']]]
+  ['passtroughcontroller',['PassTroughController',['../d2/d4e/classPassTroughController.html#ab07ab9e0032dd1a46f3fd80726ce4b1f',1,'PassTroughController']]],
+  ['publishmetadata',['publishMetaData',['../d9/d85/classController.html#a95ac558f7a8d570ba4f0ba12182de8c5',1,'Controller']]]
 ];

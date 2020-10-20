@@ -1,7 +1,6 @@
 var searchData=
 [
   ['calccontrol',['calcControl',['../d9/d85/classController.html#a190a3955517e39310a4b715a883cbe02',1,'Controller']]],
-  ['cartesianimpedancecontroller',['CartesianImpedanceController',['../d1/d6d/classcartesian__impedance__controller_1_1CartesianImpedanceController.html',1,'cartesian_impedance_controller']]],
   ['constrainedrigidmotion',['ConstrainedRigidMotion',['../d3/dfb/classConstrainedRigidMotion.html',1,'ConstrainedRigidMotion'],['../df/d1b/group__RigidMotion.html#gaa85deb237e7407287829b6596997b210',1,'ConstrainedRigidMotion::ConstrainedRigidMotion()'],['../df/d1b/group__RigidMotion.html#ga603d9727e46dc49dcf22b24870d15779',1,'ConstrainedRigidMotion::ConstrainedRigidMotion(Eigen::Vector3d reference)']]],
   ['constrainedrigidmotionros',['ConstrainedRigidMotionRos',['../da/d00/classConstrainedRigidMotionRos.html',1,'']]],
   ['constrainedrigidmotiontf',['ConstrainedRigidMotionTf',['../d5/d1e/classConstrainedRigidMotionTf.html',1,'']]],

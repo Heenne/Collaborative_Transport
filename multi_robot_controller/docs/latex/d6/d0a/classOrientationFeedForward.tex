@@ -51,7 +51,9 @@ void \hyperlink{classOrientationFeedForward_adbd1691b1e930752818624d065acbf1c}{s
 void \hyperlink{classOrientationFeedForward_a5f69dfd449972707d2ccd07e20fd2c5b}{set\+Desired\+Pose} (Pose pose)
 \begin{DoxyCompactList}\small\item\em Set the Desired Pose that has to be hold in mobile base frame. \end{DoxyCompactList}\item 
 void \hyperlink{classOrientationFeedForward_ad419aebf0df88282ca6c1dc24adbadb2}{set\+Desired\+Pose} (Position position, Orientation orientation)
-\begin{DoxyCompactList}\small\item\em Set the Desired Pose object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Set the Desired Pose object. \end{DoxyCompactList}\item 
+void \hyperlink{classOrientationFeedForward_a28382586a5d371fa6efbdf08f5e57518}{set\+Initial} (Orientation initial\+\_\+ori)
+\begin{DoxyCompactList}\small\item\em Set the Initial orientation to be respected. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Constructor \& Destructor Documentation}
@@ -102,6 +104,17 @@ Pose in robot base frame wich can be forwarded to the robot motion control
 {\em position} & Position that has to be hold by the endeffektor defined in mobile base frame \\
 \hline
 {\em orientation} & Orientation that has to be hold by the endeffektor defined in robot base frame \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classOrientationFeedForward_a28382586a5d371fa6efbdf08f5e57518}\label{classOrientationFeedForward_a28382586a5d371fa6efbdf08f5e57518}} 
+\index{Orientation\+Feed\+Forward@{Orientation\+Feed\+Forward}!set\+Initial@{set\+Initial}}
+\index{set\+Initial@{set\+Initial}!Orientation\+Feed\+Forward@{Orientation\+Feed\+Forward}}
+\subsubsection{\texorpdfstring{set\+Initial()}{setInitial()}}
+{\footnotesize\ttfamily void Orientation\+Feed\+Forward\+::set\+Initial (\begin{DoxyParamCaption}\item[{Orientation}]{initial\+\_\+ori }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em initial\+\_\+ori} & orientation given at initialisation time \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{classOrientationFeedForward_adc105d9a1fe00d6a79fcf38447202709}\label{classOrientationFeedForward_adc105d9a1fe00d6a79fcf38447202709}} 

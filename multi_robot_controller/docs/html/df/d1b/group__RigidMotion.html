@@ -129,6 +129,9 @@ Functions</h2></td></tr>
 <tr class="memitem:gad4fb6e13815454559ec7e52b291489af"><td class="memItemLeft" align="right" valign="top">static Eigen::Matrix3d&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d1b/group__RigidMotion.html#gad4fb6e13815454559ec7e52b291489af">ConstrainedRigidMotion::createDiffDriveLocking</a> ()</td></tr>
 <tr class="memdesc:gad4fb6e13815454559ec7e52b291489af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create a differential drive locking matrix.  <a href="#gad4fb6e13815454559ec7e52b291489af">More...</a><br /></td></tr>
 <tr class="separator:gad4fb6e13815454559ec7e52b291489af"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga70771b8bb17cff0ffceadae49eab9f8e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../df/d1b/group__RigidMotion.html#ga70771b8bb17cff0ffceadae49eab9f8e">ConstrainedRigidMotion::setVelocityThresh</a> (double thresh)</td></tr>
+<tr class="memdesc:ga70771b8bb17cff0ffceadae49eab9f8e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set the Velocity Threshold that specifies when to calc atan2 to given value.  <a href="#ga70771b8bb17cff0ffceadae49eab9f8e">More...</a><br /></td></tr>
+<tr class="separator:ga70771b8bb17cff0ffceadae49eab9f8e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gabb5eee0f91ee59d0eda733f8d5769094"><td class="memItemLeft" align="right" valign="top"><a id="gabb5eee0f91ee59d0eda733f8d5769094"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>ConstrainedRigidMotionTf::updateInputState</b> (tf::Pose pose, tf::Vector3 lin_vel, tf::Vector3 ang_vel, double time)</td></tr>
 <tr class="separator:gabb5eee0f91ee59d0eda733f8d5769094"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -239,6 +242,30 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>ConstrainedRigidMotio
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">ref</td><td>x,y,phi representation of the reference </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="ga70771b8bb17cff0ffceadae49eab9f8e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga70771b8bb17cff0ffceadae49eab9f8e">&#9670;&nbsp;</a></span>setVelocityThresh()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ConstrainedRigidMotion::setVelocityThresh </td>
+          <td>(</td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>thresh</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">thresh</td><td>Minimum velocity the atan2 is calculate from </td></tr>
   </table>
   </dd>
 </dl>

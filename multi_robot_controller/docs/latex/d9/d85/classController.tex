@@ -2,6 +2,15 @@
 \label{classController}\index{Controller@{Controller}}
 
 
+Class for controlling a formation of multiple mobile robots.  
+
+
+
+
+{\ttfamily \#include $<$controller.\+h$>$}
+
+
+
 Inheritance diagram for Controller\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
@@ -53,6 +62,26 @@ ros\+::\+Publisher {\bfseries meta\+\_\+}
 \mbox{\Hypertarget{classController_a454701a403066ee2b8c24bd61268655e}\label{classController_a454701a403066ee2b8c24bd61268655e}} 
 \hyperlink{structController_1_1State}{State} {\bfseries control\+\_\+diff\+\_\+}
 \end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+Objects of this class contain the following ros parameter\+:
+
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{2}{|X[-1]}|}
+\hline
+\rowcolor{\tableheadbgcolor}\textbf{ Ros-\/\+Parameter }&\textbf{ Description  }\\\cline{1-2}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\rowcolor{\tableheadbgcolor}\textbf{ Ros-\/\+Parameter }&\textbf{ Description  }\\\cline{1-2}
+\endhead
+$\sim$target/input\+\_\+type&Type of the target state topic. \\\cline{1-2}
+$\sim$current/input\+\_\+type&Type of the current state topic. \\\cline{1-2}
+$\sim$rate &Rate the controller is spinning with. \\\cline{1-2}
+$\sim$topic\+\_\+output &Name of the output topic. \\\cline{1-2}
+\end{longtabu}
 
 
 \subsection{Constructor \& Destructor Documentation}

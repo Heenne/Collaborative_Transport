@@ -1,3 +1,6 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node2" href="$d7/d29/classNecessaryParamException.html" title="NecessaryParamException" alt="" coords="152,5,333,32"/>
+<area shape="rect" id="node1" href="$d6/d0a/classOrientationFeedForward.html" title="A Orientation feed forward class. It uses a given orientation and calculates a robot arm pose that co..." alt="" coords="5,31,167,57"/>
+<area shape="rect" id="node2" href="$df/df6/classRosOrientationFeedForwardBase.html" title="A Orientation feed forward class. It implements parameter loading and initialisation for the Orientat..." alt="" coords="215,31,429,57"/>
+<area shape="rect" id="node3" href="$dc/d54/classMsgOrientationFeedForward.html" title="A Ros implementation of the OrientationFeeedForward class. It contains a ros Subscriber that listens ..." alt="" coords="477,5,696,32"/>
+<area shape="rect" id="node4" href="$de/da6/classTfOrientationFeedForward.html" title="A Tf implementation of the OrientationFeeedForward class. It contains a tf listener that listens to a..." alt="" coords="500,56,673,83"/>
 </map>

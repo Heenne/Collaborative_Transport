@@ -27,6 +27,8 @@ void \hyperlink{group__RigidMotion_gac71f6e395c1d63f54cfb837b5526236b}{Constrain
 \begin{DoxyCompactList}\small\item\em Set the reference from source to destination. \end{DoxyCompactList}\item 
 static Eigen\+::\+Matrix3d \hyperlink{group__RigidMotion_gad4fb6e13815454559ec7e52b291489af}{Constrained\+Rigid\+Motion\+::create\+Diff\+Drive\+Locking} ()
 \begin{DoxyCompactList}\small\item\em Create a differential drive locking matrix. \end{DoxyCompactList}\item 
+void \hyperlink{group__RigidMotion_ga70771b8bb17cff0ffceadae49eab9f8e}{Constrained\+Rigid\+Motion\+::set\+Velocity\+Thresh} (double thresh)
+\begin{DoxyCompactList}\small\item\em Set the Velocity Threshold that specifies when to calc atan2 to given value. \end{DoxyCompactList}\item 
 \mbox{\Hypertarget{group__RigidMotion_gabb5eee0f91ee59d0eda733f8d5769094}\label{group__RigidMotion_gabb5eee0f91ee59d0eda733f8d5769094}} 
 void {\bfseries Constrained\+Rigid\+Motion\+Tf\+::update\+Input\+State} (tf\+::\+Pose pose, tf\+::\+Vector3 lin\+\_\+vel, tf\+::\+Vector3 ang\+\_\+vel, double time)
 \end{DoxyCompactItemize}
@@ -83,6 +85,17 @@ Eigen\+::\+Vector3d State vector of the destination
 
 \begin{DoxyParams}{Parameters}
 {\em ref} & x,y,phi representation of the reference \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{group__RigidMotion_ga70771b8bb17cff0ffceadae49eab9f8e}\label{group__RigidMotion_ga70771b8bb17cff0ffceadae49eab9f8e}} 
+\index{Rigid\+Motion@{Rigid\+Motion}!set\+Velocity\+Thresh@{set\+Velocity\+Thresh}}
+\index{set\+Velocity\+Thresh@{set\+Velocity\+Thresh}!Rigid\+Motion@{Rigid\+Motion}}
+\subsubsection{\texorpdfstring{set\+Velocity\+Thresh()}{setVelocityThresh()}}
+{\footnotesize\ttfamily void Constrained\+Rigid\+Motion\+::set\+Velocity\+Thresh (\begin{DoxyParamCaption}\item[{double}]{thresh }\end{DoxyParamCaption})}
+
+
+\begin{DoxyParams}{Parameters}
+{\em thresh} & Minimum velocity the atan2 is calculate from \\
 \hline
 \end{DoxyParams}
 \mbox{\Hypertarget{group__RigidMotion_ga80649fcba3aed41550ba463f405d051b}\label{group__RigidMotion_ga80649fcba3aed41550ba463f405d051b}} 
