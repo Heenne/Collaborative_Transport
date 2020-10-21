@@ -29,7 +29,7 @@
     </include>
 
      <node if="$(arg has_ft_sensor)" name="force_watchdog" type="force_watchdog.py" pkg="watchdogs" output="screen">
-        <remap from="watch_topic" to="/mur/ur/wrench"/>
+        <remap from="watch_topic" to="/mur/ur/wrench_filtered"/>
         <rosparam command="load" file="$(find transport_launcher)/config/watchdog.yaml"/>
         <param name="lower_abs_force" value="-1"/>
         <param name="upper_abs_force" value="40"/>
