@@ -23,7 +23,8 @@
             <param name="translation" value="0.1"/>
             <param name="rotation" value="0.2"/>
             <remap from="joy" to="/joy" />
-            <remap from="cmd_vel" to="master_velocity"/>
+            <remap if="$(arg use_ps4_cmd_vel)" from="cmd_vel" to="master_velocity_unfiltered"/>
+            <remap unless="$(arg use_ps4_cmd_vel)" from="cmd_vel" to="master_velocity"/>
             <remap from="enable" to="/transport_state_machine/enable"/>
             <remap from="disable" to="/transport_state_machine/disable"/>
             <remap from="trigger" to="/transport_state_machine/trigger"/>
@@ -37,12 +38,19 @@
       <param name="tf_prefix" value="master"/>
     </node>
 
-    <node if="$(arg use_ps4_cmd_vel)" name="cmd_vel_integrator" pkg="mir_helper" type="vel_integrator_node">
-      <param name="topic_name" value="reset_pose"/>
-      <param name="frame_id" value="/map"/>
-      <remap from="cmd_vel" to="master_velocity"/>
-      <remap from="cmd_vel_integrated" to="master_pose"/>
-    </node>
+    <group if="$(arg use_ps4_cmd_vel)">
+      <node  name="cmd_vel_integrator" pkg="mir_helper" type="vel_integrator_node">
+        <param name="topic_name" value="reset_pose"/>
+        <param name="frame_id" value="/map"/>
+        <remap from="cmd_vel" to="master_velocity_unfiltered"/>
+        <remap from="cmd_vel_integrated" to="master_pose"/>
+      </node>
+      <node name="master_vel_filter" type="twist_stamped_mean_filter" pkg="manipulate_topics" output="screen">
+        <param name="sample_number" value="50"/>
+        <remap from="input" to="master_velocity_unfiltered"/>
+        <remap from="output" to="master_velocity"/>
+      </node>
+    </group>
 
     <node if="$(arg use_planner_cmd_vel)" name="planner" type="planner_node" pkg="base_trajectory_analytical" output="screen">
         <rosparam command="load" file="$(find transport_launcher)/config/planner.yaml"/>
