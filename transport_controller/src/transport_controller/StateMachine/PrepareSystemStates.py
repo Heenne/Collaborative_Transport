@@ -5,6 +5,7 @@ from tf import transformations
 from geometry_msgs.msg import PoseStamped
 from std_srvs.srv import Empty,EmptyRequest,SetBool,SetBoolRequest
 from ServiceDistributor import ClientDistributor,ServiceConfig
+from controller_manager_msgs.srv import SwitchController,SwitchControllerRequest
 
 
 class StartState(smach.State):
@@ -13,12 +14,18 @@ class StartState(smach.State):
                                         io_keys=['slaves']
                                         )
         self.__enable_manipulator=rospy.get_param("~enable_manipulator",False)
+        self.__arm_controller=self.__switcher=ClientDistributor(arm_namespaces,ServiceConfig("controller_manager/switch_controller",SwitchController))   
         self.__arm_namespaces=arm_namespaces
         self.__base_namespaces=base_namespaces
+       
+        self.__arm_request=SwitchControllerRequest()
+        self.__arm_request.start_controllers=["position_joint_controller"]
+        self.__arm_request.strictness=2
         
         if self.__enable_manipulator:
             self.__gripper_clients=ClientDistributor(arm_namespaces,ServiceConfig("grip",SetBool)) 
-            self.__formation_disabler=ClientDistributor(base_namespaces,ServiceConfig("slave_controller/disable_controller",Empty))
+
+        self.__formation_disabler=ClientDistributor(base_namespaces,ServiceConfig("slave_controller/disable_controller",Empty))
 
 
     def execute(self,userdata):
@@ -45,4 +52,5 @@ class StartState(smach.State):
             req.data=False
             self.__gripper_clients.call(req)
             self.__formation_disabler.call(EmptyRequest())
+            self.__arm_controller.call(self.__arm_request)
         return "startup_done"

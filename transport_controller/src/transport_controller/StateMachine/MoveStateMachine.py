@@ -14,25 +14,23 @@ class MoveStateMachine(smach.StateMachine):
         smach.StateMachine.__init__(self,outcomes=['movement_done',"movement_error"],input_keys=['slaves'])        
         self.__enable_manipulator=rospy.get_param("~enable_manipulator",False)
         with self:            
+
+            smach.StateMachine.add("Idle",States.WaitTriggerState(0.1,"start_moving"),
+                                transitions={   'start_moving':'CalcPoses'}   )
+
             if self.__enable_manipulator:
                 smach.StateMachine.add('CalcPoses', st.CalcPosesState(),
                                         transitions={   'calculation_done':'DrivePose',
                                                         'calculation_error':'movement_error',
                                                         'master_pose_error':'movement_error'})
+                
                 smach.StateMachine.add("DrivePose",st.DrivePoseState(arm_namespaces,"drive"),
-                                                    transitions={  'done':'Idle'})
+                                                    transitions={  'done':'Movement'})
             else:
                 smach.StateMachine.add('CalcPoses', st.CalcPosesState(),
-                                        transitions={   'calculation_done':'Idle',
+                                        transitions={   'calculation_done':'Movement',
                                                         'calculation_error':'movement_error',
                                                         'master_pose_error':'movement_error'})
-            
-       
-                
-
-            smach.StateMachine.add("Idle",States.WaitTriggerState(0.1,"start_moving"),
-                                    transitions={   'start_moving':'Movement'}   )
-            
             
         
             sm_con=self.__allocMoveConcurrency__(base_namespaces)          
