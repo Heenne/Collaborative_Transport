@@ -16,7 +16,7 @@
     -->
     <include file="$(find mur_hardware_helper)/launch/mur.launch">
         <arg name="pose_filename" value="$(find transport_launcher)/poses/mur_transport_poses.yaml"/>
-        <arg name="controllers_started" value="joint_state_controller robot_status_controller force_torque_sensor_controller position_joint_controller"/>
+        <arg name="controllers_started" value="joint_state_controller robot_status_controller position_joint_controller"/>
         <arg name="controllers_stopped" value="cartesian_controller cartesian_impedance_controller"/>
     </include>
 
