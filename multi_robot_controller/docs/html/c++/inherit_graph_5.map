@@ -1,0 +1,7 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$classInputBase.html" title="InputBase" alt="" coords="5,81,87,108"/>
+<area shape="rect" id="node2" href="$classInputOdom.html" title="InputOdom" alt="" coords="163,5,250,32"/>
+<area shape="rect" id="node3" href="$classInputPoseOdom.html" title="InputPoseOdom" alt="" coords="149,56,265,83"/>
+<area shape="rect" id="node4" href="$classInputPoseTwist.html" title="InputPoseTwist" alt="" coords="150,107,263,133"/>
+<area shape="rect" id="node5" href="$classInputPoseTwistLocal.html" title="InputPoseTwistLocal" alt="" coords="135,157,279,184"/>
+</map>

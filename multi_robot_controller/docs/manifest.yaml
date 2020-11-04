@@ -1,0 +1,21 @@
+actions: []
+authors: ''
+brief: ''
+bugtracker: ''
+depends:
+- dynamic_reconfigure
+- nav_msgs
+- multi_robot_msgs
+- catkin
+- roscpp
+- cmake_modules
+- geometry_msgs
+- tf
+description: The multi_robot_controller package
+license: TODO
+maintainers: Malte Heinrich <malte.heinrich@stud.uni-hannover.de>
+msgs: []
+package_type: package
+repo_url: ''
+srvs: []
+url: ''

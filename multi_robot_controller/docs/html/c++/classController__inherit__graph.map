@@ -1,0 +1,4 @@
+<map id="Controller" name="Controller">
+<area shape="rect" id="node2" href="$classLyapunovController.html" title="Class that implements a lyapunov approach based controller. " alt="" coords="5,80,140,107"/>
+<area shape="rect" id="node3" href="$classPassTroughController.html" title="Controller that forwards the given velocity. " alt="" coords="164,80,312,107"/>
+</map>

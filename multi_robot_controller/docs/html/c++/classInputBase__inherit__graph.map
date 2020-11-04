@@ -1,0 +1,6 @@
+<map id="InputBase" name="InputBase">
+<area shape="rect" id="node2" href="$classInputOdom.html" title="InputOdom" alt="" coords="5,80,92,107"/>
+<area shape="rect" id="node3" href="$classInputPoseOdom.html" title="InputPoseOdom" alt="" coords="116,80,232,107"/>
+<area shape="rect" id="node4" href="$classInputPoseTwist.html" title="InputPoseTwist" alt="" coords="256,80,369,107"/>
+<area shape="rect" id="node5" href="$classInputPoseTwistLocal.html" title="InputPoseTwistLocal" alt="" coords="394,80,538,107"/>
+</map>

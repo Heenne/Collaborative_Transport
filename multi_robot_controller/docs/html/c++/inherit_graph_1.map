@@ -1,0 +1,5 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$classController.html" title="Class for controlling a formation of multiple mobile robots. " alt="" coords="5,31,84,57"/>
+<area shape="rect" id="node2" href="$classLyapunovController.html" title="Class that implements a lyapunov approach based controller. " alt="" coords="139,5,273,32"/>
+<area shape="rect" id="node3" href="$classPassTroughController.html" title="Controller that forwards the given velocity. " alt="" coords="132,56,280,83"/>
+</map>

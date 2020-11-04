@@ -1,5 +1,0 @@
-<map id="OrientationFeedForward" name="OrientationFeedForward">
-<area shape="rect" id="node2" href="$df/df6/classRosOrientationFeedForwardBase.html" title="A Orientation feed forward class. It implements parameter loading and initialisation for the Orientat..." alt="" coords="117,80,331,107"/>
-<area shape="rect" id="node3" href="$dc/d54/classMsgOrientationFeedForward.html" title="A Ros implementation of the OrientationFeeedForward class. It contains a ros Subscriber that listens ..." alt="" coords="5,155,224,181"/>
-<area shape="rect" id="node4" href="$de/da6/classTfOrientationFeedForward.html" title="A Tf implementation of the OrientationFeeedForward class. It contains a tf listener that listens to a..." alt="" coords="248,155,421,181"/>
-</map>
