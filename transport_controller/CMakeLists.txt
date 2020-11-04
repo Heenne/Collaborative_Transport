@@ -160,7 +160,6 @@ include_directories(
 catkin_install_python(PROGRAMS
   nodes/transport_state_machine_node.py
   nodes/service_distributor_node.py
-  nodes/ps4_statemachine_controller.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 
