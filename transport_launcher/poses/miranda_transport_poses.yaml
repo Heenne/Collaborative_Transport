@@ -9,9 +9,11 @@ drive:
   
 grip:
   panda_joint1: 0.0
-  panda_joint2: 0.4245286051390464
+  panda_joint2: 0.27079139359792076
   panda_joint3: 0.0
-  panda_joint4: -2.301307
+  panda_joint4: -2.3397709703278124
   panda_joint5: 0.0
-  panda_joint6: 2.7416359369489878
+  panda_joint6: 2.5941756415896946
   panda_joint7: -0.785398163
+
+

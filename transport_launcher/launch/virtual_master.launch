@@ -10,21 +10,24 @@
   </node>
 
  <group ns="virtual_master">
+    <include file="$(find mir_description)/launch/upload_mir_urdf.launch"/>
 
-
-  <include file="$(find mir_description)/launch/upload_mir_urdf.launch"/>
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher">
         <param name="tf_prefix" value="master"/>
     </node>
-    
+
+    <node name="base_link_broadcaster" pkg="transport_launcher" type="base_broadcaster.py">
+      <remap from="robot_pose" to="master_pose"/>
+      <param name="tf_prefix" value="master"/>
+    </node>
 
     <node name="state_machine_controller" pkg="ps4_controller" type="ps4_diffdrive_services.py" output="screen">
             <param name="allow_cmd_vel" value="$(arg use_ps4_cmd_vel)"/>
             <param name="translation" value="0.1"/>
             <param name="rotation" value="0.2"/>
             <remap from="joy" to="/joy" />
-            <remap if="$(arg use_ps4_cmd_vel)" from="cmd_vel" to="master_velocity_unfiltered"/>
-            <remap unless="$(arg use_ps4_cmd_vel)" from="cmd_vel" to="master_velocity"/>
+            <param name="rate" value="100"/>
+            <remap if="$(arg use_ps4_cmd_vel)" from="cmd_vel" to="master_velocity_unfiltered"/>          
             <remap from="CIRC" to="/transport_state_machine/enable"/>
             <remap from="RECT" to="/transport_state_machine/disable"/>
             <remap from="X" to="/transport_state_machine/trigger"/>
@@ -33,10 +36,7 @@
             <remap from="OPTIONS" to="planner/start_planner"/>
     </node>
     
-    <node name="base_link_broadcaster" pkg="transport_launcher" type="base_broadcaster.py">
-      <remap from="robot_pose" to="master_pose"/>
-      <param name="tf_prefix" value="master"/>
-    </node>
+   
 
     <group if="$(arg use_ps4_cmd_vel)">
       <node  name="cmd_vel_integrator" pkg="mir_helper" type="vel_integrator_node">
@@ -45,30 +45,32 @@
         <remap from="cmd_vel" to="master_velocity_unfiltered"/>
         <remap from="cmd_vel_integrated" to="master_pose"/>
       </node>
+
       <node name="master_vel_filter" type="twist_stamped_mean_filter" pkg="manipulate_topics" output="screen">
-        <param name="sample_number" value="50"/>
+        <param name="sample_number" value="200"/>
         <remap from="input" to="master_velocity_unfiltered"/>
         <remap from="output" to="master_velocity"/>
       </node>
     </group>
 
-    <node if="$(arg use_planner_cmd_vel)" name="planner" type="planner_node" pkg="base_trajectory_analytical" output="screen">
+
+  <group if="$(arg use_planner_cmd_vel)">
+    <node name="planner" type="planner_node" pkg="base_trajectory_analytical" output="screen">
         <rosparam command="load" file="$(find transport_launcher)/config/planner.yaml"/>
         <remap from="trajectory_odom" to="master_odom"/>
         <remap from="trajectory_vel" to="master_velocity_unstamped"/>
         <remap from="trajectory_pose" to="master_pose"/>
         <remap from="start_pose" to="initialpose"/>        
         <remap from="reset_pose" to="initialpose"/>  
+    </node>  
+
+    <node name="twist_stamper" pkg="mir_helper" type="twist_stamper">
+      <remap from="twist_in" to="master_velocity_unstamped"/>
+      <remap from="twist_out" to="master_velocity"/>
     </node>
 
-      
-  <node if="$(arg use_planner_cmd_vel)" name="twist_stamper" pkg="mir_helper" type="twist_stamper">
-    <remap from="twist_in" to="master_velocity_unstamped"/>
-    <remap from="twist_out" to="master_velocity"/>
-  </node>
-
-    <node name="fake_mir_joint_publisher" pkg="mir_driver" type="fake_mir_joint_publisher.py" output="screen" />
-    
+    <node name="fake_mir_joint_publisher" pkg="mir_driver" type="fake_mir_joint_publisher.py" output="screen" />    
   </group>
+</group>
   
 </launch>

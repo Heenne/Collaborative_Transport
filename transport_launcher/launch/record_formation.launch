@@ -14,6 +14,7 @@
                         (.*)/target_pose 
                         (.*)/wrench
                         (.*)/franka_states 
+                        (.*)_filtered
                         /tf
                         
                     -o $(arg filename).bag"

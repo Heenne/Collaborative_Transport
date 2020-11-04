@@ -1,5 +1,3 @@
-lower_abs_force: -1
-upper_abs_force: 40
-lower_abs_torque: -1
-upper_abs_torque: 7
-services: ["mur/mir/slave_controller/disable_controller","miranda/mir/slave_controller/disable_controller"]
+limits_low: [-20,-20,-50,-2,-2,-2]
+limits_high: [20,20,50,2,2,2]
+services: ["/mur/mir/slave_controller/disable_controller","/miranda/mir/slave_controller/disable_controller"]

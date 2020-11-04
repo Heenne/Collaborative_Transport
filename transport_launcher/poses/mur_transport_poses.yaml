@@ -8,9 +8,8 @@ drive:
 
 grip:
   elbow_joint: -1.570796326
-  shoulder_lift_joint: -1.570796326
+  shoulder_lift_joint: -1.6956589857684534
   shoulder_pan_joint: 0
-  wrist_1_joint: -1.570796326
+  wrist_1_joint: -1.4487250486956995
   wrist_2_joint: 1.570796326
-  wrist_3_joint: 1.570796326
-  #wrist_3_joint: 0.75
+  wrist_3_joint: 0.0

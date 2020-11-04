@@ -64,7 +64,7 @@ class LinkObjectState(smach.State):
         
         req=SwitchControllerRequest()
         req.stop_controllers=[]
-        req.start_controllers=["cartesian_impedance_controller"]
+        req.start_controllers=["compliance_controller"]
         req.strictness=2
         self.__switcher.call(req)
 
@@ -87,9 +87,10 @@ class ReleaseObjectState(smach.State):
         grip_req=SetBoolRequest()
         grip_req.data=False
         self.__clients.call(grip_req)
+        rospy.sleep(2)
 
         req=SwitchControllerRequest()
-        req.stop_controllers=["cartesian_impedance_controller"]
+        req.stop_controllers=["compliance_controller"]
         req.start_controllers=["position_joint_controller"]
         req.strictness=2
         self.__switcher.call(req)
