@@ -28,8 +28,5 @@
         <arg if="$(arg twist_local)" name="config_file" value="$(find transport_launcher)/config/local_twist_slave_controller.yaml"/>       
     </include>
 
-     <node if="$(arg has_ft_sensor)" name="force_watchdog" type="force_watchdog.py" pkg="watchdogs" output="screen">
-        <remap from="watch_topic" to="/mur/ur/wrench_filtered"/>
-        <rosparam command="load" file="$(find transport_launcher)/config/watchdog.yaml"/>
-    </node>
+
 </launch>

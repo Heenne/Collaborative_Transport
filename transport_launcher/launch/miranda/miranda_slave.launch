@@ -24,6 +24,13 @@
         <arg name="controllers_stopped" value="compliance_controller cartesian_controller"/>
         <arg name="pose_filename" value="$(find transport_launcher)/poses/miranda_transport_poses.yaml"/>
     </include>
+ 
+
+    <node name="cmd_vel_differentiator" type="twist_stamped_diff_filter" pkg="manipulate_topics" ns="miranda/mir" output="screen">
+        <remap from="input" to="cmd_vel"/>
+        <remap from="output" to="/miranda/panda/compliance_controller/imu"/>
+    </node>
+
 
     <!-- Launch the formation slave controller -->
     <rosparam command="load" file="$(find transport_launcher)/config/reference_miranda.yaml" ns="/miranda/mir/slave_controller"/>
