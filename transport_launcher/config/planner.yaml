@@ -11,7 +11,7 @@ iterations: 10
 # amplifier_y: 0.5
 
 # Stundenglas
-omega: 0.07
+omega: 0.03
 ratio: 2
 phaseshift: 0
 amplifier_x: 2.0

@@ -1,3 +1,3 @@
-limits_low: [-20,-20,-50,-2,-2,-2]
-limits_high: [20,20,50,2,2,2]
+limits_low: [-20,-20,-50,-2,-3,-2]
+limits_high: [20,20,50,2,3,2]
 services: ["/mur/mir/slave_controller/disable_controller","/miranda/mir/slave_controller/disable_controller"]
