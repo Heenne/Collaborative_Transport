@@ -1,0 +1,9 @@
+<launch>
+    <arg name="twist_local" default="false"/>
+    <arg name="has_ft_sensor" value="true"/>
+
+    <include file="$(find transport_launcher)/launch/miranda/miranda_slave.launch" pass_all_args="true">
+        <arg name="robot_name" value="murianda"/>
+    </include>
+
+</launch>
