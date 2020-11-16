@@ -1,0 +1,18 @@
+<launch>
+    <arg name="robot_name"  value="miranda"/>
+
+   <node   name="reconfigure_load_stiffness_ic" pkg="dynamic_reconfigure" type="dynparam" 
+            args="load $(arg robot_name)/panda/compliance_controller $(find transport_launcher)/config/impedance_dyn.yaml" />
+  
+  <include file="$(find miranda_hardware_helper)/launch/miranda.launch">
+        <arg name="robot_name"  default="$(arg robot_name)"/>
+        <arg name="controllers_started" value="franka_state_controller compliance_controller"/>
+        <arg name="controllers_stopped" value="position_joint_controller cartesian_controller"/>
+        <arg name="pose_filename" value="$(find transport_launcher)/poses/miranda_transport_poses.yaml"/>
+    </include>
+
+    <node name="cmd_vel_differentiator" type="twist_stamped_diff_filter" pkg="manipulate_topics" ns="$(arg robot_name)/mir" output="screen">
+        <remap from="input" to="cmd_vel"/>
+        <remap from="output" to="/$(arg robot_name)/panda/compliance_controller/imu"/>
+    </node>
+</launch>

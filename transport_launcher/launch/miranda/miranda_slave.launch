@@ -27,12 +27,15 @@
     </include>
  
 
-    <node name="cmd_vel_differentiator" type="twist_stamped_diff_filter" pkg="manipulate_topics" ns="miranda/mir" output="screen">
+    <node name="cmd_vel_differentiator" type="twist_stamped_diff_filter" pkg="manipulate_topics" ns="$(arg robot_name)/mir" output="screen">
         <remap from="input" to="cmd_vel"/>
-        <remap from="output" to="$(arg robot_name)/panda/compliance_controller/imu"/>
+        <remap from="output" to="compliance_controller/imu"/>
     </node>
 
-
+    <!-- <node name="cartesian_interpolator" type="cartesian_relative_interpolator" pkg="cartesian_move" output="screen" ns="$(arg robot_name)/panda">
+        <rosparam command="load" file="$(find transport_launcher)/config/interpolator.yaml" subst_value="true"/>
+        <remap from="pose_interpolated" to="cartesian_controller/target_pose"/>
+    </node> -->
     <!-- Launch the formation slave controller -->
     <rosparam command="load" file="$(find transport_launcher)/config/reference_$(arg robot_name).yaml" ns="$(arg robot_name)/mir/slave_controller"/>
     <include file="$(find multi_robot_controller)/launch/slave.launch" ns="$(arg robot_name)/mir">
