@@ -1,12 +1,17 @@
-base_namespaces: ["/mur/mir","/miranda/mir"]
-arm_namespaces: ["/mur/ur","/miranda/panda"]
-enable_manipulator: true
-enable_orientation_ff: false
+# base_namespaces: ["/mur/mir","/miranda/mir"]
+# arm_namespaces: ["/mur/ur","/miranda/panda"]
+# enable_manipulator: true
+# enable_orientation_ff: false
 
 base_namespaces: ["/murianda/mir","/miranda/mir"]
 arm_namespaces: ["/murianda/panda","/miranda/panda"]
 enable_manipulator: true
 enable_orientation_ff: false
+
+# base_namespaces: ["/murianda/mir"]
+# arm_namespaces: ["/murianda/panda"]
+# enable_manipulator: true
+# enable_orientation_ff: false
 
 
 # base_namespaces: ["/mur/mir"]
