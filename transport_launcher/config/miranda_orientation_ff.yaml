@@ -1,5 +1,5 @@
 update_rate: 30
-pose_topic: cartesian_impedance_controller/target_pose
+pose_topic: compliance_controller/target_pose
 lookup_offset: true 
 off_source_frame: miranda/mir/base_link
 off_target_frame: miranda/panda/panda_link0
