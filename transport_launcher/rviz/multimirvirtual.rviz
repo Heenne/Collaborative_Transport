@@ -7,7 +7,7 @@ Panels:
         - /Global Options1
         - /Status1
         - /Grid1
-        - /Path1
+        - /Ur1
       Splitter Ratio: 0.5
     Tree Height: 1622
   - Class: rviz/Selection
@@ -74,6 +74,95 @@ Visualization Manager:
         Expand Link Details: false
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
+        back_laser_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        base_footprint:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        base_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        bl_caster_rotation_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        bl_caster_wheel_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        br_caster_rotation_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        br_caster_wheel_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        fl_caster_rotation_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        fl_caster_wheel_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        fr_caster_rotation_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        fr_caster_wheel_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        front_laser_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        imu_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        imu_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        left_wheel_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        right_wheel_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        surface:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        us_1_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        us_2_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
       Name: Miranda
       Robot Description: miranda/mir/robot_description
       TF Prefix: miranda/mir
@@ -196,8 +285,8 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
       Name: Mur
-      Robot Description: mur/mir/robot_description
-      TF Prefix: mur/mir
+      Robot Description: murianda/mir/robot_description
+      TF Prefix: murianda/mir
       Update Interval: 0
       Value: true
       Visual Enabled: true
@@ -211,61 +300,69 @@ Visualization Manager:
         Expand Link Details: false
         Expand Tree: false
         Link Tree Style: Links in Alphabetic Order
-        base:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        base_link:
+        panda_hand:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        ee_link:
+        panda_leftfinger:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        forearm_link:
+        panda_link0:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        shoulder_link:
+        panda_link1:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        tool0:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        upper_arm_link:
+        panda_link2:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        world:
-          Alpha: 1
-          Show Axes: false
-          Show Trail: false
-        wrist_1_link:
+        panda_link3:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        wrist_2_link:
+        panda_link4:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
-        wrist_3_link:
+        panda_link5:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        panda_link6:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        panda_link7:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        panda_link8:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
+        panda_rightfinger:
           Alpha: 1
           Show Axes: false
           Show Trail: false
           Value: true
       Name: Ur
-      Robot Description: mur/ur/robot_description
-      TF Prefix: mur/ur
+      Robot Description: murianda/panda/robot_description
+      TF Prefix: murianda/panda
       Update Interval: 0
       Value: true
       Visual Enabled: true
@@ -380,7 +477,7 @@ Visualization Manager:
       Draw Behind: false
       Enabled: true
       Name: MurCostmap
-      Topic: /mur/mir/move_base_node/local_costmap/costmap
+      Topic: /murianda/mir/move_base_node/local_costmap/costmap
       Unreliable: false
       Use Timestamp: false
       Value: true
@@ -467,25 +564,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/XYOrbit
-      Distance: 12.29948616027832
+      Distance: 17.999589920043945
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 8.684184074401855
-        Y: 6.113731384277344
-        Z: 3.810504495049827e-6
+        X: 26.10063362121582
+        Y: 7.318992614746094
+        Z: -1.911541403387673e-6
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.9147961139678955
+      Pitch: 1.5697963237762451
       Target Frame: <Fixed Frame>
       Value: XYOrbit (rviz)
-      Yaw: 5.203568458557129
+      Yaw: 4.723570346832275
     Saved: ~
 Window Geometry:
   Displays:

@@ -1,3 +1,5 @@
+
+##Parallel front
 drive:
   panda_joint1: 0.0
   panda_joint2: -1.57
@@ -17,3 +19,4 @@ grip:
   panda_joint7: -0.785398163
 
 
+##Parallel front

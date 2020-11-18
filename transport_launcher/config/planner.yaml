@@ -1,6 +1,6 @@
 type: 0        
 pause: true
-iterations: 10
+iterations: 1
 
 
 #Kreis
@@ -11,11 +11,11 @@ iterations: 10
 # amplifier_y: 0.5
 
 # Stundenglas
-omega: 0.03
+omega: 0.04
 ratio: 2
 phaseshift: 0
-amplifier_x: 2.0
-amplifier_y: 0.25
+amplifier_x: 3.5
+amplifier_y: 2.0
 
 #Ellipse
 # omega: 0.05
