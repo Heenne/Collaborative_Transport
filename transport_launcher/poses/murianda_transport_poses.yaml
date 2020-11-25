@@ -7,12 +7,23 @@ drive:
   panda_joint6: 0.78
   panda_joint7: 0.78
   
-grip:
-  panda_joint1: 0.0
-  panda_joint2: 0.3735469071219424
-  panda_joint3: 0.0
-  panda_joint4: -2.144559895364862
-  panda_joint5: 0.0
-  panda_joint6: 2.5191509624057344
-  panda_joint7: -0.785398163
 
+#Front
+# grip:
+#   panda_joint1: 0.0
+#   panda_joint2: 0.3735469071219424
+#   panda_joint3: 0.0
+#   panda_joint4: -2.144559895364862
+#   panda_joint5: 0.0
+#   panda_joint6: 2.5191509624057344
+#   panda_joint7: -0.785398163
+
+#Above rotation axis
+grip:
+  panda_joint1: 0.6978
+  panda_joint2: -1.7
+  panda_joint3: 0.41
+  panda_joint4: -2.31
+  panda_joint5: 0.66
+  panda_joint6: 0.71
+  panda_joint7: 0.366
