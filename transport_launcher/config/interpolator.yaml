@@ -1,4 +1,0 @@
-max_velocity: 0.1
-time_step: 0.01
-ee_frame: "$(arg robot_name)/panda/panda_EE"
-base_frame: "$(arg robot_name)/panda/panda_link0"
