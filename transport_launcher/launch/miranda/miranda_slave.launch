@@ -1,7 +1,9 @@
 <launch>
     <arg name="robot_name"  default="miranda"/>
     <arg name="twist_local" default="false"/>
-    
+    <arg name="pose_filename" default="$(find transport_launcher)/poses/$(arg robot_name)_transport_poses.yaml"/>
+    <arg name="reference_filename" default="$(find transport_launcher)/config/reference_$(arg robot_name).yaml"/>
+
     <node   name="reconfigure_load_lyapunov" pkg="dynamic_reconfigure" type="dynparam" ns="$(arg robot_name)"
             args="load /$(arg robot_name)/mir/slave_controller $(find transport_launcher)/config/lyapunov_dyn.yaml" />
     
@@ -23,17 +25,11 @@
         <arg name="robot_name"  default="$(arg robot_name)"/>
         <arg name="controllers_started" value="franka_state_controller position_joint_controller"/>
         <arg name="controllers_stopped" value="compliance_controller cartesian_controller"/>
-        <arg name="pose_filename" value="$(find transport_launcher)/poses/$(arg robot_name)_transport_poses.yaml"/>
+        <arg name="pose_filename" value="$(arg pose_filename)"/>
     </include>
- 
-
-    <node name="cmd_vel_differentiator" type="twist_stamped_diff_filter" pkg="manipulate_topics" ns="$(arg robot_name)/mir">
-        <remap from="input" to="cmd_vel"/>
-        <remap from="output" to="compliance_controller/imu"/>
-    </node>
 
     <!-- Launch the formation slave controller -->
-    <rosparam command="load" file="$(find transport_launcher)/config/reference_$(arg robot_name).yaml" ns="$(arg robot_name)/mir/slave_controller"/>
+    <rosparam command="load" file="$(arg reference_filename)" ns="$(arg robot_name)/mir/slave_controller"/>
     <include file="$(find multi_robot_controller)/launch/slave.launch" ns="$(arg robot_name)/mir">
         <arg unless="$(arg twist_local)" name="config_file" value="$(find transport_launcher)/config/global_twist_slave_controller.yaml"/>
         <arg if="$(arg twist_local)" name="config_file" value="$(find transport_launcher)/config/local_twist_slave_controller.yaml"/>
