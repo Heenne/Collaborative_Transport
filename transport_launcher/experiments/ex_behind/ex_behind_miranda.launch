@@ -1,0 +1,6 @@
+<launch>
+    <include file="$(find transport_launcher)/experiments/ex_robot.launch" pass_all_args="true">
+        <arg name="experiment_name" default="ex_behind"/>
+        <arg name="robot_name" default="miranda"/>
+    </include>
+</launch>

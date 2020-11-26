@@ -1,0 +1,12 @@
+<launch>
+    <arg name="experiment_name" default="ex_parallel"/>
+    <arg name="robot_name" default="miranda"/>
+
+    <include file="$(find transport_launcher)/launch/miranda/miranda_slave.launch" pass_all_args="true">
+        <arg name="robot_name"  value="murianda"/>
+        <arg name="twist_local" value="false"/>
+        <arg name="pose_filename" value="$(find transport_launcher)/experiments/$(arg experiment_name)/$(arg robot_name)_transport_poses.yaml"/>
+        <arg name="reference_filename" value="$(find transport_launcher)/experiments/$(arg experiment_name)/reference_$(arg robot_name).yaml"/>
+    </include>
+
+</launch>
