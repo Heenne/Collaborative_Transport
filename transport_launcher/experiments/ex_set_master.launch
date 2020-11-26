@@ -1,0 +1,6 @@
+<launch>
+    <node name="master_setter" type="set_master.py" pkg="transport_launcher" ns="virtual_master">
+        <rosparam command="load" file="$(find transport_launcher)/experiments/master_pose.yaml"/>
+        <remap from="initial_pose" to="initialpose"/>
+    </node>
+</launch>
