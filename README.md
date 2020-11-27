@@ -13,7 +13,7 @@ git clone https://github.com/ibMH/Collaborative_Transport
 ```
 
 ### Install dependencies
-Download and install the helper tools from https://github.com/ibMH/Collaborative_Transport manually.
+Download and install the helper tools from https://github.com/ibMH/Helper_Tools manually.
 Afterwards install missing dependencies by using rosdep (ROS_DISTRO has to be defined or substituted by your ROS destribution)
 ```
 rosdep update
