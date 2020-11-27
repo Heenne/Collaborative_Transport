@@ -9,7 +9,7 @@
 Change directory to your catkin workspace. Within catkin workspace there should be at least the src directory!
 ### Clone package
 ```
-git clone https://github.com/ibMH/Collaborative_Transport
+git clone https://github.com/ibMH/Collaborative_Transport.git
 ```
 
 ### Install dependencies
