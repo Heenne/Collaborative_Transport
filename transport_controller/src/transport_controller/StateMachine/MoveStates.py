@@ -73,9 +73,10 @@ class DrivePoseState(smach.State):
         self.__pose_name=pose_name  
         self.__client=ClientDistributor( namespaces,
                                         ServiceConfig("move_teached/drive_to",SetName))
+        self.__sleep_time=rospy.get_param("~drive_sleeptime")
     def execute(self,userdata):
         req=SetNameRequest()
         req.name=self.__pose_name
         self.__client.call(req)
-        rospy.sleep(5)
+        rospy.sleep(self.__sleep_time)
         return "done"

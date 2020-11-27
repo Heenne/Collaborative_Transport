@@ -8,6 +8,7 @@ arm_namespaces: ["/murianda/panda","/miranda/panda"]
 enable_manipulator: true
 enable_orientation_ff: false
 
+
 # base_namespaces: ["/murianda/mir"]
 # arm_namespaces: ["/murianda/panda"]
 # enable_manipulator: true
@@ -23,3 +24,5 @@ enable_orientation_ff: false
 # arm_namespaces: ["/miranda/panda"]
 # enable_manipulator: true
 # enable_orientation_ff: false
+
+drive_sleeptime: 8
