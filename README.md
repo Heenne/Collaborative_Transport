@@ -6,10 +6,10 @@
 * `transport_launcher`: Launchfiles for launching the different elements within a collaborative object transport
 
 ## 2. Installation
-Change directory to your catkin workspace. Within catkin workspace there should be at least the src directory!
+Start by changeing directory to your catkin workspace!
 ### Clone package
 ```
-git clone https://github.com/ibMH/Collaborative_Transport.git
+git clone https://github.com/ibMH/Collaborative_Transport.git src
 ```
 
 ### Install dependencies
@@ -26,6 +26,6 @@ catkin_make
 ```
 or
 ```
-catkin tools
+catkin build
 ```
 
