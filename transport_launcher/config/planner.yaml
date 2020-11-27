@@ -14,8 +14,8 @@ iterations: 1
 omega: 0.04
 ratio: 2
 phaseshift: 0
-amplifier_x: 3.5
-amplifier_y: 2.0
+amplifier_x: 4
+amplifier_y: 1.75
 
 #Ellipse
 # omega: 0.05
