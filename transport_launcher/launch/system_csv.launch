@@ -1,0 +1,12 @@
+<launch>
+    <node name="path_parser" type="parse_csv.py" pkg="manipulate_topics" ns="virtual_master">
+        <param name="file_name" value="/home/rosmatch/Downloads/SplineTest.csv"/>
+        <param name="time_incr" value="0.02"/>
+        <remap from="pose" to="master_pose"/>
+        <remap from="velocity" to="master_velocity"/>
+        <remap from="start_planner" to="planner/start_planner"/>
+        <remap from="stop_planner" to="planner/stop_planner"/>
+    </node>
+
+    <include file="$(find transport_launcher)/launch/system.launch"/>   
+</launch>
