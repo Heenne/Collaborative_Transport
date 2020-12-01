@@ -1,23 +1,17 @@
 <launch>
-    <include file="$(find transport_launcher)/launch/virtual_master.launch">
-        <arg name="use_ps4_cmd_vel"  value="true"/>
-        <arg name="use_planner_cmd_vel"  value="false"/>
-    </include>
 
-     <node name="transport_state_machine" type="transport_state_machine_node.py" pkg="transport_controller" output="screen">
-        <rosparam command="load" file="$(find transport_launcher)/config/system_settings.yaml"/>
-    </node>
-    
-
-    <!-- Watchdogs for forces to avoid damage -->
-    <node name="force_watchdog" type="force_watchdog.py" pkg="watchdogs" output="screen" ns="miranda">
-        <remap from="watch_topic" to="panda/franka_state_controller/F_ext"/>
-        <rosparam command="load" file="$(find transport_launcher)/config/watchdog.yaml"/>
-    </node>
-    <node name="force_watchdog" type="force_watchdog.py" pkg="watchdogs" output="screen" ns="murianda">
-        <remap from="watch_topic" to="panda/franka_state_controller/F_ext"/>
-        <rosparam command="load" file="$(find transport_launcher)/config/watchdog.yaml"/>
+    <node  name="cmd_vel_integrator" pkg="mir_helper" type="vel_integrator_node">
+        <param name="topic_name" value="reset_pose"/>
+        <param name="frame_id" value="/map"/>
+        <remap from="cmd_vel" to="master_velocity_unfiltered"/>
+        <remap from="cmd_vel_integrated" to="master_pose"/>
     </node>
 
-    <node type="rviz" name="rviz" pkg="rviz" args="-d $(find transport_launcher)/rviz/multimirvirtual.rviz" />
+    <node name="master_vel_filter" type="twist_stamped_mean_filter" pkg="manipulate_topics" output="screen">
+        <param name="sample_number" value="200"/>
+        <remap from="input" to="master_velocity_unfiltered"/>
+        <remap from="output" to="master_velocity"/>
+    </node>
+
+    <include file="$(find transport_launcher)/launch/system.launch"/>   
 </launch>

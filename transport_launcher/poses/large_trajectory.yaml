@@ -1,0 +1,117 @@
+pose1:
+  header:
+    frame_id: /map
+  pose:
+    orientation:
+      w: -0.031295201713689096
+      x: 0.0
+      y: 0.0
+      z: 0.9995101852155882
+    position:
+      x: 41.42011838899765
+      y: 15.625689904346274
+      z: 0.0
+pose2:
+  header:
+    frame_id: /map
+  pose:
+    orientation:
+      w: -0.22268375506993754
+      x: 0.0
+      y: 0.0
+      z: 0.9748907350200596
+    position:
+      x: 39.09823472553674
+      y: 15.029192459394068
+      z: 0.0
+pose3:
+  header:
+    frame_id: /map
+  pose:
+    orientation:
+      w: -0.09495692277923261
+      x: 0.0
+      y: 0.0
+      z: 0.9954813824558945
+    position:
+      x: 36.62960807777513
+      y: 14.078607105869196
+      z: 0.0
+pose4:
+  header:
+    frame_id: /map
+  pose:
+    orientation:
+      w: -0.019917900577011264
+      x: 0.0
+      y: 0.0
+      z: 0.9998016189407798
+    position:
+      x: 33.54557706189898
+      y: 13.666912301943823
+      z: 0.0
+pose5:
+  header:
+    frame_id: /map
+  pose:
+    orientation:
+      w: -0.0014805920903022335
+      x: 0.0
+      y: 0.0
+      z: 0.9999989039229303
+    position:
+      x: 30.00986874059622
+      y: 13.5441070705081
+      z: 0.0
+pose6:
+  header:
+    frame_id: /map
+  pose:
+    orientation:
+      w: -0.4285950127123094
+      x: 0.0
+      y: 0.0
+      z: 0.903496715587907
+    position:
+      x: 26.665256039081356
+      y: 11.104306596951037
+      z: 0.0
+pose7:
+  header:
+    frame_id: /map
+  pose:
+    orientation:
+      w: 0.01650275103990217
+      x: 0.0
+      y: 0.0
+      z: 0.9998638203316065
+    position:
+      x: 24.19958616135387
+      y: 10.11611305699609
+      z: 0.0
+pose8:
+  header:
+    frame_id: /map
+  pose:
+    orientation:
+      w: 0.5240099160539146
+      x: 0.0
+      y: 0.0
+      z: 0.8517121625744046
+    position:
+      x: 21.50045549005021
+      y: 12.509339975334829
+      z: 0.0
+pose9:
+  header:
+    frame_id: /map
+  pose:
+    orientation:
+      w: 0.6293977749803836
+      x: 0.0
+      y: 0.0
+      z: -0.77708329080591
+    position:
+      x: 19.68357564743483
+      y: 13.397681802557972
+      z: 0.0

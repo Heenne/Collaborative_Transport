@@ -1,0 +1,29 @@
+<launch>
+    <arg name="enable_cmd_vel" default="false"/>
+    
+    <node respawn="true" pkg="joy" type="joy_node"  name="ps4_joy">
+        <param name="dev" value="/dev/input/js0"/>
+        <param name="deadzone" value="0.12"/>
+        <param name="coalesce_interval" value="0.001"/>
+    </node>
+
+    <node name="state_machine_controller" pkg="ps4_controller" type="ps4_diffdrive_services.py" output="screen" ns="virtual_master">
+            <param name="allow_cmd_vel" value="$(arg enable_cmd_vel)"/>
+            <param name="translation" value="0.1"/>
+            <param name="rotation" value="0.2"/>
+            <remap from="joy" to="/joy" />
+            <param name="rate" value="100"/>
+            <remap if="$(arg enable_cmd_vel)" from="cmd_vel" to="master_velocity_unfiltered"/>          
+            <remap from="CIRC" to="/transport_state_machine/enable"/>
+            <remap from="RECT" to="/transport_state_machine/disable"/>
+            <remap from="X" to="/transport_state_machine/trigger"/>
+            <remap from="TRI" to="/transport_state_machine/stop"/>
+            <remap from="L1" to="/transport_state_machine/move"/>
+            <remap from="OPTIONS" to="planner/start_planner"/>
+    </node>
+
+    <node name="transport_state_machine" type="transport_state_machine_node.py" pkg="transport_controller" output="screen">
+        <rosparam command="load" file="$(find transport_launcher)/config/system_settings.yaml"/>
+    </node>
+
+</launch>

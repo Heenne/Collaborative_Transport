@@ -1,0 +1,17 @@
+<launch> 
+    <include file="$(find transport_launcher)/launch/virtual_master.launch"/>    
+    <include file="$(find transport_launcher)/launch/state_machine.launch"/>   
+
+
+    <!-- Watchdogs for forces to avoid damage -->
+    <node name="force_watchdog" type="force_watchdog.py" pkg="watchdogs" output="screen" ns="miranda">
+        <remap from="watch_topic" to="panda/franka_state_controller/F_ext"/>
+        <rosparam command="load" file="$(find transport_launcher)/config/watchdog.yaml"/>
+    </node>
+    <node name="force_watchdog" type="force_watchdog.py" pkg="watchdogs" output="screen" ns="murianda">
+        <remap from="watch_topic" to="panda/franka_state_controller/F_ext"/>
+        <rosparam command="load" file="$(find transport_launcher)/config/watchdog.yaml"/>
+    </node>
+    
+    <node type="rviz" name="rviz" pkg="rviz" args="-d $(find transport_launcher)/rviz/multimirvirtual.rviz" />
+</launch>
