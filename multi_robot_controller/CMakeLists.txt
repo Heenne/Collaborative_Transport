@@ -20,7 +20,7 @@ find_package(
   controller_interface
   dynamic_reconfigure
   eigen_conversions
-  franka_hw    
+      
   hardware_interface
   
   geometry_msgs
