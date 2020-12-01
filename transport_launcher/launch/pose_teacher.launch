@@ -1,0 +1,21 @@
+<launch>   
+    <arg name="file_name" default="base_poses.yaml"/>
+    <node respawn="true" pkg="joy" type="joy_node"  name="ps4_joy">
+        <param name="dev" value="/dev/input/js0"/>
+        <param name="deadzone" value="0.12"/>
+        <param name="coalesce_interval" value="0.001"/>
+    </node>
+    <node name="base_teacher" type="pose_teacher_base_node.py" pkg="robot_teacher" output="screen">
+        <param name="file_name" value="$(find transport_launcher)/poses/$(arg file_name)"/>
+        <remap from="pose" to="/miranda/mir/robot_pose_stamped"/>
+    </node> 
+    <node name="state_machine_controller" pkg="ps4_controller" type="ps4_diffdrive_services.py" output="screen">
+            <param name="allow_cmd_vel" value="true"/>
+            <param name="translation" value="0.2"/>
+            <param name="rotation" value="0.2"/>
+            <remap from="joy" to="/joy" />
+            <param name="rate" value="100"/>
+            <remap from="X" to="/base_teacher/save_pose_unnamed"/>     
+            <remap from="cmd_vel" to="/miranda/mir/cmd_vel" />
+    </node>    
+</launch>
