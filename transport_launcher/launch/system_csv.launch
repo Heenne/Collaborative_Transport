@@ -1,6 +1,6 @@
 <launch>
     <node name="path_parser" type="parse_csv.py" pkg="manipulate_topics" ns="virtual_master">
-        <param name="file_name" value="/home/rosmatch/Downloads/SplineTest.csv"/>
+        <param name="file_name" value="$(find transport_launcher)/trajectories/Video.csv"/>
         <param name="time_incr" value="0.02"/>
         <remap from="pose" to="master_pose"/>
         <remap from="velocity" to="master_velocity"/>

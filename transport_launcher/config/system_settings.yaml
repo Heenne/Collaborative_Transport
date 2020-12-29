@@ -3,10 +3,10 @@
 # enable_manipulator: true
 # enable_orientation_ff: false
 
-# base_namespaces: ["/murianda/mir","/miranda/mir"]
-# arm_namespaces: ["/murianda/panda","/miranda/panda"]
-# enable_manipulator: true
-# enable_orientation_ff: false
+base_namespaces: ["/murianda/mir","/miranda/mir"]
+arm_namespaces: ["/murianda/panda","/miranda/panda"]
+enable_manipulator: true
+enable_orientation_ff: false
 
 
 # base_namespaces: ["/murianda/mir"]
@@ -20,9 +20,9 @@
 # enable_manipulator: true
 # enable_orientation_ff: false
 
-base_namespaces: ["/miranda/mir"]
-arm_namespaces: ["/miranda/panda"]
-enable_manipulator: true
-enable_orientation_ff: false
+# base_namespaces: ["/miranda/mir"]
+# arm_namespaces: ["/miranda/panda"]
+# enable_manipulator: true
+# enable_orientation_ff: false
 
 drive_sleeptime: 8

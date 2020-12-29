@@ -9,7 +9,7 @@
         <remap from="reset_pose" to="initialpose"/>  
     </node>  
 
-    <node name="twist_stamper" pkg="mir_helper" type="twist_stamper">
+    <node name="twist_stamper" pkg="mir_helper" type="twist_stamper"  ns="virtual_master">
       <remap from="twist_in" to="master_velocity_unstamped"/>
       <remap from="twist_out" to="master_velocity"/>
     </node>    
