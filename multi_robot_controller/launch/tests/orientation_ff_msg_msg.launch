@@ -1,0 +1,10 @@
+<launch>
+<arg name="tf_prefix" value=""/>
+
+<node pkg="multi_robot_controller" type="feed_forward_msg_msg_node" name="test_node" output="screen">
+    <remap from="current_orientation" to="miranda/mir/robot_pose_stamped"/>
+    <remap from="target_orientation" to="test_target"/>
+    <remap from="target_pose" to="miranda/panda/six_dof_impedance_fixed_joint_controller/target_pose"/>
+    <rosparam command="load" file="$(find multi_robot_controller)/config/orientation_ff.yaml" subst_value="true"/>
+</node>
+</launch>

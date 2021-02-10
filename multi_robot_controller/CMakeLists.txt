@@ -167,6 +167,9 @@ add_library(orientation_feed_forward
   ${FEED_FORWARD_INCLUDE_PATH}/msg_orientation_feed_forward.h
   ${FEED_FORWARD_SRC_PATH}/msg_orientation_feed_forward.cpp
 
+  ${FEED_FORWARD_INCLUDE_PATH}/msg_msg_orientation_feed_forward.h
+  ${FEED_FORWARD_SRC_PATH}/msg_msg_orientation_feed_forward.cpp
+
   ${FEED_FORWARD_INCLUDE_PATH}/tf_orientation_feed_forward.h
   ${FEED_FORWARD_SRC_PATH}/tf_orientation_feed_forward.cpp
 
@@ -247,6 +250,7 @@ add_executable(slave_node ${NODES_PATH}/slave_node.cpp)
 add_executable(master_node ${NODES_PATH}/master_node.cpp)
 add_executable(rigid_transformer ${NODES_PATH}/rigid_transformer.cpp)
 add_executable(feed_forward_msg_node ${NODES_PATH}/feed_forward_msg_node.cpp)
+add_executable(feed_forward_msg_msg_node ${NODES_PATH}/feed_forward_msg_msg_node.cpp)
 add_executable(feed_forward_tf_node ${NODES_PATH}/feed_forward_tf_node.cpp)
 
 target_link_libraries(rigid_transformer
@@ -267,6 +271,11 @@ target_link_libraries(master_node
 )
 
 target_link_libraries(feed_forward_msg_node
+orientation_feed_forward
+  ${catkin_LIBRARIES}
+  ${eigen3_LIBRARIES}
+)
+target_link_libraries(feed_forward_msg_msg_node
 orientation_feed_forward
   ${catkin_LIBRARIES}
   ${eigen3_LIBRARIES}
