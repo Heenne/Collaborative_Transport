@@ -1,15 +1,21 @@
 <launch>
+    <arg name="robot_name"  default="miranda"/>
     <arg name="twist_local" default="false"/>
-
+    <arg name="pose_filename" default="$(find transport_launcher)/poses/$(arg robot_name)_transport_poses.yaml"/>
+    <arg name="reference_filename" default="$(find transport_launcher)/config/reference_$(arg robot_name).yaml"/>
+    <arg name="tf_prefix" value="$(arg robot_name)"/>
     <!--    
         Laucnh the robot hardware          
     -->
-    <include file="$(find transport_launcher)/launch/miranda/miranda_slave.launch" pass_all_args="true"/>       
+    <include file="$(find transport_launcher)/launch/miranda/miranda_slave.launch" pass_all_args="true"/>
 
     <!-- 
         Start the orientation feed forward with given config file
      -->
-    <node name="orientation_ff" type="feed_forward_tf_node" pkg="multi_robot_controller" ns="miranda/panda">
-        <rosparam command="load" file="$(find transport_launcher)/config/miranda_orientation_ff.yaml"/>
+    <node pkg="multi_robot_controller" type="feed_forward_msg_msg_node" name="test_node" output="screen" ns="$(arg robot_name)">
+        <remap from="current_orientation" to="mir/robot_pose_stamped"/>
+        <remap from="target_orientation" to="/virtual_master/master_pose"/>
+        <remap from="target_pose" to="panda/fixed_joint_impedance_controller/target_pose"/>
+        <rosparam command="load" file="$(find transport_launcher)/config/miranda_orientation_ff.yaml" subst_value="true"/>
     </node>
 </launch>

@@ -1,13 +1,13 @@
 update_rate: 30
-pose_topic: compliance_controller/target_pose
+pose_topic: panda/fixed_joint_impedance_controller/target_pose
 lookup_offset: true 
-off_source_frame: miranda/mir/base_link
-off_target_frame: miranda/panda/panda_link0
+off_source_frame: $(arg robot_name)/mir/base_link
+off_target_frame: $(arg robot_name)/panda/panda_link0
 lookup_initial_pose: true
-ee_source_frame: miranda/mir/base_link
-ee_target_frame: miranda/panda/panda_EE
+ee_source_frame: $(arg robot_name)/mir/base_link
+ee_target_frame: $(arg robot_name)/panda/panda_EE
 has_initial_orientation: true
 current_source_frame: master/base_link
-current_target_frame: miranda/mir/base_link
-ee_pose_frame: miranda/panda/panda_link0
+current_target_frame: $(arg robot_name)/mir/base_link
+ee_pose_frame: $(arg robot_name)/panda/panda_link0
 tf_prefix: ""
