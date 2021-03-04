@@ -24,9 +24,10 @@
     <include file="$(find miranda_hardware_helper)/launch/miranda.launch">
         <arg name="robot_name"  default="$(arg robot_name)"/>
         <arg name="controllers_started" value="franka_state_controller position_joint_controller"/>
-        <arg name="controllers_stopped" value="compliance_controller cartesian_controller"/>
+        <arg name="controllers_stopped" value="imp cartesian_controller"/>
         <arg name="pose_filename" value="$(arg pose_filename)"/>
     </include>
+    <rosparam command="load" file="$(find transport_launcher)/config/controllers.yaml" ns="$(arg robot_name)/panda"/>
 
     <!-- Launch the formation slave controller -->
     <rosparam command="load" file="$(arg reference_filename)" ns="$(arg robot_name)/mir/slave_controller"/>
