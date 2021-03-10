@@ -1,3 +1,7 @@
+# limits_low: [-30,-30,-50,-20,-30,-20]
+# limits_high: [30,30,50,20,30,20]
+# services: ["/murianda/mir/slave_controller/disable_controller","/miranda/mir/slave_controller/disable_controller"]
+
 limits_low: [-30,-30,-50,-20,-30,-20]
 limits_high: [30,30,50,20,30,20]
-services: ["/murianda/mir/slave_controller/disable_controller","/miranda/mir/slave_controller/disable_controller"]
+services: ["/miranda/mir/slave_controller/disable_controller"]

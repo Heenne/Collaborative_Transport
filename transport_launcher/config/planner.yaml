@@ -10,12 +10,18 @@ iterations: 1
 # amplifier_x: 0.5
 # amplifier_y: 0.5
 
-# Stundenglas
-omega: 0.04
+# Stundenglas IROS
+# omega: 0.04
+# ratio: 2
+# phaseshift: 0
+# amplifier_x: 4
+# amplifier_y: 1.75
+
+omega: 0.02
 ratio: 2
 phaseshift: 0
-amplifier_x: 4
-amplifier_y: 1.75
+amplifier_x: 1
+amplifier_y: 0.25
 
 #Ellipse
 # omega: 0.05

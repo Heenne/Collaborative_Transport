@@ -13,4 +13,4 @@ current:
   topic_odom: "odom_enc"
 
 lyapunov: [3.0,4.0,1.0]
-topic_output: "cmd_vel"
+topic_output: "mobile_base_controller/cmd_vel"
