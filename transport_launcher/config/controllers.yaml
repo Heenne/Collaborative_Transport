@@ -35,7 +35,7 @@ franka_state_controller:
 
 cartesian_controller: *pjc
 
-imp:
+compliance_controller:
   type: panda_controllers_extended/SixDofCartesianImpedanceFixedJointController
   arm_id: panda
   joint_names:

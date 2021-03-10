@@ -1,0 +1,53 @@
+<launch>
+    <arg name="robot_name"  default="miranda"/>
+    <arg name="twist_local" default="false"/>
+    <arg name="pose_filename" default="$(find transport_launcher)/poses/$(arg robot_name)_transport_poses.yaml"/>
+    <arg name="reference_filename" default="$(find transport_launcher)/config/reference_$(arg robot_name).yaml"/>
+
+    <node   name="reconfigure_load_lyapunov" pkg="dynamic_reconfigure" type="dynparam" ns="$(arg robot_name)"
+            args="load /$(arg robot_name)/mir/slave_controller $(find transport_launcher)/config/slave_controller_dyn.yaml" />
+    
+    <!-- Master thesis Heinrich -->
+    <!-- <node   name="reconfigure_load_stiffness_ic" pkg="dynamic_reconfigure" type="dynparam" ns="$(arg robot_name)"
+            args="load /$(arg robot_name)/panda/compliance_controller $(find transport_launcher)/config/impedance_dyn.yaml" /> -->
+    
+    <!-- IROS -->
+    <node   name="reconfigure_load_stiffness_ic" pkg="dynamic_reconfigure" type="dynparam" ns="$(arg robot_name)"
+            args="load /$(arg robot_name)/panda/compliance_controller $(find transport_launcher)/config/compliance_dyn.yaml" />
+    
+
+    <!--    Laucnh the robot hardware
+            Access move base server
+            Sate controlle for the knowledge of current manipulator state
+            Joint controller for teached movemet
+            impedance controller for transport movement
+    -->
+    <remap from="/$(arg robot_name)/mir/map" to="/map"/>
+    
+    <include file="$(find miranda_hardware_helper)/launch/miranda.launch">
+        <arg name="robot_name"  default="$(arg robot_name)"/>
+    </include> 
+
+    <!-- Load necessary controllers -->
+    <rosparam command="load" file="$(find transport_launcher)/config/controllers.yaml" ns="$(arg robot_name)/panda"/>    
+    <node name="arm_controller_spawner_stopped" pkg="controller_manager" type="spawner" ns="$(arg robot_name)/panda" 
+            args="--stopped compliance_controller cartesian_controller" respawn="false" output="screen"/>  
+     <node name="arm_controller_spawner" pkg="controller_manager" type="spawner" ns="$(arg robot_name)/panda" 
+            args="position_joint_controller" respawn="false" output="screen"/>  
+  
+
+   
+    <!-- Launch the formation slave controller -->
+    <rosparam command="load" file="$(arg reference_filename)" ns="$(arg robot_name)/mir/slave_controller"/>
+    <include file="$(find multi_robot_controller)/launch/slave.launch" ns="$(arg robot_name)/mir">
+        <arg unless="$(arg twist_local)" name="config_file" value="$(find transport_launcher)/config/global_twist_slave_controller.yaml"/>
+        <arg if="$(arg twist_local)" name="config_file" value="$(find transport_launcher)/config/local_twist_slave_controller.yaml"/>
+    </include>
+
+    <!-- Launch the pose teacher for driving to named poses -->    
+    <node name="move_teached" type="pose_teacher_node.py" pkg="robot_teacher"  output="screen" ns="$(arg robot_name)/panda" >
+       <rosparam command="load" file="$(find panda_hardware_helper)/config/robot_teacher.yaml"/>
+       <param name="file_name" value="$(arg pose_filename)"/>
+    </node>
+
+</launch>

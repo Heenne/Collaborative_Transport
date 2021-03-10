@@ -1,28 +1,19 @@
-# base_namespaces: ["/mur/mir","/miranda/mir"]
-# arm_namespaces: ["/mur/ur","/miranda/panda"]
-# enable_manipulator: true
-# enable_orientation_ff: false
-
+##For both robots
 # base_namespaces: ["/murianda/mir","/miranda/mir"]
 # arm_namespaces: ["/murianda/panda","/miranda/panda"]
 # enable_manipulator: true
 # enable_orientation_ff: false
 
-
-# base_namespaces: ["/murianda/mir"]
-# arm_namespaces: ["/murianda/panda"]
-# enable_manipulator: true
-# enable_orientation_ff: false
-
-
-# base_namespaces: ["/mur/mir"]
-# arm_namespaces: ["/mur/ur"]
-# enable_manipulator: true
-# enable_orientation_ff: false
-
-base_namespaces: ["/miranda/mir"]
-arm_namespaces: ["/miranda/panda"]
+#Just murianda
+base_namespaces: ["/murianda/mir"]
+arm_namespaces: ["/murianda/panda"]
 enable_manipulator: true
 enable_orientation_ff: false
+
+##just miranda
+# base_namespaces: ["/miranda/mir"]
+# arm_namespaces: ["/miranda/panda"]
+# enable_manipulator: true
+# enable_orientation_ff: false
 
 drive_sleeptime: 8
