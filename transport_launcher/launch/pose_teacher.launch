@@ -7,7 +7,7 @@
         <param name="coalesce_interval" value="0.001"/>
     </node>
     <node name="base_teacher" type="pose_teacher_base_node.py" pkg="robot_teacher" output="screen">
-        <param name="file_name" value="$(find transport_launcher)/poses/$(arg file_name)"/>
+        <param name="file_name" value="$(find transport_launcher)/poses/$(arg file_name).yaml"/>
         <remap from="pose" to="/miranda/mir/robot_pose_stamped"/>
     </node> 
     <node name="state_machine_controller" pkg="ps4_controller" type="ps4_diffdrive_services.py" output="screen">
