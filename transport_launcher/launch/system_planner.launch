@@ -3,16 +3,16 @@
      <node name="planner" type="planner_node" pkg="base_trajectory_analytical" output="screen" ns="virtual_master">
         <rosparam command="load" file="$(find transport_launcher)/config/planner.yaml"/>
         <remap from="trajectory_odom" to="master_odom"/>
-        <remap from="trajectory_vel" to="master_velocity_unstamped"/>
+        <remap from="trajectory_vel" to="master_velocity"/>
         <remap from="trajectory_pose" to="master_pose"/>
         <remap from="start_pose" to="initialpose"/>        
         <remap from="reset_pose" to="initialpose"/>  
     </node>  
 
-    <node name="twist_stamper" pkg="mir_helper" type="twist_stamper"  ns="virtual_master">
+    <!-- <node name="twist_stamper" pkg="mir_driver" type="twist_stamper"  ns="virtual_master">
       <remap from="twist_in" to="master_velocity_unstamped"/>
       <remap from="twist_out" to="master_velocity"/>
-    </node>    
+    </node>     -->
 
     <include file="$(find transport_launcher)/launch/system.launch"/>       
     
