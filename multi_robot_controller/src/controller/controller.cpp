@@ -62,7 +62,7 @@ Controller::Controller(ros::NodeHandle &nh)
     if(priv.getParam("topic_output",output_topic))
     {
         ROS_INFO("Advertising output at %s",this->nh_.resolveName(output_topic).c_str());
-        this->pub_=this->nh_.advertise<geometry_msgs::TwistStamped>(output_topic,10);
+        this->pub_=this->nh_.advertise<geometry_msgs::Twist>(output_topic,10);
     }
     else
     {
@@ -91,6 +91,16 @@ std::unique_ptr<InputBase> Controller::allocInput(InputTypes type,ros::NodeHandl
         {
             ROS_INFO("Allocing a pose+twist_global input!");
             return std::make_unique<InputPoseTwist>(this->nh_,parameter);        
+        }
+        case InputTypes::POSE_TWIST_STAMPED:
+        {
+            ROS_INFO("Allocing a pose+twist_global input!");
+            return std::make_unique<InputPoseTwistStamped>(this->nh_,parameter);        
+        }
+        case InputTypes::POSE_TWIST_STAMPED_LOCAL:
+        {
+            ROS_INFO("Allocing a pose+twist_global input!");
+            return std::make_unique<InputPoseTwistStampedLocal>(this->nh_,parameter);        
         }
         case InputTypes::POSE_TWIST_LOCAL:
         {
@@ -147,9 +157,9 @@ void Controller::publish()
     //Publish control command
     if(this->enable_)
     {
-        geometry_msgs::TwistStamped twist;
-        twist.twist.linear.x=this->control_.v;
-        twist.twist.angular.z=this->control_.omega;
+        geometry_msgs::Twist twist;
+        twist.linear.x=this->control_.v;
+        twist.angular.z=this->control_.omega;
         this->pub_.publish(twist);
     }
     //publish Metadata    
