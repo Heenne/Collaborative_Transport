@@ -4,13 +4,13 @@ dictitems:
   Droll: 0.4
   Dx: 56.0
   Dy: 56.0
-  Dyaw: 0.4
+  Dyaw: 0.0
   Dz: 56.0
   Kpitch: 32.0
   Kroll: 32.0
   Kx: 600.0
   Ky: 600.0
-  Kyaw: 32.0
+  Kyaw: 0.0
   Kz: 1200.0
   groups: !!python/object/new:dynamic_reconfigure.encoding.Config
     dictitems:
@@ -18,13 +18,13 @@ dictitems:
       Droll: 0.4
       Dx: 56.0
       Dy: 56.0
-      Dyaw: 0.4
+      Dyaw: 0.0
       Dz: 56.0
       Kpitch: 32.0
       Kroll: 32.0
       Kx: 600.0
       Ky: 600.0
-      Kyaw: 32.0
+      Kyaw: 0.0
       Kz: 1200.0
       groups: !!python/object/new:dynamic_reconfigure.encoding.Config
         state: []
