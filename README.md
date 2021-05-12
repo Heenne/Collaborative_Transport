@@ -9,7 +9,7 @@
 Start by changeing directory to your catkin workspace!
 ### Clone package
 ```
-git clone https://github.com/ibMH/Collaborative_Transport.git src
+git clone https://github.com/matchRos/Collaborative_Transport.git src
 ```
 
 ### Install dependencies
