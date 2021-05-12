@@ -13,7 +13,7 @@ git clone https://github.com/matchRos/Collaborative_Transport.git src
 ```
 
 ### Install dependencies
-Download and install the helper tools from https://github.com/ibMH/Helper_Tools manually.
+Download and install the Match_Mobile_Robotics package from https://github.com/matchRos/Match_Mobile_Robotics manually.
 Afterwards install missing dependencies by using rosdep (ROS_DISTRO has to be defined or substituted by your ROS destribution)
 ```
 rosdep update
